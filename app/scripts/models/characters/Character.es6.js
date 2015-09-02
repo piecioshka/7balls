@@ -1,7 +1,7 @@
-class Player {
+class Character {
     constructor(settings) {
         Object.assign(this, settings);
     }
 }
 
-export default Player;
+export default Character;
