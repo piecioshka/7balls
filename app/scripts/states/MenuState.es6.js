@@ -18,7 +18,8 @@ class MenuState extends Phaser.State {
     _selectGoku() {
         // Add player object as common in all states.
         this.game.player = new Goku({
-            name: 'Son Gokū'
+            name: 'Son Gokū',
+            exp: ['Kamehameha']
         });
 
         // Move to next state: Searching
