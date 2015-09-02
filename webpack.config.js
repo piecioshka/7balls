@@ -1,5 +1,9 @@
 module.exports = {
-    entry: './app/scripts/main.es6.js',
+    resolve: {
+        extensions: ['.es6.js', '.js', '']
+    },
+
+    entry: './app/scripts/main',
 
     output: {
         filename: 'bundle.js',
@@ -11,7 +15,7 @@ module.exports = {
             {
                 test: /\.es6\.js/,
                 loader: 'babel',
-                exclude: 'node_modules'
+                exclude: /node_modules/
             }
         ]
     }

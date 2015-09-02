@@ -1,9 +1,11 @@
-// ECMAScript 6
+import MenuState from './states/MenuState';
 
 class Game {
     constructor() {
-        console.log('Game');
         this.game = new Phaser.Game(800, 200, Phaser.Canvas, 'game');
+
+        this.game.state.add('Menu', MenuState);
+        this.game.state.start('Menu');
     }
 }
 
