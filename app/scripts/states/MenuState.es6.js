@@ -1,3 +1,6 @@
+import Goku from '../models/characters/Goku';
+import Vegeta from '../models/characters/Vegeta';
+
 class MenuState extends Phaser.State {
     preload() {
         console.log('MenuState#preload');
@@ -15,11 +18,17 @@ class MenuState extends Phaser.State {
     }
 
     _selectGoku() {
-        console.log('this._selectGoku');
+        this.player = new Goku({
+            name: 'Son Gokū'
+        });
+        this.state.start('Searching');
     }
 
     _selectVegeta() {
-        console.log('this._selectVegeta');
+        this.player = new Vegeta({
+            name: 'Vegeta'
+        });
+        this.state.start('Searching');
     }
 
     update() {
