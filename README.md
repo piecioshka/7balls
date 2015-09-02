@@ -10,15 +10,18 @@ Zasady:
 
  * na początku gry gracz wybiera postać: Vegeta albo Son Goku
  * gracz musi zebrać 7 smoczych kól, aby wyjść ze świata zmarłych do żywych, 
-    * gdy to mu się uda, pokazuje mu się smok, który spełnia życzenie zawodnika (na początku będzie to życie), na końcu zmierza do walki z pierwszym wojownikiem,
+    * gdy to mu się uda, pokazuje mu się smok, który spełnia życzenie zawodnika (na początku będzie to życie), 
+    następnie zmierza do walki z pierwszym wojownikiem,
     * gdy mu się nie uda - GAME OVER
  * gracz walczy z pierwszym rywalem
     * gdy przegra ma jeszcze jedno życie, może walczyć dalej, bądź postarać się zebrać kolejne kule aby zdobyć kolejne życie
     * gdy pokona rywala:
         * dostaje kolejne level oraz dodatkowe skillsy
         * można wejść do salki, gdzie zdobędzie się trochę doświadczenia, lepszym rozwojem jest walka z przeciwnikiem
-        * gracz dalej może albo walczyć z kolejnym rywalem, albo próbować zdobyć smocze kule, ale wtedy na mapce mogą pojawić się przeciwnicy chroniący smoczych kul
- 
+        * gracz dalej może albo walczyć z kolejnym rywalem, albo próbować zdobyć smocze kule, ale wtedy na mapie mogą 
+        pojawić się przeciwnicy chroniący smoczych kul
+
+
  - jeśli gracz wykona dziwny atak dostaje magiczną fasolkę, która może użyć podczas walki
  - jeśli długo się nie gra zawodnikiem to jest głodny, bo się go nie nakarmiło
 
