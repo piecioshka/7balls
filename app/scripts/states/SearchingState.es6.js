@@ -1,6 +1,8 @@
 import Configuration from '../configuration';
 
 class SearchingState extends Phaser.State {
+    layer = null;
+
     preload() {
         // this.load.image('bg-searching', './assets/graphics/backgrounds/bg-searching.jpg');
         this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg', 40, 40);
@@ -22,27 +24,34 @@ class SearchingState extends Phaser.State {
 
         let map = this.add.tilemap('searching-1');
         map.addTilesetImage('spr-searching');
+        map.setCollisionByIndex(1);
 
-        let layer = map.createLayer('Tile Layer 1');
-        layer.resizeWorld();
+        this.layer = map.createLayer('Tile Layer 1');
+        this.layer.resizeWorld();
 
-        this._setupPlayerSprite();
         this._setupBalls();
+        this._setupPlayerSprite();
         this._showWelcomeMessage();
     }
 
     _setupPlayerSprite() {
-        this.game.player.sprite = this.add.sprite(10, 50, `${this.game.player.id}-searching`);
-        this.game.player.sprite.anchor.setTo(0.5, 0.5);
+        let player = this.game.player.phaser = this.add.sprite(30, 50, `${this.game.player.id}-searching`);
+        player.anchor.setTo(0.5, 0.5);
+
+        this.physics.arcade.enable(player);
+        player.body.collideWorldBounds = true;
+        player.body.setSize(30, 30, 0, 10);
     }
 
     _setupBalls() {
-        this.game.balls = this.add.group();
+        let balls = this.game.balls = this.add.group();
+        balls.enableBody = true;
+        this.physics.arcade.enable(balls);
 
         let places = this.cache.getJSON('place-1');
         places.forEach((item) => {
             let [x, y] = item;
-            this.game.balls.add(this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-searching', 1));
+            balls.add(this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-searching', 1));
         });
     }
 
@@ -64,28 +73,48 @@ class SearchingState extends Phaser.State {
     }
 
     update() {
-        let player = this.game.player.sprite;
+        this._handleCollision();
+        this._handleKeyboard();
+    }
+
+    _handleCollision() {
+        this.physics.arcade.collide(this.game.player.phaser, this.layer);
+        this.physics.arcade.collide(this.game.player.phaser, this.game.balls, (player, ball) => {
+            ball.destroy();
+
+            if (this.game.balls.length === 0) {
+                this.game.state.start('Fight');
+            }
+        });
+    }
+
+    _handleKeyboard() {
+        let player = this.game.player.phaser;
         let keyboard = this.input.keyboard;
 
+        player.body.velocity.x = player.body.velocity.y = 0;
+
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.x -= Configuration.PLAYER_SPEED;
+            player.body.velocity.x -= Configuration.PLAYER_SPEED;
             player.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.x += Configuration.PLAYER_SPEED;
+            player.body.velocity.x += Configuration.PLAYER_SPEED;
             player.angle = 10;
         } else {
             player.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            player.y -= Configuration.PLAYER_SPEED;
+            player.body.velocity.y -= Configuration.PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            player.y += Configuration.PLAYER_SPEED;
+            player.body.velocity.y += Configuration.PLAYER_SPEED;
         }
     }
 
     render() {
-
+        // let player = this.game.player.phaser;
+        // this.game.debug.bodyInfo(player, 25, 25);
+        // this.game.debug.body(player);
     }
 }
 

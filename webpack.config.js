@@ -14,7 +14,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.es6\.js/,
-                loader: 'babel',
+                loader: 'babel?stage=0',
                 exclude: /node_modules/
             }
         ]
