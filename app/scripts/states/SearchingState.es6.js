@@ -3,6 +3,8 @@ class SearchingState extends Phaser.State {
         // this.load.image('bg-searching', './assets/graphics/backgrounds/bg-searching.jpg');
         this.load.image('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg');
         this.load.tilemap('searching-1', './assets/maps/searching-1.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('searching-2', './assets/maps/searching-2.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('searching-3', './assets/maps/searching-3.json', null, Phaser.Tilemap.TILED_JSON);
 
         this.load.image('goku-searching', './assets/graphics/characters/goku/goku-searching.png');
         this.load.image('vegeta-searching', './assets/graphics/characters/vegeta/vegeta-searching.png');
