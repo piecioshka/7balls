@@ -5,6 +5,8 @@ class Character {
 
     static get defaultSettings() {
         return {
+            // Identifier of character, ex. goku, vegeta
+            id: 'unknown',
             // User put his favourite nickname.
             nickname: 'unknown',
             // Name of character: Son Goku or Vegeta.
