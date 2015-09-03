@@ -1,7 +1,10 @@
+import Configuration from '../configuration';
+
 class SearchingState extends Phaser.State {
     preload() {
         // this.load.image('bg-searching', './assets/graphics/backgrounds/bg-searching.jpg');
         this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg', 40, 40);
+
         this.load.tilemap('searching-1', './assets/maps/searching-1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('searching-2', './assets/maps/searching-2.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('searching-3', './assets/maps/searching-3.json', null, Phaser.Tilemap.TILED_JSON);
@@ -30,6 +33,7 @@ class SearchingState extends Phaser.State {
 
     _setupPlayerSprite() {
         this.game.player.sprite = this.add.sprite(10, 50, `${this.game.player.id}-searching`);
+        this.game.player.sprite.anchor.setTo(0.5, 0.5);
     }
 
     _setupBalls() {
@@ -60,7 +64,24 @@ class SearchingState extends Phaser.State {
     }
 
     update() {
+        let player = this.game.player.sprite;
+        let keyboard = this.input.keyboard;
 
+        if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            player.x -= Configuration.PLAYER_SPEED;
+            player.angle = -10;
+        } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            player.x += Configuration.PLAYER_SPEED;
+            player.angle = 10;
+        } else {
+            player.angle = 0;
+        }
+
+        if (keyboard.isDown(Phaser.Keyboard.UP)) {
+            player.y -= Configuration.PLAYER_SPEED;
+        } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
+            player.y += Configuration.PLAYER_SPEED;
+        }
     }
 
     render() {
