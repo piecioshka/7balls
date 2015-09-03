@@ -1,10 +1,14 @@
 class SearchingState extends Phaser.State {
     preload() {
         // this.load.image('bg-searching', './assets/graphics/backgrounds/bg-searching.jpg');
-        this.load.image('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg');
+        this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg', 40, 40);
         this.load.tilemap('searching-1', './assets/maps/searching-1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('searching-2', './assets/maps/searching-2.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('searching-3', './assets/maps/searching-3.json', null, Phaser.Tilemap.TILED_JSON);
+
+        this.load.json('place-1', './assets/balls/place-1.json');
+        this.load.json('place-2', './assets/balls/place-2.json');
+        this.load.json('place-3', './assets/balls/place-3.json');
 
         this.load.image('goku-searching', './assets/graphics/characters/goku/goku-searching.png');
         this.load.image('vegeta-searching', './assets/graphics/characters/vegeta/vegeta-searching.png');
@@ -19,9 +23,23 @@ class SearchingState extends Phaser.State {
         let layer = map.createLayer('Tile Layer 1');
         layer.resizeWorld();
 
+        this._setupPlayerSprite();
+        this._setupBalls();
         this._showWelcomeMessage();
+    }
 
+    _setupPlayerSprite() {
         this.game.player.sprite = this.add.sprite(10, 50, `${this.game.player.id}-searching`);
+    }
+
+    _setupBalls() {
+        this.game.balls = this.add.group();
+
+        let places = this.cache.getJSON('place-1');
+        places.forEach((item) => {
+            let [x, y] = item;
+            this.game.balls.add(this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-searching', 1));
+        });
     }
 
     _showWelcomeMessage() {
