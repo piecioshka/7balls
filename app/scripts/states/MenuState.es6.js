@@ -11,8 +11,8 @@ class MenuState extends Phaser.State {
     create() {
         this.add.image(0, 0, 'bg-menu');
 
-        this.add.button(200, 130, 'goku-card', this._selectGoku.bind(this));
-        this.add.button(400, 130, 'vegeta-card', this._selectVegeta.bind(this));
+        this.add.button(220, 130, 'goku-card', this._selectGoku.bind(this));
+        this.add.button(420, 130, 'vegeta-card', this._selectVegeta.bind(this));
     }
 
     _selectGoku() {
