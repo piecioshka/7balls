@@ -83,7 +83,7 @@ class SearchingState extends Phaser.State {
             ball.destroy();
 
             if (this.game.balls.length === 0) {
-                this.game.state.start('Fight');
+                this.state.start('Shenron');
             }
         });
     }
