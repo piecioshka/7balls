@@ -16,10 +16,12 @@ Zasady:
  * gracz walczy z pierwszym rywalem
     * gdy przegra ma jeszcze jedno życie, może walczyć dalej, bądź postarać się zebrać kolejne kule aby zdobyć kolejne życie
     * gdy pokona rywala:
-        * dostaje kolejne level oraz dodatkowe skillsy
-        * można wejść do salki, gdzie zdobędzie się trochę doświadczenia, lepszym rozwojem jest walka z przeciwnikiem
-        * gracz dalej może albo walczyć z kolejnym rywalem, albo próbować zdobyć smocze kule, ale wtedy na mapie mogą 
-        pojawić się przeciwnicy chroniący smoczych kul
+        * dodatkowy exp
+        * przenosi się do kuchni własnego domu aby się najeść
+        * następnie przechodzi do salki, gdzie może zdobyć trochę exp (lepszym rozwojem jest walka z przeciwnikiem)
+        * podczas treningu można wybrać 2 opcje:
+            * gracz dalej może walczyć z kolejnym rywalem,
+            * albo próbować zdobyć smocze kule, wtedy na mapie pojawiają się przeciwnicy chroniący smoczych kul
 
 
  - jeśli gracz wykona dziwny atak dostaje magiczną fasolkę, która może użyć podczas walki

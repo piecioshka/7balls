@@ -13,10 +13,10 @@ class Character {
             name: 'unknown',
             // Number of lives.
             up: 0,
-            // Percent of health.
+            // Percent of health. Decrease. When =0, up -1.
             hp: 100,
-            // List of skills.
-            exp: [],
+            // Number of skills. Increase. When =100, level +1.
+            exp: 0,
             // Number of level.
             lvl: 1
         };
