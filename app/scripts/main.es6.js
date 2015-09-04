@@ -4,6 +4,7 @@ import GameOverState from './states/GameOverState';
 import MenuState from './states/MenuState';
 import SearchingState from './states/SearchingState';
 import ShenronState from './states/ShenronState';
+import TrainingState from './states/TrainingState';
 
 class Game {
     constructor() {
@@ -16,6 +17,7 @@ class Game {
         this.game.state.add('Menu', MenuState);
         this.game.state.add('Searching', SearchingState);
         this.game.state.add('Shenron', ShenronState);
+        this.game.state.add('Training', TrainingState);
 
         // First state is screen with character choice.
         this.game.state.start('Menu');
