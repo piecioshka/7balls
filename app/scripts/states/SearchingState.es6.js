@@ -32,6 +32,8 @@ class SearchingState extends Phaser.State {
         this._setupBalls();
         this._setupPlayerSprite();
         this._showWelcomeMessage();
+
+        this._setupTimer();
     }
 
     _setupPlayerSprite() {
@@ -70,6 +72,34 @@ class SearchingState extends Phaser.State {
 
     _hideWelcomeMessage(message) {
         this.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
+    }
+
+    _setupTimer() {
+        let [limit] = Configuration.SEARCHING_MAPS_TIME_LIMIT;
+        let ending = parseInt(Math.log2(limit));
+        let clock = this.time.create();
+        let message = this.add.text(10, 10, `Time: ${limit}`);
+        message.fill = '#fff';
+        message.setShadow(0, 0, 'rgba(0,0,0,0.5)', 3);
+
+        clock.repeat(Phaser.Timer.SECOND, limit, () => {
+            let remain = limit - parseInt(clock.seconds);
+            message.setText(`Time: ${remain}`);
+
+            if (remain === ending) {
+                message.anchor.setTo(0.5, 0.5);
+                message.x = this.game.width / 2;
+                message.y = this.game.height / 2;
+                message.fill = '#f00';
+                message.fontSize = 60;
+            }
+        }, this);
+
+        clock.onComplete.add(() => {
+            this.state.start('GameOver');
+        });
+
+        clock.start();
     }
 
     update() {
