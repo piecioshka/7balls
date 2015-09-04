@@ -1,5 +1,6 @@
 import Configuration from './configuration';
 import FightState from './states/FightState';
+import GameOverState from './states/GameOverState';
 import MenuState from './states/MenuState';
 import SearchingState from './states/SearchingState';
 import ShenronState from './states/ShenronState';
@@ -11,6 +12,7 @@ class Game {
 
         // List of all states.
         this.game.state.add('Fight', FightState);
+        this.game.state.add('GameOver', GameOverState);
         this.game.state.add('Menu', MenuState);
         this.game.state.add('Searching', SearchingState);
         this.game.state.add('Shenron', ShenronState);
