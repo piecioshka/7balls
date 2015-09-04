@@ -56,20 +56,20 @@ class SearchingState extends Phaser.State {
     }
 
     _showWelcomeMessage() {
-        this.welcomeMessage = this.add.text(this.game.width / 2, this.game.height / 2, `Hello ${this.game.player.nickname} (${this.game.player.name})`);
-        this.welcomeMessage.alpha = 0;
-        this.welcomeMessage.anchor.set(0.5, 0.5);
-        this.welcomeMessage.fontSize = 60;
-        this.welcomeMessage.fill = '#fff';
-        this.welcomeMessage.setShadow(5, 5, 'rgba(0,0,0,0.5)', 5);
+        let message = this.add.text(this.game.width / 2, this.game.height / 2, `Hello ${this.game.player.nickname} (${this.game.player.name})`);
+        message.alpha = 0;
+        message.fontSize = 60;
+        message.fill = '#fff';
+        message.anchor.set(0.5, 0.5);
+        message.setShadow(0, 0, 'rgba(0,0,0,0.5)', 10);
 
-        this.add.tween(this.welcomeMessage).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
+        this.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
 
-        this.time.events.add(Phaser.Timer.SECOND * 1.5, this._hideWelcomeMessage, this);
+        this.time.events.add(Phaser.Timer.SECOND * 1.5, this._hideWelcomeMessage, this, message);
     }
 
-    _hideWelcomeMessage() {
-        this.add.tween(this.welcomeMessage).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
+    _hideWelcomeMessage(message) {
+        this.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
     }
 
     update() {
