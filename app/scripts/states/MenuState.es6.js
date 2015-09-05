@@ -5,15 +5,19 @@ class MenuState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
     onEnter = null;
+    soundScouter = null;
 
     preload() {
         this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.jpg');
         this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.jpg');
         this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.jpg');
+
+        this.load.audio('scouter', './assets/sound/dbz/scouter.ogg');
     }
 
     create() {
         this.add.image(0, 0, 'bg-menu');
+        this.soundScouter = this.add.audio('scouter');
 
         this.gokuCard = this.add.button(220, 130, 'goku-card', this._chooseGoku.bind(this));
         this.vegetaCard = this.add.button(420, 130, 'vegeta-card', this._chooseVegeta.bind(this));
@@ -29,6 +33,9 @@ class MenuState extends Phaser.State {
 
         // Move to next state: Searching
         this.state.start('Searching');
+
+        // Play sound effect.
+        this.soundScouter.play();
     }
 
     _chooseVegeta() {
@@ -37,6 +44,9 @@ class MenuState extends Phaser.State {
 
         // Move to next state: Searching
         this.state.start('Searching');
+
+        // Play sound effect.
+        this.soundScouter.play();
     }
 
     update() {
