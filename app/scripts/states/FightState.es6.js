@@ -9,11 +9,12 @@ class FightState extends Phaser.State {
         x: null,
         c: null,
         up: null,
-        down: null,
         space: null
     };
     sound = {
-        jump: null
+        jump: null,
+        weakkick: null,
+        weakpunch: null
     };
 
     preload() {
@@ -47,6 +48,8 @@ class FightState extends Phaser.State {
         this.world.setBounds(0, 0, this.game.width, this.game.height - 40);
 
         this.sound.jump = this.add.audio('sound-jump');
+        this.sound.weakkick = this.add.audio('sound-weakkick');
+        this.sound.weakpunch = this.add.audio('sound-weakpunch');
 
         this._setupEnemy();
 
@@ -67,13 +70,15 @@ class FightState extends Phaser.State {
     }
 
     _setupPlayerSprite() {
-        let player = this.game.player.phaser = this.add.sprite(200, 260, `${this.game.player.id}-spritesheet`);
+        let player = this.game.player.phaser = this.add.sprite(150, 360, `${this.game.player.id}-spritesheet`);
+        player.anchor.setTo(0, 1);
         this._defineDefaultProperties(player);
         FightState._defineAnimations(player, this.game.player.name);
     }
 
     _setupEnemySprite() {
-        let enemy = this.game.enemy.phaser = this.add.sprite(600, 260, `${this.game.enemy.id}-spritesheet`);
+        let enemy = this.game.enemy.phaser = this.add.sprite(650, 360, `${this.game.enemy.id}-spritesheet`);
+        enemy.anchor.setTo(1, 1);
         this._defineDefaultProperties(enemy);
         FightState._defineAnimations(enemy, this.game.enemy.name);
     }
@@ -84,7 +89,6 @@ class FightState extends Phaser.State {
         this.keyboard.c = this.input.keyboard.addKey(Phaser.Keyboard.C);
         this.keyboard.x = this.input.keyboard.addKey(Phaser.Keyboard.X);
         this.keyboard.up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
-        this.keyboard.down = this.input.keyboard.addKey(Phaser.Keyboard.DOWN);
         this.keyboard.space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
         //  Stop the following keys from propagating up to the browser
@@ -92,17 +96,18 @@ class FightState extends Phaser.State {
             Phaser.Keyboard.C,
             Phaser.Keyboard.X,
             Phaser.Keyboard.UP,
-            Phaser.Keyboard.DOWN,
             Phaser.Keyboard.SPACEBAR
         ]);
 
         this.keyboard.c.onDown.add(() => {
             player.play('kicking');
+            this.sound.weakkick.play();
             console.log('Character "%s" is KICKING', this.game.player.name);
         });
 
         this.keyboard.x.onDown.add(() => {
             player.play('boxing');
+            this.sound.weakpunch.play();
             console.log('Character "%s" is BOXING', this.game.player.name);
         });
 
@@ -117,11 +122,6 @@ class FightState extends Phaser.State {
 
         this.keyboard.up.onDown.add(handleJump);
         this.keyboard.space.onDown.add(handleJump);
-
-        this.keyboard.down.onDown.add(() => {
-            player.play('sitting');
-            console.log('Character "%s" is SITTING', this.game.player.name);
-        });
     }
 
     _randomEnemy() {
@@ -130,8 +130,6 @@ class FightState extends Phaser.State {
     }
 
     _defineDefaultProperties(character) {
-        character.anchor.setTo(0.5, 0.5);
-
         this.physics.arcade.enable(character);
         character.body.bounce.setTo(0, 0.1);
         character.body.collideWorldBounds = true;
@@ -139,13 +137,33 @@ class FightState extends Phaser.State {
     }
 
     static _defineAnimations(character, name) {
-        character.animations.add('standing', [0, 1, 2, 3], 4, true);
-        character.animations.add('sitting', [4, 5, 6, 7], 4, true);
-        character.animations.add('jumping', [8, 9, 10, 11], 4, true);
-        character.animations.add('kicking', [12, 13, 14, 15], 4, true);
-        character.animations.add('boxing', [16, 17, 18, 19], 4, true);
-        character.animations.add('win', [20, 21, 22, 23], 4, true);
-        character.animations.add('died', [24, 25, 26, 27], 4, true);
+        let resizeMaximum = () => {
+            character.body.setSize(150, 200, 0, 0);
+        };
+        let reduceByHalf = () => {
+            character.body.setSize(150, 100, 0, 0);
+        };
+        let revertDefaultSize = () => {
+            character.body.setSize(100, 200, 0, 0);
+        };
+
+        let sitting = character.animations.add('sitting', [4, 5], 4, false);
+        sitting.onStart.add(reduceByHalf);
+        sitting.onComplete.add(revertDefaultSize);
+
+        let kicking = character.animations.add('kicking', [12, 13], 16, false);
+        kicking.onStart.add(resizeMaximum);
+        kicking.onComplete.add(revertDefaultSize);
+
+        let boxing = character.animations.add('boxing', [16, 17], 16, false);
+        boxing.onStart.add(resizeMaximum);
+        boxing.onComplete.add(revertDefaultSize);
+
+        character.animations.add('standing', [0, 1, 2], 4, true);
+        character.animations.add('jumping', [8, 9], 4, false);
+        character.animations.add('win', [20, 21], 4, false);
+        character.animations.add('died', [24, 25], 4, false);
+
         character.play('standing');
         console.log('Character "%s" is STANDING', name);
     }
@@ -176,6 +194,11 @@ class FightState extends Phaser.State {
             player.body.velocity.x -= Configuration.FIGHT_PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
             player.body.velocity.x += Configuration.FIGHT_PLAYER_SPEED;
+        }
+
+        if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
+            player.play('sitting');
+            console.log('Character "%s" is SITTING', this.game.player.name);
         }
     }
 
