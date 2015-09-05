@@ -15,9 +15,9 @@ class Character {
             up: 0,
             // Percent of health. Decrease. When =0, up -1.
             hp: 100,
-            // Number of skills. Increase. When =100, level +1.
+            // Number of skills. Increase. When =100, level +1 and reduce =0.
             exp: 0,
-            // Number of level.
+            // Number of level. Max lvl=100
             lvl: 1
         };
     }

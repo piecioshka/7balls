@@ -14,7 +14,13 @@ class FightState extends Phaser.State {
     sound = {
         jump: null,
         weakkick: null,
-        weakpunch: null
+        weakpunch: null,
+
+        mediumkick: null,
+        mediumpunch: null,
+
+        strongkick: null,
+        strongpunch: null
     };
 
     preload() {
@@ -30,14 +36,17 @@ class FightState extends Phaser.State {
 
         this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
 
+        // Use this when character has level less than 30.
         this.load.audio('sound-weakkick', './assets/sound/dbz/weakkick.ogg');
         this.load.audio('sound-weakpunch', './assets/sound/dbz/weakpunch.ogg');
 
+        // Use this when character has level less than 60.
         this.load.audio('sound-mediumkick', './assets/sound/dbz/mediumkick.ogg');
         this.load.audio('sound-mediumpunch', './assets/sound/dbz/mediumpunch.ogg');
 
+        // Use this when character has level less than 100.
         this.load.audio('sound-strongkick', './assets/sound/dbz/strongkick.ogg');
-        this.load.audio('sound-superpunch', './assets/sound/dbz/strongpunch.ogg');
+        this.load.audio('sound-strongpunch', './assets/sound/dbz/strongpunch.ogg');
     }
 
     create() {
@@ -50,6 +59,12 @@ class FightState extends Phaser.State {
         this.sound.jump = this.add.audio('sound-jump');
         this.sound.weakkick = this.add.audio('sound-weakkick');
         this.sound.weakpunch = this.add.audio('sound-weakpunch');
+
+        this.sound.mediumkick = this.add.audio('sound-mediumkick');
+        this.sound.mediumpunch = this.add.audio('sound-mediumpunch');
+
+        this.sound.strongkick = this.add.audio('sound-strongkick');
+        this.sound.strongpunch = this.add.audio('sound-strongpunch');
 
         this._setupEnemy();
 
@@ -86,6 +101,30 @@ class FightState extends Phaser.State {
     _setupKeyboard() {
         let player = this.game.player.phaser;
 
+        let playKickSound = () => {
+            let player = this.game.player;
+
+            if (player.lvl < 30) {
+                this.sound.weakkick.play();
+            } else if (player.lvl < 60) {
+                this.sound.mediumkick.play();
+            } else {
+                this.sound.strongkick.play();
+            }
+        };
+
+        let playPunchSound = () => {
+            let player = this.game.player;
+
+            if (player.lvl < 30) {
+                this.sound.weakpunch.play();
+            } else if (player.lvl < 60) {
+                this.sound.mediumpunch.play();
+            } else {
+                this.sound.strongpunch.play();
+            }
+        };
+
         this.keyboard.c = this.input.keyboard.addKey(Phaser.Keyboard.C);
         this.keyboard.x = this.input.keyboard.addKey(Phaser.Keyboard.X);
         this.keyboard.up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -101,13 +140,13 @@ class FightState extends Phaser.State {
 
         this.keyboard.c.onDown.add(() => {
             player.play('kicking');
-            this.sound.weakkick.play();
+            playKickSound();
             console.log('Character "%s" is KICKING', this.game.player.name);
         });
 
         this.keyboard.x.onDown.add(() => {
             player.play('boxing');
-            this.sound.weakpunch.play();
+            playPunchSound();
             console.log('Character "%s" is BOXING', this.game.player.name);
         });
 
