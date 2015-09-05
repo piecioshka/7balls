@@ -2,9 +2,11 @@ import Configuration from '../configuration';
 
 class SearchingState extends Phaser.State {
     layer = null;
+    sound = {
+        candypop: null
+    };
 
     preload() {
-        // this.load.image('bg-searching', './assets/graphics/backgrounds/bg-searching.jpg');
         this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg', 40, 40);
 
         this.load.tilemap('searching-1', './assets/maps/searching-1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -17,10 +19,13 @@ class SearchingState extends Phaser.State {
 
         this.load.image('goku-searching', './assets/graphics/characters/goku/goku-searching.png');
         this.load.image('vegeta-searching', './assets/graphics/characters/vegeta/vegeta-searching.png');
+
+        this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
     }
 
     create() {
-        // this.add.image(0, 0, 'bg-searching');
+        this.physics.startSystem(Phaser.Physics.ARCADE);
+        this.sound.candypop = this.add.audio('sound-candypop');
 
         let map = this.add.tilemap('searching-1');
         map.addTilesetImage('spr-searching');
@@ -112,6 +117,8 @@ class SearchingState extends Phaser.State {
         this.physics.arcade.collide(this.game.player.phaser, this.game.balls, (player, ball) => {
             ball.destroy();
 
+            this.sound.candypop.play();
+
             if (this.game.balls.length === 0) {
                 this.state.start('Shenron');
             }
@@ -125,19 +132,19 @@ class SearchingState extends Phaser.State {
         player.body.velocity.x = player.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.body.velocity.x -= Configuration.PLAYER_SPEED;
+            player.body.velocity.x -= Configuration.SEARCHING_PLAYER_SPEED;
             player.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.body.velocity.x += Configuration.PLAYER_SPEED;
+            player.body.velocity.x += Configuration.SEARCHING_PLAYER_SPEED;
             player.angle = 10;
         } else {
             player.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            player.body.velocity.y -= Configuration.PLAYER_SPEED;
+            player.body.velocity.y -= Configuration.SEARCHING_PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            player.body.velocity.y += Configuration.PLAYER_SPEED;
+            player.body.velocity.y += Configuration.SEARCHING_PLAYER_SPEED;
         }
     }
 
