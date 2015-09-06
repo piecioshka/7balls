@@ -1,12 +1,15 @@
 import Configuration from '../configuration';
+import AbstractState from './AbstractState';
 
-class SearchingState extends Phaser.State {
+class SearchingState extends AbstractState {
     layer = null;
     sound = {
         candypop: null
     };
 
     preload() {
+        super.preload();
+
         this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg', 40, 40);
 
         this.load.tilemap('searching-1', './assets/maps/searching-1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -39,6 +42,8 @@ class SearchingState extends Phaser.State {
         this._showWelcomeMessage();
 
         this._setupTimer();
+
+        this.loadSoundPreferences();
     }
 
     _setupPlayerSprite() {

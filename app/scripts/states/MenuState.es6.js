@@ -1,7 +1,8 @@
+import AbstractState from './AbstractState';
 import Goku from '../models/characters/Goku';
 import Vegeta from '../models/characters/Vegeta';
 
-class MenuState extends Phaser.State {
+class MenuState extends AbstractState {
     gokuCard = null;
     vegetaCard = null;
     onEnter = null;
@@ -10,6 +11,8 @@ class MenuState extends Phaser.State {
     };
 
     preload() {
+        super.preload();
+
         this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.jpg');
         this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.jpg');
         this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.jpg');
@@ -19,12 +22,15 @@ class MenuState extends Phaser.State {
 
     create() {
         this.add.image(0, 0, 'bg-menu');
+        this.game.sound.mute = true;
         this.sound.scouter = this.add.audio('scouter');
 
         this.gokuCard = this.add.button(220, 130, 'goku-card', this._chooseGoku.bind(this));
         this.vegetaCard = this.add.button(420, 130, 'vegeta-card', this._chooseVegeta.bind(this));
 
         this._selectGoku();
+
+        this.loadSoundPreferences();
     }
 
     _chooseGoku() {

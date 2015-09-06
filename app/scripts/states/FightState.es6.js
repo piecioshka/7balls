@@ -1,9 +1,10 @@
 import Configuration from '../configuration';
+import AbstractState from './AbstractState';
 import Freeza from '../models/characters/Freeza';
 import Cell from '../models/characters/Cell';
 import Bubu from '../models/characters/Bubu';
 
-class FightState extends Phaser.State {
+class FightState extends AbstractState {
     enemies = [Freeza, Cell, Bubu];
     keyboard = {
         x: null,
@@ -24,6 +25,8 @@ class FightState extends Phaser.State {
     };
 
     preload() {
+        super.preload();
+
         this.load.image('bg-fight-hell', './assets/graphics/backgrounds/bg-fight-hell.png');
         this.load.image('bg-fight-sky', './assets/graphics/backgrounds/bg-fight-sky.png');
 
@@ -74,6 +77,8 @@ class FightState extends Phaser.State {
         this._setupEnemySprite();
 
         this._setupKeyboard();
+
+        this.loadSoundPreferences();
     }
 
     _setupEnemy() {

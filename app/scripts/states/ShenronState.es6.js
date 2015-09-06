@@ -1,9 +1,13 @@
-class ShenronState {
+import AbstractState from './AbstractState';
+
+class ShenronState extends AbstractState {
     sound = {
         ambienceThunder: null
     };
 
     preload() {
+        super.preload();
+
         this.load.image('bg-shenron', './assets/graphics/backgrounds/bg-shenron.jpg');
         this.load.audio('sound-ambience-thunder', './assets/sound/dbk/ambience_thunder.ogg');
     }
@@ -14,6 +18,8 @@ class ShenronState {
 
         this.time.events.add(Phaser.Timer.SECOND * 2, this._setupFight, this);
         this.sound.ambienceThunder.play();
+
+        this.loadSoundPreferences();
     }
 
     _setupFight() {
