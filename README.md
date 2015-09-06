@@ -30,10 +30,11 @@ Zasady:
 Cechy charakteryzujące zawodnika:
 
  - nickname, np. piecioshka
+ - id: np. goku, vegeta (po procesie zamiany na małe litery oraz usuwaniu znaków specjalnych)
  - postać: np. Son Goku, Vegeta
  - liczba żyć: up
  - procent zdrowia: hp
- - lista skillsów (umiejętności): exp
+ - liczba skillsów (umiejętności): exp
  - liczba leveli (siły): lvl
 
 Dodatkowo:

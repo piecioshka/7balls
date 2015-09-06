@@ -47,6 +47,8 @@ class FightState extends Phaser.State {
         // Use this when character has level less than 100.
         this.load.audio('sound-strongkick', './assets/sound/dbz/strongkick.ogg');
         this.load.audio('sound-strongpunch', './assets/sound/dbz/strongpunch.ogg');
+
+        this.load.text('font-saiyan-sans', './assets/fonts/Saiyan-Sans.ttf');
     }
 
     create() {
@@ -84,7 +86,17 @@ class FightState extends Phaser.State {
         console.log('Random character: ', this.game.enemy.name);
     }
 
+    _addText(x, y, text) {
+        let label = this.add.text(x, y, text);
+        label.font = 'SaiyanSans';
+        label.fill = '#fff';
+    }
+
     _setupPlayerSprite() {
+        this._addText(21, 18, 'HP');
+        this._addText(8, 48, 'EXP');
+        this._addText(63, 81, `${this.game.player.lvl} lvl`);
+
         let player = this.game.player.phaser = this.add.sprite(150, 360, `${this.game.player.id}-spritesheet`);
         player.anchor.setTo(0, 1);
         this._defineDefaultProperties(player);
@@ -92,6 +104,10 @@ class FightState extends Phaser.State {
     }
 
     _setupEnemySprite() {
+        this._addText(755, 18, 'HP');
+        this._addText(755, 48, 'EXP');
+        this._addText(682, 81, `${this.game.enemy.lvl} lvl`);
+
         let enemy = this.game.enemy.phaser = this.add.sprite(650, 360, `${this.game.enemy.id}-spritesheet`);
         enemy.anchor.setTo(1, 1);
         this._defineDefaultProperties(enemy);
