@@ -23,6 +23,16 @@ class FightState extends AbstractState {
         strongkick: null,
         strongpunch: null
     };
+    bars = {
+        player: {
+            hp: null,
+            exp: null
+        },
+        enemy: {
+            hp: null,
+            exp: null
+        }
+    };
 
     preload() {
         super.preload();
@@ -40,6 +50,12 @@ class FightState extends AbstractState {
         this.load.image('freeza-card', './assets/graphics/characters/freeza/freeza-card.jpg');
         this.load.image('cell-card', './assets/graphics/characters/cell/cell-card.jpg');
         this.load.image('bubu-card', './assets/graphics/characters/bubu/bubu-card.jpg');
+
+        this.load.image('bar-blank', './assets/graphics/bars/blank.png');
+        this.load.image('bar-exp', './assets/graphics/bars/exp.png');
+        this.load.image('bar-exp-invert', './assets/graphics/bars/exp-invert.png');
+        this.load.image('bar-hp', './assets/graphics/bars/hp.png');
+        this.load.image('bar-hp-invert', './assets/graphics/bars/hp-invert.png');
 
         this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
 
@@ -95,10 +111,11 @@ class FightState extends AbstractState {
         console.log('Random character: ', this.game.enemy.name);
     }
 
-    _addText(x, y, text) {
+    _addText(x, y, text, anchor = [0, 0]) {
         let label = this.add.text(x, y, text);
         label.font = 'SaiyanSans';
         label.fill = '#fff';
+        label.anchor.setTo(...anchor);
     }
 
     _addAvatar(x, y, key) {
@@ -107,11 +124,27 @@ class FightState extends AbstractState {
         avatar.height = 70;
     }
 
+    _addBar(x, y, key, anchor = [0, 0]) {
+        let blank = this.add.image(x, y, 'bar-blank');
+        blank.anchor.setTo(...anchor);
+
+        let bar = this.add.image(x, y, key);
+        bar.anchor.setTo(...anchor);
+
+        return bar
+    }
+
     _setupPlayerSprite() {
         this._addText(21, 18, 'HP');
         this._addText(8, 48, 'EXP');
         this._addAvatar(6, 85, `${this.game.player.id}-card`);
         this._addText(63, 81, `${this.game.player.lvl} lvl`);
+
+        this.bars.player.hp = this._addBar(55, 25, 'bar-hp');
+        this._updatePlayerBarHP(50);
+
+        this.bars.player.exp = this._addBar(55, 55, 'bar-exp');
+        this._updatePlayerBarEXP(150);
 
         let player = this.game.player.phaser = this.add.sprite(150, 360, `${this.game.player.id}-spritesheet`);
         player.anchor.setTo(0, 1);
@@ -119,16 +152,38 @@ class FightState extends AbstractState {
         FightState._defineAnimations(player, this.game.player.name);
     }
 
+    _updatePlayerBarHP(x) {
+        this.bars.player.hp.crop(new Phaser.Rectangle(0, 0, x, 16));
+    }
+
+    _updatePlayerBarEXP(x) {
+        this.bars.player.exp.crop(new Phaser.Rectangle(0, 0, x, 16));
+    }
+
     _setupEnemySprite() {
         this._addText(755, 18, 'HP');
         this._addText(755, 48, 'EXP');
         this._addAvatar(745, 85, `${this.game.enemy.id}-card`);
-        this._addText(682, 81, `${this.game.enemy.lvl} lvl`);
+        this._addText(733, 81, `${this.game.enemy.lvl} lvl`, [1, 0]);
+
+        this.bars.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
+        this._updateEnemyBarHP(50);
+
+        this.bars.enemy.exp = this._addBar(746, 55, 'bar-exp-invert', [1, 0]);
+        this._updateEnemyBarEXP(150);
 
         let enemy = this.game.enemy.phaser = this.add.sprite(650, 360, `${this.game.enemy.id}-spritesheet`);
         enemy.anchor.setTo(1, 1);
         this._defineDefaultProperties(enemy);
         FightState._defineAnimations(enemy, this.game.enemy.name);
+    }
+
+    _updateEnemyBarHP(x) {
+        this.bars.enemy.hp.crop(new Phaser.Rectangle(x, 0, 256 - x, 16));
+    }
+
+    _updateEnemyBarEXP(x) {
+        this.bars.enemy.exp.crop(new Phaser.Rectangle(x, 0, 256 - x, 16));
     }
 
     _setupKeyboard() {

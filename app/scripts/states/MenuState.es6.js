@@ -26,8 +26,8 @@ class MenuState extends AbstractState {
         this.game.sound.mute = true;
         this.sound.scouter = this.add.audio('scouter');
 
-        this.gokuCard = this.add.button(220, 130, 'goku-card', this._chooseGoku.bind(this));
-        this.vegetaCard = this.add.button(420, 130, 'vegeta-card', this._chooseVegeta.bind(this));
+        this.gokuCard = this.add.button(220, 160, 'goku-card', this._chooseGoku.bind(this));
+        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', this._chooseVegeta.bind(this));
 
         this._selectGoku();
 

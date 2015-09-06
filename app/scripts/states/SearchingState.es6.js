@@ -10,7 +10,7 @@ class SearchingState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.jpg', 40, 40);
+        this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.png', 40, 40);
 
         this.load.tilemap('searching-1', './assets/maps/searching-1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('searching-2', './assets/maps/searching-2.json', null, Phaser.Tilemap.TILED_JSON);
