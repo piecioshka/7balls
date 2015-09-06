@@ -14,6 +14,7 @@ class MenuState extends AbstractState {
         super.preload();
 
         this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.jpg');
+
         this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.jpg');
         this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.jpg');
 

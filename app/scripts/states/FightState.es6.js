@@ -37,6 +37,10 @@ class FightState extends AbstractState {
         this.load.spritesheet('cell-spritesheet', './assets/graphics/characters/cell/cell-fight.png', 150, 200);
         this.load.spritesheet('bubu-spritesheet', './assets/graphics/characters/bubu/bubu-fight.png', 150, 200);
 
+        this.load.image('freeza-card', './assets/graphics/characters/freeza/freeza-card.jpg');
+        this.load.image('cell-card', './assets/graphics/characters/cell/cell-card.jpg');
+        this.load.image('bubu-card', './assets/graphics/characters/bubu/bubu-card.jpg');
+
         this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
 
         // Use this when character has level less than 30.
@@ -97,9 +101,16 @@ class FightState extends AbstractState {
         label.fill = '#fff';
     }
 
+    _addAvatar(x, y, key) {
+        let avatar = this.add.image(x, y, key);
+        avatar.width = 50;
+        avatar.height = 70;
+    }
+
     _setupPlayerSprite() {
         this._addText(21, 18, 'HP');
         this._addText(8, 48, 'EXP');
+        this._addAvatar(6, 85, `${this.game.player.id}-card`);
         this._addText(63, 81, `${this.game.player.lvl} lvl`);
 
         let player = this.game.player.phaser = this.add.sprite(150, 360, `${this.game.player.id}-spritesheet`);
@@ -111,6 +122,7 @@ class FightState extends AbstractState {
     _setupEnemySprite() {
         this._addText(755, 18, 'HP');
         this._addText(755, 48, 'EXP');
+        this._addAvatar(745, 85, `${this.game.enemy.id}-card`);
         this._addText(682, 81, `${this.game.enemy.lvl} lvl`);
 
         let enemy = this.game.enemy.phaser = this.add.sprite(650, 360, `${this.game.enemy.id}-spritesheet`);
