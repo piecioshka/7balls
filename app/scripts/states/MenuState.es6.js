@@ -24,13 +24,24 @@ class MenuState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-menu');
 
-        this.gokuCard = this.add.button(220, 160, 'goku-card', this._chooseGoku.bind(this));
-        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', this._chooseVegeta.bind(this));
+        this._setupCardGoku();
+        this._setupCardVegeta();
 
+        // Default: select Son Goku!
         this._selectGoku();
 
         this.loadSoundPreferences();
         this._setupSound();
+    }
+
+    _setupCardGoku() {
+        this.gokuCard = this.add.button(220, 160, 'goku-card', this._chooseGoku, this);
+        this.gokuCard.events.onInputOver.add(this._selectGoku, this);
+    }
+
+    _setupCardVegeta() {
+        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', this._chooseVegeta, this);
+        this.vegetaCard.events.onInputOver.add(this._selectVegeta, this);
     }
 
     _chooseGoku() {
@@ -76,13 +87,13 @@ class MenuState extends AbstractState {
     _selectGoku() {
         this.gokuCard.alpha = 1;
         this.vegetaCard.alpha = 0.5;
-        this.onEnter = this._chooseGoku.bind(this);
+        this.onEnter = this._chooseGoku;
     }
 
     _selectVegeta() {
         this.gokuCard.alpha = 0.5;
         this.vegetaCard.alpha = 1;
-        this.onEnter = this._chooseVegeta.bind(this);
+        this.onEnter = this._chooseVegeta;
     }
 
     render() {
