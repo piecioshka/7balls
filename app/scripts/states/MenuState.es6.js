@@ -49,7 +49,7 @@ class MenuState extends AbstractState {
         this.game.player = new Goku();
 
         // Move to next state: Searching
-        this.state.start('Searching');
+        this.state.start('Fight');
 
         // Add some effect.
         this.sound.scouter.play();
@@ -60,7 +60,7 @@ class MenuState extends AbstractState {
         this.game.player = new Vegeta();
 
         // Move to next state: Searching
-        this.state.start('Searching');
+        this.state.start('Fight');
 
         // Add some effect.
         this.sound.scouter.play();

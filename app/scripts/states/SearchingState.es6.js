@@ -38,7 +38,7 @@ class SearchingState extends AbstractState {
 
         this._setupBalls();
         this._setupPlayerSprite();
-        this._showWelcomeMessage();
+        this.showWelcomeMessage(`Hello ${this.game.player.nickname} (${this.game.player.name})`);
 
         this._setupTimer();
 
@@ -65,23 +65,6 @@ class SearchingState extends AbstractState {
             let [x, y] = item;
             balls.add(this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-searching', 1));
         });
-    }
-
-    _showWelcomeMessage() {
-        let message = this.add.text(this.game.width / 2, this.game.height / 2, `Hello ${this.game.player.nickname} (${this.game.player.name})`);
-        message.alpha = 0;
-        message.fontSize = 60;
-        message.fill = '#fff';
-        message.anchor.set(0.5, 0.5);
-        message.setShadow(0, 0, 'rgba(0,0,0,0.5)', 10);
-
-        this.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
-
-        this.time.events.add(Phaser.Timer.SECOND * 1.5, this._hideWelcomeMessage, this, message);
-    }
-
-    _hideWelcomeMessage(message) {
-        this.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
     }
 
     _setupTimer() {

@@ -95,6 +95,10 @@ class FightState extends AbstractState {
         this._setupEnemyOptions();
         this._setupLogo();
 
+        this.showWelcomeMessage('vs', () => {
+            this.showWelcomeMessage('Fight!');
+        });
+
         this._setupKeyboard();
 
         this.loadSoundPreferences();
