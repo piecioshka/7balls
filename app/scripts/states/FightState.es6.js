@@ -310,6 +310,10 @@ class FightState extends AbstractState {
             }
         };
 
+        let isCharactersOverlap = () => {
+            return this.physics.arcade.overlap(this.game.player.phaser, this.game.enemy.phaser);
+        };
+
         this.keyboard.c = this.input.keyboard.addKey(Phaser.Keyboard.C);
         this.keyboard.x = this.input.keyboard.addKey(Phaser.Keyboard.X);
         this.keyboard.up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -327,7 +331,7 @@ class FightState extends AbstractState {
             player.phaser.play('kicking');
             console.log('Character "%s" is KICKING', player.name);
 
-            if (this._isOverlap()) {
+            if (isCharactersOverlap()) {
                 this._addPlayerEXP(Configuration.FIGHT_KICKING_POINTS);
                 this._removeEnemyHP(Configuration.FIGHT_KICKING_POINTS);
             }
@@ -339,7 +343,7 @@ class FightState extends AbstractState {
             player.phaser.play('boxing');
             console.log('Character "%s" is BOXING', player.name);
 
-            if (this._isOverlap()) {
+            if (isCharactersOverlap()) {
                 this._addPlayerEXP(Configuration.FIGHT_BOXING_POINTS);
                 this._removeEnemyHP(Configuration.FIGHT_BOXING_POINTS);
             }
@@ -418,16 +422,7 @@ class FightState extends AbstractState {
     }
 
     update() {
-        this._handleCollision();
         this._handleKeyboard();
-    }
-
-    _isOverlap() {
-        return this.physics.arcade.overlap(this.game.player.phaser, this.game.enemy.phaser);
-    }
-
-    _handleCollision() {
-
     }
 
     _handleKeyboard() {
