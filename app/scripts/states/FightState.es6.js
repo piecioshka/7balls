@@ -23,14 +23,16 @@ class FightState extends AbstractState {
         strongkick: null,
         strongpunch: null
     };
-    bars = {
+    options = {
         player: {
             hp: null,
-            exp: null
+            exp: null,
+            lvl: null
         },
         enemy: {
             hp: null,
-            exp: null
+            exp: null,
+            lvl: null
         }
     };
 
@@ -62,15 +64,15 @@ class FightState extends AbstractState {
 
         this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
 
-        // Use this when character has level less than 30.
+        // Use this when character has level less than first threshold.
         this.load.audio('sound-weakkick', './assets/sound/dbz/weakkick.ogg');
         this.load.audio('sound-weakpunch', './assets/sound/dbz/weakpunch.ogg');
 
-        // Use this when character has level less than 60.
+        // Use this when character has level less than second threshold.
         this.load.audio('sound-mediumkick', './assets/sound/dbz/mediumkick.ogg');
         this.load.audio('sound-mediumpunch', './assets/sound/dbz/mediumpunch.ogg');
 
-        // Use this when character has level less than 100.
+        // Use this when character has level less than max.
         this.load.audio('sound-strongkick', './assets/sound/dbz/strongkick.ogg');
         this.load.audio('sound-strongpunch', './assets/sound/dbz/strongpunch.ogg');
 
@@ -82,7 +84,7 @@ class FightState extends AbstractState {
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.physics.arcade.gravity.set(0, Configuration.FIGHT_GRAVITY);
-        this.world.setBounds(0, 0, this.game.width, this.game.height - 40);
+        this.world.setBounds(0, 0, this.game.width, this.game.height - Configuration.FIGHT_BOTTOM_MARGIN);
 
         this._setupEnemy();
 
@@ -100,7 +102,7 @@ class FightState extends AbstractState {
     }
 
     _setupLogo() {
-        this.add.image(this.game.width / 2 - 62, 5, 'logo-minimal');
+        this.add.image((this.game.width / 2) - (this.cache.getImage('logo-minimal').width / 2), 5, 'logo-minimal');
     }
 
     _setupEnemy() {
@@ -118,30 +120,29 @@ class FightState extends AbstractState {
         label.font = 'SaiyanSans';
         label.fill = '#fff';
         label.anchor.setTo(...anchor);
+
+        return label;
     }
 
     _addAvatar(x, y, key) {
         let avatar = this.add.image(x, y, key);
-        avatar.width = 50;
-        avatar.height = 70;
+        avatar.width = Configuration.FIGHT_CHARACTER_AVATAR_WIDTH;
+        avatar.height = Configuration.FIGHT_CHARACTER_AVATAR_HEIGHT;
     }
 
     _addBar(x, y, key, anchor = [0, 0]) {
         let blank = this.add.image(x, y, 'bar-blank');
         blank.anchor.setTo(...anchor);
 
-        let bar = this.add.image(x, y, key);
-        bar.anchor.setTo(...anchor);
+        let color = this.add.image(x, y, key);
+        color.anchor.setTo(...anchor);
 
-        return bar
+        return { blank, color };
     }
 
-    _addDisableBar(x, y, key, anchor = [0, 0]) {
-        let bar = this.add.image(x, y, key);
-        bar.anchor.setTo(...anchor);
-        bar.alpha = 0.3;
-
-        return bar
+    static _disableBar(bar) {
+        bar.blank.destroy();
+        bar.color.alpha = 0.2;
     }
 
     _setupPlayerSprite() {
@@ -155,25 +156,48 @@ class FightState extends AbstractState {
         this._addText(21, 18, 'HP');
         this._addText(8, 48, 'EXP');
         this._addAvatar(6, 85, `${this.game.player.id}-card`);
-        this._addText(63, 81, `${this.game.player.lvl} lvl`);
 
-        this.bars.player.hp = this._addBar(55, 25, 'bar-hp');
-        this._updatePlayerBarHP(this.game.player.hp);
+        this.options.player.lvl = this._addText(63, 81, `${this.game.player.lvl} lvl`);
 
-        this.bars.player.exp = this._addBar(55, 55, 'bar-exp');
-        this._updatePlayerBarEXP(this.game.player.exp);
+        this.options.player.hp = this._addBar(55, 25, 'bar-hp');
+        this._updatePlayerOptionsHP();
+
+        this.options.player.exp = this._addBar(55, 55, 'bar-exp');
+        this._updatePlayerOptionsEXP();
     }
 
-    _updatePlayerBarHP(hp) {
-        let width = hp * 256 / 100;
-        console.info('[player] hp: %s (%s)', hp, width);
-        this.bars.player.hp.crop(new Phaser.Rectangle(0, 0, width, 16));
+    _updatePlayerOptionsLvL() {
+        this.options.player.lvl.setText(`${this.game.player.lvl} lvl`);
     }
 
-    _updatePlayerBarEXP(exp) {
-        let width = exp * 256 / 100;
-        console.info('[player] exp: %s (%s)', exp, width);
-        this.bars.player.exp.crop(new Phaser.Rectangle(0, 0, width, 16));
+    _updatePlayerOptionsHP() {
+        let hp = this.game.player.hp;
+        let imageWidth = this.cache.getImage('bar-hp').width;
+        let width = hp * imageWidth / 100;
+        this.options.player.hp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
+    }
+
+    _updatePlayerOptionsEXP() {
+        let exp = this.game.player.exp;
+        let imageWidth = this.cache.getImage('bar-exp').width;
+        let width = exp * imageWidth / 100;
+        this.options.player.exp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
+    }
+
+    _addPlayerEXP(value) {
+        let player = this.game.player;
+        player.exp += value;
+
+        if (player.exp >= Configuration.FIGHT_MAX_EXP) {
+            player.exp = 0;
+
+            if (player.lvl < Configuration.FIGHT_MAX_LVL) {
+                player.lvl++;
+            }
+        }
+
+        this._updatePlayerOptionsEXP();
+        this._updatePlayerOptionsLvL();
     }
 
     _setupEnemySprite() {
@@ -187,18 +211,25 @@ class FightState extends AbstractState {
         this._addText(755, 18, 'HP');
         this._addText(755, 48, 'EXP');
         this._addAvatar(745, 85, `${this.game.enemy.id}-card`);
-        this._addText(733, 81, `${this.game.enemy.lvl} lvl`, [1, 0]);
 
-        this.bars.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
-        this._updateEnemyBarHP(this.game.enemy.hp);
+        this.options.enemy.lvl = this._addText(733, 81, `${this.game.enemy.lvl} lvl`, [1, 0]);
 
-        this.bars.enemy.exp = this._addDisableBar(746, 55, 'bar-exp-invert-disable', [1, 0]);
+        this.options.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
+        this._updateEnemyOptionsHP();
+
+        this.options.enemy.exp = this._addBar(746, 55, 'bar-exp-invert-disable', [1, 0]);
+        FightState._disableBar(this.options.enemy.exp);
     }
 
-    _updateEnemyBarHP(hp) {
-        let width = hp * 256 / 100;
-        console.info('[enemy] hp: %s (%s)', hp, width);
-        this.bars.enemy.hp.crop(new Phaser.Rectangle(256 - width, 0, width, 16));
+    _updateEnemyOptionsLvL() {
+        this.options.player.lvl.setText(`${this.game.enemy.lvl} lvl`);
+    }
+
+    _updateEnemyOptionsHP() {
+        let hp = this.game.enemy.hp;
+        let imageWidth = this.cache.getImage('bar-hp-invert').width;
+        let width = hp * imageWidth / 100;
+        this.options.enemy.hp.color.crop(new Phaser.Rectangle(imageWidth - width, 0, width, 16));
     }
 
     _setupKeyboard() {
@@ -207,24 +238,34 @@ class FightState extends AbstractState {
         let playKickSound = () => {
             let player = this.game.player;
 
-            if (player.lvl < 30) {
-                this.sound.weakkick.play();
-            } else if (player.lvl < 60) {
-                this.sound.mediumkick.play();
-            } else {
-                this.sound.strongkick.play();
+            switch (true) {
+                case player.lvl < Configuration.FIGHT_LVL_FIRST_THRESHOLD:
+                    this.sound.weakkick.play();
+                    break;
+
+                case player.lvl < Configuration.FIGHT_LVL_SECOND_THRESHOLD:
+                    this.sound.mediumkick.play();
+                    break;
+
+                default:
+                    this.sound.strongkick.play();
             }
         };
 
         let playPunchSound = () => {
             let player = this.game.player;
 
-            if (player.lvl < 30) {
-                this.sound.weakpunch.play();
-            } else if (player.lvl < 60) {
-                this.sound.mediumpunch.play();
-            } else {
-                this.sound.strongpunch.play();
+            switch (true) {
+                case player.lvl < Configuration.FIGHT_LVL_FIRST_THRESHOLD:
+                    this.sound.weakpunch.play();
+                    break;
+
+                case player.lvl < Configuration.FIGHT_LVL_SECOND_THRESHOLD:
+                    this.sound.mediumpunch.play();
+                    break;
+
+                default:
+                    this.sound.strongpunch.play();
             }
         };
 
@@ -244,12 +285,14 @@ class FightState extends AbstractState {
         this.keyboard.c.onDown.add(() => {
             player.play('kicking');
             playKickSound();
+            this._addPlayerEXP(Configuration.FIGHT_KICKING_POINTS);
             console.log('Character "%s" is KICKING', this.game.player.name);
         });
 
         this.keyboard.x.onDown.add(() => {
             player.play('boxing');
             playPunchSound();
+            this._addPlayerEXP(Configuration.FIGHT_BOXING_POINTS);
             console.log('Character "%s" is BOXING', this.game.player.name);
         });
 
