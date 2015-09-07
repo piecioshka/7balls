@@ -47,12 +47,14 @@ class SearchingState extends AbstractState {
     }
 
     _setupPlayerSprite() {
-        let player = this.game.player.phaser = this.add.sprite(30, 50, `${this.game.player.id}-searching`);
-        player.anchor.setTo(0.5, 0.5);
+        let player = this.game.player;
 
-        this.physics.arcade.enable(player);
-        player.body.collideWorldBounds = true;
-        player.body.setSize(30, 30, 0, 10);
+        player.phaser = this.add.sprite(30, 50, `${player.id}-searching`);
+        player.phaser.anchor.setTo(0.5, 0.5);
+
+        this.physics.arcade.enable(player.phaser);
+        player.phaser.body.collideWorldBounds = true;
+        player.phaser.body.setSize(30, 30, 0, 10);
     }
 
     _setupBalls() {
@@ -118,32 +120,32 @@ class SearchingState extends AbstractState {
     }
 
     _handleKeyboard() {
-        let player = this.game.player.phaser;
+        let player = this.game.player;
         let keyboard = this.input.keyboard;
 
-        player.body.velocity.x = player.body.velocity.y = 0;
+        player.phaser.body.velocity.x = player.phaser.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.body.velocity.x -= Configuration.SEARCHING_PLAYER_SPEED;
-            player.angle = -10;
+            player.phaser.body.velocity.x -= Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.body.velocity.x += Configuration.SEARCHING_PLAYER_SPEED;
-            player.angle = 10;
+            player.phaser.body.velocity.x += Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.angle = 10;
         } else {
-            player.angle = 0;
+            player.phaser.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            player.body.velocity.y -= Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.body.velocity.y -= Configuration.SEARCHING_PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            player.body.velocity.y += Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.body.velocity.y += Configuration.SEARCHING_PLAYER_SPEED;
         }
     }
 
     render() {
-        // let player = this.game.player.phaser;
-        // this.game.debug.bodyInfo(player, 25, 25);
-        // this.game.debug.body(player);
+        // let player = this.game.player;
+        // this.game.debug.bodyInfo(player.phaser, 25, 25);
+        // this.game.debug.body(player.phaser);
     }
 }
 

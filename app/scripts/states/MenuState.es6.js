@@ -46,7 +46,7 @@ class MenuState extends AbstractState {
 
     _chooseGoku() {
         // Add player object as common in all states.
-        this.game.player = new Goku();
+        this.game.player = this.game.player || new Goku();
 
         // Move to next state: Searching
         this.state.start('Fight');
@@ -57,7 +57,7 @@ class MenuState extends AbstractState {
 
     _chooseVegeta() {
         // Add player object as common in all states.
-        this.game.player = new Vegeta();
+        this.game.player = this.game.player || new Vegeta();
 
         // Move to next state: Searching
         this.state.start('Fight');
