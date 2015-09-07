@@ -46,9 +46,7 @@ class MenuState extends AbstractState {
 
     _chooseGoku() {
         // Add player object as common in all states.
-        this.game.player = new Goku({
-            exp: ['Kamehameha']
-        });
+        this.game.player = new Goku();
 
         // Move to next state: Searching
         this.state.start('Searching');

@@ -56,6 +56,7 @@ class FightState extends AbstractState {
         this.load.image('bar-blank', './assets/graphics/bars/blank.png');
         this.load.image('bar-exp', './assets/graphics/bars/exp.png');
         this.load.image('bar-exp-invert', './assets/graphics/bars/exp-invert.png');
+        this.load.image('bar-exp-invert-disable', './assets/graphics/bars/exp-invert-disable.png');
         this.load.image('bar-hp', './assets/graphics/bars/hp.png');
         this.load.image('bar-hp-invert', './assets/graphics/bars/hp-invert.png');
 
@@ -135,6 +136,14 @@ class FightState extends AbstractState {
         return bar
     }
 
+    _addDisableBar(x, y, key, anchor = [0, 0]) {
+        let bar = this.add.image(x, y, key);
+        bar.anchor.setTo(...anchor);
+        bar.alpha = 0.3;
+
+        return bar
+    }
+
     _setupPlayerSprite() {
         let player = this.game.player.phaser = this.add.sprite(150, 360, `${this.game.player.id}-spritesheet`);
         player.anchor.setTo(0, 1);
@@ -149,18 +158,22 @@ class FightState extends AbstractState {
         this._addText(63, 81, `${this.game.player.lvl} lvl`);
 
         this.bars.player.hp = this._addBar(55, 25, 'bar-hp');
-        this._updatePlayerBarHP(50);
+        this._updatePlayerBarHP(this.game.player.hp);
 
         this.bars.player.exp = this._addBar(55, 55, 'bar-exp');
-        this._updatePlayerBarEXP(150);
+        this._updatePlayerBarEXP(this.game.player.exp);
     }
 
-    _updatePlayerBarHP(x) {
-        this.bars.player.hp.crop(new Phaser.Rectangle(0, 0, x, 16));
+    _updatePlayerBarHP(hp) {
+        let width = hp * 256 / 100;
+        console.info('[player] hp: %s (%s)', hp, width);
+        this.bars.player.hp.crop(new Phaser.Rectangle(0, 0, width, 16));
     }
 
-    _updatePlayerBarEXP(x) {
-        this.bars.player.exp.crop(new Phaser.Rectangle(0, 0, x, 16));
+    _updatePlayerBarEXP(exp) {
+        let width = exp * 256 / 100;
+        console.info('[player] exp: %s (%s)', exp, width);
+        this.bars.player.exp.crop(new Phaser.Rectangle(0, 0, width, 16));
     }
 
     _setupEnemySprite() {
@@ -177,18 +190,15 @@ class FightState extends AbstractState {
         this._addText(733, 81, `${this.game.enemy.lvl} lvl`, [1, 0]);
 
         this.bars.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
-        this._updateEnemyBarHP(50);
+        this._updateEnemyBarHP(this.game.enemy.hp);
 
-        this.bars.enemy.exp = this._addBar(746, 55, 'bar-exp-invert', [1, 0]);
-        this._updateEnemyBarEXP(150);
+        this.bars.enemy.exp = this._addDisableBar(746, 55, 'bar-exp-invert-disable', [1, 0]);
     }
 
-    _updateEnemyBarHP(x) {
-        this.bars.enemy.hp.crop(new Phaser.Rectangle(x, 0, 256 - x, 16));
-    }
-
-    _updateEnemyBarEXP(x) {
-        this.bars.enemy.exp.crop(new Phaser.Rectangle(x, 0, 256 - x, 16));
+    _updateEnemyBarHP(hp) {
+        let width = hp * 256 / 100;
+        console.info('[enemy] hp: %s (%s)', hp, width);
+        this.bars.enemy.hp.crop(new Phaser.Rectangle(256 - width, 0, width, 16));
     }
 
     _setupKeyboard() {
