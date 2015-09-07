@@ -40,6 +40,8 @@ class FightState extends AbstractState {
         this.load.image('bg-fight-hell', './assets/graphics/backgrounds/bg-fight-hell.png');
         this.load.image('bg-fight-sky', './assets/graphics/backgrounds/bg-fight-sky.png');
 
+        this.load.image('logo-minimal', './assets/graphics/logo/logo-minimal.png');
+
         this.load.spritesheet('goku-spritesheet', './assets/graphics/characters/goku/goku-fight.png', 150, 200);
         this.load.spritesheet('vegeta-spritesheet', './assets/graphics/characters/vegeta/vegeta-fight.png', 150, 200);
 
@@ -81,24 +83,23 @@ class FightState extends AbstractState {
         this.physics.arcade.gravity.set(0, Configuration.FIGHT_GRAVITY);
         this.world.setBounds(0, 0, this.game.width, this.game.height - 40);
 
-        this.sound.jump = this.add.audio('sound-jump');
-        this.sound.weakkick = this.add.audio('sound-weakkick');
-        this.sound.weakpunch = this.add.audio('sound-weakpunch');
-
-        this.sound.mediumkick = this.add.audio('sound-mediumkick');
-        this.sound.mediumpunch = this.add.audio('sound-mediumpunch');
-
-        this.sound.strongkick = this.add.audio('sound-strongkick');
-        this.sound.strongpunch = this.add.audio('sound-strongpunch');
-
         this._setupEnemy();
 
         this._setupPlayerSprite();
         this._setupEnemySprite();
 
+        this._setupPlayerOptions();
+        this._setupEnemyOptions();
+        this._setupLogo();
+
         this._setupKeyboard();
 
         this.loadSoundPreferences();
+        this._setupSound();
+    }
+
+    _setupLogo() {
+        this.add.image(this.game.width / 2 - 62, 5, 'logo-minimal');
     }
 
     _setupEnemy() {
@@ -135,6 +136,13 @@ class FightState extends AbstractState {
     }
 
     _setupPlayerSprite() {
+        let player = this.game.player.phaser = this.add.sprite(150, 360, `${this.game.player.id}-spritesheet`);
+        player.anchor.setTo(0, 1);
+        this._defineDefaultProperties(player);
+        FightState._defineAnimations(player, this.game.player.name);
+    }
+
+    _setupPlayerOptions() {
         this._addText(21, 18, 'HP');
         this._addText(8, 48, 'EXP');
         this._addAvatar(6, 85, `${this.game.player.id}-card`);
@@ -145,11 +153,6 @@ class FightState extends AbstractState {
 
         this.bars.player.exp = this._addBar(55, 55, 'bar-exp');
         this._updatePlayerBarEXP(150);
-
-        let player = this.game.player.phaser = this.add.sprite(150, 360, `${this.game.player.id}-spritesheet`);
-        player.anchor.setTo(0, 1);
-        this._defineDefaultProperties(player);
-        FightState._defineAnimations(player, this.game.player.name);
     }
 
     _updatePlayerBarHP(x) {
@@ -161,6 +164,13 @@ class FightState extends AbstractState {
     }
 
     _setupEnemySprite() {
+        let enemy = this.game.enemy.phaser = this.add.sprite(650, 360, `${this.game.enemy.id}-spritesheet`);
+        enemy.anchor.setTo(1, 1);
+        this._defineDefaultProperties(enemy);
+        FightState._defineAnimations(enemy, this.game.enemy.name);
+    }
+
+    _setupEnemyOptions() {
         this._addText(755, 18, 'HP');
         this._addText(755, 48, 'EXP');
         this._addAvatar(745, 85, `${this.game.enemy.id}-card`);
@@ -171,11 +181,6 @@ class FightState extends AbstractState {
 
         this.bars.enemy.exp = this._addBar(746, 55, 'bar-exp-invert', [1, 0]);
         this._updateEnemyBarEXP(150);
-
-        let enemy = this.game.enemy.phaser = this.add.sprite(650, 360, `${this.game.enemy.id}-spritesheet`);
-        enemy.anchor.setTo(1, 1);
-        this._defineDefaultProperties(enemy);
-        FightState._defineAnimations(enemy, this.game.enemy.name);
     }
 
     _updateEnemyBarHP(x) {
@@ -293,6 +298,18 @@ class FightState extends AbstractState {
 
         character.play('standing');
         console.log('Character "%s" is STANDING', name);
+    }
+
+    _setupSound() {
+        this.sound.jump = this.add.audio('sound-jump');
+        this.sound.weakkick = this.add.audio('sound-weakkick');
+        this.sound.weakpunch = this.add.audio('sound-weakpunch');
+
+        this.sound.mediumkick = this.add.audio('sound-mediumkick');
+        this.sound.mediumpunch = this.add.audio('sound-mediumpunch');
+
+        this.sound.strongkick = this.add.audio('sound-strongkick');
+        this.sound.strongpunch = this.add.audio('sound-strongpunch');
     }
 
     update() {

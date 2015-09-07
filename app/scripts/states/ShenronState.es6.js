@@ -14,17 +14,21 @@ class ShenronState extends AbstractState {
 
     create() {
         this.add.image(0, 0, 'bg-shenron');
-        this.sound.ambienceThunder = this.add.audio('sound-ambience-thunder');
 
         this.time.events.add(Phaser.Timer.SECOND * 2, this._setupFight, this);
-        this.sound.ambienceThunder.play();
 
         this.loadSoundPreferences();
+        this._setupSound();
     }
 
     _setupFight() {
         this.state.start('Fight');
         this.sound.ambienceThunder.stop();
+    }
+
+    _setupSound() {
+        this.sound.ambienceThunder = this.add.audio('sound-ambience-thunder');
+        this.sound.ambienceThunder.play();
     }
 
     update() {

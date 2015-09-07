@@ -23,8 +23,6 @@ class MenuState extends AbstractState {
 
     create() {
         this.add.image(0, 0, 'bg-menu');
-        this.game.sound.mute = true;
-        this.sound.scouter = this.add.audio('scouter');
 
         this.gokuCard = this.add.button(220, 160, 'goku-card', this._chooseGoku.bind(this));
         this.vegetaCard = this.add.button(420, 160, 'vegeta-card', this._chooseVegeta.bind(this));
@@ -32,6 +30,7 @@ class MenuState extends AbstractState {
         this._selectGoku();
 
         this.loadSoundPreferences();
+        this._setupSound();
     }
 
     _chooseGoku() {
@@ -56,6 +55,10 @@ class MenuState extends AbstractState {
 
         // Add some effect.
         this.sound.scouter.play();
+    }
+
+    _setupSound() {
+        this.sound.scouter = this.add.audio('scouter');
     }
 
     update() {

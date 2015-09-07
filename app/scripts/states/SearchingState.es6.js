@@ -28,7 +28,6 @@ class SearchingState extends AbstractState {
 
     create() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
-        this.sound.candypop = this.add.audio('sound-candypop');
 
         let map = this.add.tilemap('searching-1');
         map.addTilesetImage('spr-searching');
@@ -44,6 +43,7 @@ class SearchingState extends AbstractState {
         this._setupTimer();
 
         this.loadSoundPreferences();
+        this._setupSound();
     }
 
     _setupPlayerSprite() {
@@ -110,6 +110,10 @@ class SearchingState extends AbstractState {
         });
 
         clock.start();
+    }
+
+    _setupSound() {
+        this.sound.candypop = this.add.audio('sound-candypop');
     }
 
     update() {
