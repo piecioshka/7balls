@@ -4,7 +4,8 @@ import AbstractState from './AbstractState';
 class SearchingState extends AbstractState {
     layer = null;
     sound = {
-        candypop: null
+        candypop: null,
+        radar: null
     };
 
     preload() {
@@ -24,11 +25,10 @@ class SearchingState extends AbstractState {
         this.load.image('vegeta-searching', './assets/graphics/characters/vegeta/vegeta-searching.png');
 
         this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
+        this.load.audio('sound-radar', './assets/sound/dbk/devices_02.ogg');
     }
 
     create() {
-        this.loadSoundPreferences();
-
         this._setupWorld();
 
         this._setupBalls();
@@ -37,6 +37,7 @@ class SearchingState extends AbstractState {
 
         this._setupTimer();
 
+        this.loadSoundPreferences();
         this._setupSound();
     }
 
@@ -88,6 +89,7 @@ class SearchingState extends AbstractState {
             message.setText(`Time: ${remain}`);
 
             if (remain === ending) {
+                this.sound.radar.play();
                 message.anchor.setTo(0.5, 0.5);
                 message.x = this.game.width / 2;
                 message.y = this.game.height / 2;
@@ -105,6 +107,7 @@ class SearchingState extends AbstractState {
 
     _setupSound() {
         this.sound.candypop = this.add.audio('sound-candypop');
+        this.sound.radar = this.add.audio('sound-radar');
     }
 
     update() {

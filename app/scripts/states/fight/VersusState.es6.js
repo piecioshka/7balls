@@ -50,8 +50,6 @@ class VersusState extends FightState {
     }
 
     create() {
-        this.loadSoundPreferences();
-
         this.add.image(0, 0, 'bg-versus-sky');
 
         this._setupLogo();
@@ -69,6 +67,7 @@ class VersusState extends FightState {
 
         this.displayCentralMessage({ text: 'Fight!' });
 
+        this.loadSoundPreferences();
         this._setupSound();
     }
 

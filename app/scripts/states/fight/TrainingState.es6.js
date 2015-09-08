@@ -35,8 +35,6 @@ class TrainingState extends FightState {
     }
 
     create() {
-        this.loadSoundPreferences();
-
         this.add.image(0, 0, 'bg-training-capsule');
 
         this._setupLogo();
@@ -48,6 +46,7 @@ class TrainingState extends FightState {
 
         this.displayCentralMessage({ text: 'Start your training!' });
 
+        this.loadSoundPreferences();
         this._setupSound();
     }
 

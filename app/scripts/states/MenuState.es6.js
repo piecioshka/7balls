@@ -22,8 +22,6 @@ class MenuState extends AbstractState {
     }
 
     create() {
-        this.loadSoundPreferences();
-
         this.add.image(0, 0, 'bg-menu');
 
         this._setupCardGoku();
@@ -32,6 +30,7 @@ class MenuState extends AbstractState {
         // Default: select Son Goku!
         this._selectGoku();
 
+        this.loadSoundPreferences();
         this._setupSound();
     }
 
