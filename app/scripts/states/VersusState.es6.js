@@ -4,7 +4,7 @@ import Freeza from '../models/characters/Freeza';
 import Cell from '../models/characters/Cell';
 import Bubu from '../models/characters/Bubu';
 
-class FightState extends AbstractState {
+class VersusState extends AbstractState {
     enemies = [Freeza, Cell, Bubu];
     keyboard = {
         x: null,
@@ -39,8 +39,8 @@ class FightState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.image('bg-fight-hell', './assets/graphics/backgrounds/bg-fight-hell.png');
-        this.load.image('bg-fight-sky', './assets/graphics/backgrounds/bg-fight-sky.png');
+        this.load.image('bg-versus-hell', './assets/graphics/backgrounds/bg-versus-hell.png');
+        this.load.image('bg-versus-sky', './assets/graphics/backgrounds/bg-versus-sky.png');
 
         this.load.image('logo-minimal', './assets/graphics/logo/logo-minimal.png');
 
@@ -80,7 +80,7 @@ class FightState extends AbstractState {
     }
 
     create() {
-        this.add.image(0, 0, 'bg-fight-sky');
+        this.add.image(0, 0, 'bg-versus-sky');
 
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.physics.arcade.gravity.set(0, Configuration.FIGHT_GRAVITY);
@@ -95,7 +95,7 @@ class FightState extends AbstractState {
         this._setupEnemyOptions();
         this._setupLogo();
 
-        this.showWelcomeMessage({ text: 'Fight!' });
+        this.displayCentralMessage({ text: 'Fight!' });
 
         this._setupKeyboard();
 
@@ -115,15 +115,6 @@ class FightState extends AbstractState {
         this.game.enemy = new Character();
 
         console.log('Random character: ', this.game.enemy.name);
-    }
-
-    _addText(x, y, text, anchor = [0, 0]) {
-        let label = this.add.text(x, y, text);
-        label.font = 'SaiyanSans';
-        label.fill = '#fff';
-        label.anchor.setTo(...anchor);
-
-        return label;
     }
 
     _addAvatar(x, y, key) {
@@ -154,17 +145,17 @@ class FightState extends AbstractState {
         player.phaser.anchor.setTo(0, 1);
 
         this._defineDefaultProperties(player.phaser);
-        FightState._defineAnimations(player.phaser, player.name);
+        VersusState._defineAnimations(player.phaser, player.name);
     }
 
     _setupPlayerOptions() {
         let player = this.game.player;
 
-        this._addText(21, 18, 'HP');
-        this._addText(8, 48, 'EXP');
+        this.addSaiyanLabel(21, 18, 'HP');
+        this.addSaiyanLabel(8, 48, 'EXP');
         this._addAvatar(6, 85, `${player.id}-card`);
 
-        this.options.player.lvl = this._addText(63, 81, `${player.lvl} lvl`);
+        this.options.player.lvl = this.addSaiyanLabel(63, 81, `${player.lvl} lvl`);
 
         this.options.player.hp = this._addBar(55, 25, 'bar-hp');
         this._updatePlayerOptionsHP();
@@ -231,7 +222,7 @@ class FightState extends AbstractState {
         let player = this.game.player;
         let enemy = this.game.enemy;
 
-        this.showWelcomeMessage({ text: `Player ${playerSate.toUpperCase()}!` });
+        this.displayCentralMessage({ text: `Player ${playerSate.toUpperCase()}!` });
 
         player.phaser.play(playerSate);
         console.log('Character "%s" is ', player.name, playerSate.toUpperCase());
@@ -247,23 +238,23 @@ class FightState extends AbstractState {
         enemy.phaser.anchor.setTo(1, 1);
 
         this._defineDefaultProperties(enemy.phaser);
-        FightState._defineAnimations(enemy.phaser, enemy.name);
+        VersusState._defineAnimations(enemy.phaser, enemy.name);
     }
 
     _setupEnemyOptions() {
         let enemy = this.game.enemy;
 
-        this._addText(755, 18, 'HP');
-        this._addText(755, 48, 'EXP');
+        this.addSaiyanLabel(755, 18, 'HP');
+        this.addSaiyanLabel(755, 48, 'EXP');
         this._addAvatar(745, 85, `${enemy.id}-card`);
 
-        this.options.enemy.lvl = this._addText(733, 81, `${enemy.lvl} lvl`, [1, 0]);
+        this.options.enemy.lvl = this.addSaiyanLabel(733, 81, `${enemy.lvl} lvl`, [1, 0]);
 
         this.options.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
         this._updateEnemyOptionsHP();
 
         this.options.enemy.exp = this._addBar(746, 55, 'bar-exp-invert-disable', [1, 0]);
-        FightState._disableBar(this.options.enemy.exp);
+        VersusState._disableBar(this.options.enemy.exp);
     }
 
     _updateEnemyOptionsHP() {
@@ -282,11 +273,11 @@ class FightState extends AbstractState {
 
         let playKickSound = () => {
             switch (true) {
-                case player.lvl < Configuration.FIGHT_LVL_FIRST_THRESHOLD:
+                case player.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[0]:
                     this.sound.weakkick.play();
                     break;
 
-                case player.lvl < Configuration.FIGHT_LVL_SECOND_THRESHOLD:
+                case player.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[1]:
                     this.sound.mediumkick.play();
                     break;
 
@@ -297,11 +288,11 @@ class FightState extends AbstractState {
 
         let playPunchSound = () => {
             switch (true) {
-                case player.lvl < Configuration.FIGHT_LVL_FIRST_THRESHOLD:
+                case player.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[0]:
                     this.sound.weakpunch.play();
                     break;
 
-                case player.lvl < Configuration.FIGHT_LVL_SECOND_THRESHOLD:
+                case player.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[1]:
                     this.sound.mediumpunch.play();
                     break;
 
@@ -332,8 +323,8 @@ class FightState extends AbstractState {
             console.log('Character "%s" is KICKING', player.name);
 
             if (isCharactersOverlap()) {
-                this._addPlayerEXP(Configuration.FIGHT_KICKING_POINTS);
-                this._removeEnemyHP(Configuration.FIGHT_KICKING_POINTS);
+                this._addPlayerEXP(Configuration.VERSUS_KICKING_POINTS);
+                this._removeEnemyHP(Configuration.VERSUS_KICKING_POINTS);
             }
 
             playKickSound();
@@ -344,8 +335,8 @@ class FightState extends AbstractState {
             console.log('Character "%s" is BOXING', player.name);
 
             if (isCharactersOverlap()) {
-                this._addPlayerEXP(Configuration.FIGHT_BOXING_POINTS);
-                this._removeEnemyHP(Configuration.FIGHT_BOXING_POINTS);
+                this._addPlayerEXP(Configuration.VERSUS_BOXING_POINTS);
+                this._removeEnemyHP(Configuration.VERSUS_BOXING_POINTS);
             }
 
             playPunchSound();
@@ -455,4 +446,4 @@ class FightState extends AbstractState {
     }
 }
 
-export default FightState;
+export default VersusState;

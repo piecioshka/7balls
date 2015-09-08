@@ -20,7 +20,7 @@ class MessageState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-message');
 
-        this.showWelcomeMessage({ text: this.body, time: this.lifetime, cb: this.callback });
+        this.displayCentralMessage({ text: this.body, time: this.lifetime, cb: this.callback });
 
         this.loadSoundPreferences();
     }

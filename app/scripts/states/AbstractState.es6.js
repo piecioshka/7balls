@@ -4,7 +4,16 @@ class AbstractState extends Phaser.State {
         this.load.image('unmute', './assets/graphics/icons/unmute.png');
     }
 
-    showWelcomeMessage({ text = 'Not defined message', time = Phaser.Timer.SECOND * 2, cb = () => {}}) {
+    addSaiyanLabel(x, y, text, anchor = [0, 0]) {
+        let label = this.add.text(x, y, text);
+        label.font = 'SaiyanSans';
+        label.fill = '#fff';
+        label.anchor.setTo(...anchor);
+
+        return label;
+    }
+
+    displayCentralMessage({ text = 'Not defined message', time = Phaser.Timer.SECOND * 2, cb = () => {}}) {
         let message = this.add.text(this.game.width / 2, this.game.height / 2, text);
         message.alpha = 0;
         message.fontSize = 40;

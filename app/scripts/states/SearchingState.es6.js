@@ -38,7 +38,7 @@ class SearchingState extends AbstractState {
 
         this._setupBalls();
         this._setupPlayerSprite();
-        this.showWelcomeMessage({ text: `Hello ${this.game.player.nickname} (${this.game.player.name})` });
+        this.displayCentralMessage({ text: `Hello ${this.game.player.nickname} (${this.game.player.name})` });
 
         this._setupTimer();
 

@@ -10,7 +10,7 @@ class TrainingState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-training');
 
-        this.showWelcomeMessage({ text: 'Start your training!' });
+        this.displayCentralMessage({ text: 'Start your training!' });
 
         this.loadSoundPreferences();
     }
