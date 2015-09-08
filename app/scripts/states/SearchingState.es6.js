@@ -27,6 +27,20 @@ class SearchingState extends AbstractState {
     }
 
     create() {
+        this.loadSoundPreferences();
+
+        this._setupWorld();
+
+        this._setupBalls();
+        this._setupPlayerSprite();
+        this.displayCentralMessage({ text: `Hello ${this.game.player.nickname} (${this.game.player.name})` });
+
+        this._setupTimer();
+
+        this._setupSound();
+    }
+
+    _setupWorld() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
         let map = this.add.tilemap('searching-1');
@@ -35,15 +49,6 @@ class SearchingState extends AbstractState {
 
         this.layer = map.createLayer('Tile Layer 1');
         this.layer.resizeWorld();
-
-        this._setupBalls();
-        this._setupPlayerSprite();
-        this.displayCentralMessage({ text: `Hello ${this.game.player.nickname} (${this.game.player.name})` });
-
-        this._setupTimer();
-
-        this.loadSoundPreferences();
-        this._setupSound();
     }
 
     _setupPlayerSprite() {
@@ -73,6 +78,7 @@ class SearchingState extends AbstractState {
         let [limit] = Configuration.SEARCHING_MAPS_TIME_LIMIT;
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
+
         let message = this.add.text(10, 10, `Time: ${limit}`);
         message.fill = '#fff';
         message.setShadow(0, 0, 'rgba(0,0,0,0.5)', 3);

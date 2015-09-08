@@ -22,6 +22,8 @@ class MenuState extends AbstractState {
     }
 
     create() {
+        this.loadSoundPreferences();
+
         this.add.image(0, 0, 'bg-menu');
 
         this._setupCardGoku();
@@ -30,7 +32,6 @@ class MenuState extends AbstractState {
         // Default: select Son Goku!
         this._selectGoku();
 
-        this.loadSoundPreferences();
         this._setupSound();
     }
 
@@ -47,18 +48,16 @@ class MenuState extends AbstractState {
     _chooseGoku() {
         // Add player object as common in all states.
         this.game.player = this.game.player || new Goku();
-
-        // Move to next state: Searching
-        this.state.start('Searching');
-
-        // Add some effect.
-        this.sound.scouter.play();
+        this._chooseSummary();
     }
 
     _chooseVegeta() {
         // Add player object as common in all states.
         this.game.player = this.game.player || new Vegeta();
+        this._chooseSummary();
+    }
 
+    _chooseSummary() {
         // Move to next state: Searching
         this.state.start('Searching');
 

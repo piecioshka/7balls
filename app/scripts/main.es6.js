@@ -1,12 +1,14 @@
 import Configuration from './configuration';
+
 import GameOverState from './states/GameOverState';
 import MealState from './states/MealState';
 import MenuState from './states/MenuState';
 import MessageState from './states/MessageState';
 import SearchingState from './states/SearchingState';
 import ShenronState from './states/ShenronState';
-import TrainingState from './states/TrainingState';
-import VersusState from './states/VersusState';
+
+import TrainingState from './states/fight/TrainingState';
+import VersusState from './states/fight/VersusState';
 
 class Game {
     constructor() {
@@ -26,7 +28,7 @@ class Game {
         // First state is screen with character choice.
         this.game.state.start('Message', true, false, {
             body: 'Welcome!\n\nGame control:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C',
-            lifetime: Phaser.Timer.SECOND * 4,
+            lifetime: Phaser.Timer.SECOND * 2,
             callback: () => {
                 this.game.state.start('Menu');
             }

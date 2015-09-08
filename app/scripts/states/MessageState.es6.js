@@ -18,11 +18,11 @@ class MessageState extends AbstractState {
     }
 
     create() {
+        this.loadSoundPreferences();
+
         this.add.image(0, 0, 'bg-message');
 
         this.displayCentralMessage({ text: this.body, time: this.lifetime, cb: this.callback });
-
-        this.loadSoundPreferences();
     }
 
     update() {

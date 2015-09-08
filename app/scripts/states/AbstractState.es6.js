@@ -2,6 +2,8 @@ class AbstractState extends Phaser.State {
     preload() {
         this.load.image('mute', './assets/graphics/icons/mute.png');
         this.load.image('unmute', './assets/graphics/icons/unmute.png');
+
+        this.load.text('font-saiyan-sans', './assets/fonts/Saiyan-Sans.ttf');
     }
 
     addSaiyanLabel(x, y, text, anchor = [0, 0]) {
@@ -13,7 +15,7 @@ class AbstractState extends Phaser.State {
         return label;
     }
 
-    displayCentralMessage({ text = 'Not defined message', time = Phaser.Timer.SECOND * 2, cb = () => {}}) {
+    displayCentralMessage({ text = 'Not defined message', time = Phaser.Timer.SECOND * 2, cb = () => undefined }) {
         let message = this.add.text(this.game.width / 2, this.game.height / 2, text);
         message.alpha = 0;
         message.fontSize = 40;

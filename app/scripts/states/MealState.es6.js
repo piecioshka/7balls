@@ -8,9 +8,9 @@ class MealState extends AbstractState {
     }
 
     create() {
-        this.add.image(0, 0, 'bg-meal-house');
-
         this.loadSoundPreferences();
+
+        this.add.image(0, 0, 'bg-meal-house');
     }
 
     update() {
