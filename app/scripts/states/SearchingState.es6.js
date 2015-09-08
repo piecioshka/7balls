@@ -38,7 +38,7 @@ class SearchingState extends AbstractState {
 
         this._setupBalls();
         this._setupPlayerSprite();
-        this.showWelcomeMessage(`Hello ${this.game.player.nickname} (${this.game.player.name})`);
+        this.showWelcomeMessage({ text: `Hello ${this.game.player.nickname} (${this.game.player.name})` });
 
         this._setupTimer();
 
@@ -72,7 +72,7 @@ class SearchingState extends AbstractState {
     _setupTimer() {
         let [limit] = Configuration.SEARCHING_MAPS_TIME_LIMIT;
         let ending = parseInt(Math.log2(limit));
-        let clock = this.time.create();
+        let clock = this.game.time.create();
         let message = this.add.text(10, 10, `Time: ${limit}`);
         message.fill = '#fff';
         message.setShadow(0, 0, 'rgba(0,0,0,0.5)', 3);

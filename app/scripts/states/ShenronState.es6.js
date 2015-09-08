@@ -15,7 +15,7 @@ class ShenronState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-shenron');
 
-        this.time.events.add(Phaser.Timer.SECOND * 2, this._setupFight, this);
+        this.game.time.events.add(Phaser.Timer.SECOND * 2, this._setupFight, this);
 
         this.loadSoundPreferences();
         this._setupSound();

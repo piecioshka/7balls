@@ -95,7 +95,7 @@ class FightState extends AbstractState {
         this._setupEnemyOptions();
         this._setupLogo();
 
-        this.showWelcomeMessage('Fight!');
+        this.showWelcomeMessage({ text: 'Fight!' });
 
         this._setupKeyboard();
 
@@ -217,7 +217,7 @@ class FightState extends AbstractState {
             this.input.keyboard.enabled = false;
             this._finishFight('win', 'died');
 
-            this.time.events.add(Phaser.Timer.SECOND * 2, () => {
+            this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
                 this.input.keyboard.enabled = true;
                 this.state.start('GameOver');
             });
@@ -231,7 +231,7 @@ class FightState extends AbstractState {
         let player = this.game.player;
         let enemy = this.game.enemy;
 
-        this.showWelcomeMessage(`Player ${playerSate.toUpperCase()}!`);
+        this.showWelcomeMessage({ text: `Player ${playerSate.toUpperCase()}!` });
 
         player.phaser.play(playerSate);
         console.log('Character "%s" is ', player.name, playerSate.toUpperCase());
