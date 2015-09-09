@@ -10,18 +10,16 @@ class AbstractState extends Phaser.State {
         let label = this.add.text(x, y, text);
         label.font = 'SaiyanSans';
         label.fill = '#fff';
+        label.setShadow(0, 0, 'rgba(0,0,0,1)', 3);
         label.anchor.setTo(...anchor);
 
         return label;
     }
 
-    displayCentralMessage({ text = 'Not defined message', time = Phaser.Timer.SECOND * 2, cb = () => undefined }) {
-        let message = this.add.text(this.game.width / 2, this.game.height / 2, text);
+    displayCentralMessage({ text = 'No message!', time = Phaser.Timer.SECOND * 2, fontSize = 50, cb = () => undefined }) {
+        let message = this.addSaiyanLabel(this.game.width / 2, this.game.height / 2, text, [0.5, 0.5]);
         message.alpha = 0;
-        message.fontSize = 40;
-        message.fill = '#fff';
-        message.anchor.set(0.5, 0.5);
-        message.setShadow(0, 0, 'rgba(0,0,0,0.5)', 10);
+        message.fontSize = fontSize;
 
         this.game.time.events.add(Phaser.Timer.SECOND / 4, () => {
             this.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);

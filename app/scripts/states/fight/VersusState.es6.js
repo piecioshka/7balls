@@ -66,7 +66,7 @@ class VersusState extends FightState {
         this._setupFight();
 
         this.displayLogo();
-        this.displayCentralMessage({ text: 'Fight!' });
+        this.displayCentralMessage({ text: 'Fight!', fontSize: 100 });
 
         this.loadSoundPreferences();
     }
