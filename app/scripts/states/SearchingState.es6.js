@@ -30,15 +30,16 @@ class SearchingState extends AbstractState {
 
     create() {
         this._setupWorld();
+        this._setupSound();
 
         this._setupBalls();
         this._setupPlayerSprite();
+
         this.displayCentralMessage({ text: `Hello ${this.game.player.nickname} (${this.game.player.name})` });
 
         this._setupTimer();
 
         this.loadSoundPreferences();
-        this._setupSound();
     }
 
     _setupWorld() {
@@ -58,9 +59,14 @@ class SearchingState extends AbstractState {
         player.phaser = this.add.sprite(30, 50, `${player.id}-searching`);
         player.phaser.anchor.setTo(0.5, 0.5);
 
-        this.physics.arcade.enable(player.phaser);
-        player.phaser.body.collideWorldBounds = true;
-        player.phaser.body.setSize(30, 30, 0, 10);
+        this._defineDefaultProperties(player);
+    }
+
+    _defineDefaultProperties(character) {
+        this.physics.arcade.enable(character.phaser);
+
+        character.phaser.body.collideWorldBounds = true;
+        character.phaser.body.setSize(30, 30, 0, 10);
     }
 
     _setupBalls() {
@@ -99,6 +105,7 @@ class SearchingState extends AbstractState {
         }, this);
 
         clock.onComplete.add(() => {
+            this.sound.radar.stop();
             this.state.start('GameOver');
         });
 
@@ -123,6 +130,7 @@ class SearchingState extends AbstractState {
             this.sound.candypop.play();
 
             if (this.game.balls.length === 0) {
+                this.sound.radar.stop();
                 this.state.start('Shenron');
             }
         });

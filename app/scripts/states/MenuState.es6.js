@@ -26,12 +26,12 @@ class MenuState extends AbstractState {
 
         this._setupCardGoku();
         this._setupCardVegeta();
+        this._setupSound();
 
         // Default: select Son Goku!
         this._selectGoku();
 
         this.loadSoundPreferences();
-        this._setupSound();
     }
 
     _setupCardGoku() {
@@ -93,7 +93,7 @@ class MenuState extends AbstractState {
     }
 
     render() {
-        // console.log('MenuState#render');
+
     }
 }
 

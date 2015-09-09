@@ -22,9 +22,10 @@ class GameOverState extends AbstractState {
         this.add.button(this.game.width / 2 - this.cache.getImage('btn-try-again').width / 2, this.game.height / 2 + 40, 'btn-try-again', this._tryAgain, this);
 
         this._setupKeyboard();
+        this._setupSound();
 
         this.loadSoundPreferences();
-        this._setupSound();
+        this.sound.dramatic.play();
     }
 
     _setupKeyboard() {
@@ -40,7 +41,6 @@ class GameOverState extends AbstractState {
 
     _setupSound() {
         this.sound.dramatic = this.add.audio('sound-dramatic');
-        this.sound.dramatic.play();
     }
 
     update() {

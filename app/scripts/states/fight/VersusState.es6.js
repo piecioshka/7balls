@@ -1,5 +1,6 @@
 import Configuration from '../../configuration';
 import FightState from './FightState';
+import Computer from '../../models/Computer';
 import Freeza from '../../models/characters/Freeza';
 import Cell from '../../models/characters/Cell';
 import Bubu from '../../models/characters/Bubu';
@@ -43,54 +44,99 @@ class VersusState extends FightState {
         this.load.image('freeza-card', './assets/graphics/characters/freeza/freeza-card.jpg');
         this.load.image('cell-card', './assets/graphics/characters/cell/cell-card.jpg');
         this.load.image('bubu-card', './assets/graphics/characters/bubu/bubu-card.jpg');
-        
+
         this.load.image('bar-hp-invert', './assets/graphics/bars/hp-invert.png');
         this.load.image('bar-exp-invert', './assets/graphics/bars/exp-invert.png');
-        this.load.image('bar-exp-invert-disable', './assets/graphics/bars/exp-invert-disable.png');
     }
 
     create() {
         this.add.image(0, 0, 'bg-versus-sky');
 
-        this._setupLogo();
         this._setupWorld();
         this._setupKeyboard();
+        this._setupSound();
 
         this._createEnemy();
 
-        this._setupPlayerSprite();
-        this._setupEnemySprite();
+        this._setupSprite(150, 360, this.game.player);
+        this._setupSprite(650, 360, this.game.enemy, [1, 1]);
         this._setupPlayerOptions();
         this._setupEnemyOptions();
 
         this._setupFight();
 
+        this.displayLogo();
         this.displayCentralMessage({ text: 'Fight!' });
 
         this.loadSoundPreferences();
-        this._setupSound();
     }
 
     _setupFight() {
         let player = this.game.player;
+        let enemy = this.game.enemy;
 
-        let isCharactersOverlap = () => {
-            return this.physics.arcade.overlap(this.game.player.phaser, this.game.enemy.phaser);
+        let handlePlayerBlow = (label, points) => {
+            if (this.physics.arcade.overlap(enemy.phaser, player.phaser) || this.physics.arcade.overlap(player.phaser, enemy.phaser)) {
+                console.log('player overlap');
+                this._addPlayerEXP(points);
+                this._removeEnemyHP(points);
+            } else {
+                console.log('player not overlap');
+            }
         };
 
         player.phaser.events.onKicking.add(() => {
-            if (isCharactersOverlap()) {
-                this._addPlayerEXP(Configuration.VERSUS_KICKING_POINTS);
-                this._removeEnemyHP(Configuration.VERSUS_KICKING_POINTS);
-            }
+            handlePlayerBlow('kicking', Configuration.VERSUS_KICKING_POINTS)
+        });
+        player.phaser.events.onBoxing.add(() => {
+            handlePlayerBlow('boxing', Configuration.VERSUS_BOXING_POINTS)
+        });
+        player.phaser.events.onDied.add(() => {
+            this._finishFight('died', 'win');
         });
 
-        player.phaser.events.onBoxing.add(() => {
-            if (isCharactersOverlap()) {
-                this._addPlayerEXP(Configuration.VERSUS_BOXING_POINTS);
-                this._removeEnemyHP(Configuration.VERSUS_BOXING_POINTS);
+        let handleEnemyBlow = (label, points) => {
+            if (this.physics.arcade.overlap(enemy.phaser, player.phaser) || this.physics.arcade.overlap(player.phaser, enemy.phaser)) {
+                console.log('enemy overlap');
+                this._addEnemyEXP(points);
+                this._removePlayerHP(points);
+            } else {
+                console.log('enemy not overlap');
             }
+        };
+
+        enemy.phaser.events.onKicking.add(() => handleEnemyBlow('kicking', Configuration.VERSUS_KICKING_POINTS));
+        enemy.phaser.events.onBoxing.add(() => handleEnemyBlow('boxing', Configuration.VERSUS_BOXING_POINTS));
+        enemy.phaser.events.onDied.add(() => {
+            this._finishFight('win', 'died');
         });
+
+        // Computer.applyArtificialIntelligence(player);
+        Computer.applyArtificialIntelligence(enemy);
+    }
+
+    _finishFight(playerSate, enemyState) {
+        let player = this.game.player;
+        let enemy = this.game.enemy;
+
+        this.input.keyboard.enabled = false;
+
+        this.displayCentralMessage({ text: `Player ${playerSate.toUpperCase()}!` });
+
+        player.phaser.play(playerSate);
+        console.log('Character "%s" is ', player.name, playerSate.toUpperCase());
+
+        enemy.phaser.play(enemyState);
+        console.log('Character "%s" is ', enemy.name, enemyState.toUpperCase());
+
+        this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
+            this.input.keyboard.enabled = true;
+            this.state.start('GameOver');
+        });
+    }
+
+    _randomEnemy() {
+        return this.enemies[parseInt(Math.random() * this.enemies.length)];
     }
 
     _createEnemy() {
@@ -101,49 +147,6 @@ class VersusState extends FightState {
         this.game.enemy = new Character();
 
         console.log('Random character: ', this.game.enemy.name);
-    }
-
-    _removeEnemyHP(value) {
-        let enemy = this.game.enemy;
-        enemy.hp -= value;
-
-        if (enemy.hp <= 0) {
-            enemy.hp = 0;
-
-            this.input.keyboard.enabled = false;
-            this._finishFight('win', 'died');
-
-            this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
-                this.input.keyboard.enabled = true;
-                this.state.start('GameOver');
-            });
-        }
-
-        this._updateEnemyOptionsHP();
-        this._updateEnemyOptionsLvL();
-    }
-
-    _finishFight(playerSate, enemyState) {
-        let player = this.game.player;
-        let enemy = this.game.enemy;
-
-        this.displayCentralMessage({ text: `Player ${playerSate.toUpperCase()}!` });
-
-        player.phaser.play(playerSate);
-        console.log('Character "%s" is ', player.name, playerSate.toUpperCase());
-
-        enemy.phaser.play(enemyState);
-        console.log('Character "%s" is ', enemy.name, enemyState.toUpperCase());
-    }
-
-    _setupEnemySprite() {
-        let enemy = this.game.enemy;
-
-        enemy.phaser = this.add.sprite(650, 360, `${enemy.id}-spritesheet`);
-        enemy.phaser.anchor.setTo(1, 1);
-
-        this._defineDefaultProperties(enemy.phaser);
-        FightState._defineAnimations(enemy.phaser, enemy.name);
     }
 
     _setupEnemyOptions() {
@@ -158,8 +161,8 @@ class VersusState extends FightState {
         this.options.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
         this._updateEnemyOptionsHP();
 
-        this.options.enemy.exp = this._addBar(746, 55, 'bar-exp-invert-disable', [1, 0]);
-        FightState._disableBar(this.options.enemy.exp);
+        this.options.enemy.exp = this._addBar(746, 55, 'bar-exp-invert', [1, 0]);
+        this._updateEnemyOptionsEXP();
     }
 
     _updateEnemyOptionsHP() {
@@ -169,27 +172,55 @@ class VersusState extends FightState {
         this.options.enemy.hp.color.crop(new Phaser.Rectangle(imageWidth - width, 0, width, 16));
     }
 
-    _updateEnemyOptionsLvL() {
-        this.options.enemy.lvl.setText(`${this.game.enemy.lvl} lvl`);
+    _updateEnemyOptionsEXP() {
+        let exp = this.game.enemy.exp;
+        let imageWidth = this.cache.getImage('bar-exp').width;
+        let width = exp * imageWidth / 100;
+        this.options.enemy.exp.color.crop(new Phaser.Rectangle(imageWidth - width, 0, width, 16));
     }
 
-    _randomEnemy() {
-        let randomNumber = parseInt(Math.random() * 3);
-        return this.enemies[randomNumber];
+    _removeEnemyHP(value) {
+        let enemy = this.game.enemy;
+        enemy.hp -= value;
+
+        if (enemy.hp <= 0) {
+            enemy.hp = 0;
+            enemy.phaser.events.onDied.dispatch();
+        }
+
+        this._updateEnemyOptionsHP();
+        this._updateOptionsLvL('enemy');
+    }
+
+    _addEnemyEXP(value) {
+        let enemy = this.game.enemy;
+        enemy.exp += value;
+
+        if (enemy.exp >= Configuration.PLAYER_MAXIMUM_EXPERIENCE) {
+            enemy.exp = 0;
+
+            if (enemy.lvl < Configuration.PLAYER_MAXIMUM_LEVEL) {
+                enemy.lvl++;
+            }
+        }
+
+        this._updateEnemyOptionsEXP();
+        this._updateOptionsLvL('enemy');
     }
 
     update() {
         super.update();
+        FightState._handleCharacterVelocity(this.game.enemy);
     }
 
     render() {
-        // let player = this.game.player;
+        let player = this.game.player;
         // this.game.debug.bodyInfo(player.phaser, 25, 25);
-        // this.game.debug.body(player.phaser);
+        this.game.debug.body(player.phaser);
 
-        // let enemy = this.game.enemy;
+        let enemy = this.game.enemy;
         // this.game.debug.bodyInfo(enemy.phaser, 25, 225);
-        // this.game.debug.body(enemy.phaser);
+        this.game.debug.body(enemy.phaser);
     }
 }
 

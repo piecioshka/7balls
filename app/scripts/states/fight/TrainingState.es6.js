@@ -37,17 +37,17 @@ class TrainingState extends FightState {
     create() {
         this.add.image(0, 0, 'bg-training-capsule');
 
-        this._setupLogo();
         this._setupWorld();
         this._setupKeyboard();
+        this._setupSound();
 
-        this._setupPlayerSprite();
+        this._setupSprite(150, 360, this.game.player);
         this._setupPlayerOptions();
 
+        this.displayLogo();
         this.displayCentralMessage({ text: 'Start your training!' });
 
         this.loadSoundPreferences();
-        this._setupSound();
     }
 
     update() {
