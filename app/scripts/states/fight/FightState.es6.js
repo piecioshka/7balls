@@ -42,7 +42,7 @@ class FightState extends AbstractState {
 
     _setupWorld() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
-        this.physics.arcade.gravity.set(0, Configuration.FIGHT_GRAVITY);
+        this.physics.arcade.gravity.set(0, 1);
         this.world.setBounds(0, 0, this.game.width, this.game.height - Configuration.FIGHT_BOTTOM_MARGIN);
     }
 
