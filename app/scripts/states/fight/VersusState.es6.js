@@ -66,7 +66,7 @@ class VersusState extends FightState {
         this._setupFight();
 
         this.displayLogo();
-        this.displayCentralMessage({ text: 'Fight!', fontSize: 100 });
+        this.displayCentralMessage({ text: `${this.game.locale.VERSUS_STATE_WELCOME}` });
 
         this.loadSoundPreferences();
     }
@@ -116,7 +116,7 @@ class VersusState extends FightState {
 
         this.input.keyboard.enabled = false;
 
-        this.displayCentralMessage({ text: `Player ${playerSate.toUpperCase()}!`, fontSize: 100 });
+        this.displayCentralMessage({ text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
 
         player.phaser.play(playerSate);
         console.log('Character "%s" is ', player.name, playerSate.toUpperCase());
@@ -151,7 +151,7 @@ class VersusState extends FightState {
         this.addSaiyanLabel(755, 48, 'EXP');
         this._addAvatar(745, 85, `${enemy.id}-card`);
 
-        this.options.enemy.lvl = this.addSaiyanLabel(733, 81, `${enemy.lvl} lvl`, [1, 0]);
+        this.options.enemy.lvl = this.addSaiyanLabel(733, 81, `${enemy.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`, [1, 0]);
 
         this.options.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
         this._updateEnemyOptionsHP();

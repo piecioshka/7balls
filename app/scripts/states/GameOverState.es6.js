@@ -42,14 +42,6 @@ class GameOverState extends AbstractState {
     _setupSound() {
         this.sound.dramatic = this.add.audio('sound-dramatic');
     }
-
-    update() {
-
-    }
-
-    render() {
-
-    }
 }
 
 export default GameOverState;

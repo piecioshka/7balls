@@ -1,0 +1,14 @@
+{
+  "MESSAGE_STATE_WELCOME": "Siema!\n\nSterowanie:\n - Nawigacja: LEFT, RIGHT, UP, DOWN\n - Walka: X, C",
+
+  "SEARCHING_STATE_WELCOME": "Cześć",
+  "SEARCHING_STATE_TIME": "Czas",
+
+  "FIGHT_STATE_LEVEL_SHORT": "poziom",
+
+  "TRAINING_STATE_WELCOME": "Zacznij swój trening!",
+
+  "VERSUS_STATE_WELCOME": "Walka!",
+  "VERSUS_STATE_PLAYER_DIED": "przegrał",
+  "VERSUS_STATE_PLAYER_WIN": "wygrał"
+}

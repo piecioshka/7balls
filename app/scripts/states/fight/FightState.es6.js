@@ -165,7 +165,7 @@ class FightState extends AbstractState {
         this.addSaiyanLabel(8, 48, 'EXP');
         this._addAvatar(6, 85, `${player.id}-card`);
 
-        this.options.player.lvl = this.addSaiyanLabel(63, 81, `${player.lvl} lvl`);
+        this.options.player.lvl = this.addSaiyanLabel(63, 81, `${player.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
 
         this.options.player.hp = this._addBar(55, 25, 'bar-hp');
         this._updatePlayerOptionsHP();
@@ -189,7 +189,7 @@ class FightState extends AbstractState {
     }
 
     _updateOptionsLvL(character) {
-        this.options[character].lvl.setText(`${this.game[character].lvl} lvl`);
+        this.options[character].lvl.setText(`${this.game[character].lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
     }
 
     _removePlayerHP(value) {

@@ -1,0 +1,14 @@
+{
+  "MESSAGE_STATE_WELCOME": "Welcome!\n\nGame control:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C",
+
+  "SEARCHING_STATE_WELCOME": "Hello",
+  "SEARCHING_STATE_TIME": "Time",
+
+  "FIGHT_STATE_LEVEL_SHORT": "lvl",
+
+  "TRAINING_STATE_WELCOME": "Start your training!",
+
+  "VERSUS_STATE_WELCOME": "Fight!",
+  "VERSUS_STATE_PLAYER_DIED": "defeat",
+  "VERSUS_STATE_PLAYER_WIN": "win"
+}

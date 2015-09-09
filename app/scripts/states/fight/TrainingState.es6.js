@@ -45,7 +45,7 @@ class TrainingState extends FightState {
         this._setupPlayerOptions();
 
         this.displayLogo();
-        this.displayCentralMessage({ text: 'Start your training!' });
+        this.displayCentralMessage({ text: `${this.game.locale.TRAINING_STATE_WELCOME}` });
 
         this.loadSoundPreferences();
     }

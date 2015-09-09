@@ -1,6 +1,7 @@
 import Configuration from './configuration';
 
 import GameOverState from './states/GameOverState';
+import LanguageState from './states/LanguageState';
 import MealState from './states/MealState';
 import MenuState from './states/MenuState';
 import MessageState from './states/MessageState';
@@ -17,6 +18,7 @@ class Game {
 
         // List of all states.
         this.game.state.add('GameOver', GameOverState);
+        this.game.state.add('Language', LanguageState);
         this.game.state.add('Meal', MealState);
         this.game.state.add('Menu', MenuState);
         this.game.state.add('Message', MessageState);
@@ -26,13 +28,7 @@ class Game {
         this.game.state.add('Versus', VersusState);
 
         // First state is screen with character choice.
-        this.game.state.start('Message', true, false, {
-            body: 'Welcome!\n\nGame control:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C',
-            lifetime: Phaser.Timer.SECOND * 2,
-            callback: () => {
-                this.game.state.start('Menu');
-            }
-        });
+        this.game.state.start('Language');
     }
 }
 

@@ -35,7 +35,7 @@ class SearchingState extends AbstractState {
         this._setupBalls();
         this._setupPlayerSprite();
 
-        this.displayCentralMessage({ text: `Hello ${this.game.player.name}!`, fontSize: 100 });
+        this.displayCentralMessage({ text: `${this.game.locale.SEARCHING_STATE_WELCOME} ${this.game.player.name}!` });
 
         this._setupTimer();
 
@@ -86,12 +86,12 @@ class SearchingState extends AbstractState {
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
-        let message = this.addSaiyanLabel(10, 0, `Time: ${limit}`);
+        let message = this.addSaiyanLabel(10, 0, `${this.game.locale.SEARCHING_STATE_TIME}: ${limit}`);
         message.fontSize = 35;
 
         clock.repeat(Phaser.Timer.SECOND, limit, () => {
             let remain = limit - parseInt(clock.seconds);
-            message.setText(`Time: ${remain}`);
+            message.setText(`${this.game.locale.SEARCHING_STATE_TIME}: ${remain}`);
 
             if (remain === ending) {
                 this.sound.radar.play();

@@ -24,41 +24,35 @@ class MenuState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-menu');
 
-        this._setupCardGoku();
-        this._setupCardVegeta();
+        this.gokuCard = this.add.button(220, 160, 'goku-card', this._chooseGoku, this);
+        this.gokuCard.events.onInputOver.add(this._selectGoku, this);
+
+        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', this._chooseVegeta, this);
+        this.vegetaCard.events.onInputOver.add(this._selectVegeta, this);
+
         this._setupSound();
 
-        // Default: select Son Goku!
+        // Default: select Son Goku.
         this._selectGoku();
 
         this.loadSoundPreferences();
     }
 
-    _setupCardGoku() {
-        this.gokuCard = this.add.button(220, 160, 'goku-card', this._chooseGoku, this);
-        this.gokuCard.events.onInputOver.add(this._selectGoku, this);
-    }
-
-    _setupCardVegeta() {
-        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', this._chooseVegeta, this);
-        this.vegetaCard.events.onInputOver.add(this._selectVegeta, this);
-    }
-
     _chooseGoku() {
         // Add player object as common in all states.
         this.game.player = this.game.player || new Goku();
-        this._chooseSummary();
+        this._next();
     }
 
     _chooseVegeta() {
         // Add player object as common in all states.
         this.game.player = this.game.player || new Vegeta();
-        this._chooseSummary();
+        this._next();
     }
 
-    _chooseSummary() {
+    _next() {
         // Move to next state: Searching
-        this.state.start('Versus');
+        this.state.start('Searching');
 
         // Add some effect.
         this.sound.scouter.play();
@@ -69,6 +63,10 @@ class MenuState extends AbstractState {
     }
 
     update() {
+        this._handleKeyboard();
+    }
+
+    _handleKeyboard() {
         let keyboard = this.input.keyboard;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
@@ -90,10 +88,6 @@ class MenuState extends AbstractState {
         this.gokuCard.alpha = 0.5;
         this.vegetaCard.alpha = 1;
         this.onEnter = this._chooseVegeta;
-    }
-
-    render() {
-
     }
 }
 
