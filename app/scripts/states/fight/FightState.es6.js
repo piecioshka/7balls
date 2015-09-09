@@ -108,13 +108,13 @@ class FightState extends AbstractState {
 
         character.phaser.events.onLeft = new Phaser.Signal();
         character.phaser.events.onLeft.add(() => {
-            character.phaser.body.velocity.x -= Configuration.FIGHT_SPEED;
+            character.phaser.body.velocity.x -= Configuration.FIGHT_HORIZONTAL_SPEED;
             console.log('Character "%s" is LEFT', character.name);
         });
 
         character.phaser.events.onRight = new Phaser.Signal();
         character.phaser.events.onRight.add(() => {
-            character.phaser.body.velocity.x += Configuration.FIGHT_SPEED;
+            character.phaser.body.velocity.x += Configuration.FIGHT_HORIZONTAL_SPEED;
             console.log('Character "%s" is RIGHT', character.name);
         });
 
@@ -300,7 +300,7 @@ class FightState extends AbstractState {
 
     static _handleCharacterVelocity(character) {
         character.phaser.body.velocity.x = 0;
-        character.phaser.body.velocity.y += 7;
+        character.phaser.body.velocity.y += Configuration.FIGHT_FALL_SPEED;
     }
 
     _handleKeyboard() {
