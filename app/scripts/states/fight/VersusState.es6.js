@@ -111,7 +111,6 @@ class VersusState extends FightState {
             this._finishFight('win', 'died');
         });
 
-        // Computer.applyArtificialIntelligence(player);
         Computer.applyArtificialIntelligence(enemy);
     }
 
@@ -121,7 +120,7 @@ class VersusState extends FightState {
 
         this.input.keyboard.enabled = false;
 
-        this.displayCentralMessage({ text: `Player ${playerSate.toUpperCase()}!` });
+        this.displayCentralMessage({ text: `Player ${playerSate.toUpperCase()}!`, fontSize: 100 });
 
         player.phaser.play(playerSate);
         console.log('Character "%s" is ', player.name, playerSate.toUpperCase());
