@@ -38,6 +38,7 @@ class GameOverState extends AbstractState {
     }
 
     _tryAgain() {
+        this.sound.dramatic.stop();
         this.state.start('Menu');
     }
 
