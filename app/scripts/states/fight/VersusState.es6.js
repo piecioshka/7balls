@@ -126,6 +126,7 @@ class VersusState extends FightState {
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
             this.input.keyboard.enabled = true;
+
             this.state.start('GameOver');
         });
     }

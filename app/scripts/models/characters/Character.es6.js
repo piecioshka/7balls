@@ -1,6 +1,11 @@
 class Character {
     constructor(settings) {
         Object.assign(this, Character.defaultSettings, settings);
+        Object.assign(this, Character.defaultNumbers, settings);
+    }
+
+    resetNumbers() {
+        Object.assign(this, Character.defaultNumbers);
     }
 
     static get defaultSettings() {
@@ -10,7 +15,12 @@ class Character {
             // User put his favourite nickname.
             nickname: 'unknown',
             // Name of character: Son Goku or Vegeta.
-            name: 'unknown',
+            name: 'unknown'
+        };
+    }
+
+    static get defaultNumbers() {
+        return {
             // Number of lives.
             up: 0,
             // Percent of health. Decrease. When =0, up -1.
@@ -19,7 +29,7 @@ class Character {
             exp: 0,
             // Number of level. Max lvl=100
             lvl: 1
-        };
+        }
     }
 }
 
