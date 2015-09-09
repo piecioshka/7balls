@@ -1,27 +1,58 @@
+import Utilities from '../common/Utilities';
+
 class Computer {
-    static times(number, callback, callbackContext) {
-        for (let i = 0; i < number; i++) {
-            callback.call(callbackContext);
-        }
-    }
-
-    static applyArtificialIntelligence(character) {
-        character.phaser.events.onKicking.dispatch();
-        // character.phaser.events.onJumping.dispatch();
-        // character.phaser.events.onSitting.dispatch();
-
-        setTimeout(() => {
-            Computer.times(30, () => {
+    static applyArtificialIntelligence(state, character) {
+        let walkingLeft = () => {
+            Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 20, () => {
                 character.phaser.events.onLeft.dispatch();
             });
+        };
+        let walkingRight = () => {
+            Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 20, () => {
+                character.phaser.events.onRight.dispatch();
+            });
+        };
+        let boxing = () => {
+            Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 4, () => {
+                character.phaser.events.onBoxing.dispatch();
+            });
+        };
+        let kicking = () => {
+            Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 4, () => {
+                character.phaser.events.onKicking.dispatch();
+            });
+        };
+        let jumping = () => {
+            character.phaser.events.onJumping.dispatch();
+        };
+        let sitting = () => {
+            character.phaser.events.onSitting.dispatch();
+        };
 
-            setTimeout(() => {
-                Computer.times(30, () => {
-                    character.phaser.events.onBoxing.dispatch();
-                    character.phaser.events.onKicking.dispatch();
-                });
-            }, 1000);
-        }, 1000);
+        const moves = [
+            walkingLeft, walkingRight
+        ];
+
+        const dodge = [
+            jumping, sitting
+        ];
+
+        const fight = [
+            boxing, kicking,
+            boxing, kicking
+        ];
+
+        let start = (time, strategy) => {
+            Utilities.interval(state, time, () => {
+                let random = Utilities.random(0, strategy.length);
+                let move = strategy[random];
+                move();
+            });
+        };
+
+        start(Phaser.Timer.SECOND / 2, moves);
+        start(Phaser.Timer.SECOND * 3 / 4, dodge);
+        start(Phaser.Timer.SECOND, fight);
     }
 }
 

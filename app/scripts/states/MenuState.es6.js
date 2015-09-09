@@ -58,7 +58,7 @@ class MenuState extends AbstractState {
 
     _chooseSummary() {
         // Move to next state: Searching
-        this.state.start('Searching');
+        this.state.start('Versus');
 
         // Add some effect.
         this.sound.scouter.play();

@@ -75,13 +75,12 @@ class VersusState extends FightState {
         let player = this.game.player;
         let enemy = this.game.enemy;
 
+        let isCollision = () => this.physics.arcade.overlap(enemy.phaser, player.phaser);
+
         let handlePlayerBlow = (label, points) => {
-            if (this.physics.arcade.overlap(enemy.phaser, player.phaser) || this.physics.arcade.overlap(player.phaser, enemy.phaser)) {
-                console.log('player overlap');
+            if (isCollision()) {
                 this._addPlayerEXP(points);
                 this._removeEnemyHP(points);
-            } else {
-                console.log('player not overlap');
             }
         };
 
@@ -96,12 +95,9 @@ class VersusState extends FightState {
         });
 
         let handleEnemyBlow = (label, points) => {
-            if (this.physics.arcade.overlap(enemy.phaser, player.phaser) || this.physics.arcade.overlap(player.phaser, enemy.phaser)) {
-                console.log('enemy overlap');
+            if (isCollision()) {
                 this._addEnemyEXP(points);
                 this._removePlayerHP(points);
-            } else {
-                console.log('enemy not overlap');
             }
         };
 
@@ -111,7 +107,7 @@ class VersusState extends FightState {
             this._finishFight('win', 'died');
         });
 
-        Computer.applyArtificialIntelligence(enemy);
+        Computer.applyArtificialIntelligence(this, enemy);
     }
 
     _finishFight(playerSate, enemyState) {

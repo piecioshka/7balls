@@ -126,6 +126,10 @@ class FightState extends AbstractState {
 
         character.phaser.events.onJumping = new Phaser.Signal();
         character.phaser.events.onJumping.add(() => {
+            if (!character.phaser.body.onFloor()) {
+                return;
+            }
+
             this.sound.jump.play();
 
             character.phaser.body.velocity.y -= Configuration.FIGHT_JUMP;
@@ -285,9 +289,7 @@ class FightState extends AbstractState {
         });
 
         let handlePlayerJump = () => {
-            if (player.phaser.body.onFloor()) {
-                player.phaser.events.onJumping.dispatch();
-            }
+            player.phaser.events.onJumping.dispatch();
         };
 
         this.keyboard.up.onDown.add(handlePlayerJump);
