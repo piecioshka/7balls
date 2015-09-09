@@ -16,6 +16,7 @@ class FightState extends AbstractState {
 
         this.load.spritesheet('goku-spritesheet', './assets/graphics/characters/goku/goku-fight.png', 150, 200);
         this.load.spritesheet('vegeta-spritesheet', './assets/graphics/characters/vegeta/vegeta-fight.png', 150, 200);
+        this.load.spritesheet('piccolo-spritesheet', './assets/graphics/characters/piccolo/piccolo-fight.png', 150, 200);
 
         this.load.spritesheet('freeza-spritesheet', './assets/graphics/characters/freeza/freeza-fight.png', 150, 200);
         this.load.spritesheet('cell-spritesheet', './assets/graphics/characters/cell/cell-fight.png', 150, 200);

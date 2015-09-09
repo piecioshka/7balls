@@ -20,10 +20,10 @@ class LanguageState extends AbstractState {
         this.add.image(0, 0, 'bg-language');
 
         this.plCard = this.add.button(150, 135, 'btn-pl', this._choosePolish, this);
-        this.plCard.events.onInputOver.add(this._selectPolish, this);
+        this.plCard.onInputOver.add(this._selectPolish, this);
 
         this.enCard = this.add.button(450, 135, 'btn-en', this._chooseEnglish, this);
-        this.enCard.events.onInputOver.add(this._selectEnglish, this);
+        this.enCard.onInputOver.add(this._selectEnglish, this);
 
         // Default: select english language.
         this._selectEnglish();

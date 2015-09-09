@@ -23,6 +23,7 @@ class SearchingState extends AbstractState {
 
         this.load.image('goku-searching', './assets/graphics/characters/goku/goku-searching.png');
         this.load.image('vegeta-searching', './assets/graphics/characters/vegeta/vegeta-searching.png');
+        this.load.image('piccolo-searching', './assets/graphics/characters/piccolo/piccolo-searching.png');
 
         this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
         this.load.audio('sound-radar', './assets/sound/dbk/devices_02.ogg');
