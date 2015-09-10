@@ -2,12 +2,6 @@ import Configuration from '../../configuration';
 import FightState from './FightState';
 
 class TrainingState extends FightState {
-    keyboard = {
-        x: null,
-        c: null,
-        up: null,
-        space: null
-    };
     sound = {
         jump: null,
 

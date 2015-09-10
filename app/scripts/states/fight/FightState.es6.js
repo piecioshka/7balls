@@ -268,12 +268,12 @@ class FightState extends AbstractState {
     _setupKeyboard() {
         let player = this.game.player;
 
-        this.keyboard.c = this.input.keyboard.addKey(Phaser.Keyboard.C);
-        this.keyboard.x = this.input.keyboard.addKey(Phaser.Keyboard.X);
-        this.keyboard.up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
-        this.keyboard.space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        let c = this.input.keyboard.addKey(Phaser.Keyboard.C);
+        let x = this.input.keyboard.addKey(Phaser.Keyboard.X);
+        let up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
+        let space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-        // Stop the following keys from propagating up to the browser
+        // Stop the following keys from propagating up to the browser.
         this.input.keyboard.addKeyCapture([
             Phaser.Keyboard.C,
             Phaser.Keyboard.X,
@@ -281,20 +281,10 @@ class FightState extends AbstractState {
             Phaser.Keyboard.SPACEBAR
         ]);
 
-        this.keyboard.c.onDown.add(() => {
-            player.phaser.events.onKicking.dispatch();
-        });
-
-        this.keyboard.x.onDown.add(() => {
-            player.phaser.events.onBoxing.dispatch();
-        });
-
-        let handlePlayerJump = () => {
-            player.phaser.events.onJumping.dispatch();
-        };
-
-        this.keyboard.up.onDown.add(handlePlayerJump);
-        this.keyboard.space.onDown.add(handlePlayerJump);
+        c.onDown.add(() => player.phaser.events.onKicking.dispatch());
+        x.onDown.add(() => player.phaser.events.onBoxing.dispatch());
+        up.onDown.add(() => player.phaser.events.onJumping.dispatch());
+        space.onDown.add(() => player.phaser.events.onJumping.dispatch());
     }
 
     update() {

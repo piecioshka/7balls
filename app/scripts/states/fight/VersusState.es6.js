@@ -7,12 +7,6 @@ import Bubu from '../../models/characters/Bubu';
 
 class VersusState extends FightState {
     enemies = [Freeza, Cell, Bubu];
-    keyboard = {
-        x: null,
-        c: null,
-        up: null,
-        space: null
-    };
     sound = {
         jump: null,
 
@@ -114,6 +108,7 @@ class VersusState extends FightState {
         let player = this.game.player;
         let enemy = this.game.enemy;
 
+        // Disable keyboard globally.
         this.input.keyboard.enabled = false;
 
         this.displayCentralMessage({ text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
@@ -125,6 +120,7 @@ class VersusState extends FightState {
         console.log('Character "%s" is ', enemy.name, enemyState.toUpperCase());
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
+            // Restore keyboard globally.
             this.input.keyboard.enabled = true;
 
             this.state.start('GameOver');

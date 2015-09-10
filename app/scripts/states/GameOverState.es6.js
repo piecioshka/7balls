@@ -1,9 +1,6 @@
 import AbstractState from './AbstractState';
 
 class GameOverState extends AbstractState {
-    keyboard = {
-        enter: null
-    };
     sound = {
         dramatic: null
     };
@@ -31,10 +28,14 @@ class GameOverState extends AbstractState {
     }
 
     _setupKeyboard() {
-        this.keyboard.enter = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
-        this.keyboard.enter.onDown.add(() => {
-            this._tryAgain();
-        });
+        let enter = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+
+        // Stop the following keys from propagating up to the browser.
+        this.input.keyboard.addKeyCapture([
+            Phaser.Keyboard.ENTER
+        ]);
+
+        enter.onDown.add(() => this._tryAgain());
     }
 
     _tryAgain() {

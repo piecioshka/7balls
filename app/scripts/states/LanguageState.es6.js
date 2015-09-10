@@ -28,6 +28,8 @@ class LanguageState extends AbstractState {
         // Default: select english language.
         this._selectEnglish();
 
+        this._setupKeyboard();
+
         this.loadSoundPreferences();
     }
 
@@ -51,20 +53,21 @@ class LanguageState extends AbstractState {
         });
     }
 
-    update() {
-        this._handleKeyboard();
-    }
+    _setupKeyboard() {
+        let left = this.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        let right = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+        let enter = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 
-    _handleKeyboard() {
-        let keyboard = this.input.keyboard;
+        // Stop the following keys from propagating up to the browser.
+        this.input.keyboard.addKeyCapture([
+            Phaser.Keyboard.LEFT,
+            Phaser.Keyboard.RIGHT,
+            Phaser.Keyboard.ENTER
+        ]);
 
-        if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            this._selectPolish();
-        } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            this._selectEnglish();
-        } else if (keyboard.isDown(Phaser.Keyboard.ENTER)) {
-            this.onEnter();
-        }
+        left.onDown.add(() => this._selectPolish());
+        right.onDown.add(() => this._selectEnglish());
+        enter.onDown.add(() => this.onEnter());
     }
 
     _selectPolish() {

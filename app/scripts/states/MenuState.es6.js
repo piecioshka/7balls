@@ -9,11 +9,15 @@ class MenuState extends AbstractState {
     piccoloCard = null;
 
     cardsIndex = 0;
-    cards = [];
+    cards = null;
 
     sound = {
         scouter: null
     };
+
+    init() {
+        this.cards = [];
+    }
 
     preload() {
         super.preload();
@@ -42,6 +46,7 @@ class MenuState extends AbstractState {
         this.piccoloCard.onInputOver.add(this._selectPiccolo, this);
         this.piccoloCard.visible = false;
 
+        this._setupKeyboard();
         this._setupSound();
 
         // Default: select Son Goku.
@@ -80,20 +85,26 @@ class MenuState extends AbstractState {
         this.sound.scouter = this.add.audio('scouter');
     }
 
+    _setupKeyboard() {
+        let left = this.input.keyboard.addKey(Phaser.Keyboard.LEFT);
+        let right = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
+
+        // Stop the following keys from propagating up to the browser.
+        this.input.keyboard.addKeyCapture([
+            Phaser.Keyboard.LEFT,
+            Phaser.Keyboard.RIGHT
+        ]);
+
+        left.onDown.add(() => this._prevCard());
+        right.onDown.add(() => this._nextCard());
+    }
+
     update() {
         this._handleKeyboard();
     }
 
     _handleKeyboard() {
         let keyboard = this.input.keyboard;
-
-        if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            this._prevCardIndex();
-            this.cards[this.cardsIndex].onInputOver.dispatch();
-        } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            this._nextCardIndex();
-            this.cards[this.cardsIndex].onInputOver.dispatch();
-        }
 
         if (keyboard.isDown(Phaser.Keyboard.ENTER)) {
             this.cards[this.cardsIndex].onInputUp.dispatch();
@@ -122,20 +133,24 @@ class MenuState extends AbstractState {
         }
     }
 
-    _prevCardIndex() {
+    _prevCard() {
         this.cardsIndex--;
 
         if (this.cardsIndex < 0) {
             this.cardsIndex = 0;
         }
+
+        this.cards[this.cardsIndex].onInputOver.dispatch();
     }
 
-    _nextCardIndex() {
+    _nextCard() {
         this.cardsIndex++;
 
         if (this.cardsIndex >= this.cards.length) {
             this.cardsIndex = this.cards.length - 1;
         }
+
+        this.cards[this.cardsIndex].onInputOver.dispatch();
     }
 
     _selectGoku() {
