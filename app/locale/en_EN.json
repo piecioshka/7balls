@@ -1,5 +1,6 @@
 {
   "MESSAGE_STATE_WELCOME": "Welcome!\n\nGame control:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C",
+  "MESSAGE_STATE_COLLECT_DRAGON_BALL": "Collect dragon balls,\nnext Shenron will be appear\nwho give you life!",
 
   "SEARCHING_STATE_WELCOME": "Hello",
   "SEARCHING_STATE_TIME": "Time",

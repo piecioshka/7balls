@@ -1,12 +1,12 @@
 class Utilities {
     /**
      * @param {number} number
-     * @param {Function} callback
-     * @param {Object} callbackContext
+     * @param {Function} cb
+     * @param {Object} ctx
      */
-    static times(number, callback, callbackContext = this) {
+    static times(number, cb, ctx = this) {
         for (let i = 0; i < number; i++) {
-            callback.call(callbackContext, i);
+            cb.call(ctx, i);
         }
     }
 
@@ -22,15 +22,15 @@ class Utilities {
     /**
      * @param {Phaser.State} state
      * @param {number} max
-     * @param {number} time
+     * @param {number} lifetime
      * @param {Function} cb
      */
-    static timesRandomAsync(state, max, time, cb) {
+    static timesRandomAsync(state, max, lifetime, cb) {
         let index = 0;
         let times = Utilities.random(1, max);
 
         (function loop() {
-            Utilities.timeout(state, time, () => {
+            Utilities.timeout(state, lifetime, () => {
                 index++;
                 cb();
 
@@ -43,22 +43,22 @@ class Utilities {
 
     /**
      * @param {Phaser.State} state
-     * @param {number} time
+     * @param {number} lifetime
      * @param {Function} cb
      */
-    static interval(state, time, cb) {
+    static interval(state, lifetime, cb) {
         let clock = state.time.create();
-        clock.repeat(time, Infinity, cb);
+        clock.repeat(lifetime, Infinity, cb);
         clock.start();
     }
 
     /**
      * @param {Phaser.State} state
-     * @param {number} time
+     * @param {number} lifetime
      * @param {function} cb
      */
-    static timeout(state, time, cb) {
-        state.time.events.add(time, cb);
+    static timeout(state, lifetime, cb) {
+        state.time.events.add(lifetime, cb);
     }
 }
 

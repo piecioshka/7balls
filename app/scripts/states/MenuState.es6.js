@@ -22,11 +22,11 @@ class MenuState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.jpg');
+        this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.png');
 
-        this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.jpg');
-        this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.jpg');
-        this.load.image('piccolo-card', './assets/graphics/characters/piccolo/piccolo-card.jpg');
+        this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.png');
+        this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.png');
+        this.load.image('piccolo-card', './assets/graphics/characters/piccolo/piccolo-card.png');
 
         this.load.audio('scouter', './assets/sound/dbz/scouter.ogg');
     }
@@ -58,24 +58,35 @@ class MenuState extends AbstractState {
     _chooseGoku() {
         // Add player object as common in all states.
         this.game.player = this.game.player || new Goku();
-        this._next();
+        this._next('goku');
     }
 
     _chooseVegeta() {
         // Add player object as common in all states.
         this.game.player = this.game.player || new Vegeta();
-        this._next();
+        this._next('vegeta');
     }
 
     _choosePiccolo() {
         // Add player object as common in all states.
         this.game.player = this.game.player || new Piccolo();
-        this._next();
+        this._next('piccolo');
     }
 
-    _next() {
-        // Move to next state: Searching
-        this.state.start('Searching');
+    _next(characterName) {
+        this.state.start('PlayerPresentation', true, false, {
+            name: `${characterName}-halo`,
+            lifetime: Phaser.Timer.SECOND * 2,
+            cb: () => {
+                this.state.start('Message', true, false, {
+                    body: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
+                    lifetime: Phaser.Timer.SECOND * 2,
+                    cb: () => {
+                        this.state.start('Collecting');
+                    }
+                });
+            }
+        });
 
         // Add some effect.
         this.sound.scouter.play();

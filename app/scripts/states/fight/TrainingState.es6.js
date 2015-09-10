@@ -25,7 +25,7 @@ class TrainingState extends FightState {
     preload() {
         super.preload();
 
-        this.load.image('bg-training-capsule', './assets/graphics/backgrounds/bg-training-capsule.jpg');
+        this.load.image('bg-training-capsule', './assets/graphics/backgrounds/bg-training-capsule.png');
     }
 
     create() {

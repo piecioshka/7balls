@@ -1,13 +1,13 @@
 import AbstractState from './AbstractState';
 
 class MessageState extends AbstractState {
-    body = undefined;
-    callback = undefined;
-    lifetime = undefined;
+    body = null;
+    cb = null;
+    lifetime = null;
 
-    init({ body, callback, lifetime }) {
+    init({ body, cb, lifetime }) {
         this.body = body;
-        this.callback = callback;
+        this.cb = cb;
         this.lifetime = lifetime;
     }
 
@@ -20,17 +20,9 @@ class MessageState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-message');
 
-        this.displayCentralMessage({ text: this.body, time: this.lifetime, cb: this.callback, fontSize: 50 });
+        this.displayCentralMessage({ text: this.body, lifetime: this.lifetime, cb: this.cb, fontSize: 50 });
 
         this.loadSoundPreferences();
-    }
-
-    update() {
-
-    }
-
-    render() {
-
     }
 }
 

@@ -8,7 +8,7 @@ class ShenronState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.image('bg-shenron', './assets/graphics/backgrounds/bg-shenron.jpg');
+        this.load.image('bg-shenron', './assets/graphics/backgrounds/bg-shenron.png');
         this.load.audio('sound-ambience-thunder', './assets/sound/dbk/ambience_thunder.ogg');
     }
 

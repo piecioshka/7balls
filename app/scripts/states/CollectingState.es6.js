@@ -1,7 +1,8 @@
 import Configuration from '../configuration';
+import Utilities from '../common/Utilities';
 import AbstractState from './AbstractState';
 
-class SearchingState extends AbstractState {
+class CollectingState extends AbstractState {
     layer = null;
     sound = {
         candypop: null,
@@ -11,44 +12,47 @@ class SearchingState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.spritesheet('spr-searching', './assets/graphics/spritesheet/spr-searching.png', 40, 40);
+        this.load.spritesheet('spr-collecting', './assets/graphics/spritesheet/spr-collecting.png', 40, 40);
 
-        this.load.tilemap('searching-1', './assets/maps/searching-1.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('searching-2', './assets/maps/searching-2.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('searching-3', './assets/maps/searching-3.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('collecting-1', './assets/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('collecting-2', './assets/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('collecting-3', './assets/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
 
-        this.load.json('place-1', './assets/balls/place-1.json');
-        this.load.json('place-2', './assets/balls/place-2.json');
-        this.load.json('place-3', './assets/balls/place-3.json');
+        this.load.json('positions-1', './assets/balls/positions-1.json');
+        this.load.json('positions-2', './assets/balls/positions-2.json');
+        this.load.json('positions-3', './assets/balls/positions-3.json');
 
-        this.load.image('goku-searching', './assets/graphics/characters/goku/goku-searching.png');
-        this.load.image('vegeta-searching', './assets/graphics/characters/vegeta/vegeta-searching.png');
-        this.load.image('piccolo-searching', './assets/graphics/characters/piccolo/piccolo-searching.png');
+        this.load.image('goku-collecting', './assets/graphics/characters/goku/goku-collecting.png');
+        this.load.image('vegeta-collecting', './assets/graphics/characters/vegeta/vegeta-collecting.png');
+        this.load.image('piccolo-collecting', './assets/graphics/characters/piccolo/piccolo-collecting.png');
 
         this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
         this.load.audio('sound-radar', './assets/sound/dbk/devices_02.ogg');
     }
 
     create() {
-        this._setupWorld();
+        let random = Utilities.random(1, 3);
+
+        this._setupWorld(random);
         this._setupSound();
 
-        this._setupBalls();
+        this._setupBalls(random);
         this._setupPlayerSprite();
 
         this.displayCentralMessage({ text: `${this.game.locale.SEARCHING_STATE_WELCOME} ${this.game.player.name}!` });
 
-        this._setupTimer();
+        this._setupTimer(random);
 
         this.loadSoundPreferences();
     }
 
-    _setupWorld() {
+    _setupWorld(random) {
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-        let map = this.add.tilemap('searching-1');
-        map.addTilesetImage('spr-searching');
-        map.setCollisionByIndex(1);
+        let map = this.add.tilemap(`collecting-${random}`);
+        map.addTilesetImage('spr-collecting');
+        // map.setCollisionByIndex(1);
+        map.setCollision([1, 3]);
 
         this.layer = map.createLayer('Tile Layer 1');
         this.layer.resizeWorld();
@@ -57,7 +61,7 @@ class SearchingState extends AbstractState {
     _setupPlayerSprite() {
         let player = this.game.player;
 
-        player.phaser = this.add.sprite(30, 50, `${player.id}-searching`);
+        player.phaser = this.add.sprite(30, 50, `${player.id}-collecting`);
         player.phaser.anchor.setTo(0.5, 0.5);
 
         this._defineDefaultProperties(player);
@@ -70,20 +74,20 @@ class SearchingState extends AbstractState {
         character.phaser.body.setSize(30, 30, 0, 10);
     }
 
-    _setupBalls() {
+    _setupBalls(random) {
         let balls = this.game.balls = this.add.group();
         balls.enableBody = true;
         this.physics.arcade.enable(balls);
 
-        let places = this.cache.getJSON('place-1');
+        let places = this.cache.getJSON(`positions-${random}`);
         places.forEach((item) => {
             let [x, y] = item;
-            balls.add(this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-searching', 1));
+            balls.add(this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-collecting', 1));
         });
     }
 
-    _setupTimer() {
-        let [limit] = Configuration.SEARCHING_MAPS_TIME_LIMIT;
+    _setupTimer(random) {
+        let limit = Configuration.SEARCHING_MAPS_TIME_LIMIT[random - 1];
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
@@ -166,4 +170,4 @@ class SearchingState extends AbstractState {
     }
 }
 
-export default SearchingState;
+export default CollectingState;

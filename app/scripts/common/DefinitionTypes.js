@@ -2,6 +2,7 @@
  * @typedef {Object} Locale
  *
  * @property {string} MESSAGE_STATE_WELCOME
+ * @property {string} MESSAGE_STATE_COLLECT_DRAGON_BALL
  *
  * @property {string} SEARCHING_STATE_WELCOME
  * @property {string} SEARCHING_STATE_TIME

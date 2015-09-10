@@ -47,7 +47,7 @@ class LanguageState extends AbstractState {
         this.state.start('Message', true, false, {
             body: this.game.locale.MESSAGE_STATE_WELCOME,
             lifetime: Phaser.Timer.SECOND * 2,
-            callback: () => {
+            cb: () => {
                 this.game.state.start('Menu');
             }
         });

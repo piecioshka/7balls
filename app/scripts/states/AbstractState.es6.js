@@ -16,7 +16,7 @@ class AbstractState extends Phaser.State {
         return label;
     }
 
-    displayCentralMessage({ text, time = Phaser.Timer.SECOND * 2, fontSize = 100, cb = () => undefined }) {
+    displayCentralMessage({ text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 100, cb = () => undefined }) {
         let message = this.addSaiyanLabel(this.game.width / 2, this.game.height / 2, text, [0.5, 0.5]);
         message.alpha = 0;
         message.fontSize = fontSize;
@@ -25,11 +25,11 @@ class AbstractState extends Phaser.State {
             this.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
         }, this, message);
 
-        this.game.time.events.add(time - Phaser.Timer.SECOND / 2, () => {
+        this.game.time.events.add(lifetime - Phaser.Timer.SECOND / 2, () => {
             this.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
         }, this, message);
 
-        this.game.time.events.add(time, cb, this, message);
+        this.game.time.events.add(lifetime, cb, this, message);
     }
 
     loadSoundPreferences() {

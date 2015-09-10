@@ -42,8 +42,8 @@ class Computer {
             boxing, kicking
         ];
 
-        let start = (time, strategy) => {
-            Utilities.interval(state, time, () => {
+        let start = (intervalTime, strategy) => {
+            Utilities.interval(state, intervalTime, () => {
                 let random = Utilities.random(0, strategy.length);
                 let move = strategy[random];
                 move();

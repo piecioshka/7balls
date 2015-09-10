@@ -8,7 +8,7 @@ class GameOverState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.image('bg-game-over', './assets/graphics/backgrounds/bg-game-over.jpg');
+        this.load.image('bg-game-over', './assets/graphics/backgrounds/bg-game-over.png');
         this.load.image('btn-try-again', './assets/graphics/buttons/try-again.png');
 
         this.load.audio('sound-dramatic', './assets/sound/dbk/dramatic_reveal_01.ogg');
