@@ -5,8 +5,8 @@ class FightState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.image('bg-versus-hell', './assets/graphics/backgrounds/bg-versus-hell.png');
-        this.load.image('bg-versus-sky', './assets/graphics/backgrounds/bg-versus-sky.png');
+        this.load.image('bg-versus-hell', './assets/graphics/backgrounds/versus/bg-versus-hell.png');
+        this.load.image('bg-versus-sky', './assets/graphics/backgrounds/versus/bg-versus-sky.png');
 
         this.load.image('logo-minimal', './assets/graphics/logo/logo-minimal.png');
 

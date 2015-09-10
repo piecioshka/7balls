@@ -4,7 +4,7 @@ class MealState extends AbstractState {
     preload() {
         super.preload();
 
-        this.load.image('bg-meal-house', './assets/graphics/backgrounds/bg-meal-house.png');
+        this.load.image('bg-meal-house', './assets/graphics/backgrounds/meal/bg-meal-house.png');
     }
 
     create() {
