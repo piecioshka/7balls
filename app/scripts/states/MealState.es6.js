@@ -1,6 +1,16 @@
 import AbstractState from './AbstractState';
+import Utilities from '../common/Utilities';
+import Character from '../models/characters/Character';
 
 class MealState extends AbstractState {
+    lifetime = null;
+    cb = null;
+
+    init({ lifetime, cb }) {
+        this.lifetime = lifetime;
+        this.cb = cb;
+    }
+
     preload() {
         super.preload();
 
@@ -10,15 +20,11 @@ class MealState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-meal-house');
 
+        this.game.player.hp = Character.defaultNumbers.hp;
+
+        Utilities.timeout(this, this.lifetime, this.cb);
+
         this.loadSoundPreferences();
-    }
-
-    update() {
-
-    }
-
-    render() {
-
     }
 }
 

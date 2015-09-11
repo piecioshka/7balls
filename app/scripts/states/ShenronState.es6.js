@@ -24,15 +24,29 @@ class ShenronState extends AbstractState {
 
         this._setupSound();
 
-        this.game.time.events.add(Phaser.Timer.SECOND * 4, this._setupVersus, this);
+        this.game.time.events.add(Phaser.Timer.SECOND * 3, this._next, this);
 
         this.loadSoundPreferences();
         this.sound.ambienceThunder.play();
     }
 
-    _setupVersus() {
-        this.state.start('Versus');
+    _next() {
         this.sound.ambienceThunder.stop();
+
+        Utilities.timeout(this, Phaser.Timer.SECOND, () => {
+            this.state.start('PlayerPresentation', true, false, {
+                name: this.game.player.id,
+                lifetime: Phaser.Timer.SECOND * 2,
+                cb: () => {
+                    this.state.start('EnemyPresentation', true, false, {
+                        lifetime: Phaser.Timer.SECOND * 2,
+                        cb: () => {
+                            this.state.start('Versus');
+                        }
+                    });
+                }
+            });
+        });
     }
 
     _setupSound() {

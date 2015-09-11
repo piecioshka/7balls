@@ -1,7 +1,10 @@
 import Configuration from '../../configuration';
+import Utilities from '../../common/Utilities';
 import FightState from './FightState';
 
 class TrainingState extends FightState {
+    lifetime = null;
+    cb = null;
     sound = {
         jump: null,
 
@@ -22,6 +25,11 @@ class TrainingState extends FightState {
         }
     };
 
+    init({ lifetime, cb }) {
+        this.lifetime = lifetime;
+        this.cb = cb;
+    }
+
     preload() {
         super.preload();
 
@@ -30,6 +38,8 @@ class TrainingState extends FightState {
 
     create() {
         this.add.image(0, 0, 'bg-training-capsule');
+
+        Utilities.timeout(this, this.lifetime, this.cb);
 
         this._setupWorld();
         this._setupKeyboard();

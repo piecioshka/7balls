@@ -16,7 +16,7 @@ class Utilities {
      * @returns {number}
      */
     static random(start = 0, stop = 10) {
-        return parseInt(Math.random() * (stop - start) + start);
+        return parseInt(Math.random() * (stop - start + 1) + start);
     }
 
     /**
@@ -27,7 +27,7 @@ class Utilities {
      */
     static timesRandomAsync(state, max, lifetime, cb) {
         let index = 0;
-        let times = Utilities.random(1, max);
+        let times = Utilities.random(1, max - 1);
 
         (function loop() {
             Utilities.timeout(state, lifetime, () => {

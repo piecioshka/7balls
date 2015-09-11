@@ -1,12 +1,8 @@
 import Configuration from '../../configuration';
 import FightState from './FightState';
 import Computer from '../../models/Computer';
-import Freeza from '../../models/characters/Freeza';
-import Cell from '../../models/characters/Cell';
-import Bubu from '../../models/characters/Bubu';
 
 class VersusState extends FightState {
-    enemies = [Freeza, Cell, Bubu];
     sound = {
         jump: null,
 
@@ -49,8 +45,6 @@ class VersusState extends FightState {
         this._setupWorld();
         this._setupKeyboard();
         this._setupSound();
-
-        this._createEnemy();
 
         this._setupSprite(150, 360, this.game.player);
         this._setupSprite(650, 360, this.game.enemy, [1, 1]);
@@ -114,31 +108,40 @@ class VersusState extends FightState {
         this.displayCentralMessage({ text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
 
         player.phaser.play(playerSate);
-        console.log('Character "%s" is ', player.name, playerSate.toUpperCase());
-
         enemy.phaser.play(enemyState);
-        console.log('Character "%s" is ', enemy.name, enemyState.toUpperCase());
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
             // Restore keyboard globally.
             this.input.keyboard.enabled = true;
 
-            this.state.start('GameOver');
+            if (playerSate === 'died') {
+                this.state.start('GameOver');
+            } else {
+                // Remove first, defeated, enemy.
+                this.game.enemies.shift();
+
+                if (this.game.enemies.length === 0) {
+                    this.state.start('Winner');
+                } else {
+                    this.state.start('Meal', true, false, {
+                        lifetime: Phaser.Timer.SECOND * 2,
+                        cb: () => {
+                            this.state.start('Training', true, false, {
+                                lifetime: Phaser.Timer.SECOND * 5,
+                                cb: () => {
+                                    this.state.start('EnemyPresentation', true, false, {
+                                        lifetime: Phaser.Timer.SECOND * 2,
+                                        cb: () => {
+                                            this.state.start('Versus');
+                                        }
+                                    });
+                                }
+                            });
+                        }
+                    });
+                }
+            }
         });
-    }
-
-    _randomEnemy() {
-        return this.enemies[parseInt(Math.random() * this.enemies.length)];
-    }
-
-    _createEnemy() {
-        // Random enemy from predefined list.
-        let Character = this._randomEnemy();
-
-        // Add player object as common in all states.
-        this.game.enemy = new Character();
-
-        console.log('Random character: ', this.game.enemy.name);
     }
 
     _setupEnemyOptions() {

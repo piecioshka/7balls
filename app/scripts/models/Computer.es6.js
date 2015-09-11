@@ -13,12 +13,12 @@ class Computer {
             });
         };
         let boxing = () => {
-            Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 4, () => {
+            Utilities.timesRandomAsync(state, 5, Phaser.Timer.SECOND / 4, () => {
                 character.phaser.events.onBoxing.dispatch();
             });
         };
         let kicking = () => {
-            Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 4, () => {
+            Utilities.timesRandomAsync(state, 5, Phaser.Timer.SECOND / 4, () => {
                 character.phaser.events.onKicking.dispatch();
             });
         };
@@ -38,13 +38,12 @@ class Computer {
         ];
 
         const fight = [
-            boxing, kicking,
             boxing, kicking
         ];
 
         let start = (intervalTime, strategy) => {
             Utilities.interval(state, intervalTime, () => {
-                let random = Utilities.random(0, strategy.length);
+                let random = Utilities.random(0, strategy.length - 1);
                 let move = strategy[random];
                 move();
             });

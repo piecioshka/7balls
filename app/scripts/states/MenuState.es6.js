@@ -3,6 +3,10 @@ import Goku from '../models/characters/Goku';
 import Vegeta from '../models/characters/Vegeta';
 import Piccolo from '../models/characters/Piccolo';
 
+import Freeza from '../models/characters/Freeza';
+import Cell from '../models/characters/Cell';
+import Bubu from '../models/characters/Bubu';
+
 class MenuState extends AbstractState {
     gokuCard = null;
     vegetaCard = null;
@@ -17,6 +21,7 @@ class MenuState extends AbstractState {
 
     init() {
         this.cards = [];
+        this.game.enemies = [Freeza, Cell, Bubu];
     }
 
     preload() {
@@ -57,25 +62,25 @@ class MenuState extends AbstractState {
 
     _chooseGoku() {
         // Add player object as common in all states.
-        this.game.player = this.game.player || new Goku();
-        this._next('goku');
+        this.game.player = new Goku();
+        this._next();
     }
 
     _chooseVegeta() {
         // Add player object as common in all states.
-        this.game.player = this.game.player || new Vegeta();
-        this._next('vegeta');
+        this.game.player = new Vegeta();
+        this._next();
     }
 
     _choosePiccolo() {
         // Add player object as common in all states.
-        this.game.player = this.game.player || new Piccolo();
-        this._next('piccolo');
+        this.game.player = new Piccolo();
+        this._next();
     }
 
-    _next(characterName) {
+    _next() {
         this.state.start('PlayerPresentation', true, false, {
-            name: `${characterName}-halo`,
+            name: `${this.game.player.id}-halo`,
             lifetime: Phaser.Timer.SECOND * 2,
             cb: () => {
                 this.state.start('Message', true, false, {

@@ -51,7 +51,6 @@ class CollectingState extends AbstractState {
 
         let map = this.add.tilemap(`collecting-${random}`);
         map.addTilesetImage('spr-collecting');
-        // map.setCollisionByIndex(1);
         map.setCollision([1, 3]);
 
         this.layer = map.createLayer('Tile Layer 1');
