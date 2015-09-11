@@ -67,7 +67,7 @@ class VersusState extends FightState {
 
         let handlePlayerBlow = (label, points) => {
             if (isCollision()) {
-                this._addPlayerEXP(points);
+                this._addPlayerEXP(points * 2);
                 this._removeEnemyHP(points);
             }
         };

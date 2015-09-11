@@ -84,7 +84,7 @@ class FightState extends AbstractState {
         character.animations.add('died', [24, 25], 4, false);
 
         character.play('standing');
-        console.log('Character "%s" is STANDING', name);
+        // console.log('Character "%s" is STANDING', name);
     }
 
     _addAvatar(x, y, key) {
@@ -110,19 +110,19 @@ class FightState extends AbstractState {
         character.phaser.events.onLeft = new Phaser.Signal();
         character.phaser.events.onLeft.add(() => {
             character.phaser.body.velocity.x -= Configuration.FIGHT_HORIZONTAL_SPEED;
-            console.log('Character "%s" is LEFT', character.name);
+            // console.log('Character "%s" is LEFT', character.name);
         });
 
         character.phaser.events.onRight = new Phaser.Signal();
         character.phaser.events.onRight.add(() => {
             character.phaser.body.velocity.x += Configuration.FIGHT_HORIZONTAL_SPEED;
-            console.log('Character "%s" is RIGHT', character.name);
+            // console.log('Character "%s" is RIGHT', character.name);
         });
 
         character.phaser.events.onSitting = new Phaser.Signal();
         character.phaser.events.onSitting.add(() => {
             character.phaser.play('sitting');
-            console.log('Character "%s" is SITTING', character.name);
+            // console.log('Character "%s" is SITTING', character.name);
         });
 
         character.phaser.events.onJumping = new Phaser.Signal();
@@ -136,7 +136,7 @@ class FightState extends AbstractState {
             character.phaser.body.velocity.y -= Configuration.FIGHT_JUMP;
 
             character.phaser.play('jumping');
-            console.log('Character "%s" is JUMPING', character.name);
+            // console.log('Character "%s" is JUMPING', character.name);
         });
 
         character.phaser.events.onKicking = new Phaser.Signal();
@@ -144,14 +144,14 @@ class FightState extends AbstractState {
             this._playKickSound(character);
 
             character.phaser.play('kicking');
-            console.log('Character "%s" is KICKING', character.name);
+            // console.log('Character "%s" is KICKING', character.name);
         });
         character.phaser.events.onBoxing = new Phaser.Signal();
         character.phaser.events.onBoxing.add(() => {
             this._playPunchSound(character);
 
             character.phaser.play('boxing');
-            console.log('Character "%s" is BOXING', character.name);
+            // console.log('Character "%s" is BOXING', character.name);
         });
         character.phaser.events.onDied = new Phaser.Signal();
 

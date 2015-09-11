@@ -2,7 +2,7 @@ import AbstractState from './AbstractState';
 
 class WinnerState extends AbstractState {
     sound = {
-        dramatic: null
+        thing1: null
     };
 
     preload() {
@@ -11,7 +11,7 @@ class WinnerState extends AbstractState {
         this.load.image('bg-winner', './assets/graphics/backgrounds/bg-winner.png');
         this.load.image('btn-try-again', './assets/graphics/buttons/try-again.png');
 
-        this.load.audio('sound-dramatic', './assets/sound/dbk/dramatic_reveal_01.ogg');
+        this.load.audio('sound-thing1', './assets/sound/dbk/thing1.ogg');
     }
 
     create() {
@@ -22,7 +22,7 @@ class WinnerState extends AbstractState {
         this._setupSound();
 
         this.loadSoundPreferences();
-        this.sound.dramatic.play();
+        this.sound.thing1.play();
     }
 
     _setupKeyboard() {
@@ -37,12 +37,12 @@ class WinnerState extends AbstractState {
     }
 
     _tryAgain() {
-        this.sound.dramatic.stop();
+        this.sound.thing1.stop();
         this.state.start('Menu');
     }
 
     _setupSound() {
-        this.sound.dramatic = this.add.audio('sound-dramatic');
+        this.sound.thing1 = this.add.audio('sound-thing1');
     }
 }
 
