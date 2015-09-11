@@ -24,8 +24,9 @@ class EnemyPresentationState extends AbstractState {
         this.add.image(0, 0, 'bg-enemy');
 
         this._setupEnemy();
+        this._displayEnemy();
 
-        this.add.image(this._getCenterPixel('width'), this._getCenterPixel('height'), this.game.enemy.id);
+        this.displayCentralMessage({ text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
 
         Utilities.timeout(this, this.lifetime, this.cb);
 
@@ -35,6 +36,10 @@ class EnemyPresentationState extends AbstractState {
     _setupEnemy() {
         // Add player object as common in all states.
         this.game.enemy = new this.game.enemies[0]();
+    }
+
+    _displayEnemy() {
+        this.add.image(this._getCenterPixel('width'), this._getCenterPixel('height'), this.game.enemy.id);
     }
 
     _getCenterPixel(dimension) {

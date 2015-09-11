@@ -67,7 +67,7 @@ class VersusState extends FightState {
 
         let handlePlayerBlow = (label, points) => {
             if (isCollision()) {
-                this._addPlayerEXP(points * 2);
+                this._addPlayerEXP(points * 1.75);
                 this._removeEnemyHP(points);
             }
         };
@@ -124,13 +124,13 @@ class VersusState extends FightState {
                     this.state.start('Winner');
                 } else {
                     this.state.start('Meal', true, false, {
-                        lifetime: Phaser.Timer.SECOND * 2,
+                        lifetime: Phaser.Timer.SECOND * 4,
                         cb: () => {
                             this.state.start('Training', true, false, {
                                 lifetime: Phaser.Timer.SECOND * 5,
                                 cb: () => {
                                     this.state.start('EnemyPresentation', true, false, {
-                                        lifetime: Phaser.Timer.SECOND * 2,
+                                        lifetime: Phaser.Timer.SECOND * 4,
                                         cb: () => {
                                             this.state.start('Versus');
                                         }

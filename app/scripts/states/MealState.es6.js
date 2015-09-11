@@ -22,6 +22,8 @@ class MealState extends AbstractState {
 
         this.game.player.hp = Character.defaultNumbers.hp;
 
+        this.displayCentralMessage({ text: `${this.game.locale.MEAL_STATE_WELCOME}` });
+
         Utilities.timeout(this, this.lifetime, this.cb);
 
         this.loadSoundPreferences();

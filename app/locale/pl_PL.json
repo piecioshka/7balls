@@ -2,10 +2,14 @@
   "MESSAGE_STATE_WELCOME": "Siema!\n\nSterowanie:\n - Nawigacja: LEFT, RIGHT, UP, DOWN\n - Walka: X, C",
   "MESSAGE_STATE_COLLECT_DRAGON_BALL": "Zbierz smocze kule,\naby pojawił się Shenron\ni przywrócił Ci życie!",
 
-  "SEARCHING_STATE_WELCOME": "Cześć",
-  "SEARCHING_STATE_TIME": "Czas",
+  "COLLECTING_STATE_WELCOME": "Cześć",
+  "COLLECTING_STATE_TIME": "Czas",
+
+  "ENEMY_PRESENTATION_STATE_WELCOME": "Następny wróg",
 
   "FIGHT_STATE_LEVEL_SHORT": "poziom",
+
+  "MEAL_STATE_WELCOME": "Czas odpocząć...",
 
   "TRAINING_STATE_WELCOME": "Zacznij trening!",
 

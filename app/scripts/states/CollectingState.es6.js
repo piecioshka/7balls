@@ -39,7 +39,7 @@ class CollectingState extends AbstractState {
         this._setupBalls(random);
         this._setupPlayerSprite();
 
-        this.displayCentralMessage({ text: `${this.game.locale.SEARCHING_STATE_WELCOME} ${this.game.player.name}!` });
+        this.displayCentralMessage({ text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
 
         this._setupTimer(random);
 
@@ -86,16 +86,16 @@ class CollectingState extends AbstractState {
     }
 
     _setupTimer(random) {
-        let limit = Configuration.SEARCHING_MAPS_TIME_LIMIT[random - 1];
+        let limit = Configuration.COLLECTING_MAPS_TIME_LIMIT[random - 1];
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
-        let message = this.addSaiyanLabel(10, 0, `${this.game.locale.SEARCHING_STATE_TIME}: ${limit}`);
+        let message = this.addSaiyanLabel(10, 0, `${this.game.locale.COLLECTING_STATE_TIME}: ${limit}`);
         message.fontSize = 35;
 
         clock.repeat(Phaser.Timer.SECOND, limit, () => {
             let remain = limit - parseInt(clock.seconds);
-            message.setText(`${this.game.locale.SEARCHING_STATE_TIME}: ${remain}`);
+            message.setText(`${this.game.locale.COLLECTING_STATE_TIME}: ${remain}`);
 
             if (remain === ending) {
                 this.sound.radar.play();
@@ -146,19 +146,19 @@ class CollectingState extends AbstractState {
         player.phaser.body.velocity.x = player.phaser.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.phaser.body.velocity.x -= Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.body.velocity.x -= Configuration.COLLECTING_PLAYER_SPEED;
             player.phaser.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.phaser.body.velocity.x += Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.body.velocity.x += Configuration.COLLECTING_PLAYER_SPEED;
             player.phaser.angle = 10;
         } else {
             player.phaser.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            player.phaser.body.velocity.y -= Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.body.velocity.y -= Configuration.COLLECTING_PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            player.phaser.body.velocity.y += Configuration.SEARCHING_PLAYER_SPEED;
+            player.phaser.body.velocity.y += Configuration.COLLECTING_PLAYER_SPEED;
         }
     }
 

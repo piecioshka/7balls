@@ -4,10 +4,14 @@
  * @property {string} MESSAGE_STATE_WELCOME
  * @property {string} MESSAGE_STATE_COLLECT_DRAGON_BALL
  *
- * @property {string} SEARCHING_STATE_WELCOME
- * @property {string} SEARCHING_STATE_TIME
+ * @property {string} COLLECTING_STATE_WELCOME
+ * @property {string} COLLECTING_STATE_TIME
+ *
+ * @property {string} ENEMY_PRESENTATION_STATE_WELCOME
  *
  * @property {string} FIGHT_STATE_LEVEL_SHORT
+ *
+ * @property {string} MEAL_STATE_WELCOME
  *
  * @property {string} TRAINING_STATE_WELCOME
  *

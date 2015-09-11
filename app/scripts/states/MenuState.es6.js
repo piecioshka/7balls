@@ -85,7 +85,7 @@ class MenuState extends AbstractState {
             cb: () => {
                 this.state.start('Message', true, false, {
                     body: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
-                    lifetime: Phaser.Timer.SECOND * 2,
+                    lifetime: Phaser.Timer.SECOND * 5,
                     cb: () => {
                         this.state.start('Collecting');
                     }

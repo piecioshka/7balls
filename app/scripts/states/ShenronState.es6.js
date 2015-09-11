@@ -24,7 +24,7 @@ class ShenronState extends AbstractState {
 
         this._setupSound();
 
-        this.game.time.events.add(Phaser.Timer.SECOND * 3, this._next, this);
+        this.game.time.events.add(Phaser.Timer.SECOND * 2, this._next, this);
 
         this.loadSoundPreferences();
         this.sound.ambienceThunder.play();
@@ -39,7 +39,7 @@ class ShenronState extends AbstractState {
                 lifetime: Phaser.Timer.SECOND * 2,
                 cb: () => {
                     this.state.start('EnemyPresentation', true, false, {
-                        lifetime: Phaser.Timer.SECOND * 2,
+                        lifetime: Phaser.Timer.SECOND * 4,
                         cb: () => {
                             this.state.start('Versus');
                         }

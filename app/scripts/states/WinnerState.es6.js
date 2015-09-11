@@ -16,7 +16,7 @@ class WinnerState extends AbstractState {
 
     create() {
         this.add.image(0, 0, 'bg-winner');
-        this.add.button(this.game.width / 2 - this.cache.getImage('btn-try-again').width / 2, this.game.height / 2 + 40, 'btn-try-again', this._tryAgain, this);
+        this.add.button(370, this.game.height / 2, 'btn-try-again', this._tryAgain, this);
 
         this._setupKeyboard();
         this._setupSound();
