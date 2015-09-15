@@ -34,11 +34,15 @@ class LanguageState extends AbstractState {
     }
 
     _choosePolish() {
+        ga('send', 'event', 'game', 'locale-pl');
+
         this.game.locale = this.cache.getJSON('locale-pl');
         this._next();
     }
 
     _chooseEnglish() {
+        ga('send', 'event', 'game', 'locale-en');
+
         this.game.locale = this.cache.getJSON('locale-en');
         this._next();
     }

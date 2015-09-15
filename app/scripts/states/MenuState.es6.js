@@ -61,18 +61,24 @@ class MenuState extends AbstractState {
     }
 
     _chooseGoku() {
+        ga('send', 'event', 'game', 'choose-goku');
+
         // Add player object as common in all states.
         this.game.player = new Goku();
         this._next();
     }
 
     _chooseVegeta() {
+        ga('send', 'event', 'game', 'choose-vegeta');
+
         // Add player object as common in all states.
         this.game.player = new Vegeta();
         this._next();
     }
 
     _choosePiccolo() {
+        ga('send', 'event', 'game', 'choose-piccolo');
+
         // Add player object as common in all states.
         this.game.player = new Piccolo();
         this._next();

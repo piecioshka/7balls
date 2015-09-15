@@ -15,6 +15,8 @@ class GameOverState extends AbstractState {
     }
 
     create() {
+        ga('send', 'event', 'game', 'over');
+
         this.add.image(0, 0, 'bg-game-over');
         this.add.button(this.game.width / 2 - this.cache.getImage('btn-try-again').width / 2, this.game.height / 2 + 40, 'btn-try-again', this._tryAgain, this);
 
@@ -39,6 +41,8 @@ class GameOverState extends AbstractState {
     }
 
     _tryAgain() {
+        ga('send', 'event', 'game', 'over-try-again');
+
         this.sound.dramatic.stop();
         this.state.start('Menu');
     }

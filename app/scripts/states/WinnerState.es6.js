@@ -15,6 +15,8 @@ class WinnerState extends AbstractState {
     }
 
     create() {
+        ga('send', 'event', 'game', 'win');
+
         this.add.image(0, 0, 'bg-winner');
         this.add.button(370, this.game.height / 2, 'btn-try-again', this._tryAgain, this);
 
@@ -37,6 +39,8 @@ class WinnerState extends AbstractState {
     }
 
     _tryAgain() {
+        ga('send', 'event', 'game', 'win-try-again');
+
         this.sound.thing1.stop();
         this.state.start('Menu');
     }
