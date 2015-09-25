@@ -306,7 +306,9 @@
       "properties": false
     }],
     // specify tab or space width for your code (fixable)
-    "indent": [2, 4],
+    "indent": [2, 4, {
+      "SwitchCase": 1
+    }],
     // specify whether double or single quotes should be used in JSX attributes
     "jsx-quotes": [2, "prefer-single"],
     // enforce spacing between keys and values in object literal properties
