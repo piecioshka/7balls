@@ -2,30 +2,30 @@ import Utilities from '../common/Utilities';
 
 class Computer {
     static applyArtificialIntelligence(state, character) {
-        let walkingLeft = () => {
+        const walkingLeft = () => {
             Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 20, () => {
                 character.phaser.events.onLeft.dispatch();
             });
         };
-        let walkingRight = () => {
+        const walkingRight = () => {
             Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 20, () => {
                 character.phaser.events.onRight.dispatch();
             });
         };
-        let boxing = () => {
+        const boxing = () => {
             Utilities.timesRandomAsync(state, 5, Phaser.Timer.SECOND / 4, () => {
                 character.phaser.events.onBoxing.dispatch();
             });
         };
-        let kicking = () => {
+        const kicking = () => {
             Utilities.timesRandomAsync(state, 5, Phaser.Timer.SECOND / 4, () => {
                 character.phaser.events.onKicking.dispatch();
             });
         };
-        let jumping = () => {
+        const jumping = () => {
             character.phaser.events.onJumping.dispatch();
         };
-        let sitting = () => {
+        const sitting = () => {
             character.phaser.events.onSitting.dispatch();
         };
 
@@ -41,10 +41,11 @@ class Computer {
             boxing, kicking
         ];
 
-        let start = (intervalTime, strategy) => {
+        const start = (intervalTime, strategy) => {
             Utilities.interval(state, intervalTime, () => {
-                let random = Utilities.random(0, strategy.length - 1);
-                let move = strategy[random];
+                const random = Utilities.random(0, strategy.length - 1);
+                const move = strategy[random];
+
                 move();
             });
         };

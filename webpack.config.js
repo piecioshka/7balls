@@ -12,7 +12,7 @@ module.exports = {
             {
                 test: /\.es6\.js/,
                 exclude: /node_modules/,
-                loader: 'eslint-loader'
+                loader: 'eslint-loader?{globals:["Phaser"]}'
             }
         ],
         loaders: [

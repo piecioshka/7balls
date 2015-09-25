@@ -7,7 +7,8 @@ class AbstractState extends Phaser.State {
     }
 
     addSaiyanLabel(x, y, text, anchor = [0, 0]) {
-        let label = this.add.text(x, y, text);
+        const label = this.add.text(x, y, text);
+
         label.font = 'SaiyanSans';
         label.fill = '#fff';
         label.setShadow(0, 0, 'rgba(0,0,0,1)', 3);
@@ -17,7 +18,8 @@ class AbstractState extends Phaser.State {
     }
 
     displayCentralMessage({ text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 100, cb = () => undefined }) {
-        let message = this.addSaiyanLabel(this.game.width / 2, this.game.height / 2, text, [0.5, 0.5]);
+        const message = this.addSaiyanLabel(this.game.width / 2, this.game.height / 2, text, [0.5, 0.5]);
+
         message.alpha = 0;
         message.fontSize = fontSize;
 
@@ -33,13 +35,13 @@ class AbstractState extends Phaser.State {
     }
 
     loadSoundPreferences() {
-        let key = 'dbp-sound-mute';
-        let modes = ['unmute', 'mute'];
-        let translateState = () => modes[Number(this.game.sound.mute)];
+        const key = 'dbp-sound-mute';
+        const modes = ['unmute', 'mute'];
+        const translateState = () => modes[Number(this.game.sound.mute)];
 
         this.game.sound.mute = Boolean(Number(localStorage.getItem(key)));
 
-        let mute = this.add.button(this.game.width - 36, this.game.height - 36, translateState());
+        const mute = this.add.button(this.game.width - 36, this.game.height - 36, translateState());
 
         mute.onInputDown.add(() => {
             this.game.sound.mute = !this.game.sound.mute;

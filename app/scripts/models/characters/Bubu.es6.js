@@ -1,4 +1,4 @@
-import Character from './Character'
+import Character from './Character';
 
 class Bubu extends Character {
     constructor(settings = {}) {
