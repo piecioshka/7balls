@@ -1,0 +1,133 @@
+
+n.n.n / 2015-12-14
+==================
+
+  * From now I can use this syntax: x += 1 instead of x = x + 1.
+  * Change ESLint parser to Babel.js.
+  * Add possibility to change ESlint parser to Babel.js.
+  * Fixed a lot of ESLint errors. Add Phaser as global variable.
+  * Each case in switch..case syntax should be start with indention.
+  * Decrease min length of variable name, ex. x & y - positions are single letter vars.
+  * Update .eslintrc with max of rules for v1.5.1 (2015-09-22).
+  * Update ESLint configuration.
+  * Enable ESLint.
+  * Fixed paths in .gitignore file about paths to node_modules and npm-debug.log.
+  * Setup Google Analytics events.
+
+v1.0 / 2015-09-11
+=================
+
+  * Last fixed before deploy after 10 days.
+  * Add music to WinnerState.
+  * Business logic implement, but is ready to refactoring.
+  * More animation on ShenronState.
+  * Randoming maps for collecting dragon balls.
+  * Attach Google Analytics.
+
+v0.9 / 2015-09-10
+=================
+
+  * Clean keyboard service.
+  * Stop sound when exit from GameOverState.
+  * Add simple shortcut for display new character on MenuState.
+  * Reset player numbers (hp, up, exp, lvl) on GameOverState.
+  * Support language choose. Create locale mechanizm. Add two locals: en_EN, pl_PL.
+  * Apply better artificial interlligence.
+  * Enlarge versus status label.
+  * Use for all label Saiyans font.
+  * Setup configuration for jumping in FightState.
+  * Fixed gravity configuration.
+
+v0.8 / 2015-09-09
+=================
+
+  * Support Artificial Intelligence.
+  * Add sound for GameOverState and when clock is comming to close in SearchinState.
+  * Create FightState as generic state only with player on stage. Create TrainingState which extend FightState.
+  * FightState is now VersusState.
+  * Create MessageState: generic screen which display only text.
+
+v0.7 / 2015-09-08
+=================
+
+  * Clear collision on FightState.
+  * Support remove HP points from Enemy. If HP=0 display player win. Support adding points to player. Recognized overlapping of player and enemy. Display try-again button on GameOverState. Add keyshortcut for ENTER in GameOverState for repeat the level. Don't create new player if exists old.
+  * Create generic method to display welcome message in AbstractState. Display welcome message on FightState and TrainingState.
+  * Append EXP points to player when try kicking or boxing.
+  * Disable EXP bar for enemy.
+  * Support mouse over event on MenuState.
+  * Fixed priority of layers on FightState.
+  * Update background on MenuState.
+
+v0.6 / 2015-09-07
+=================
+
+  * Setup characters bars: HP & EXP. Use Saiyan Sans to each graphics as can.
+  * Display avatars of characters on FightState.
+  * Create AbstractState which is usesd as master class of all states. Implement mute (sound) switcher - globally add icon in right bottom corner.
+  * Add labels: HP, EXP and LVL on FightState - use Saiyan Sans.
+
+v0.5 / 2015-09-06
+=================
+
+  * Different sound of kick and punch for player lvl.
+  * Enable modify bounding box when animation required.
+  * Add sound effect to ShenronState.
+  * Setup FightState. Add sound to SearchState.
+  * Remove useless background (on SearchingState is displayed map of tiles).
+  * Create models for enemies.
+  * Add spritesheets for enemies: Freeza, Cell and Bubu.
+  * Add MealState - place where character will be rest.
+  * Add a lot of sound effects. Use `scouter.ogg` on MenuState when user choose character.
+  * Add files related with Dragon Ball logo.
+
+v0.4 / 2015-09-05
+=================
+
+  * Support keyboard on MenuState. Default select Son Goku.
+  * Create TrainingState.
+  * Support countdown on SearchingState.
+  * Refactoring _showWelcomeMessage.
+  * Create GameOverState with background.
+  * Create ShenronState.
+  * Reset margin in <body> - the default browser style.
+
+v0.3 / 2015-09-03
+=================
+
+  * Enable collision. Enable ES7 Stage 0 in webpack configuration file for Babel.js.
+  * Add background to FightState.
+  * Fixed cards position on MenuState.
+  * Support input keyboard: LEFT, RIGHT, UP, DOWN.
+  * Add places for dragon balls.
+  * Add 2 new maps for SearchingState.
+  * Update map - add 7 tiles with dragon balls. Update spritesheet (add elipse on one tile - this will be dragon ball).
+  * Show welcome message on SearchingState.
+  * Add two characters (Goku & Vegeta) to SearchingState.
+  * Create spritesheet and map (JSON format). Apply map to game.
+
+v0.2 / 2015-09-02
+=================
+
+  * Update graphics: add background color to bg-menu.
+  * Create default character properties. Print on SearchingState player experience.
+  * Use SearchingState. Redirect user to it after choose character. Setup common player object - cross states.
+  * Create player object after user choose.
+  * Rename Player model to Character. Player is object which user playing/control.
+  * Setup two new states: SearchingState & FightState.
+  * Create main models: Vegeta & Goku as child base class Player.
+  * Display two card. User can select one.
+  * Rename Son-Goku to Goku.
+  * Display background on MenuState.
+  * Create Configuration module.
+  * Create graphics.
+  * Define MenuState. Fixed webpack.config.js.
+  * Edit README file.
+
+v0.1 / 2015-09-01
+=================
+
+  * Setup idea for game in README.md
+  * Setup Phaser.js
+  * Setup webpack configuration.
+  * Initial commit
