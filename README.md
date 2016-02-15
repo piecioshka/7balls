@@ -1,10 +1,8 @@
 # www.dragonballplay.com
 
-> Projekt ma na celu stworzenie gry internetowej oraz portalu dla graczy.
+> Projekt ma na celu stworzenie gry internetowej dla fanów anime Dragon Ball.
 
-## Gra
-
-### Fabuła
+## Fabuła
 
 Zasady:
 
@@ -72,17 +70,7 @@ Pierwsze pomysły:
  * gracz może latać na planszy, aby dostawać się do konkretnego miejsca
  * wraz ze doświadczeniem możliwa jest transformacja wg skali SSJ
 
-## Portal dla graczy (dodatkowo)
-
- * dzięki portalowi pozyskamy zainteresowanych historią `Dragon Ball` użytkowników.
- * dzięki rejestracji będziemy przechowywali login użytkownika, który przyda się w grze.
-
 Wymagania:
 
  * użytkownik (rejestracja, logowanie, zmiana hasła)
  * wybór głównej postaci
-
-## Linki
-
- * Gra: http://www.dragonballplay.com/game
- * Portal: http://www.dragonballplay.com
