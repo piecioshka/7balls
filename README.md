@@ -6,13 +6,14 @@
 
 ### Błędy
 
+* [x] wyłączyć `Phaser banner`
+* [x] przenieść `vendor` do `node_modules` (jest tylko `phaser.js`)
 * [ ] dodać tryb `fullscreen`
 * [ ] dodać odznakę - link do GitHuba
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
 * [ ] zmiana nazw plików wg `snake case`
 * [ ] dodać paczkę `debug`
-* [ ] jak wyłączyć `Phaser banner`?
 * [ ] upgrade `Babel.js`
 * [ ] przenieść `DefinitionTypes` do katalogu z dokumentacją
 * [ ] nie działa na IE9, bo nie ma `Object.assign` - poprawić
@@ -24,7 +25,6 @@
 * [ ] nie używać fonta `Sayian sans` do wszystkiego, tylko do napisu DBP
 * [ ] zamiana `undefined` na `null`
 * [ ] `availability` -> `capabilities`
-* [ ] przenieść `vendor` do `node_modules` (jest tylko phaser.js)
 
 ### Rozwój
 

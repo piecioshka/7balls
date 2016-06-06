@@ -1,3 +1,5 @@
+'use strict';
+
 import Configuration from './configuration';
 
 import CollectingState from './states/CollectingState';
