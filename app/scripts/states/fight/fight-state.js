@@ -1,3 +1,9 @@
+'use strict';
+
+let debug = {
+    log: require('debug')('7balls:fight-state:log')
+};
+
 import Configuration from '../../configuration';
 import AbstractState from '../abstract-state';
 
@@ -88,7 +94,7 @@ class FightState extends AbstractState {
 
         character.play('standing');
 
-        // console.log('Character "%s" is STANDING', name);
+        debug.log('Character "%s" is STANDING', name);
     }
 
     _addAvatar(x, y, key) {
@@ -116,21 +122,21 @@ class FightState extends AbstractState {
         character.phaser.events.onLeft.add(() => {
             character.phaser.body.velocity.x -= Configuration.FIGHT_HORIZONTAL_SPEED;
 
-            // console.log('Character "%s" is LEFT', character.name);
+            debug.log('Character "%s" is LEFT', character.name);
         });
 
         character.phaser.events.onRight = new Phaser.Signal();
         character.phaser.events.onRight.add(() => {
             character.phaser.body.velocity.x += Configuration.FIGHT_HORIZONTAL_SPEED;
 
-            // console.log('Character "%s" is RIGHT', character.name);
+            debug.log('Character "%s" is RIGHT', character.name);
         });
 
         character.phaser.events.onSitting = new Phaser.Signal();
         character.phaser.events.onSitting.add(() => {
             character.phaser.play('sitting');
 
-            // console.log('Character "%s" is SITTING', character.name);
+            debug.log('Character "%s" is SITTING', character.name);
         });
 
         character.phaser.events.onJumping = new Phaser.Signal();
@@ -145,7 +151,7 @@ class FightState extends AbstractState {
 
             character.phaser.play('jumping');
 
-            // console.log('Character "%s" is JUMPING', character.name);
+            debug.log('Character "%s" is JUMPING', character.name);
         });
 
         character.phaser.events.onKicking = new Phaser.Signal();
@@ -154,7 +160,7 @@ class FightState extends AbstractState {
 
             character.phaser.play('kicking');
 
-            // console.log('Character "%s" is KICKING', character.name);
+            debug.log('Character "%s" is KICKING', character.name);
         });
         character.phaser.events.onBoxing = new Phaser.Signal();
         character.phaser.events.onBoxing.add(() => {
@@ -162,7 +168,7 @@ class FightState extends AbstractState {
 
             character.phaser.play('boxing');
 
-            // console.log('Character "%s" is BOXING', character.name);
+            debug.log('Character "%s" is BOXING', character.name);
         });
         character.phaser.events.onDied = new Phaser.Signal();
 
