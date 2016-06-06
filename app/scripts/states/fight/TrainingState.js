@@ -1,4 +1,3 @@
-import Configuration from '../../configuration';
 import Utilities from '../../common/Utilities';
 import FightState from './FightState';
 

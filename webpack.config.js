@@ -1,8 +1,6 @@
-module.exports = {
-    resolve: {
-        extensions: ['.es6.js', '.js', '']
-    },
+'use strict';
 
+module.exports = {
     entry: './app/scripts/main',
 
     output: {
@@ -13,9 +11,13 @@ module.exports = {
     module: {
         loaders: [
             {
-                test: /\.es6\.js/,
-                exclude: /node_modules/,
-                loader: 'babel-loader?stage=0'
+                test: /\.js$/,
+                exclude: /wwww\.7balls\.game\/node_modules/,
+                loader: 'babel-loader',
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015', 'stage-0']
+                }
             }
         ]
     }

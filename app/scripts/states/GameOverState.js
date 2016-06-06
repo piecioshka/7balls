@@ -1,3 +1,5 @@
+'use strict';
+
 import AbstractState from './AbstractState';
 
 class GameOverState extends AbstractState {
