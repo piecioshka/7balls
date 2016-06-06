@@ -36,7 +36,7 @@
 
 ### Inne związane z realizacją projektu
 
-* [x] pełny opis (notatki z okresu tworzenia 1 sezonu) - plik STORY.md
+* [x] pełny opis (notatki z okresu tworzenia 1 sezonu) - plik [](./STORY.md)
 * [ ] nauka Phaser.js z 5 zakupionych książek
     * [ ] jaka jest różnica między innymi fizykami gry?
 * [ ] kupić `ScreenFlow`
@@ -57,7 +57,6 @@
         * przenosi się do kuchni własnego domu, aby się najeść i odpocząć
         * następnie przechodzi do salki, gdzie może zdobyć trochę exp (lepszym rozwojem jest walka z przeciwnikiem)
         * po kilku sekundach treningu walczymy z kolejnym rywalem
-        
 
 ### Planowana
 
