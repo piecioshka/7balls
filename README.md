@@ -11,10 +11,10 @@
 * [x] upgrade `Babel.js` do wersji 6.x
 * [x] zmiana nazw plików wg `snake case`
 * [x] dodać paczkę `debug`
+* [x] dodać odznakę - link do GitHuba
+* [ ] zamiana `undefined` na `null`
 * [ ] nie działa na IE9, bo nie ma `Object.assign` - poprawić
 * [ ] dodać tryb `fullscreen`
-* [ ] zamiana `undefined` na `null`
-* [ ] dodać odznakę - link do GitHuba
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
 * [ ] przenieść `DefinitionTypes` do katalogu z dokumentacją
