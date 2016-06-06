@@ -4,35 +4,42 @@
 
 ## TODO
 
-* [x] pełny opis (notatki z okresu tworzenia 1 sezonu) - plik STORY.md
-* [ ] nauka Phaser.js z 5 zakupionych książek
-* [ ] kupić ScreenFlow
-* [ ] stworzyć podsumowanie 1 sezonu jak tworzyłem grę 
-* [ ] dodać fullscreen do gry
+### Błędy
+
+* [ ] dodać tryb `fullscreen`
 * [ ] dodać odznakę - link do GitHuba
-* [ ] zweryfikować czy player.x a nie player.body.x ? tak samo z velocity
-* [ ] po co czyścić velocity w każdym update?
-* [ ] zmiana nazw plików wg snake case
-* [ ] dodać paczkę "debug"
-* [ ] jak wyłączyć Phaser banner?
-* [ ] jaka jest różnica między innymi fizykami gry?
-* [ ] czy trzeba tworzyć nowy zegar? czy nie można skorzystać z już istniejącego dodając tylko do this.time.events.add...
-* [ ] wykorzystajmy `webpack dev server`, aby nie czekać na zmiany
-* [ ] przenieść `vendor` do `node_modules` (jest tylko phaser.js)
+* [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
+* [ ] po co czyścić `velocity` w każdym `update`?
+* [ ] zmiana nazw plików wg `snake case`
+* [ ] dodać paczkę `debug`
+* [ ] jak wyłączyć `Phaser banner`?
 * [ ] upgrade `Babel.js`
 * [ ] przenieść `DefinitionTypes` do katalogu z dokumentacją
 * [ ] nie działa na IE9, bo nie ma `Object.assign` - poprawić
-* [ ] przenieść ładowanie do state-a Preload
-* [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
+* [ ] przenieść ładowanie assetów do state-a Preload
 * [ ] kucanie powinno być na stałe (nie trzeba tak jak przy uderzeniu wracać do normalnej postaci)
 * [ ] kucanie nie powinno uderzać zawodnika (rozszerzać bounding boxa)
 * [ ] poprawić dodanie customowej czcionki
 * [ ] czy faktycznie musimy definiować klawisze jako properties klasy?
-* [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)
 * [ ] nie używać fonta `Sayian sans` do wszystkiego, tylko do napisu DBP
 * [ ] zamiana `undefined` na `null`
 * [ ] `availability` -> `capabilities`
+* [ ] przenieść `vendor` do `node_modules` (jest tylko phaser.js)
+
+### Rozwój
+
+* [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
+* [ ] czy trzeba tworzyć nowy zegar? czy nie można skorzystać z już istniejącego dodając tylko do `this.time.events.add`?
+* [ ] wykorzystajmy `webpack dev server`, aby nie czekać na zmiany
+* [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)
 * [ ] dodać `credits` - autorzy gry
+
+### Inne związane z realizacją projektu
+
+* [x] pełny opis (notatki z okresu tworzenia 1 sezonu) - plik STORY.md
+* [ ] nauka Phaser.js z 5 zakupionych książek
+    * [ ] jaka jest różnica między innymi fizykami gry?
+* [ ] kupić `ScreenFlow`
 
 ## Fabuła
 
