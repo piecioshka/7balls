@@ -12,7 +12,7 @@
 * [x] zmiana nazw plików wg `snake case`
 * [x] dodać paczkę `debug`
 * [x] dodać odznakę - link do GitHuba
-* [ ] zamiana `undefined` na `null`
+* [x] zamiana `undefined` na `null`
 * [ ] nie działa na IE9, bo nie ma `Object.assign` - poprawić
 * [ ] dodać tryb `fullscreen`
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
@@ -40,6 +40,8 @@
 * [ ] nauka Phaser.js z 5 zakupionych książek
     * [ ] jaka jest różnica między innymi fizykami gry?
 * [ ] kupić `ScreenFlow`
+* [ ] nagrać jak korzysta się z paczki `debug`
+* [ ] nagrać jak się konwertuje projekt z 5.x na 6.x `Babel.js`
 
 ## Fabuła
 

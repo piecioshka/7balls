@@ -17,7 +17,7 @@ class AbstractState extends Phaser.State {
         return label;
     }
 
-    displayCentralMessage({ text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 100, cb = () => undefined }) {
+    displayCentralMessage({ text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 100, cb = () => null }) {
         const message = this.addSaiyanLabel(this.game.width / 2, this.game.height / 2, text, [0.5, 0.5]);
 
         message.alpha = 0;
