@@ -1,5 +1,5 @@
 import Configuration from '../../configuration';
-import AbstractState from '../AbstractState';
+import AbstractState from '../abstract-state';
 
 class FightState extends AbstractState {
     preload() {

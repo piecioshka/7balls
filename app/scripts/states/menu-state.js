@@ -1,11 +1,11 @@
-import AbstractState from './AbstractState';
-import Goku from '../models/characters/Goku';
-import Vegeta from '../models/characters/Vegeta';
-import Piccolo from '../models/characters/Piccolo';
+import AbstractState from './abstract-state';
+import Goku from '../models/characters/goku';
+import Vegeta from '../models/characters/vegeta';
+import Piccolo from '../models/characters/piccolo';
 
-import Freeza from '../models/characters/Freeza';
-import Cell from '../models/characters/Cell';
-import Bubu from '../models/characters/Bubu';
+import Freeza from '../models/characters/freeza';
+import Cell from '../models/characters/cell';
+import Bubu from '../models/characters/bubu';
 
 class MenuState extends AbstractState {
     gokuCard = null;

@@ -1,6 +1,6 @@
 import Configuration from '../configuration';
-import Utilities from '../common/Utilities';
-import AbstractState from './AbstractState';
+import Utilities from '../common/utilities';
+import AbstractState from './abstract-state';
 
 class CollectingState extends AbstractState {
     layer = null;

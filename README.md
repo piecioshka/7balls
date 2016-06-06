@@ -9,13 +9,13 @@
 * [x] wyłączyć `Phaser banner`
 * [x] przenieść `vendor` do `node_modules` (jest tylko `phaser.js`)
 * [x] upgrade `Babel.js` do wersji 6.x
+* [x] zmiana nazw plików wg `snake case`
 * [ ] nie działa na IE9, bo nie ma `Object.assign` - poprawić
 * [ ] dodać tryb `fullscreen`
 * [ ] zamiana `undefined` na `null`
 * [ ] dodać odznakę - link do GitHuba
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
-* [ ] zmiana nazw plików wg `snake case`
 * [ ] dodać paczkę `debug`
 * [ ] przenieść `DefinitionTypes` do katalogu z dokumentacją
 * [ ] przenieść ładowanie assetów do state-a Preload

@@ -1,4 +1,4 @@
-import Character from './Character';
+import Character from './character';
 
 class Freeza extends Character {
     constructor(settings = {}) {

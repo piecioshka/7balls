@@ -1,4 +1,4 @@
-import Character from './Character';
+import Character from './character';
 
 class Vegeta extends Character {
     constructor(settings = {}) {

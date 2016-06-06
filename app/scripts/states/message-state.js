@@ -1,4 +1,4 @@
-import AbstractState from './AbstractState';
+import AbstractState from './abstract-state';
 
 class MessageState extends AbstractState {
     body = null;

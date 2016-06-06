@@ -1,4 +1,4 @@
-import AbstractState from './AbstractState';
+import AbstractState from './abstract-state';
 
 class LanguageState extends AbstractState {
     plCard = null;

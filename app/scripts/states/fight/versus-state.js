@@ -1,6 +1,6 @@
 import Configuration from '../../configuration';
-import FightState from './FightState';
-import Computer from '../../models/Computer';
+import FightState from './fight-state';
+import Computer from '../../models/computer';
 
 class VersusState extends FightState {
     sound = {

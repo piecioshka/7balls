@@ -1,5 +1,5 @@
-import Utilities from '../../common/Utilities';
-import FightState from './FightState';
+import Utilities from '../../common/utilities';
+import FightState from './fight-state';
 
 class TrainingState extends FightState {
     lifetime = null;

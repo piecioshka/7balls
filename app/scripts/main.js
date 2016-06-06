@@ -2,18 +2,18 @@
 
 import Configuration from './configuration';
 
-import CollectingState from './states/CollectingState';
-import EnemyPresentationState from './states/EnemyPresentationState';
-import GameOverState from './states/GameOverState';
-import LanguageState from './states/LanguageState';
-import MealState from './states/MealState';
-import MenuState from './states/MenuState';
-import MessageState from './states/MessageState';
-import PlayerPresentationState from './states/PlayerPresentationState';
-import ShenronState from './states/ShenronState';
-import TrainingState from './states/fight/TrainingState';
-import VersusState from './states/fight/VersusState';
-import WinnerState from './states/WinnerState';
+import CollectingState from './states/collecting-state';
+import EnemyPresentationState from './states/enemy-presentation-state';
+import GameOverState from './states/game-over-state';
+import LanguageState from './states/language-state';
+import MealState from './states/meal-state';
+import MenuState from './states/menu-state';
+import MessageState from './states/message-state';
+import PlayerPresentationState from './states/player-presentation-state';
+import ShenronState from './states/shenron-state';
+import TrainingState from './states/fight/training-state';
+import VersusState from './states/fight/versus-state';
+import WinnerState from './states/winner-state';
 
 class Game {
     constructor() {

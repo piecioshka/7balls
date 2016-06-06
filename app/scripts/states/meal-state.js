@@ -1,6 +1,6 @@
-import AbstractState from './AbstractState';
-import Utilities from '../common/Utilities';
-import Character from '../models/characters/Character';
+import AbstractState from './abstract-state';
+import Utilities from '../common/utilities';
+import Character from '../models/characters/character';
 
 class MealState extends AbstractState {
     lifetime = null;

@@ -1,4 +1,4 @@
-import Character from './Character';
+import Character from './character';
 
 class Cell extends Character {
     constructor(settings = {}) {

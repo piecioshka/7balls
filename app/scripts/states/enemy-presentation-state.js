@@ -1,5 +1,5 @@
-import AbstractState from './AbstractState';
-import Utilities from '../common/Utilities';
+import AbstractState from './abstract-state';
+import Utilities from '../common/utilities';
 
 class EnemyPresentationState extends AbstractState {
     cb = null;

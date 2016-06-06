@@ -1,4 +1,4 @@
-import Utilities from '../common/Utilities';
+import Utilities from '../common/utilities';
 
 class Computer {
     static applyArtificialIntelligence(state, character) {
