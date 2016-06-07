@@ -1,11 +1,20 @@
+'use strict';
+
+let debug = {
+    log: require('debug')('7balls:character:log')
+};
+
+let assign = require('lodash.assign');
+
 class Character {
     constructor(settings) {
-        Object.assign(this, Character.defaultSettings, settings);
-        Object.assign(this, Character.defaultNumbers, settings);
+        debug.log('new', settings);
+        assign(this, Character.defaultSettings, settings);
+        assign(this, Character.defaultNumbers, settings);
     }
 
     resetNumbers() {
-        Object.assign(this, Character.defaultNumbers);
+        assign(this, Character.defaultNumbers);
     }
 
     static get defaultSettings() {

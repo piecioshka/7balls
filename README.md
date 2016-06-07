@@ -6,7 +6,8 @@
 
 ```bash
 npm install
-npm run dev     # developerskie
+npm run dev     # developersko
+npm run watch   # developersko
 npm run build   # produkcyjne
 ```
 
@@ -21,7 +22,7 @@ npm run build   # produkcyjne
 * [x] dodać paczkę `debug`
 * [x] dodać odznakę - link do GitHuba
 * [x] zamiana `undefined` na `null`
-* [ ] nie działa na IE9, bo nie ma `Object.assign` - poprawić
+* [x] nie działa na IE9, bo nie ma `Object.assign` - użyć `lodash.assign`
 * [ ] dodać tryb `fullscreen`
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
@@ -50,6 +51,7 @@ npm run build   # produkcyjne
 * [ ] kupić `ScreenFlow`
 * [ ] nagrać jak korzysta się z paczki `debug`
 * [ ] nagrać jak się konwertuje projekt z 5.x na 6.x `Babel.js`
+* [ ] nagrać jak używać `webpack-dev-server` razem z `write-file-webpack-plugin`
 
 ## Fabuła
 

@@ -1,6 +1,12 @@
 'use strict';
 
+let WriteFilePlugin = require('write-file-webpack-plugin');
+
 module.exports = {
+    devServer: {
+        outputPath: './app/dist'
+    },
+
     entry: {
         bundle: './app/scripts/main',
         phaser: './node_modules/phaser/build/phaser'
@@ -28,5 +34,9 @@ module.exports = {
                 }
             }
         ]
-    }
+    },
+
+    plugins: [
+        new WriteFilePlugin()
+    ]
 };
