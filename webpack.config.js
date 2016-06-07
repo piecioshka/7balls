@@ -1,18 +1,26 @@
 'use strict';
 
 module.exports = {
-    entry: './app/scripts/main',
+    entry: {
+        bundle: './app/scripts/main',
+        phaser: './node_modules/phaser/build/phaser'
+    },
 
     output: {
-        filename: 'bundle.js',
-        path: './app/dist'
+        filename: '[name].js',
+        path: './app/dist',
+        pathinfo: true
     },
 
     module: {
         loaders: [
             {
+                test: /phaser\.js$/,
+                loader: 'script-loader'
+            },
+            {
                 test: /\.js$/,
-                exclude: /wwww\.7balls\.game\/node_modules/,
+                exclude: /node_modules/,
                 loader: 'babel-loader',
                 query: {
                     cacheDirectory: true,

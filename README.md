@@ -2,6 +2,14 @@
 
 > Projekt ma na celu stworzenie gry internetowej dla fanów anime Dragon Ball.
 
+## Uruchomienie
+
+```bash
+npm install
+npm run dev     # developerskie
+npm run build   # produkcyjne
+```
+
 ## TODO
 
 ### Błędy
@@ -28,7 +36,7 @@
 
 ### Rozwój
 
-* [ ] wykorzystajmy `webpack dev server`, aby nie czekać na zmiany
+* [x] wykorzystajmy `webpack-dev-server`, aby nie czekać na zmiany
 * [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
 * [ ] czy trzeba tworzyć nowy zegar? czy nie można skorzystać z już istniejącego dodając tylko do `this.time.events.add`?
 * [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)

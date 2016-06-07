@@ -1,3 +1,5 @@
+'use strict';
+
 class AbstractState extends Phaser.State {
     preload() {
         this.load.image('mute', './assets/graphics/icons/mute.png');

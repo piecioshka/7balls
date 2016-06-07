@@ -1,3 +1,5 @@
+'use strict';
+
 import Configuration from '../configuration';
 import Utilities from '../common/utilities';
 import AbstractState from './abstract-state';
