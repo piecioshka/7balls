@@ -2,14 +2,21 @@
 
 > Gry webowa oparta na anime "Dragon Ball"
 
-## Uruchomienie produkcyjne
-
-Aplikacja dostępna jest tutaj: http://www.7balls.game
+## Gdzie można zagrać?
 
 Wspierane są wszystkie najnowsze wersje przeglądarek,
-oraz systemy operacyjne: MS Windows, Linux, Mac OS x.
+oraz systemy operacyjne: MS Windows, Linux, Mac OS X.
+Aplikacja dostępna jest tutaj: http://www.7balls.game
 
-## Uruchomienie developerskie
+## Geneza projektu
+
+Gra była realizowana na potrzeby stworzenia [prezentacji](https://www.youtube.com/watch?v=klDeljOKDjU) na WarsawJS.
+Podczas tworzenia projektu powstało 25 filmów na temat tego projektu.
+Wszystkie materiały znajdują się na kanale YouTube autora.
+[Playlista](https://www.youtube.com/playlist?list=PLDTdlgCXlVhjAlKJ1W2Y12Xejvt4Ih02p) zawiera
+kompletną listę odcinków w chronologicznej postaci.
+
+## Uruchomienie deweloperskie (dla programistów)
 
 ```
 npm install
@@ -59,3 +66,15 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [ ] nagrać jak korzysta się z paczki `debug`
 * [ ] nagrać jak się konwertuje projekt z 5.x na 6.x `Babel.js`
 * [ ] nagrać jak używać `webpack-dev-server` razem z `write-file-webpack-plugin`
+
+## Kontakt
+
+Kontakt do autora aplikacji:
+
+ * Twitter: [@piecioshka](http://twitter.com/piecioshka)
+ * Wykop: [@piecioshka](http://wykop.pl/profile/piecioshka)
+ * Blog: [piecioshka.pl](https://piecioshka.pl/blog)
+
+---
+
+@ 2015
