@@ -11,7 +11,7 @@ npm run build   # buduje paczkę produkcyjną
 npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 ```
 
-## TODO
+## TODO LIST
 
 ### Błędy
 
@@ -45,7 +45,7 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 
 ### Inne związane z realizacją projektu
 
-* [x] pełny opis (notatki z okresu tworzenia 1 sezonu) - plik [STORY.md](./STORY.md)
+* [x] pełny opis (notatki z okresu tworzenia 1 sezonu) - plik `MY-10-DAYS.md`
 * [ ] nauka Phaser.js z 5 zakupionych książek
     * [ ] jaka jest różnica między innymi fizykami gry?
 * [ ] kupić `ScreenFlow`
