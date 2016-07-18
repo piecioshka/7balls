@@ -1,26 +1,42 @@
+'use strict';
+
+let WriteFilePlugin = require('write-file-webpack-plugin');
+
 module.exports = {
-    resolve: {
-        extensions: ['.es6.js', '.js', '']
+    devServer: {
+        outputPath: './app/dist'
     },
-    entry: './app/scripts/main',
+
+    entry: {
+        bundle: './app/scripts/main',
+        phaser: './node_modules/phaser/build/phaser'
+    },
+
     output: {
-        filename: 'bundle.js',
-        path: './app/dist'
+        filename: '[name].js',
+        path: './app/dist',
+        pathinfo: true
     },
+
     module: {
-        preLoaders: [
-            {
-                test: /\.es6\.js/,
-                exclude: /node_modules/,
-                loader: 'eslint-loader?{globals:["Phaser"]}'
-            }
-        ],
         loaders: [
             {
-                test: /\.es6\.js/,
+                test: /phaser\.js$/,
+                loader: 'script-loader'
+            },
+            {
+                test: /\.js$/,
                 exclude: /node_modules/,
-                loader: 'babel-loader?stage=0'
+                loader: 'babel-loader',
+                query: {
+                    cacheDirectory: true,
+                    presets: ['es2015', 'stage-0']
+                }
             }
         ]
-    }
+    },
+
+    plugins: [
+        new WriteFilePlugin()
+    ]
 };
