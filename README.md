@@ -2,7 +2,14 @@
 
 > Gry webowa oparta na anime "Dragon Ball"
 
-## Uruchomienie
+## Uruchomienie produkcyjne
+
+Aplikacja dostępna jest tutaj: http://www.7balls.game
+
+Wspierane są wszystkie najnowsze wersje przeglądarek,
+oraz systemy operacyjne: MS Windows, Linux, Mac OS x.
+
+## Uruchomienie developerskie
 
 ```
 npm install
