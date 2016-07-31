@@ -1,10 +1,11 @@
-'use strict';
-
 import Configuration from '../configuration';
 import Utilities from '../common/utilities';
 import AbstractState from './abstract-state';
 
-class CollectingState extends AbstractState {
+import { shout, addSaiyanLabel } from '../helpers/meesage';
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class CollectingState extends AbstractState {
     layer = null;
     sound = {
         candypop: null,
@@ -41,11 +42,11 @@ class CollectingState extends AbstractState {
         this._setupBalls(random);
         this._setupPlayerSprite();
 
-        this.shout({ text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
+        shout(this.game, { text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
 
         this._setupTimer(random);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     _setupWorld(random) {
@@ -92,7 +93,7 @@ class CollectingState extends AbstractState {
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
-        let message = this.addSaiyanLabel(10, 0, `${this.game.locale.COLLECTING_STATE_TIME}: ${limit}`);
+        let message = addSaiyanLabel(this.game, 10, 0, `${this.game.locale.COLLECTING_STATE_TIME}: ${limit}`);
         message.fontSize = 35;
 
         clock.repeat(Phaser.Timer.SECOND, limit, () => {
@@ -170,5 +171,3 @@ class CollectingState extends AbstractState {
         // this.game.debug.body(player.phaser);
     }
 }
-
-export default CollectingState;

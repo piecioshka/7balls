@@ -1,5 +1,3 @@
-'use strict';
-
 let debug = {
     log: require('debug')('7balls:fight-state:log')
 };
@@ -7,7 +5,9 @@ let debug = {
 import Configuration from '../../configuration';
 import AbstractState from '../abstract-state';
 
-class FightState extends AbstractState {
+import { addSaiyanLabel } from '../../helpers/meesage';
+
+export default class FightState extends AbstractState {
     preload() {
         super.preload();
 
@@ -179,11 +179,11 @@ class FightState extends AbstractState {
     _setupPlayerOptions() {
         let player = this.game.player;
 
-        this.addSaiyanLabel(21, 18, 'HP');
-        this.addSaiyanLabel(8, 48, 'EXP');
+        addSaiyanLabel(this.game, 21, 18, 'HP');
+        addSaiyanLabel(this.game, 8, 48, 'EXP');
         this._addAvatar(6, 85, `${player.id}-card`);
 
-        this.options.player.lvl = this.addSaiyanLabel(63, 81, `${player.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
+        this.options.player.lvl = addSaiyanLabel(this.game, 63, 81, `${player.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
 
         this.options.player.hp = this._addBar(55, 25, 'bar-hp');
         this._updatePlayerOptionsHP();
@@ -333,5 +333,3 @@ class FightState extends AbstractState {
         }
     }
 }
-
-export default FightState;

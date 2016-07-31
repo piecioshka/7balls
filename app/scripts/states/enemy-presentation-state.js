@@ -1,7 +1,10 @@
 import AbstractState from './abstract-state';
 import Utilities from '../common/utilities';
 
-class EnemyPresentationState extends AbstractState {
+import { shout } from '../helpers/meesage';
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class EnemyPresentationState extends AbstractState {
     cb = null;
     lifetime = null;
 
@@ -26,11 +29,11 @@ class EnemyPresentationState extends AbstractState {
         this._setupEnemy();
         this._displayEnemy();
 
-        this.shout({ text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
+        shout(this.game, { text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
 
         Utilities.timeout(this, this.lifetime, this.cb);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     _setupEnemy() {
@@ -46,5 +49,3 @@ class EnemyPresentationState extends AbstractState {
         return (this.game[dimension] / 2) - (this.cache.getImage(this.game.enemy.id)[dimension] / 2);
     }
 }
-
-export default EnemyPresentationState;

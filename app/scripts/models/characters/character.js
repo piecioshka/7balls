@@ -1,12 +1,10 @@
-'use strict';
-
 let debug = {
     log: require('debug')('7balls:character:log')
 };
 
 let assign = require('lodash.assign');
 
-class Character {
+export default class Character {
     constructor(settings) {
         debug.log('new', settings);
         assign(this, Character.defaultSettings, settings);
@@ -48,5 +46,3 @@ class Character {
         };
     }
 }
-
-export default Character;

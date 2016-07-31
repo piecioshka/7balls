@@ -1,4 +1,4 @@
-class Utilities {
+export default class Utilities {
 
     /**
      * @param {number} start Number which is down limit.
@@ -53,5 +53,3 @@ class Utilities {
         state.time.events.add(lifetime, cb);
     }
 }
-
-export default Utilities;

@@ -1,7 +1,9 @@
 import AbstractState from './abstract-state';
 import Utilities from '../common/utilities';
 
-class PlayerPresentationState extends AbstractState {
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class PlayerPresentationState extends AbstractState {
     name = null;
     cb = null;
     lifetime = null;
@@ -38,8 +40,6 @@ class PlayerPresentationState extends AbstractState {
 
         Utilities.timeout(this, this.lifetime, this.cb);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 }
-
-export default PlayerPresentationState;

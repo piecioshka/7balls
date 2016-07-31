@@ -7,7 +7,9 @@ import Freeza from '../models/characters/freeza';
 import Cell from '../models/characters/cell';
 import Bubu from '../models/characters/bubu';
 
-class MenuState extends AbstractState {
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class MenuState extends AbstractState {
     gokuCard = null;
     vegetaCard = null;
     piccoloCard = null;
@@ -57,7 +59,7 @@ class MenuState extends AbstractState {
         // Default: select Son Goku.
         this._selectGoku();
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     _chooseGoku() {
@@ -99,7 +101,7 @@ class MenuState extends AbstractState {
             }
         });
 
-        // Add some effect.
+        // Add some audio effect.
         this.sound.scouter.play();
     }
 
@@ -193,5 +195,3 @@ class MenuState extends AbstractState {
         this.piccoloCard.alpha = 1;
     }
 }
-
-export default MenuState;

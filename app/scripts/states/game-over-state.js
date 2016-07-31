@@ -1,8 +1,7 @@
-'use strict';
-
 import AbstractState from './abstract-state';
+import { loadSoundPreferences } from '../helpers/audio';
 
-class GameOverState extends AbstractState {
+export default class GameOverState extends AbstractState {
     sound = {
         dramatic: null
     };
@@ -27,7 +26,7 @@ class GameOverState extends AbstractState {
         this._setupKeyboard();
         this._setupSound();
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
         this.sound.dramatic.play();
     }
 
@@ -53,5 +52,3 @@ class GameOverState extends AbstractState {
         this.sound.dramatic = this.add.audio('sound-dramatic');
     }
 }
-
-export default GameOverState;

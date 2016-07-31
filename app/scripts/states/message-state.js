@@ -1,6 +1,9 @@
 import AbstractState from './abstract-state';
 
-class MessageState extends AbstractState {
+import { displayCentralMessage } from '../helpers/meesage';
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class MessageState extends AbstractState {
     body = null;
     cb = null;
     lifetime = null;
@@ -20,10 +23,8 @@ class MessageState extends AbstractState {
     create() {
         this.add.image(0, 0, 'bg-message');
 
-        this.displayCentralMessage({ text: this.body, lifetime: this.lifetime, cb: this.cb, fontSize: 50 });
+        displayCentralMessage(this.game, { text: this.body, lifetime: this.lifetime, cb: this.cb, fontSize: 50 });
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 }
-
-export default MessageState;

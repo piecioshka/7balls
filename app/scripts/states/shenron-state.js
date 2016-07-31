@@ -1,7 +1,9 @@
 import AbstractState from './abstract-state';
 import Utilities from '../common/utilities';
 
-class ShenronState extends AbstractState {
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class ShenronState extends AbstractState {
     sound = {
         ambienceThunder: null
     };
@@ -26,7 +28,7 @@ class ShenronState extends AbstractState {
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, this._next, this);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
         this.sound.ambienceThunder.play();
     }
 
@@ -53,5 +55,3 @@ class ShenronState extends AbstractState {
         this.sound.ambienceThunder = this.add.audio('sound-ambience-thunder');
     }
 }
-
-export default ShenronState;

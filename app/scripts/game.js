@@ -1,5 +1,3 @@
-'use strict';
-
 import Configuration from './configuration';
 
 import CollectingState from './states/collecting-state';
@@ -15,7 +13,7 @@ import TrainingState from './states/fight/training-state';
 import VersusState from './states/fight/versus-state';
 import WinnerState from './states/winner-state';
 
-class Game {
+export default class Game {
     constructor() {
         // Create game object.
         this.game = new Phaser.Game(Configuration.GAME_WIDTH, Configuration.GAME_HEIGHT, Phaser.Canvas, Configuration.GAME_RENDER_ID);
@@ -38,5 +36,3 @@ class Game {
         this.game.state.start('Language');
     }
 }
-
-export default Game;

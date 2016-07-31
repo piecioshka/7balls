@@ -1,6 +1,6 @@
 import Utilities from '../common/utilities';
 
-class Computer {
+export default class Computer {
     static applyArtificialIntelligence(state, character) {
         let walkingLeft = () => {
             Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 20, () => {
@@ -55,5 +55,3 @@ class Computer {
         start(Phaser.Timer.SECOND, fight);
     }
 }
-
-export default Computer;

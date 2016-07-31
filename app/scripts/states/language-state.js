@@ -1,9 +1,14 @@
 import AbstractState from './abstract-state';
+import { loadSoundPreferences } from '../helpers/audio';
 
-class LanguageState extends AbstractState {
+export default class LanguageState extends AbstractState {
     plCard = null;
     enCard = null;
     onEnter = null;
+
+    sound = {
+        scouter: null
+    };
 
     preload() {
         super.preload();
@@ -14,6 +19,8 @@ class LanguageState extends AbstractState {
         this.load.image('bg-language', './assets/graphics/backgrounds/bg-language.png');
         this.load.image('btn-pl', './assets/graphics/buttons/pl-flag.png');
         this.load.image('btn-en', './assets/graphics/buttons/usa-flag.png');
+
+        this.load.audio('scouter', './assets/sound/dbz/scouter.ogg');
     }
 
     create() {
@@ -29,8 +36,9 @@ class LanguageState extends AbstractState {
         this._selectEnglish();
 
         this._setupKeyboard();
+        this._setupSound();
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     _choosePolish() {
@@ -55,6 +63,9 @@ class LanguageState extends AbstractState {
                 this.game.state.start('Menu');
             }
         });
+
+        // Add some audio effect.
+        this.sound.scouter.play();
     }
 
     _setupKeyboard() {
@@ -74,6 +85,10 @@ class LanguageState extends AbstractState {
         enter.onDown.add(() => this.onEnter());
     }
 
+    _setupSound() {
+        this.sound.scouter = this.add.audio('scouter');
+    }
+
     _selectPolish() {
         this.plCard.alpha = 1;
         this.enCard.alpha = 0.5;
@@ -86,5 +101,3 @@ class LanguageState extends AbstractState {
         this.onEnter = this._chooseEnglish;
     }
 }
-
-export default LanguageState;

@@ -1,7 +1,10 @@
 import Utilities from '../../common/utilities';
 import FightState from './fight-state';
 
-class TrainingState extends FightState {
+import { shout } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
+
+export default class TrainingState extends FightState {
     lifetime = null;
     cb = null;
     sound = {
@@ -48,9 +51,9 @@ class TrainingState extends FightState {
         this._setupPlayerOptions();
 
         this.displayLogo();
-        this.shout({ text: `${this.game.locale.TRAINING_STATE_WELCOME}` });
+        shout(this.game, { text: `${this.game.locale.TRAINING_STATE_WELCOME}` });
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     update() {
@@ -63,5 +66,3 @@ class TrainingState extends FightState {
         // this.game.debug.body(player.phaser);
     }
 }
-
-export default TrainingState;

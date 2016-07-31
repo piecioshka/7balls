@@ -18,6 +18,8 @@ module.exports = {
         pathinfo: true
     },
 
+    devtool: '#inline-source-map',
+
     module: {
         loaders: [
             {

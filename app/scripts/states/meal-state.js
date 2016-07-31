@@ -2,7 +2,10 @@ import AbstractState from './abstract-state';
 import Utilities from '../common/utilities';
 import Character from '../models/characters/character';
 
-class MealState extends AbstractState {
+import { shout } from '../helpers/meesage';
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class MealState extends AbstractState {
     lifetime = null;
     cb = null;
 
@@ -22,12 +25,10 @@ class MealState extends AbstractState {
 
         this.game.player.hp = Character.defaultNumbers.hp;
 
-        this.shout({ text: `${this.game.locale.MEAL_STATE_WELCOME}` });
+        shout(this.game, { text: `${this.game.locale.MEAL_STATE_WELCOME}` });
 
         Utilities.timeout(this, this.lifetime, this.cb);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 }
-
-export default MealState;

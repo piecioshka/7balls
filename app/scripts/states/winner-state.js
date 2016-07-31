@@ -1,6 +1,8 @@
 import AbstractState from './abstract-state';
 
-class WinnerState extends AbstractState {
+import { loadSoundPreferences } from '../helpers/audio';
+
+export default class WinnerState extends AbstractState {
     sound = {
         thing1: null
     };
@@ -23,7 +25,7 @@ class WinnerState extends AbstractState {
         this._setupKeyboard();
         this._setupSound();
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
         this.sound.thing1.play();
     }
 
@@ -49,5 +51,3 @@ class WinnerState extends AbstractState {
         this.sound.thing1 = this.add.audio('sound-thing1');
     }
 }
-
-export default WinnerState;
