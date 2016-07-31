@@ -18,6 +18,8 @@ module.exports = {
         pathinfo: true
     },
 
+    devtool: '#inline-source-map',
+
     module: {
         loaders: [
             {
@@ -32,6 +34,10 @@ module.exports = {
                     cacheDirectory: true,
                     presets: ['es2015', 'stage-0']
                 }
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     },

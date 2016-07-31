@@ -1,32 +1,32 @@
-'use strict';
-
 import Configuration from './configuration';
 
-import CollectingState from './states/collecting-state';
-import EnemyPresentationState from './states/enemy-presentation-state';
-import GameOverState from './states/game-over-state';
-import LanguageState from './states/language-state';
-import MealState from './states/meal-state';
-import MenuState from './states/menu-state';
-import MessageState from './states/message-state';
-import PlayerPresentationState from './states/player-presentation-state';
-import ShenronState from './states/shenron-state';
-import TrainingState from './states/fight/training-state';
-import VersusState from './states/fight/versus-state';
-import WinnerState from './states/winner-state';
+import BootstrapState from './states/bootstrap-state';
+import CollectDragonBallsState from './states/collect-states/collect-dragon-balls-state';
+import EnemyPresentationState from './states/static-states/enemy-presentation-state';
+import GameOverState from './states/static-states/game-over-state';
+import SelectLanguageState from './states/select-states/select-language-state';
+import MealState from './states/static-states/meal-state';
+import SelectCharacterState from './states/select-states/select-character-state';
+import MessageState from './states/static-states/message-state';
+import PlayerPresentationState from './states/static-states/player-presentation-state';
+import ShenronState from './states/static-states/shenron-state';
+import TrainingState from './states/fight-states/training-state';
+import VersusState from './states/fight-states/versus-state';
+import WinnerState from './states/static-states/winner-state';
 
-class Game {
+export default class Game {
     constructor() {
         // Create game object.
         this.game = new Phaser.Game(Configuration.GAME_WIDTH, Configuration.GAME_HEIGHT, Phaser.Canvas, Configuration.GAME_RENDER_ID);
 
         // List of all states.
-        this.game.state.add('Collecting', CollectingState);
+        this.game.state.add('Bootstrap', BootstrapState);
+        this.game.state.add('CollectDragonBalls', CollectDragonBallsState);
         this.game.state.add('EnemyPresentation', EnemyPresentationState);
         this.game.state.add('GameOver', GameOverState);
-        this.game.state.add('Language', LanguageState);
+        this.game.state.add('SelectLanguage', SelectLanguageState);
         this.game.state.add('Meal', MealState);
-        this.game.state.add('Menu', MenuState);
+        this.game.state.add('SelectCharacter', SelectCharacterState);
         this.game.state.add('Message', MessageState);
         this.game.state.add('PlayerPresentation', PlayerPresentationState);
         this.game.state.add('Shenron', ShenronState);
@@ -34,9 +34,6 @@ class Game {
         this.game.state.add('Versus', VersusState);
         this.game.state.add('Winner', WinnerState);
 
-        // First state is screen with character choice.
-        this.game.state.start('Language');
+        this.game.state.start('Bootstrap');
     }
 }
-
-export default Game;

@@ -1,20 +1,17 @@
-import AbstractState from './abstract-state';
+let isObject = require('lodash.isobject');
+let assert = require('assert');
 
-class LanguageState extends AbstractState {
+import { displayGameVersion } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
+
+export default class SelectLanguageState extends Phaser.State {
     plCard = null;
     enCard = null;
     onEnter = null;
 
-    preload() {
-        super.preload();
-
-        this.load.json('locale-en', './locale/en_EN.json');
-        this.load.json('locale-pl', './locale/pl_PL.json');
-
-        this.load.image('bg-language', './assets/graphics/backgrounds/bg-language.png');
-        this.load.image('btn-pl', './assets/graphics/buttons/pl-flag.png');
-        this.load.image('btn-en', './assets/graphics/buttons/usa-flag.png');
-    }
+    sound = {
+        scouter: null
+    };
 
     create() {
         this.add.image(0, 0, 'bg-language');
@@ -29,14 +26,18 @@ class LanguageState extends AbstractState {
         this._selectEnglish();
 
         this._setupKeyboard();
+        this._setupSound();
 
-        this.loadSoundPreferences();
+        displayGameVersion(this.game);
+        loadSoundPreferences(this.game);
     }
 
     _choosePolish() {
         ga('send', 'event', 'game', 'locale-pl');
 
         this.game.locale = this.cache.getJSON('locale-pl');
+        assert(isObject(this.game.locale));
+
         this._next();
     }
 
@@ -44,6 +45,8 @@ class LanguageState extends AbstractState {
         ga('send', 'event', 'game', 'locale-en');
 
         this.game.locale = this.cache.getJSON('locale-en');
+        assert(isObject(this.game.locale));
+
         this._next();
     }
 
@@ -52,9 +55,12 @@ class LanguageState extends AbstractState {
             body: this.game.locale.MESSAGE_STATE_WELCOME,
             lifetime: Phaser.Timer.SECOND * 5,
             cb: () => {
-                this.game.state.start('Menu');
+                this.game.state.start('SelectCharacter');
             }
         });
+
+        // Add some audio effect.
+        this.sound.scouter.play();
     }
 
     _setupKeyboard() {
@@ -74,6 +80,10 @@ class LanguageState extends AbstractState {
         enter.onDown.add(() => this.onEnter());
     }
 
+    _setupSound() {
+        this.sound.scouter = this.add.audio('scouter');
+    }
+
     _selectPolish() {
         this.plCard.alpha = 1;
         this.enCard.alpha = 0.5;
@@ -86,5 +96,3 @@ class LanguageState extends AbstractState {
         this.onEnter = this._chooseEnglish;
     }
 }
-
-export default LanguageState;

@@ -1,22 +1,15 @@
-import AbstractState from './abstract-state';
-import Utilities from '../common/utilities';
 
-class ShenronState extends AbstractState {
+import Utilities from '../../common/utilities';
+
+import { loadSoundPreferences } from '../../helpers/audio';
+
+export default class ShenronState extends Phaser.State {
     sound = {
         ambienceThunder: null
     };
 
-    preload() {
-        super.preload();
-
-        this.load.image('bg-shenron-before', './assets/graphics/backgrounds/shenron/bg-shenron-before.png');
-        this.load.image('bg-shenron', './assets/graphics/backgrounds/shenron/bg-shenron.png');
-
-        this.load.audio('sound-ambience-thunder', './assets/sound/dbk/ambience_thunder.ogg');
-    }
-
     create() {
-        this.add.image(0, 0, 'bg-shenron-before');
+        this.add.image(0, 0, 'bg-shenron-growing');
 
         Utilities.timeout(this, Phaser.Timer.SECOND, () => {
             this.add.image(0, 0, 'bg-shenron');
@@ -26,7 +19,7 @@ class ShenronState extends AbstractState {
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, this._next, this);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
         this.sound.ambienceThunder.play();
     }
 
@@ -53,5 +46,3 @@ class ShenronState extends AbstractState {
         this.sound.ambienceThunder = this.add.audio('sound-ambience-thunder');
     }
 }
-
-export default ShenronState;

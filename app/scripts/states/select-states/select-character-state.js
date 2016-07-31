@@ -1,13 +1,16 @@
-import AbstractState from './abstract-state';
-import Goku from '../models/characters/goku';
-import Vegeta from '../models/characters/vegeta';
-import Piccolo from '../models/characters/piccolo';
 
-import Freeza from '../models/characters/freeza';
-import Cell from '../models/characters/cell';
-import Bubu from '../models/characters/bubu';
+import Goku from '../../models/characters/goku';
+import Vegeta from '../../models/characters/vegeta';
+import Piccolo from '../../models/characters/piccolo';
 
-class MenuState extends AbstractState {
+import Freeza from '../../models/characters/freeza';
+import Cell from '../../models/characters/cell';
+import Bubu from '../../models/characters/bubu';
+
+import { displayGameVersion } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
+
+export default class SelectCharacterState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
     piccoloCard = null;
@@ -22,18 +25,6 @@ class MenuState extends AbstractState {
     init() {
         this.cards = [];
         this.game.enemies = [Freeza, Cell, Bubu];
-    }
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.png');
-
-        this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.png');
-        this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.png');
-        this.load.image('piccolo-card', './assets/graphics/characters/piccolo/piccolo-card.png');
-
-        this.load.audio('scouter', './assets/sound/dbz/scouter.ogg');
     }
 
     create() {
@@ -57,7 +48,8 @@ class MenuState extends AbstractState {
         // Default: select Son Goku.
         this._selectGoku();
 
-        this.loadSoundPreferences();
+        displayGameVersion(this.game);
+        loadSoundPreferences(this.game);
     }
 
     _chooseGoku() {
@@ -93,13 +85,13 @@ class MenuState extends AbstractState {
                     body: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
                     lifetime: Phaser.Timer.SECOND * 5,
                     cb: () => {
-                        this.state.start('Collecting');
+                        this.state.start('CollectDragonBalls');
                     }
                 });
             }
         });
 
-        // Add some effect.
+        // Add some audio effect.
         this.sound.scouter.play();
     }
 
@@ -193,5 +185,3 @@ class MenuState extends AbstractState {
         this.piccoloCard.alpha = 1;
     }
 }
-
-export default MenuState;

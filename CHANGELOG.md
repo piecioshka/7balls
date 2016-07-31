@@ -55,7 +55,7 @@ v0.9.0 / 2015-09-10
 
   * Clean keyboard service.
   * Stop sound when exit from GameOverState.
-  * Add simple shortcut for display new character on MenuState.
+  * Add simple shortcut for display new character on SelectCharacterState.
   * Reset player numbers (hp, up, exp, lvl) on GameOverState.
   * Support language choose. Create locale mechanizm. Add two locals: en_EN, pl_PL.
   * Apply better artificial interlligence.
@@ -81,9 +81,9 @@ v0.7.0 / 2015-09-08
   * Create generic method to display welcome message in AbstractState. Display welcome message on FightState and TrainingState.
   * Append EXP points to player when try kicking or boxing.
   * Disable EXP bar for enemy.
-  * Support mouse over event on MenuState.
+  * Support mouse over event on SelectCharacterState.
   * Fixed priority of layers on FightState.
-  * Update background on MenuState.
+  * Update background on SelectCharacterState.
 
 v0.6.0 / 2015-09-07
 ===================
@@ -104,13 +104,13 @@ v0.5.0 / 2015-09-06
   * Create models for enemies.
   * Add spritesheets for enemies: Freeza, Cell and Bubu.
   * Add MealState - place where character will be rest.
-  * Add a lot of sound effects. Use `scouter.ogg` on MenuState when user choose character.
+  * Add a lot of sound effects. Use `scouter.ogg` on SelectCharacterState when user choose character.
   * Add files related with Dragon Ball logo.
 
 v0.4.0 / 2015-09-05
 ===================
 
-  * Support keyboard on MenuState. Default select Son Goku.
+  * Support keyboard on SelectCharacterState. Default select Son Goku.
   * Create TrainingState.
   * Support countdown on SearchingState.
   * Refactoring _showWelcomeMessage.
@@ -123,7 +123,7 @@ v0.3.0 / 2015-09-03
 
   * Enable collision. Enable ES7 Stage 0 in webpack configuration file for Babel.js.
   * Add background to FightState.
-  * Fixed cards position on MenuState.
+  * Fixed cards position on SelectCharacterState.
   * Support input keyboard: LEFT, RIGHT, UP, DOWN.
   * Add places for dragon balls.
   * Add 2 new maps for SearchingState.
@@ -144,10 +144,10 @@ v0.2.0 / 2015-09-02
   * Create main models: Vegeta & Goku as child base class Player.
   * Display two card. User can select one.
   * Rename Son-Goku to Goku.
-  * Display background on MenuState.
+  * Display background on SelectCharacterState.
   * Create Configuration module.
   * Create graphics.
-  * Define MenuState. Fixed webpack.config.js.
+  * Define SelectCharacterState. Fixed webpack.config.js.
   * Edit README file.
 
 v0.1.0 / 2015-09-01

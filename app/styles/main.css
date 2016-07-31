@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Saiyan-Sans';
+    src: url(../assets/fonts/Saiyan-Sans.ttf);
+}
+
 body {
-    margin: 0
+    margin: 0;
+    /* Workaround to use custom font in Phaser.js */
+    font-family: 'Saiyan-Sans', serif;
 }

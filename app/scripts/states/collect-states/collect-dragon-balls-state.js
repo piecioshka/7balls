@@ -1,36 +1,15 @@
-'use strict';
+import Configuration from '../../configuration';
+import Utilities from '../../common/utilities';
 
-import Configuration from '../configuration';
-import Utilities from '../common/utilities';
-import AbstractState from './abstract-state';
+import { shout, addSaiyanLabel } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
 
-class CollectingState extends AbstractState {
+export default class CollectDragonBallsState extends Phaser.State {
     layer = null;
     sound = {
         candypop: null,
         radar: null
     };
-
-    preload() {
-        super.preload();
-
-        this.load.spritesheet('spr-collecting', './assets/graphics/spritesheet/spr-collecting.png', 40, 40);
-
-        this.load.tilemap('collecting-1', './assets/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-2', './assets/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-3', './assets/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
-
-        this.load.json('positions-1', './assets/balls/positions-1.json');
-        this.load.json('positions-2', './assets/balls/positions-2.json');
-        this.load.json('positions-3', './assets/balls/positions-3.json');
-
-        this.load.image('goku-collecting', './assets/graphics/characters/goku/goku-collecting.png');
-        this.load.image('vegeta-collecting', './assets/graphics/characters/vegeta/vegeta-collecting.png');
-        this.load.image('piccolo-collecting', './assets/graphics/characters/piccolo/piccolo-collecting.png');
-
-        this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
-        this.load.audio('sound-radar', './assets/sound/dbk/devices_02.ogg');
-    }
 
     create() {
         let random = Utilities.random(1, 3);
@@ -41,11 +20,11 @@ class CollectingState extends AbstractState {
         this._setupBalls(random);
         this._setupPlayerSprite();
 
-        this.displayCentralMessage({ text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
+        shout(this.game, { text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
 
         this._setupTimer(random);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     _setupWorld(random) {
@@ -62,7 +41,7 @@ class CollectingState extends AbstractState {
     _setupPlayerSprite() {
         let player = this.game.player;
 
-        player.phaser = this.add.sprite(30, 50, `${player.id}-collecting`);
+        player.phaser = this.add.sprite(30, 60, `${player.id}-collecting`);
         player.phaser.anchor.setTo(0.5, 0.5);
 
         this._defineDefaultProperties(player);
@@ -72,7 +51,7 @@ class CollectingState extends AbstractState {
         this.physics.arcade.enable(character.phaser);
 
         character.phaser.body.collideWorldBounds = true;
-        character.phaser.body.setSize(30, 30, 0, 10);
+        character.phaser.body.setSize(30, 30, 5, 30);
     }
 
     _setupBalls(random) {
@@ -92,7 +71,7 @@ class CollectingState extends AbstractState {
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
-        let message = this.addSaiyanLabel(10, 0, `${this.game.locale.COLLECTING_STATE_TIME}: ${limit}`);
+        let message = addSaiyanLabel(this.game, 10, 0, `${this.game.locale.COLLECTING_STATE_TIME}: ${limit}`);
         message.fontSize = 35;
 
         clock.repeat(Phaser.Timer.SECOND, limit, () => {
@@ -170,5 +149,3 @@ class CollectingState extends AbstractState {
         // this.game.debug.body(player.phaser);
     }
 }
-
-export default CollectingState;

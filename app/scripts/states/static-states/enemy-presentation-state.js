@@ -1,7 +1,10 @@
-import AbstractState from './abstract-state';
-import Utilities from '../common/utilities';
 
-class EnemyPresentationState extends AbstractState {
+import Utilities from '../../common/utilities';
+
+import { shout } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
+
+export default class EnemyPresentationState extends Phaser.State {
     cb = null;
     lifetime = null;
 
@@ -10,27 +13,17 @@ class EnemyPresentationState extends AbstractState {
         this.lifetime = lifetime;
     }
 
-    preload() {
-        super.preload();
-
-        this.load.image('bg-enemy', './assets/graphics/backgrounds/bg-enemy.png');
-
-        this.load.image('freeza', './assets/graphics/characters/freeza/poster/freeza.png');
-        this.load.image('cell', './assets/graphics/characters/cell/poster/cell.png');
-        this.load.image('bubu', './assets/graphics/characters/bubu/poster/bubu.png');
-    }
-
     create() {
         this.add.image(0, 0, 'bg-enemy');
 
         this._setupEnemy();
         this._displayEnemy();
 
-        this.displayCentralMessage({ text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
+        shout(this.game, { text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
 
         Utilities.timeout(this, this.lifetime, this.cb);
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     _setupEnemy() {
@@ -46,5 +39,3 @@ class EnemyPresentationState extends AbstractState {
         return (this.game[dimension] / 2) - (this.cache.getImage(this.game.enemy.id)[dimension] / 2);
     }
 }
-
-export default EnemyPresentationState;

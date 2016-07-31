@@ -2,7 +2,10 @@ import Configuration from '../../configuration';
 import FightState from './fight-state';
 import Computer from '../../models/computer';
 
-class VersusState extends FightState {
+import { shout, addSaiyanLabel } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
+
+export default class VersusState extends FightState {
     sound = {
         jump: null,
 
@@ -28,17 +31,6 @@ class VersusState extends FightState {
         }
     };
 
-    preload() {
-        super.preload();
-
-        this.load.image('freeza-card', './assets/graphics/characters/freeza/freeza-card.png');
-        this.load.image('cell-card', './assets/graphics/characters/cell/cell-card.png');
-        this.load.image('bubu-card', './assets/graphics/characters/bubu/bubu-card.png');
-
-        this.load.image('bar-hp-invert', './assets/graphics/bars/hp-invert.png');
-        this.load.image('bar-exp-invert', './assets/graphics/bars/exp-invert.png');
-    }
-
     create() {
         this.add.image(0, 0, 'bg-versus-sky');
 
@@ -54,9 +46,9 @@ class VersusState extends FightState {
         this._setupFight();
 
         this.displayLogo();
-        this.displayCentralMessage({ text: `${this.game.locale.VERSUS_STATE_WELCOME}` });
+        shout(this.game, { text: `${this.game.locale.VERSUS_STATE_WELCOME}` });
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
     }
 
     _setupFight() {
@@ -105,7 +97,7 @@ class VersusState extends FightState {
         // Disable keyboard globally.
         this.input.keyboard.enabled = false;
 
-        this.displayCentralMessage({ text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
+        shout(this.game, { text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
 
         player.phaser.play(playerSate);
         enemy.phaser.play(enemyState);
@@ -147,11 +139,11 @@ class VersusState extends FightState {
     _setupEnemyOptions() {
         let enemy = this.game.enemy;
 
-        this.addSaiyanLabel(755, 18, 'HP');
-        this.addSaiyanLabel(755, 48, 'EXP');
+        addSaiyanLabel(this.game, 755, 18, 'HP');
+        addSaiyanLabel(this.game, 755, 48, 'EXP');
         this._addAvatar(745, 85, `${enemy.id}-card`);
 
-        this.options.enemy.lvl = this.addSaiyanLabel(733, 81, `${enemy.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`, [1, 0]);
+        this.options.enemy.lvl = addSaiyanLabel(this.game, 733, 81, `${enemy.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`, [1, 0]);
 
         this.options.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
         this._updateEnemyOptionsHP();
@@ -218,5 +210,3 @@ class VersusState extends FightState {
         this.game.debug.body(enemy.phaser);
     }
 }
-
-export default VersusState;

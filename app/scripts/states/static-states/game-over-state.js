@@ -1,20 +1,10 @@
-'use strict';
 
-import AbstractState from './abstract-state';
+import { loadSoundPreferences } from '../../helpers/audio';
 
-class GameOverState extends AbstractState {
+export default class GameOverState extends Phaser.State {
     sound = {
         dramatic: null
     };
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-game-over', './assets/graphics/backgrounds/bg-game-over.png');
-        this.load.image('btn-try-again', './assets/graphics/buttons/try-again.png');
-
-        this.load.audio('sound-dramatic', './assets/sound/dbk/dramatic_reveal_01.ogg');
-    }
 
     create() {
         ga('send', 'event', 'game', 'over');
@@ -27,7 +17,7 @@ class GameOverState extends AbstractState {
         this._setupKeyboard();
         this._setupSound();
 
-        this.loadSoundPreferences();
+        loadSoundPreferences(this.game);
         this.sound.dramatic.play();
     }
 
@@ -46,12 +36,10 @@ class GameOverState extends AbstractState {
         ga('send', 'event', 'game', 'over-try-again');
 
         this.sound.dramatic.stop();
-        this.state.start('Menu');
+        this.state.start('SelectCharacter');
     }
 
     _setupSound() {
         this.sound.dramatic = this.add.audio('sound-dramatic');
     }
 }
-
-export default GameOverState;

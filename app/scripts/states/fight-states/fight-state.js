@@ -1,48 +1,13 @@
-'use strict';
-
 let debug = {
     log: require('debug')('7balls:fight-state:log')
 };
 
 import Configuration from '../../configuration';
-import AbstractState from '../abstract-state';
 
-class FightState extends AbstractState {
-    preload() {
-        super.preload();
 
-        this.load.image('bg-versus-hell', './assets/graphics/backgrounds/versus/bg-versus-hell.png');
-        this.load.image('bg-versus-sky', './assets/graphics/backgrounds/versus/bg-versus-sky.png');
+import { addSaiyanLabel } from '../../helpers/meesage';
 
-        this.load.image('logo-minimal', './assets/graphics/logo/logo-minimal.png');
-
-        this.load.image('bar-blank', './assets/graphics/bars/blank.png');
-        this.load.image('bar-hp', './assets/graphics/bars/hp.png');
-        this.load.image('bar-exp', './assets/graphics/bars/exp.png');
-
-        this.load.spritesheet('goku-spritesheet', './assets/graphics/characters/goku/goku-fight.png', 150, 200);
-        this.load.spritesheet('vegeta-spritesheet', './assets/graphics/characters/vegeta/vegeta-fight.png', 150, 200);
-        this.load.spritesheet('piccolo-spritesheet', './assets/graphics/characters/piccolo/piccolo-fight.png', 150, 200);
-
-        this.load.spritesheet('freeza-spritesheet', './assets/graphics/characters/freeza/freeza-fight.png', 150, 200);
-        this.load.spritesheet('cell-spritesheet', './assets/graphics/characters/cell/cell-fight.png', 150, 200);
-        this.load.spritesheet('bubu-spritesheet', './assets/graphics/characters/bubu/bubu-fight.png', 150, 200);
-
-        this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
-
-        // Use this when character has level less than first threshold.
-        this.load.audio('sound-weakkick', './assets/sound/dbz/weakkick.ogg');
-        this.load.audio('sound-weakpunch', './assets/sound/dbz/weakpunch.ogg');
-
-        // Use this when character has level less than second threshold.
-        this.load.audio('sound-mediumkick', './assets/sound/dbz/mediumkick.ogg');
-        this.load.audio('sound-mediumpunch', './assets/sound/dbz/mediumpunch.ogg');
-
-        // Use this when character has level less than max.
-        this.load.audio('sound-strongkick', './assets/sound/dbz/strongkick.ogg');
-        this.load.audio('sound-strongpunch', './assets/sound/dbz/strongpunch.ogg');
-    }
-
+export default class FightState extends Phaser.State {
     displayLogo() {
         this.add.image((this.game.width / 2) - (this.cache.getImage('logo-minimal').width / 2), 5, 'logo-minimal');
     }
@@ -62,27 +27,27 @@ class FightState extends AbstractState {
     }
 
     static _defineAnimations(character) {
-        const resizeMaximum = () => {
+        let resizeMaximum = () => {
             character.body.setSize(150, 200, 0, 0);
         };
-        const reduceByHalf = () => {
+        let reduceByHalf = () => {
             character.body.setSize(150, 100, 0, 0);
         };
-        const revertDefaultSize = () => {
+        let revertDefaultSize = () => {
             character.body.setSize(100, 200, 0, 0);
         };
 
-        const sitting = character.animations.add('sitting', [4, 5], 4, false);
+        let sitting = character.animations.add('sitting', [4, 5], 4, false);
 
         sitting.onStart.add(reduceByHalf);
         sitting.onComplete.add(revertDefaultSize);
 
-        const kicking = character.animations.add('kicking', [12, 13], 16, false);
+        let kicking = character.animations.add('kicking', [12, 13], 16, false);
 
         kicking.onStart.add(resizeMaximum);
         kicking.onComplete.add(revertDefaultSize);
 
-        const boxing = character.animations.add('boxing', [16, 17], 16, false);
+        let boxing = character.animations.add('boxing', [16, 17], 16, false);
 
         boxing.onStart.add(resizeMaximum);
         boxing.onComplete.add(revertDefaultSize);
@@ -98,15 +63,15 @@ class FightState extends AbstractState {
     }
 
     _addAvatar(x, y, key) {
-        const avatar = this.add.image(x, y, key);
+        let avatar = this.add.image(x, y, key);
 
         avatar.width = Configuration.FIGHT_CHARACTER_AVATAR_WIDTH;
         avatar.height = Configuration.FIGHT_CHARACTER_AVATAR_HEIGHT;
     }
 
     _addBar(x, y, key, anchor = [0, 0]) {
-        const blank = this.add.image(x, y, 'bar-blank');
-        const color = this.add.image(x, y, key);
+        let blank = this.add.image(x, y, 'bar-blank');
+        let color = this.add.image(x, y, key);
 
         blank.anchor.setTo(...anchor);
         color.anchor.setTo(...anchor);
@@ -177,13 +142,13 @@ class FightState extends AbstractState {
     }
 
     _setupPlayerOptions() {
-        const player = this.game.player;
+        let player = this.game.player;
 
-        this.addSaiyanLabel(21, 18, 'HP');
-        this.addSaiyanLabel(8, 48, 'EXP');
+        addSaiyanLabel(this.game, 21, 18, 'HP');
+        addSaiyanLabel(this.game, 8, 48, 'EXP');
         this._addAvatar(6, 85, `${player.id}-card`);
 
-        this.options.player.lvl = this.addSaiyanLabel(63, 81, `${player.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
+        this.options.player.lvl = addSaiyanLabel(this.game, 63, 81, `${player.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
 
         this.options.player.hp = this._addBar(55, 25, 'bar-hp');
         this._updatePlayerOptionsHP();
@@ -193,17 +158,17 @@ class FightState extends AbstractState {
     }
 
     _updatePlayerOptionsHP() {
-        const hp = this.game.player.hp;
-        const imageWidth = this.cache.getImage('bar-hp').width;
-        const width = hp * imageWidth / 100;
+        let hp = this.game.player.hp;
+        let imageWidth = this.cache.getImage('bar-hp').width;
+        let width = hp * imageWidth / 100;
 
         this.options.player.hp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
     }
 
     _updatePlayerOptionsEXP() {
-        const exp = this.game.player.exp;
-        const imageWidth = this.cache.getImage('bar-exp').width;
-        const width = exp * imageWidth / 100;
+        let exp = this.game.player.exp;
+        let imageWidth = this.cache.getImage('bar-exp').width;
+        let width = exp * imageWidth / 100;
 
         this.options.player.exp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
     }
@@ -213,7 +178,7 @@ class FightState extends AbstractState {
     }
 
     _removePlayerHP(value) {
-        const player = this.game.player;
+        let player = this.game.player;
 
         player.hp -= value;
 
@@ -227,7 +192,7 @@ class FightState extends AbstractState {
     }
 
     _addPlayerEXP(value) {
-        const player = this.game.player;
+        let player = this.game.player;
 
         player.exp += value;
 
@@ -287,11 +252,11 @@ class FightState extends AbstractState {
     }
 
     _setupKeyboard() {
-        const player = this.game.player;
-        const c = this.input.keyboard.addKey(Phaser.Keyboard.C);
-        const x = this.input.keyboard.addKey(Phaser.Keyboard.X);
-        const up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
-        const space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        let player = this.game.player;
+        let c = this.input.keyboard.addKey(Phaser.Keyboard.C);
+        let x = this.input.keyboard.addKey(Phaser.Keyboard.X);
+        let up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
+        let space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
         // Stop the following keys from propagating up to the browser.
         this.input.keyboard.addKeyCapture([
@@ -317,8 +282,8 @@ class FightState extends AbstractState {
     }
 
     _handleKeyboard() {
-        const player = this.game.player;
-        const keyboard = this.input.keyboard;
+        let player = this.game.player;
+        let keyboard = this.input.keyboard;
 
         FightState._handleCharacterVelocity(player);
 
@@ -333,5 +298,3 @@ class FightState extends AbstractState {
         }
     }
 }
-
-export default FightState;
