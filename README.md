@@ -49,6 +49,7 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [x] wykorzystajmy `webpack-dev-server`, aby nie czekać na zmiany
 * [x] przenieść `DefinitionTypes` do katalogu `misc`
 * [x] przenieść ładowanie assetów do `BootstrapState`
+* [x] prezentować aktualną wersję na ekranach wyboru języka i zawodnika
 * [ ] czy faktycznie musimy definiować klawisze jako properties klasy?
 * [ ] dodać tryb `fullscreen`
 * [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
@@ -56,6 +57,7 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)
 * [ ] dodać `credits` - autorzy gry
 * [ ] po porażce przegrany powinien leżeć na ziemi
+* [ ] zrezygnować z zarządzaniem przezroczystością na rzecz zielonej otoczki (border)
 
 ### Inne związane z realizacją projektu
 

@@ -3,6 +3,8 @@ const WHITE_COLOR = 'rgb(255,255,255)';
 
 const BACKGROUND_HEIGHT = 150;
 
+let pkg = require('../../../package.json');
+
 let addRectangle = (game, x, y, width, height) => {
     let rect = game.add.graphics(x, y);
 
@@ -72,8 +74,20 @@ let displayCentralMessage = (game, { text, lifetime = Phaser.Timer.SECOND * 2, f
     return message;
 };
 
+let displayVersion = (game) => {
+    let version = game.add.text(5, game.height - 20, 'v' + pkg.version);
+
+    version.font = 'Arial';
+    version.fontSize = '10px';
+    version.fill = '#fff';
+    version.setShadow(0, 0, BLACK_COLOR, 3);
+
+    return version;
+};
+
 module.exports = {
     addSaiyanLabel,
     shout,
-    displayCentralMessage
+    displayCentralMessage,
+    displayVersion
 };

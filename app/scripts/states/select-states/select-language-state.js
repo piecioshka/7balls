@@ -1,6 +1,7 @@
 let isObject = require('lodash.isobject');
 let assert = require('assert');
 
+import { displayVersion } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class SelectLanguageState extends Phaser.State {
@@ -27,6 +28,7 @@ export default class SelectLanguageState extends Phaser.State {
         this._setupKeyboard();
         this._setupSound();
 
+        displayVersion(this.game);
         loadSoundPreferences(this.game);
     }
 

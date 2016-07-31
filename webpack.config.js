@@ -34,6 +34,10 @@ module.exports = {
                     cacheDirectory: true,
                     presets: ['es2015', 'stage-0']
                 }
+            },
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
             }
         ]
     },
