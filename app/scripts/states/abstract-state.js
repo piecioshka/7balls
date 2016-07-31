@@ -11,7 +11,7 @@ class AbstractState extends Phaser.State {
     addSaiyanLabel(x, y, text, anchor = [0, 0]) {
         const label = this.add.text(x, y, text);
 
-        label.font = 'SaiyanSans';
+        label.font = 'Saiyan-Sans';
         label.fill = '#fff';
         label.setShadow(0, 0, 'rgba(0,0,0,1)', 3);
         label.anchor.setTo(...anchor);
