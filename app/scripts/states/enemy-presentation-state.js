@@ -26,7 +26,7 @@ class EnemyPresentationState extends AbstractState {
         this._setupEnemy();
         this._displayEnemy();
 
-        this.displayCentralMessage({ text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
+        this.shout({ text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
 
         Utilities.timeout(this, this.lifetime, this.cb);
 

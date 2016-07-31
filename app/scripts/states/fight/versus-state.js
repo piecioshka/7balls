@@ -54,7 +54,7 @@ class VersusState extends FightState {
         this._setupFight();
 
         this.displayLogo();
-        this.displayCentralMessage({ text: `${this.game.locale.VERSUS_STATE_WELCOME}` });
+        this.shout({ text: `${this.game.locale.VERSUS_STATE_WELCOME}` });
 
         this.loadSoundPreferences();
     }
@@ -105,7 +105,7 @@ class VersusState extends FightState {
         // Disable keyboard globally.
         this.input.keyboard.enabled = false;
 
-        this.displayCentralMessage({ text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
+        this.shout({ text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
 
         player.phaser.play(playerSate);
         enemy.phaser.play(enemyState);

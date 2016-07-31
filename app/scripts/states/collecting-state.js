@@ -41,7 +41,7 @@ class CollectingState extends AbstractState {
         this._setupBalls(random);
         this._setupPlayerSprite();
 
-        this.displayCentralMessage({ text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
+        this.shout({ text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
 
         this._setupTimer(random);
 
