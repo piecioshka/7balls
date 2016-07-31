@@ -37,21 +37,20 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [x] dodać odznakę - link do GitHuba
 * [x] zamiana `undefined` na `null`
 * [x] nie działa na IE9, bo nie ma `Object.assign` - użyć `lodash.assign`
-* [ ] dodać tryb `fullscreen`
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
-* [ ] przenieść `DefinitionTypes` do katalogu z dokumentacją
 * [ ] przenieść ładowanie assetów do state-a Preload
 * [ ] kucanie powinno być na stałe (nie trzeba tak jak przy uderzeniu wracać do normalnej postaci)
 * [ ] kucanie nie powinno uderzać zawodnika (rozszerzać bounding boxa)
 * [ ] poprawić dodanie customowej czcionki
 * [ ] czy faktycznie musimy definiować klawisze jako properties klasy?
 * [ ] nie używać fonta `Sayian sans` do wszystkiego, tylko do napisu DBP
-* [ ] `availability` -> `capabilities`
 
 ### Rozwój
 
 * [x] wykorzystajmy `webpack-dev-server`, aby nie czekać na zmiany
+* [x] przenieść `DefinitionTypes` do katalogu `misc`
+* [ ] dodać tryb `fullscreen`
 * [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
 * [ ] czy trzeba tworzyć nowy zegar? czy nie można skorzystać z już istniejącego dodając tylko do `this.time.events.add`?
 * [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)
