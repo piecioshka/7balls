@@ -1,7 +1,7 @@
-import AbstractState from './abstract-state';
-import Utilities from '../common/utilities';
+import AbstractState from '../abstract-state';
+import Utilities from '../../common/utilities';
 
-import { loadSoundPreferences } from '../helpers/audio';
+import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class ShenronState extends AbstractState {
     sound = {

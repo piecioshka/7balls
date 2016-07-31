@@ -1,9 +1,9 @@
-import Configuration from '../configuration';
-import Utilities from '../common/utilities';
-import AbstractState from './abstract-state';
+import AbstractState from '../abstract-state';
+import Configuration from '../../configuration';
+import Utilities from '../../common/utilities';
 
-import { shout, addSaiyanLabel } from '../helpers/meesage';
-import { loadSoundPreferences } from '../helpers/audio';
+import { shout, addSaiyanLabel } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class CollectingState extends AbstractState {
     layer = null;

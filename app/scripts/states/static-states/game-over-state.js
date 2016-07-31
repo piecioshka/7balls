@@ -1,5 +1,5 @@
-import AbstractState from './abstract-state';
-import { loadSoundPreferences } from '../helpers/audio';
+import AbstractState from '../abstract-state';
+import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class GameOverState extends AbstractState {
     sound = {
@@ -45,7 +45,7 @@ export default class GameOverState extends AbstractState {
         ga('send', 'event', 'game', 'over-try-again');
 
         this.sound.dramatic.stop();
-        this.state.start('Menu');
+        this.state.start('SelectCharacter');
     }
 
     _setupSound() {

@@ -1,9 +1,9 @@
-import AbstractState from './abstract-state';
-import Utilities from '../common/utilities';
-import Character from '../models/characters/character';
+import AbstractState from '../abstract-state';
+import Utilities from '../../common/utilities';
+import Character from '../../models/characters/character';
 
-import { shout } from '../helpers/meesage';
-import { loadSoundPreferences } from '../helpers/audio';
+import { shout } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class MealState extends AbstractState {
     lifetime = null;

@@ -1,15 +1,15 @@
-import AbstractState from './abstract-state';
-import Goku from '../models/characters/goku';
-import Vegeta from '../models/characters/vegeta';
-import Piccolo from '../models/characters/piccolo';
+import AbstractState from '../abstract-state';
+import Goku from '../../models/characters/goku';
+import Vegeta from '../../models/characters/vegeta';
+import Piccolo from '../../models/characters/piccolo';
 
-import Freeza from '../models/characters/freeza';
-import Cell from '../models/characters/cell';
-import Bubu from '../models/characters/bubu';
+import Freeza from '../../models/characters/freeza';
+import Cell from '../../models/characters/cell';
+import Bubu from '../../models/characters/bubu';
 
-import { loadSoundPreferences } from '../helpers/audio';
+import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class MenuState extends AbstractState {
+export default class SelectCharacterState extends AbstractState {
     gokuCard = null;
     vegetaCard = null;
     piccoloCard = null;

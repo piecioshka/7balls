@@ -1,7 +1,7 @@
-import AbstractState from './abstract-state';
+import AbstractState from '../abstract-state';
 
-import { displayCentralMessage } from '../helpers/meesage';
-import { loadSoundPreferences } from '../helpers/audio';
+import { displayCentralMessage } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class MessageState extends AbstractState {
     body = null;

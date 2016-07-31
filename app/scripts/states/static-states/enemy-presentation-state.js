@@ -1,8 +1,8 @@
-import AbstractState from './abstract-state';
-import Utilities from '../common/utilities';
+import AbstractState from '../abstract-state';
+import Utilities from '../../common/utilities';
 
-import { shout } from '../helpers/meesage';
-import { loadSoundPreferences } from '../helpers/audio';
+import { shout } from '../../helpers/meesage';
+import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class EnemyPresentationState extends AbstractState {
     cb = null;

@@ -1,7 +1,7 @@
-import AbstractState from './abstract-state';
-import { loadSoundPreferences } from '../helpers/audio';
+import AbstractState from '../abstract-state';
+import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class LanguageState extends AbstractState {
+export default class SelectLanguageState extends AbstractState {
     plCard = null;
     enCard = null;
     onEnter = null;
@@ -60,7 +60,7 @@ export default class LanguageState extends AbstractState {
             body: this.game.locale.MESSAGE_STATE_WELCOME,
             lifetime: Phaser.Timer.SECOND * 5,
             cb: () => {
-                this.game.state.start('Menu');
+                this.game.state.start('SelectCharacter');
             }
         });
 
