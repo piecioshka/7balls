@@ -17,7 +17,7 @@ class Utilities {
      */
     static timesRandomAsync(state, max, lifetime, cb) {
         let index = 0;
-        const times = Utilities.random(1, max - 1);
+        let times = Utilities.random(1, max - 1);
 
         (function loop() {
             Utilities.timeout(state, lifetime, () => {
@@ -38,7 +38,7 @@ class Utilities {
      * @param {Function} cb Callback.
      */
     static interval(state, lifetime, cb) {
-        const clock = state.time.create();
+        let clock = state.time.create();
 
         clock.repeat(lifetime, Infinity, cb);
         clock.start();

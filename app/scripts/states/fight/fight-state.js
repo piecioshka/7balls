@@ -62,27 +62,27 @@ class FightState extends AbstractState {
     }
 
     static _defineAnimations(character) {
-        const resizeMaximum = () => {
+        let resizeMaximum = () => {
             character.body.setSize(150, 200, 0, 0);
         };
-        const reduceByHalf = () => {
+        let reduceByHalf = () => {
             character.body.setSize(150, 100, 0, 0);
         };
-        const revertDefaultSize = () => {
+        let revertDefaultSize = () => {
             character.body.setSize(100, 200, 0, 0);
         };
 
-        const sitting = character.animations.add('sitting', [4, 5], 4, false);
+        let sitting = character.animations.add('sitting', [4, 5], 4, false);
 
         sitting.onStart.add(reduceByHalf);
         sitting.onComplete.add(revertDefaultSize);
 
-        const kicking = character.animations.add('kicking', [12, 13], 16, false);
+        let kicking = character.animations.add('kicking', [12, 13], 16, false);
 
         kicking.onStart.add(resizeMaximum);
         kicking.onComplete.add(revertDefaultSize);
 
-        const boxing = character.animations.add('boxing', [16, 17], 16, false);
+        let boxing = character.animations.add('boxing', [16, 17], 16, false);
 
         boxing.onStart.add(resizeMaximum);
         boxing.onComplete.add(revertDefaultSize);
@@ -98,15 +98,15 @@ class FightState extends AbstractState {
     }
 
     _addAvatar(x, y, key) {
-        const avatar = this.add.image(x, y, key);
+        let avatar = this.add.image(x, y, key);
 
         avatar.width = Configuration.FIGHT_CHARACTER_AVATAR_WIDTH;
         avatar.height = Configuration.FIGHT_CHARACTER_AVATAR_HEIGHT;
     }
 
     _addBar(x, y, key, anchor = [0, 0]) {
-        const blank = this.add.image(x, y, 'bar-blank');
-        const color = this.add.image(x, y, key);
+        let blank = this.add.image(x, y, 'bar-blank');
+        let color = this.add.image(x, y, key);
 
         blank.anchor.setTo(...anchor);
         color.anchor.setTo(...anchor);
@@ -177,7 +177,7 @@ class FightState extends AbstractState {
     }
 
     _setupPlayerOptions() {
-        const player = this.game.player;
+        let player = this.game.player;
 
         this.addSaiyanLabel(21, 18, 'HP');
         this.addSaiyanLabel(8, 48, 'EXP');
@@ -193,17 +193,17 @@ class FightState extends AbstractState {
     }
 
     _updatePlayerOptionsHP() {
-        const hp = this.game.player.hp;
-        const imageWidth = this.cache.getImage('bar-hp').width;
-        const width = hp * imageWidth / 100;
+        let hp = this.game.player.hp;
+        let imageWidth = this.cache.getImage('bar-hp').width;
+        let width = hp * imageWidth / 100;
 
         this.options.player.hp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
     }
 
     _updatePlayerOptionsEXP() {
-        const exp = this.game.player.exp;
-        const imageWidth = this.cache.getImage('bar-exp').width;
-        const width = exp * imageWidth / 100;
+        let exp = this.game.player.exp;
+        let imageWidth = this.cache.getImage('bar-exp').width;
+        let width = exp * imageWidth / 100;
 
         this.options.player.exp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
     }
@@ -213,7 +213,7 @@ class FightState extends AbstractState {
     }
 
     _removePlayerHP(value) {
-        const player = this.game.player;
+        let player = this.game.player;
 
         player.hp -= value;
 
@@ -227,7 +227,7 @@ class FightState extends AbstractState {
     }
 
     _addPlayerEXP(value) {
-        const player = this.game.player;
+        let player = this.game.player;
 
         player.exp += value;
 
@@ -287,11 +287,11 @@ class FightState extends AbstractState {
     }
 
     _setupKeyboard() {
-        const player = this.game.player;
-        const c = this.input.keyboard.addKey(Phaser.Keyboard.C);
-        const x = this.input.keyboard.addKey(Phaser.Keyboard.X);
-        const up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
-        const space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
+        let player = this.game.player;
+        let c = this.input.keyboard.addKey(Phaser.Keyboard.C);
+        let x = this.input.keyboard.addKey(Phaser.Keyboard.X);
+        let up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
+        let space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
         // Stop the following keys from propagating up to the browser.
         this.input.keyboard.addKeyCapture([
@@ -317,8 +317,8 @@ class FightState extends AbstractState {
     }
 
     _handleKeyboard() {
-        const player = this.game.player;
-        const keyboard = this.input.keyboard;
+        let player = this.game.player;
+        let keyboard = this.input.keyboard;
 
         FightState._handleCharacterVelocity(player);
 

@@ -2,49 +2,49 @@ import Utilities from '../common/utilities';
 
 class Computer {
     static applyArtificialIntelligence(state, character) {
-        const walkingLeft = () => {
+        let walkingLeft = () => {
             Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 20, () => {
                 character.phaser.events.onLeft.dispatch();
             });
         };
-        const walkingRight = () => {
+        let walkingRight = () => {
             Utilities.timesRandomAsync(state, 10, Phaser.Timer.SECOND / 20, () => {
                 character.phaser.events.onRight.dispatch();
             });
         };
-        const boxing = () => {
+        let boxing = () => {
             Utilities.timesRandomAsync(state, 5, Phaser.Timer.SECOND / 4, () => {
                 character.phaser.events.onBoxing.dispatch();
             });
         };
-        const kicking = () => {
+        let kicking = () => {
             Utilities.timesRandomAsync(state, 5, Phaser.Timer.SECOND / 4, () => {
                 character.phaser.events.onKicking.dispatch();
             });
         };
-        const jumping = () => {
+        let jumping = () => {
             character.phaser.events.onJumping.dispatch();
         };
-        const sitting = () => {
+        let sitting = () => {
             character.phaser.events.onSitting.dispatch();
         };
 
-        const moves = [
+        let moves = [
             walkingLeft, walkingRight
         ];
 
-        const dodge = [
+        let dodge = [
             jumping, sitting
         ];
 
-        const fight = [
+        let fight = [
             boxing, kicking
         ];
 
-        const start = (intervalTime, strategy) => {
+        let start = (intervalTime, strategy) => {
             Utilities.interval(state, intervalTime, () => {
-                const random = Utilities.random(0, strategy.length - 1);
-                const move = strategy[random];
+                let random = Utilities.random(0, strategy.length - 1);
+                let move = strategy[random];
 
                 move();
             });
