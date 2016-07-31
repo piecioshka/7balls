@@ -83,7 +83,7 @@ export default class SelectCharacterState extends Phaser.State {
                     body: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
                     lifetime: Phaser.Timer.SECOND * 5,
                     cb: () => {
-                        this.state.start('Collecting');
+                        this.state.start('CollectDragonBalls');
                     }
                 });
             }

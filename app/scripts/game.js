@@ -1,7 +1,7 @@
 import Configuration from './configuration';
 
 import BootstrapState from './states/bootstrap-state';
-import CollectingState from './states/collect-states/collecting-state';
+import CollectDragonBallsState from './states/collect-states/collect-dragon-balls-state';
 import EnemyPresentationState from './states/static-states/enemy-presentation-state';
 import GameOverState from './states/static-states/game-over-state';
 import SelectLanguageState from './states/select-states/select-language-state';
@@ -21,7 +21,7 @@ export default class Game {
 
         // List of all states.
         this.game.state.add('Bootstrap', BootstrapState);
-        this.game.state.add('Collecting', CollectingState);
+        this.game.state.add('CollectDragonBalls', CollectDragonBallsState);
         this.game.state.add('EnemyPresentation', EnemyPresentationState);
         this.game.state.add('GameOver', GameOverState);
         this.game.state.add('SelectLanguage', SelectLanguageState);

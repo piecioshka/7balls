@@ -5,7 +5,7 @@ import Utilities from '../../common/utilities';
 import { shout, addSaiyanLabel } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class CollectingState extends Phaser.State {
+export default class CollectDragonBallsState extends Phaser.State {
     layer = null;
     sound = {
         candypop: null,
