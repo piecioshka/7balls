@@ -1,4 +1,3 @@
-
 import Configuration from '../../configuration';
 import Utilities from '../../common/utilities';
 
@@ -42,7 +41,7 @@ export default class CollectDragonBallsState extends Phaser.State {
     _setupPlayerSprite() {
         let player = this.game.player;
 
-        player.phaser = this.add.sprite(30, 50, `${player.id}-collecting`);
+        player.phaser = this.add.sprite(30, 60, `${player.id}-collecting`);
         player.phaser.anchor.setTo(0.5, 0.5);
 
         this._defineDefaultProperties(player);
@@ -52,7 +51,7 @@ export default class CollectDragonBallsState extends Phaser.State {
         this.physics.arcade.enable(character.phaser);
 
         character.phaser.body.collideWorldBounds = true;
-        character.phaser.body.setSize(30, 30, 0, 10);
+        character.phaser.body.setSize(30, 30, 5, 30);
     }
 
     _setupBalls(random) {
