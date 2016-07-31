@@ -74,7 +74,7 @@ let displayCentralMessage = (game, { text, lifetime = Phaser.Timer.SECOND * 2, f
     return message;
 };
 
-let displayVersion = (game) => {
+let displayGameVersion = (game) => {
     let version = game.add.text(5, game.height - 20, 'v' + pkg.version);
 
     version.font = 'Arial';
@@ -89,5 +89,5 @@ module.exports = {
     addSaiyanLabel,
     shout,
     displayCentralMessage,
-    displayVersion
+    displayGameVersion
 };

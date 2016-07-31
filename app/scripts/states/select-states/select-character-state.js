@@ -7,7 +7,7 @@ import Freeza from '../../models/characters/freeza';
 import Cell from '../../models/characters/cell';
 import Bubu from '../../models/characters/bubu';
 
-import { displayVersion } from '../../helpers/meesage';
+import { displayGameVersion } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';
 
 export default class SelectCharacterState extends Phaser.State {
@@ -48,7 +48,7 @@ export default class SelectCharacterState extends Phaser.State {
         // Default: select Son Goku.
         this._selectGoku();
 
-        displayVersion(this.game);
+        displayGameVersion(this.game);
         loadSoundPreferences(this.game);
     }
 
