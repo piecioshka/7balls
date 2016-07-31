@@ -31,17 +31,6 @@ export default class VersusState extends FightState {
         }
     };
 
-    preload() {
-        super.preload();
-
-        this.load.image('freeza-card', './assets/graphics/characters/freeza/freeza-card.png');
-        this.load.image('cell-card', './assets/graphics/characters/cell/cell-card.png');
-        this.load.image('bubu-card', './assets/graphics/characters/bubu/bubu-card.png');
-
-        this.load.image('bar-hp-invert', './assets/graphics/bars/hp-invert.png');
-        this.load.image('bar-exp-invert', './assets/graphics/bars/exp-invert.png');
-    }
-
     create() {
         this.add.image(0, 0, 'bg-versus-sky');
 

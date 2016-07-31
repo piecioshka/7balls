@@ -3,46 +3,11 @@ let debug = {
 };
 
 import Configuration from '../../configuration';
-import AbstractState from '../abstract-state';
+
 
 import { addSaiyanLabel } from '../../helpers/meesage';
 
-export default class FightState extends AbstractState {
-    preload() {
-        super.preload();
-
-        this.load.image('bg-versus-hell', './assets/graphics/backgrounds/versus/bg-versus-hell.png');
-        this.load.image('bg-versus-sky', './assets/graphics/backgrounds/versus/bg-versus-sky.png');
-
-        this.load.image('logo-minimal', './assets/graphics/logo/logo-minimal.png');
-
-        this.load.image('bar-blank', './assets/graphics/bars/blank.png');
-        this.load.image('bar-hp', './assets/graphics/bars/hp.png');
-        this.load.image('bar-exp', './assets/graphics/bars/exp.png');
-
-        this.load.spritesheet('goku-spritesheet', './assets/graphics/characters/goku/goku-fight.png', 150, 200);
-        this.load.spritesheet('vegeta-spritesheet', './assets/graphics/characters/vegeta/vegeta-fight.png', 150, 200);
-        this.load.spritesheet('piccolo-spritesheet', './assets/graphics/characters/piccolo/piccolo-fight.png', 150, 200);
-
-        this.load.spritesheet('freeza-spritesheet', './assets/graphics/characters/freeza/freeza-fight.png', 150, 200);
-        this.load.spritesheet('cell-spritesheet', './assets/graphics/characters/cell/cell-fight.png', 150, 200);
-        this.load.spritesheet('bubu-spritesheet', './assets/graphics/characters/bubu/bubu-fight.png', 150, 200);
-
-        this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
-
-        // Use this when character has level less than first threshold.
-        this.load.audio('sound-weakkick', './assets/sound/dbz/weakkick.ogg');
-        this.load.audio('sound-weakpunch', './assets/sound/dbz/weakpunch.ogg');
-
-        // Use this when character has level less than second threshold.
-        this.load.audio('sound-mediumkick', './assets/sound/dbz/mediumkick.ogg');
-        this.load.audio('sound-mediumpunch', './assets/sound/dbz/mediumpunch.ogg');
-
-        // Use this when character has level less than max.
-        this.load.audio('sound-strongkick', './assets/sound/dbz/strongkick.ogg');
-        this.load.audio('sound-strongpunch', './assets/sound/dbz/strongpunch.ogg');
-    }
-
+export default class FightState extends Phaser.State {
     displayLogo() {
         this.add.image((this.game.width / 2) - (this.cache.getImage('logo-minimal').width / 2), 5, 'logo-minimal');
     }

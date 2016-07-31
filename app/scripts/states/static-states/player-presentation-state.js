@@ -1,9 +1,9 @@
-import AbstractState from '../abstract-state';
+
 import Utilities from '../../common/utilities';
 
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class PlayerPresentationState extends AbstractState {
+export default class PlayerPresentationState extends Phaser.State {
     name = null;
     cb = null;
     lifetime = null;
@@ -12,21 +12,6 @@ export default class PlayerPresentationState extends AbstractState {
         this.name = name;
         this.cb = cb;
         this.lifetime = lifetime;
-    }
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-player', './assets/graphics/backgrounds/bg-player.png');
-
-        this.load.image('goku', './assets/graphics/characters/goku/poster/goku.png');
-        this.load.image('goku-halo', './assets/graphics/characters/goku/poster/goku-halo.png');
-
-        this.load.image('vegeta', './assets/graphics/characters/vegeta/poster/vegeta.png');
-        this.load.image('vegeta-halo', './assets/graphics/characters/vegeta/poster/vegeta-halo.png');
-
-        this.load.image('piccolo', './assets/graphics/characters/piccolo/poster/piccolo.png');
-        this.load.image('piccolo-halo', './assets/graphics/characters/piccolo/poster/piccolo-halo.png');
     }
 
     create() {

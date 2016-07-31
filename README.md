@@ -48,13 +48,14 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 
 * [x] wykorzystajmy `webpack-dev-server`, aby nie czekać na zmiany
 * [x] przenieść `DefinitionTypes` do katalogu `misc`
+* [x] przenieść ładowanie assetów do `BootstrapState`
 * [ ] czy faktycznie musimy definiować klawisze jako properties klasy?
-* [ ] przenieść ładowanie assetów do state-a Preload
 * [ ] dodać tryb `fullscreen`
 * [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
 * [ ] czy trzeba tworzyć nowy zegar? czy nie można skorzystać z już istniejącego dodając tylko do `this.time.events.add`?
 * [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)
 * [ ] dodać `credits` - autorzy gry
+* [ ] po porażce przegrany powinien leżeć na ziemi
 
 ### Inne związane z realizacją projektu
 

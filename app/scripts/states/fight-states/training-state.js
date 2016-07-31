@@ -32,12 +32,6 @@ export default class TrainingState extends FightState {
         this.cb = cb;
     }
 
-    preload() {
-        super.preload();
-
-        this.load.image('bg-training-capsule', './assets/graphics/backgrounds/training/bg-training-capsule.png');
-    }
-
     create() {
         this.add.image(0, 0, 'bg-training-capsule');
 

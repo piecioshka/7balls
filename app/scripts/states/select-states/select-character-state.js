@@ -1,4 +1,4 @@
-import AbstractState from '../abstract-state';
+
 import Goku from '../../models/characters/goku';
 import Vegeta from '../../models/characters/vegeta';
 import Piccolo from '../../models/characters/piccolo';
@@ -9,7 +9,7 @@ import Bubu from '../../models/characters/bubu';
 
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class SelectCharacterState extends AbstractState {
+export default class SelectCharacterState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
     piccoloCard = null;
@@ -24,18 +24,6 @@ export default class SelectCharacterState extends AbstractState {
     init() {
         this.cards = [];
         this.game.enemies = [Freeza, Cell, Bubu];
-    }
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.png');
-
-        this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.png');
-        this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.png');
-        this.load.image('piccolo-card', './assets/graphics/characters/piccolo/piccolo-card.png');
-
-        this.load.audio('scouter', './assets/sound/dbz/scouter.ogg');
     }
 
     create() {

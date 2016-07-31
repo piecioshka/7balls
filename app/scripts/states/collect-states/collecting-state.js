@@ -1,37 +1,16 @@
-import AbstractState from '../abstract-state';
+
 import Configuration from '../../configuration';
 import Utilities from '../../common/utilities';
 
 import { shout, addSaiyanLabel } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class CollectingState extends AbstractState {
+export default class CollectingState extends Phaser.State {
     layer = null;
     sound = {
         candypop: null,
         radar: null
     };
-
-    preload() {
-        super.preload();
-
-        this.load.spritesheet('spr-collecting', './assets/graphics/spritesheet/spr-collecting.png', 40, 40);
-
-        this.load.tilemap('collecting-1', './assets/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-2', './assets/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-3', './assets/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
-
-        this.load.json('positions-1', './assets/balls/positions-1.json');
-        this.load.json('positions-2', './assets/balls/positions-2.json');
-        this.load.json('positions-3', './assets/balls/positions-3.json');
-
-        this.load.image('goku-collecting', './assets/graphics/characters/goku/goku-collecting.png');
-        this.load.image('vegeta-collecting', './assets/graphics/characters/vegeta/vegeta-collecting.png');
-        this.load.image('piccolo-collecting', './assets/graphics/characters/piccolo/piccolo-collecting.png');
-
-        this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
-        this.load.audio('sound-radar', './assets/sound/dbk/devices_02.ogg');
-    }
 
     create() {
         let random = Utilities.random(1, 3);

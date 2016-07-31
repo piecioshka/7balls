@@ -1,26 +1,16 @@
-import AbstractState from '../abstract-state';
+
 import Utilities from '../../common/utilities';
 
 import { shout } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class EnemyPresentationState extends AbstractState {
+export default class EnemyPresentationState extends Phaser.State {
     cb = null;
     lifetime = null;
 
     init({ cb, lifetime }) {
         this.cb = cb;
         this.lifetime = lifetime;
-    }
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-enemy', './assets/graphics/backgrounds/bg-enemy.png');
-
-        this.load.image('freeza', './assets/graphics/characters/freeza/poster/freeza.png');
-        this.load.image('cell', './assets/graphics/characters/cell/poster/cell.png');
-        this.load.image('bubu', './assets/graphics/characters/bubu/poster/bubu.png');
     }
 
     create() {

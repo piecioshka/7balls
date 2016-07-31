@@ -1,9 +1,9 @@
-import AbstractState from '../abstract-state';
+
 
 import { displayCentralMessage } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class MessageState extends AbstractState {
+export default class MessageState extends Phaser.State {
     body = null;
     cb = null;
     lifetime = null;
@@ -12,12 +12,6 @@ export default class MessageState extends AbstractState {
         this.body = body;
         this.cb = cb;
         this.lifetime = lifetime;
-    }
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-message', './assets/graphics/backgrounds/bg-message.png');
     }
 
     create() {

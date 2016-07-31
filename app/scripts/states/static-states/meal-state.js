@@ -1,23 +1,17 @@
-import AbstractState from '../abstract-state';
+
 import Utilities from '../../common/utilities';
 import Character from '../../models/characters/character';
 
 import { shout } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class MealState extends AbstractState {
+export default class MealState extends Phaser.State {
     lifetime = null;
     cb = null;
 
     init({ lifetime, cb }) {
         this.lifetime = lifetime;
         this.cb = cb;
-    }
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-meal-house', './assets/graphics/backgrounds/meal/bg-meal-house.png');
     }
 
     create() {

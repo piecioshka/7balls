@@ -1,20 +1,11 @@
-import AbstractState from '../abstract-state';
+
 
 import { loadSoundPreferences } from '../../helpers/audio';
 
-export default class WinnerState extends AbstractState {
+export default class WinnerState extends Phaser.State {
     sound = {
         thing1: null
     };
-
-    preload() {
-        super.preload();
-
-        this.load.image('bg-winner', './assets/graphics/backgrounds/bg-winner.png');
-        this.load.image('btn-try-again', './assets/graphics/buttons/try-again.png');
-
-        this.load.audio('sound-thing1', './assets/sound/dbk/thing1.ogg');
-    }
 
     create() {
         ga('send', 'event', 'game', 'win');
