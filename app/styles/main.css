@@ -8,3 +8,9 @@ body {
     /* Workaround to use custom font in Phaser.js */
     font-family: 'Saiyan-Sans', serif;
 }
+
+#game {
+    width: 800px;
+    height: 400px;
+    background: #000;
+}

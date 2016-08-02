@@ -50,6 +50,7 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [x] przenieść `DefinitionTypes` do katalogu `misc`
 * [x] przenieść ładowanie assetów do `BootstrapState`
 * [x] prezentować aktualną wersję na ekranach wyboru języka i zawodnika
+* [x] stworzyć loader podczas ładowania assetów
 * [ ] czy faktycznie musimy definiować klawisze jako properties klasy?
 * [ ] dodać tryb `fullscreen`
 * [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
