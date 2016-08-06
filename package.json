@@ -12,7 +12,8 @@
         "clear": "rm -rf node_modules/ npm-debug.log app/dist/",
         "build": "webpack --profile",
         "watch": "webpack -w",
-        "dev": "webpack-dev-server --no-info --compress --hot --content-base app"
+        "dev": "webpack-dev-server --no-info --compress --hot --content-base app",
+        "count": "find app/scripts -name '*.js' -not -path 'app/scripts/vendor*' | xargs wc -l | sort -r"
     },
     "devDependencies": {
         "assert": "^1.4.1",
