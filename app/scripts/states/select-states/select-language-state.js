@@ -1,15 +1,19 @@
 let isObject = require('lodash.isobject');
 let assert = require('assert');
 
-import { displayGameVersion } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
+let utils = require('../../common/utils');
+let { displayGameVersion } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
 
+/**
+ * @extends Phaser.State
+ */
 export default class SelectLanguageState extends Phaser.State {
     plCard = null;
     enCard = null;
     onEnter = null;
 
-    sound = {
+    audio = {
         scouter: null
     };
 
@@ -60,7 +64,7 @@ export default class SelectLanguageState extends Phaser.State {
         });
 
         // Add some audio effect.
-        this.sound.scouter.play();
+        this.audio.scouter.play();
     }
 
     _setupKeyboard() {
@@ -81,7 +85,7 @@ export default class SelectLanguageState extends Phaser.State {
     }
 
     _setupSound() {
-        this.sound.scouter = this.add.audio('scouter');
+        this.audio.scouter = this.add.audio('scouter');
     }
 
     _selectPolish() {

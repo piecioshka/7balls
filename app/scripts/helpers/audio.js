@@ -1,7 +1,9 @@
+let config = require('../configs');
+let MUTE_MODES = ['unmute', 'mute'];
+
 let loadSoundPreferences = (game) => {
-    let key = 'dbp-sound-mute';
-    let modes = ['unmute', 'mute'];
-    let translateState = () => modes[Number(game.sound.mute)];
+    let key = config.STORAGE_AUDIO_KEY;
+    let translateState = () => MUTE_MODES[Number(game.sound.mute)];
 
     game.sound.mute = Boolean(Number(localStorage.getItem(key)));
 

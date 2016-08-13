@@ -1,4 +1,4 @@
-import Character from './character';
+import Character from '../character';
 
 export default class Piccolo extends Character {
     constructor(settings = {}) {

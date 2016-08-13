@@ -1,10 +1,12 @@
+let utils = require('../../common/utils');
+let Character = require('../../models/character');
 
-import Utilities from '../../common/utils';
-import Character from '../../models/characters/character';
+let { shout } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
 
-import { shout } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends Phaser.State
+ */
 export default class MealState extends Phaser.State {
     lifetime = null;
     cb = null;
@@ -21,7 +23,7 @@ export default class MealState extends Phaser.State {
 
         shout(this.game, { text: `${this.game.locale.MEAL_STATE_WELCOME}` });
 
-        Utilities.timeout(this, this.lifetime, this.cb);
+        utils.timeout(this, this.lifetime, this.cb);
 
         loadSoundPreferences(this.game);
     }

@@ -1,13 +1,17 @@
-import Utilities from '../../common/utils';
+let utils = require('../../common/utils');
+
+let { shout } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
+
 import FightState from './fight-state';
 
-import { shout } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends FightState
+ */
 export default class TrainingState extends FightState {
     lifetime = null;
     cb = null;
-    sound = {
+    audio = {
         jump: null,
 
         weakkick: null,
@@ -35,7 +39,7 @@ export default class TrainingState extends FightState {
     create() {
         this.add.image(0, 0, 'bg-training-capsule');
 
-        Utilities.timeout(this, this.lifetime, this.cb);
+        utils.timeout(this, this.lifetime, this.cb);
 
         this._setupWorld();
         this._setupKeyboard();

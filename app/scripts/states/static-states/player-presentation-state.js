@@ -1,8 +1,10 @@
+let utils = require('../../common/utils');
 
-import Utilities from '../../common/utils';
+let { loadSoundPreferences } = require('../../helpers/audio');
 
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends Phaser.State
+ */
 export default class PlayerPresentationState extends Phaser.State {
     name = null;
     cb = null;
@@ -23,7 +25,7 @@ export default class PlayerPresentationState extends Phaser.State {
 
         this.add.image(getCenterPixel('width'), getCenterPixel('height'), this.name);
 
-        Utilities.timeout(this, this.lifetime, this.cb);
+        utils.timeout(this, this.lifetime, this.cb);
 
         loadSoundPreferences(this.game);
     }

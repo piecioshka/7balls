@@ -1,8 +1,10 @@
+let { loadSoundPreferences } = require('../../helpers/audio');
 
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends Phaser.State
+ */
 export default class GameOverState extends Phaser.State {
-    sound = {
+    audio = {
         dramatic: null
     };
 
@@ -18,7 +20,8 @@ export default class GameOverState extends Phaser.State {
         this._setupSound();
 
         loadSoundPreferences(this.game);
-        this.sound.dramatic.play();
+
+        this.audio.dramatic.play();
     }
 
     _setupKeyboard() {
@@ -35,11 +38,11 @@ export default class GameOverState extends Phaser.State {
     _tryAgain() {
         ga('send', 'event', 'game', 'over-try-again');
 
-        this.sound.dramatic.stop();
+        this.audio.dramatic.stop();
         this.state.start('SelectCharacter');
     }
 
     _setupSound() {
-        this.sound.dramatic = this.add.audio('sound-dramatic');
+        this.audio.dramatic = this.add.audio('sound-dramatic');
     }
 }

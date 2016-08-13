@@ -2,11 +2,13 @@ let debug = {
     log: require('debug')('7balls:fight-state:log')
 };
 
-import Configuration from '../../configs';
+let config = require('../../configs');
 
+let { addSaiyanLabel } = require('../../helpers/message');
 
-import { addSaiyanLabel } from '../../helpers/meesage';
-
+/**
+ * @extends Phaser.State
+ */
 export default class FightState extends Phaser.State {
     displayLogo() {
         this.add.image((this.game.width / 2) - (this.cache.getImage('logo-minimal').width / 2), 5, 'logo-minimal');
@@ -15,7 +17,7 @@ export default class FightState extends Phaser.State {
     _setupWorld() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.physics.arcade.gravity.set(0, 1);
-        this.world.setBounds(0, 0, this.game.width, this.game.height - Configuration.FIGHT_BOTTOM_MARGIN);
+        this.world.setBounds(0, 0, this.game.width, this.game.height - config.FIGHT_BOTTOM_MARGIN);
     }
 
     _defineDefaultProperties(character) {
@@ -65,8 +67,8 @@ export default class FightState extends Phaser.State {
     _addAvatar(x, y, key) {
         let avatar = this.add.image(x, y, key);
 
-        avatar.width = Configuration.FIGHT_CHARACTER_AVATAR_WIDTH;
-        avatar.height = Configuration.FIGHT_CHARACTER_AVATAR_HEIGHT;
+        avatar.width = config.FIGHT_CHARACTER_AVATAR_WIDTH;
+        avatar.height = config.FIGHT_CHARACTER_AVATAR_HEIGHT;
     }
 
     _addBar(x, y, key, anchor = [0, 0]) {
@@ -85,14 +87,14 @@ export default class FightState extends Phaser.State {
 
         character.phaser.events.onLeft = new Phaser.Signal();
         character.phaser.events.onLeft.add(() => {
-            character.phaser.body.velocity.x -= Configuration.FIGHT_HORIZONTAL_SPEED;
+            character.phaser.body.velocity.x -= config.FIGHT_HORIZONTAL_SPEED;
 
             debug.log('Character "%s" is LEFT', character.name);
         });
 
         character.phaser.events.onRight = new Phaser.Signal();
         character.phaser.events.onRight.add(() => {
-            character.phaser.body.velocity.x += Configuration.FIGHT_HORIZONTAL_SPEED;
+            character.phaser.body.velocity.x += config.FIGHT_HORIZONTAL_SPEED;
 
             debug.log('Character "%s" is RIGHT', character.name);
         });
@@ -110,9 +112,9 @@ export default class FightState extends Phaser.State {
                 return;
             }
 
-            this.sound.jump.play();
+            this.audio.jump.play();
 
-            character.phaser.body.velocity.y -= Configuration.FIGHT_JUMP;
+            character.phaser.body.velocity.y -= config.FIGHT_JUMP;
 
             character.phaser.play('jumping');
 
@@ -196,10 +198,10 @@ export default class FightState extends Phaser.State {
 
         player.exp += value;
 
-        if (player.exp >= Configuration.PLAYER_MAXIMUM_EXPERIENCE) {
+        if (player.exp >= config.PLAYER_MAXIMUM_EXPERIENCE) {
             player.exp = 0;
 
-            if (player.lvl < Configuration.PLAYER_MAXIMUM_LEVEL) {
+            if (player.lvl < config.PLAYER_MAXIMUM_LEVEL) {
                 player.lvl++;
             }
         }
@@ -209,45 +211,45 @@ export default class FightState extends Phaser.State {
     }
 
     _setupSound() {
-        this.sound.jump = this.add.audio('sound-jump');
+        this.audio.jump = this.add.audio('sound-jump');
 
-        this.sound.weakkick = this.add.audio('sound-weakkick');
-        this.sound.weakpunch = this.add.audio('sound-weakpunch');
+        this.audio.weakkick = this.add.audio('sound-weakkick');
+        this.audio.weakpunch = this.add.audio('sound-weakpunch');
 
-        this.sound.mediumkick = this.add.audio('sound-mediumkick');
-        this.sound.mediumpunch = this.add.audio('sound-mediumpunch');
+        this.audio.mediumkick = this.add.audio('sound-mediumkick');
+        this.audio.mediumpunch = this.add.audio('sound-mediumpunch');
 
-        this.sound.strongkick = this.add.audio('sound-strongkick');
-        this.sound.strongpunch = this.add.audio('sound-strongpunch');
+        this.audio.strongkick = this.add.audio('sound-strongkick');
+        this.audio.strongpunch = this.add.audio('sound-strongpunch');
     }
 
     _playKickSound(character) {
         switch (true) {
-            case character.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[0]:
-                this.sound.weakkick.play();
+            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[0]:
+                this.audio.weakkick.play();
                 break;
 
-            case character.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[1]:
-                this.sound.mediumkick.play();
+            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[1]:
+                this.audio.mediumkick.play();
                 break;
 
             default:
-                this.sound.strongkick.play();
+                this.audio.strongkick.play();
         }
     }
 
     _playPunchSound(character) {
         switch (true) {
-            case character.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[0]:
-                this.sound.weakpunch.play();
+            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[0]:
+                this.audio.weakpunch.play();
                 break;
 
-            case character.lvl < Configuration.FIGHT_LEVELS_THRESHOLD[1]:
-                this.sound.mediumpunch.play();
+            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[1]:
+                this.audio.mediumpunch.play();
                 break;
 
             default:
-                this.sound.strongpunch.play();
+                this.audio.strongpunch.play();
         }
     }
 
@@ -278,7 +280,7 @@ export default class FightState extends Phaser.State {
 
     static _handleCharacterVelocity(character) {
         character.phaser.body.velocity.x = 0;
-        character.phaser.body.velocity.y += Configuration.FIGHT_FALL_SPEED;
+        character.phaser.body.velocity.y += config.FIGHT_FALL_SPEED;
     }
 
     _handleKeyboard() {

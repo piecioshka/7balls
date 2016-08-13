@@ -1,9 +1,10 @@
+let { loadSoundPreferences } = require('../../helpers/audio');
 
-
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends Phaser.State
+ */
 export default class WinnerState extends Phaser.State {
-    sound = {
+    audio = {
         thing1: null
     };
 
@@ -17,7 +18,8 @@ export default class WinnerState extends Phaser.State {
         this._setupSound();
 
         loadSoundPreferences(this.game);
-        this.sound.thing1.play();
+
+        this.audio.thing1.play();
     }
 
     _setupKeyboard() {
@@ -34,11 +36,11 @@ export default class WinnerState extends Phaser.State {
     _tryAgain() {
         ga('send', 'event', 'game', 'win-try-again');
 
-        this.sound.thing1.stop();
+        this.audio.thing1.stop();
         this.state.start('SelectCharacter');
     }
 
     _setupSound() {
-        this.sound.thing1 = this.add.audio('sound-thing1');
+        this.audio.thing1 = this.add.audio('sound-thing1');
     }
 }

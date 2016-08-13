@@ -1,12 +1,15 @@
-import Configuration from '../../configs';
+let config = require('../../configs');
 import FightState from './fight-state';
 import Computer from '../../models/computer';
 
-import { shout, addSaiyanLabel } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
+let { shout, addSaiyanLabel } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
 
+/**
+ * @extends FightState
+ */
 export default class VersusState extends FightState {
-    sound = {
+    audio = {
         jump: null,
 
         weakkick: null,
@@ -65,10 +68,10 @@ export default class VersusState extends FightState {
         };
 
         player.phaser.events.onKicking.add(() => {
-            handlePlayerBlow('kicking', Configuration.VERSUS_KICKING_POINTS)
+            handlePlayerBlow('kicking', config.VERSUS_KICKING_POINTS)
         });
         player.phaser.events.onBoxing.add(() => {
-            handlePlayerBlow('boxing', Configuration.VERSUS_BOXING_POINTS)
+            handlePlayerBlow('boxing', config.VERSUS_BOXING_POINTS)
         });
         player.phaser.events.onDied.add(() => {
             this._finishFight('died', 'win');
@@ -81,8 +84,8 @@ export default class VersusState extends FightState {
             }
         };
 
-        enemy.phaser.events.onKicking.add(() => handleEnemyBlow('kicking', Configuration.VERSUS_KICKING_POINTS));
-        enemy.phaser.events.onBoxing.add(() => handleEnemyBlow('boxing', Configuration.VERSUS_BOXING_POINTS));
+        enemy.phaser.events.onKicking.add(() => handleEnemyBlow('kicking', config.VERSUS_KICKING_POINTS));
+        enemy.phaser.events.onBoxing.add(() => handleEnemyBlow('boxing', config.VERSUS_BOXING_POINTS));
         enemy.phaser.events.onDied.add(() => {
             this._finishFight('win', 'died');
         });
@@ -183,10 +186,10 @@ export default class VersusState extends FightState {
         let enemy = this.game.enemy;
         enemy.exp += value;
 
-        if (enemy.exp >= Configuration.PLAYER_MAXIMUM_EXPERIENCE) {
+        if (enemy.exp >= config.PLAYER_MAXIMUM_EXPERIENCE) {
             enemy.exp = 0;
 
-            if (enemy.lvl < Configuration.PLAYER_MAXIMUM_LEVEL) {
+            if (enemy.lvl < config.PLAYER_MAXIMUM_LEVEL) {
                 enemy.lvl++;
             }
         }

@@ -1,4 +1,3 @@
-
 import Goku from '../../models/characters/goku';
 import Vegeta from '../../models/characters/vegeta';
 import Piccolo from '../../models/characters/piccolo';
@@ -7,9 +6,12 @@ import Freeza from '../../models/characters/freeza';
 import Cell from '../../models/characters/cell';
 import Bubu from '../../models/characters/bubu';
 
-import { displayGameVersion } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
+let { displayGameVersion } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
 
+/**
+ * @extends Phaser.State
+ */
 export default class SelectCharacterState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
@@ -18,7 +20,7 @@ export default class SelectCharacterState extends Phaser.State {
     cardsIndex = 0;
     cards = null;
 
-    sound = {
+    audio = {
         scouter: null
     };
 
@@ -92,11 +94,11 @@ export default class SelectCharacterState extends Phaser.State {
         });
 
         // Add some audio effect.
-        this.sound.scouter.play();
+        this.audio.scouter.play();
     }
 
     _setupSound() {
-        this.sound.scouter = this.add.audio('scouter');
+        this.audio.scouter = this.add.audio('scouter');
     }
 
     _setupKeyboard() {

@@ -1,8 +1,9 @@
+let { displayCentralMessage } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
 
-
-import { displayCentralMessage } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends Phaser.State
+ */
 export default class MessageState extends Phaser.State {
     body = null;
     cb = null;

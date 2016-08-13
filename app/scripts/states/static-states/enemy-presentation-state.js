@@ -1,9 +1,11 @@
+let utils = require('../../common/utils');
 
-import Utilities from '../../common/utils';
+let { shout } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
 
-import { shout } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends Phaser.State
+ */
 export default class EnemyPresentationState extends Phaser.State {
     cb = null;
     lifetime = null;
@@ -21,7 +23,7 @@ export default class EnemyPresentationState extends Phaser.State {
 
         shout(this.game, { text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
 
-        Utilities.timeout(this, this.lifetime, this.cb);
+        utils.timeout(this, this.lifetime, this.cb);
 
         loadSoundPreferences(this.game);
     }

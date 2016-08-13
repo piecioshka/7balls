@@ -5,12 +5,15 @@ let debug = {
 // Czas opóźnienia do schowania paska postępu.
 const DISPLAY_LOADING_DELAY = 500;
 
+/**
+ * @extends Phaser.State
+ */
 export default class LoadingState extends Phaser.State {
     preload() {
         var loadingLabel = this.add.text(this.world.centerX, 150, 'Loading...', { font: '30px Arial', fill: '#ffffff' });
         loadingLabel.anchor.setTo(0.5, 0.5);
 
-        var pixelLoadingWidth = this.cache.getImage('pixel-loading').width
+        var pixelLoadingWidth = this.cache.getImage('pixel-loading').width;
         var progressBar = this.add.sprite(this.world.centerX - (pixelLoadingWidth / 2), 200, 'pixel-loading');
         this.load.setPreloadSprite(progressBar);
 

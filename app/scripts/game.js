@@ -1,4 +1,4 @@
-import Configuration from './configs';
+import config from './configs';
 
 import BootstrapState from './states/bootstrap-state';
 import LoadingState from './states/loading-state';
@@ -18,7 +18,7 @@ import WinnerState from './states/static-states/winner-state';
 export default class Game {
     constructor() {
         // Create game object.
-        this.game = new Phaser.Game(Configuration.GAME_WIDTH, Configuration.GAME_HEIGHT, Phaser.Canvas, Configuration.GAME_RENDER_ID);
+        this.game = new Phaser.Game(config.GAME_WIDTH, config.GAME_HEIGHT, Phaser.Canvas, config.GAME_RENDER_ID);
 
         // List of all states.
         this.game.state.add('Bootstrap', BootstrapState);

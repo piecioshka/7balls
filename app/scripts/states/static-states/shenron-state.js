@@ -1,18 +1,20 @@
+let utils = require('../../common/utils');
 
-import Utilities from '../../common/utils';
+let { loadSoundPreferences } = require('../../helpers/audio');
 
-import { loadSoundPreferences } from '../../helpers/audio';
-
+/**
+ * @extends Phaser.State
+ */
 export default class ShenronState extends Phaser.State {
-    sound = {
+    audio = {
         ambienceThunder: null
     };
 
     create() {
-        this.add.image(0, 0, 'bg-shenron-growing');
+        let background = this.add.image(0, 0, 'bg-shenron-growing');
 
-        Utilities.timeout(this, Phaser.Timer.SECOND, () => {
-            this.add.image(0, 0, 'bg-shenron');
+        utils.timeout(this, Phaser.Timer.SECOND, () => {
+            background.loadTexture('bg-shenron');
         });
 
         this._setupSound();
@@ -20,13 +22,14 @@ export default class ShenronState extends Phaser.State {
         this.game.time.events.add(Phaser.Timer.SECOND * 2, this._next, this);
 
         loadSoundPreferences(this.game);
-        this.sound.ambienceThunder.play();
+
+        this.audio.ambienceThunder.play();
     }
 
     _next() {
-        this.sound.ambienceThunder.stop();
+        this.audio.ambienceThunder.stop();
 
-        Utilities.timeout(this, Phaser.Timer.SECOND, () => {
+        utils.timeout(this, Phaser.Timer.SECOND, () => {
             this.state.start('PlayerPresentation', true, false, {
                 name: this.game.player.id,
                 lifetime: Phaser.Timer.SECOND * 2,
@@ -43,6 +46,6 @@ export default class ShenronState extends Phaser.State {
     }
 
     _setupSound() {
-        this.sound.ambienceThunder = this.add.audio('sound-ambience-thunder');
+        this.audio.ambienceThunder = this.add.audio('sound-ambience-thunder');
     }
 }

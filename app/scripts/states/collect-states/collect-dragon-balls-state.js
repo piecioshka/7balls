@@ -1,18 +1,21 @@
-import Configuration from '../../configs';
-import Utilities from '../../common/utils';
+let config = require('../../configs');
+let utils = require('../../common/utils');
 
-import { shout, addSaiyanLabel } from '../../helpers/meesage';
-import { loadSoundPreferences } from '../../helpers/audio';
+let { shout, addSaiyanLabel } = require('../../helpers/message');
+let { loadSoundPreferences } = require('../../helpers/audio');
 
+/**
+ * @extends Phaser.State
+ */
 export default class CollectDragonBallsState extends Phaser.State {
     layer = null;
-    sound = {
+    audio = {
         candypop: null,
         radar: null
     };
 
     create() {
-        let random = Utilities.random(1, 3);
+        let random = utils.random(1, 3);
 
         this._setupWorld(random);
         this._setupSound();
@@ -67,7 +70,7 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _setupTimer(random) {
-        let limit = Configuration.COLLECTING_MAPS_TIME_LIMIT[random - 1];
+        let limit = config.COLLECTING_MAPS_TIME_LIMIT[random - 1];
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
@@ -79,7 +82,7 @@ export default class CollectDragonBallsState extends Phaser.State {
             message.setText(`${this.game.locale.COLLECTING_STATE_TIME}: ${remain}`);
 
             if (remain === ending) {
-                this.sound.radar.play();
+                this.audio.radar.play();
                 message.anchor.setTo(0.5, 0.5);
                 message.x = this.game.width / 2;
                 message.y = this.game.height / 2;
@@ -89,7 +92,7 @@ export default class CollectDragonBallsState extends Phaser.State {
         }, this);
 
         clock.onComplete.add(() => {
-            this.sound.radar.stop();
+            this.audio.radar.stop();
             this.state.start('GameOver');
         });
 
@@ -97,8 +100,8 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _setupSound() {
-        this.sound.candypop = this.add.audio('sound-candypop');
-        this.sound.radar = this.add.audio('sound-radar');
+        this.audio.candypop = this.add.audio('sound-candypop');
+        this.audio.radar = this.add.audio('sound-radar');
     }
 
     update() {
@@ -111,10 +114,10 @@ export default class CollectDragonBallsState extends Phaser.State {
         this.physics.arcade.collide(this.game.player.phaser, this.game.balls, (player, ball) => {
             ball.destroy();
 
-            this.sound.candypop.play();
+            this.audio.candypop.play();
 
             if (this.game.balls.length === 0) {
-                this.sound.radar.stop();
+                this.audio.radar.stop();
                 this.state.start('Shenron');
             }
         });
@@ -127,19 +130,19 @@ export default class CollectDragonBallsState extends Phaser.State {
         player.phaser.body.velocity.x = player.phaser.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.phaser.body.velocity.x -= Configuration.COLLECTING_PLAYER_SPEED;
+            player.phaser.body.velocity.x -= config.COLLECTING_PLAYER_SPEED;
             player.phaser.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.phaser.body.velocity.x += Configuration.COLLECTING_PLAYER_SPEED;
+            player.phaser.body.velocity.x += config.COLLECTING_PLAYER_SPEED;
             player.phaser.angle = 10;
         } else {
             player.phaser.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            player.phaser.body.velocity.y -= Configuration.COLLECTING_PLAYER_SPEED;
+            player.phaser.body.velocity.y -= config.COLLECTING_PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            player.phaser.body.velocity.y += Configuration.COLLECTING_PLAYER_SPEED;
+            player.phaser.body.velocity.y += config.COLLECTING_PLAYER_SPEED;
         }
     }
 

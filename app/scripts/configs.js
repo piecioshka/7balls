@@ -1,7 +1,11 @@
-const Configuration = {
+let pkg = require('../../package.json');
+
+module.exports = {
     GAME_WIDTH: 800,
     GAME_HEIGHT: 400,
     GAME_RENDER_ID: 'game',
+
+    STORAGE_AUDIO_KEY: `${pkg.name}-sound-mute`,
 
     PLAYER_MAXIMUM_EXPERIENCE: 100,
     PLAYER_MAXIMUM_LEVEL: 100,
@@ -20,5 +24,3 @@ const Configuration = {
     VERSUS_KICKING_POINTS: 5,
     VERSUS_BOXING_POINTS: 3
 };
-
-export default Configuration;
