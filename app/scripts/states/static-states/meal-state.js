@@ -1,5 +1,5 @@
 let utils = require('../../common/utils');
-let Character = require('../../models/character');
+let Character = require('../../models/player');
 
 let { shout } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');

@@ -1,6 +1,6 @@
-import Character from '../character';
+import Player from '../player';
 
-export default class Freeza extends Character {
+export default class Freeza extends Player {
     constructor(settings = {}) {
         settings.id = 'freeza';
         settings.name = 'Freeza';

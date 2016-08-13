@@ -1,6 +1,6 @@
-import Character from '../character';
+import Player from '../player';
 
-export default class Cell extends Character {
+export default class Cell extends Player {
     constructor(settings = {}) {
         settings.id = 'cell';
         settings.name = 'Cell';

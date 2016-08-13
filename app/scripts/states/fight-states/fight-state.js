@@ -6,10 +6,53 @@ let config = require('../../configs');
 
 let { addSaiyanLabel } = require('../../helpers/message');
 
+function defineAnimations(character) {
+    let resizeMaximum = () => {
+        character.body.setSize(150, 200, 0, 0);
+    };
+    let reduceByHalf = () => {
+        character.body.setSize(150, 100, 0, 0);
+    };
+    let revertDefaultSize = () => {
+        character.body.setSize(100, 200, 0, 0);
+    };
+
+    let sitting = character.animations.add('sitting', [4, 5], 4, false);
+
+    sitting.onStart.add(reduceByHalf);
+    sitting.onComplete.add(revertDefaultSize);
+
+    let kicking = character.animations.add('kicking', [12, 13], 16, false);
+
+    kicking.onStart.add(resizeMaximum);
+    kicking.onComplete.add(revertDefaultSize);
+
+    let boxing = character.animations.add('boxing', [16, 17], 16, false);
+
+    boxing.onStart.add(resizeMaximum);
+    boxing.onComplete.add(revertDefaultSize);
+
+    character.animations.add('standing', [0, 1, 2], 4, true);
+    character.animations.add('jumping', [8, 9], 4, false);
+    character.animations.add('win', [20, 21], 4, false);
+    character.animations.add('died', [24, 25], 4, false);
+
+    character.play('standing');
+
+    debug.log('Character "%s" is STANDING', name);
+}
+
+function handleCharacterVelocity(character) {
+    character.phaser.body.velocity.x = 0;
+    character.phaser.body.velocity.y += config.FIGHT_FALL_SPEED;
+}
+
 /**
  * @extends Phaser.State
  */
 export default class FightState extends Phaser.State {
+    static handleCharacterVelocity = handleCharacterVelocity;
+
     displayLogo() {
         this.add.image((this.game.width / 2) - (this.cache.getImage('logo-minimal').width / 2), 5, 'logo-minimal');
     }
@@ -26,42 +69,6 @@ export default class FightState extends Phaser.State {
         character.body.bounce.setTo(0, 0.1);
         character.body.collideWorldBounds = true;
         character.body.setSize(100, 200, 0, 0);
-    }
-
-    static _defineAnimations(character) {
-        let resizeMaximum = () => {
-            character.body.setSize(150, 200, 0, 0);
-        };
-        let reduceByHalf = () => {
-            character.body.setSize(150, 100, 0, 0);
-        };
-        let revertDefaultSize = () => {
-            character.body.setSize(100, 200, 0, 0);
-        };
-
-        let sitting = character.animations.add('sitting', [4, 5], 4, false);
-
-        sitting.onStart.add(reduceByHalf);
-        sitting.onComplete.add(revertDefaultSize);
-
-        let kicking = character.animations.add('kicking', [12, 13], 16, false);
-
-        kicking.onStart.add(resizeMaximum);
-        kicking.onComplete.add(revertDefaultSize);
-
-        let boxing = character.animations.add('boxing', [16, 17], 16, false);
-
-        boxing.onStart.add(resizeMaximum);
-        boxing.onComplete.add(revertDefaultSize);
-
-        character.animations.add('standing', [0, 1, 2], 4, true);
-        character.animations.add('jumping', [8, 9], 4, false);
-        character.animations.add('win', [20, 21], 4, false);
-        character.animations.add('died', [24, 25], 4, false);
-
-        character.play('standing');
-
-        debug.log('Character "%s" is STANDING', name);
     }
 
     _addAvatar(x, y, key) {
@@ -140,7 +147,7 @@ export default class FightState extends Phaser.State {
         character.phaser.events.onDied = new Phaser.Signal();
 
         this._defineDefaultProperties(character.phaser);
-        FightState._defineAnimations(character.phaser);
+        defineAnimations(character.phaser);
     }
 
     _setupPlayerOptions() {
@@ -278,16 +285,11 @@ export default class FightState extends Phaser.State {
         this._handleKeyboard();
     }
 
-    static _handleCharacterVelocity(character) {
-        character.phaser.body.velocity.x = 0;
-        character.phaser.body.velocity.y += config.FIGHT_FALL_SPEED;
-    }
-
     _handleKeyboard() {
         let player = this.game.player;
         let keyboard = this.input.keyboard;
 
-        FightState._handleCharacterVelocity(player);
+        handleCharacterVelocity(player);
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
             player.phaser.events.onLeft.dispatch();
