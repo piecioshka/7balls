@@ -55,40 +55,35 @@ export default class VersusState extends FightState {
     }
 
     _setupFight() {
+        let context = this;
         let player = this.game.player;
         let enemy = this.game.enemy;
 
-        let isCollision = () => this.physics.arcade.overlap(enemy.phaser, player.phaser);
+        function isCollision() {
+            return context.physics.arcade.overlap(enemy.phaser, player.phaser);
+        }
 
-        function handlePlayerBlow(label, points) {
+        function handlePlayerBlow(points) {
             if (isCollision()) {
-                this._addPlayerEXP(points * 1.75);
-                this._removeEnemyHP(points);
+                context._addPlayerEXP(points * 1.75);
+                context._removeEnemyHP(points);
             }
         }
 
-        player.phaser.events.onKicking.add(() => {
-            handlePlayerBlow('kicking', config.VERSUS_KICKING_POINTS)
-        });
-        player.phaser.events.onBoxing.add(() => {
-            handlePlayerBlow('boxing', config.VERSUS_BOXING_POINTS)
-        });
-        player.phaser.events.onDied.add(() => {
-            this._finishFight('died', 'win');
-        });
+        player.phaser.events.onKicking.add(() => handlePlayerBlow(config.VERSUS_KICKING_POINTS));
+        player.phaser.events.onBoxing.add(() => handlePlayerBlow(config.VERSUS_BOXING_POINTS));
+        player.phaser.events.onDied.add(() => this._finishFight('died', 'win'));
 
-        function handleEnemyBlow(label, points) {
+        function handleEnemyBlow(points) {
             if (isCollision()) {
-                this._addEnemyEXP(points);
-                this._removePlayerHP(points);
+                context._addEnemyEXP(points);
+                context._removePlayerHP(points);
             }
         }
 
-        enemy.phaser.events.onKicking.add(() => handleEnemyBlow('kicking', config.VERSUS_KICKING_POINTS));
-        enemy.phaser.events.onBoxing.add(() => handleEnemyBlow('boxing', config.VERSUS_BOXING_POINTS));
-        enemy.phaser.events.onDied.add(() => {
-            this._finishFight('win', 'died');
-        });
+        enemy.phaser.events.onKicking.add(() => handleEnemyBlow(config.VERSUS_KICKING_POINTS));
+        enemy.phaser.events.onBoxing.add(() => handleEnemyBlow(config.VERSUS_BOXING_POINTS));
+        enemy.phaser.events.onDied.add(() => this._finishFight('win', 'died'));
 
         Computer.applyArtificialIntelligence(this, enemy);
     }

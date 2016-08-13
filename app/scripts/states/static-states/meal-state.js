@@ -1,5 +1,5 @@
 let utils = require('../../common/utils');
-let Character = require('../../models/player');
+import Player from '../../models/player';
 
 let { shout } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
@@ -19,7 +19,7 @@ export default class MealState extends Phaser.State {
     create() {
         this.add.image(0, 0, 'bg-meal-house');
 
-        this.game.player.hp = Character.defaultNumbers.hp;
+        this.game.player.hp = Player.defaultNumbers.hp;
 
         shout(this.game, { text: `${this.game.locale.MEAL_STATE_WELCOME}` });
 

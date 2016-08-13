@@ -16,7 +16,7 @@ function addRectangle(game, x, y, width, height) {
 }
 
 function displayHorizontalRectangle(game, lifetime) {
-    let background = addRectangle(game, 0, (game.height / 2) - (BACKGROUND_HEIGHT / 2) + 10, game.width, BACKGROUND_HEIGHT);
+    let background = addRectangle(game, 0, (game.height / 2) - (BACKGROUND_HEIGHT / 2), game.width, BACKGROUND_HEIGHT);
     background.alpha = 0;
 
     game.time.events.add(Phaser.Timer.SECOND / 4, () => {
