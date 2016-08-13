@@ -5,7 +5,7 @@
   "COLLECTING_STATE_WELCOME": "Hello",
   "COLLECTING_STATE_TIME": "Time",
 
-  "ENEMY_PRESENTATION_STATE_WELCOME": "Next enemy appear!",
+  "ENEMY_PRESENTATION_STATE_WELCOME": "New enemy appeared!",
 
   "FIGHT_STATE_LEVEL_SHORT": "lvl",
 

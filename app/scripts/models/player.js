@@ -29,10 +29,19 @@ let defaultNumbers = {
     lvl: 1
 };
 
-export default class Character {
+export default class Player {
     static defaultSettings = defaultSettings;
     static defaultNumbers = defaultSettings;
 
+    /**
+     * @type {?Phaser.Sprite}
+     */
+    phaser = null;
+
+    /**
+     * @param settings
+     * @param {Phaser.Game} settings.game
+     */
     constructor(settings) {
         debug.log('new', settings);
         assign(this, defaultSettings, settings);

@@ -56,7 +56,7 @@ function addSaiyanLabel(game, x, y, text, anchor) {
     return label;
 }
 
-function shout(game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 80, cb = () => null }) {
+function shout(game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 60, cb = () => null }) {
     displayHorizontalRectangle(game, lifetime);
     return displayCentralMessage(game, { text, lifetime, fontSize, cb });
 }

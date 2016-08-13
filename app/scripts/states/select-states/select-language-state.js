@@ -57,7 +57,7 @@ export default class SelectLanguageState extends Phaser.State {
     _next() {
         this.state.start('Message', true, false, {
             body: this.game.locale.MESSAGE_STATE_WELCOME,
-            lifetime: Phaser.Timer.SECOND * 5,
+            lifetime: Phaser.Timer.SECOND * 2,
             cb: () => {
                 this.game.state.start('SelectCharacter');
             }

@@ -65,7 +65,8 @@ export default class CollectDragonBallsState extends Phaser.State {
         let places = this.cache.getJSON(`positions-${random}`);
         places.forEach((item) => {
             let [x, y] = item;
-            balls.add(this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-collecting', 1));
+            let ball = this.add.tileSprite(x * 40, y * 40, 40, 40, 'spr-collecting', 1);
+            balls.add(ball);
         });
     }
 

@@ -91,6 +91,12 @@ export default class FightState extends Phaser.State {
     }
 
     _setupSprite(x, y, character, anchor = [0, 1]) {
+        // Usuwamy ewentualny Phaser.Sprite (z poprzednich stanów).
+        if (character.phaser) {
+            character.phaser.destroy();
+            delete character.phaser;
+        }
+
         character.phaser = this.add.sprite(x, y, `${character.id}-spritesheet`);
         character.phaser.anchor.setTo(...anchor);
 
@@ -138,6 +144,7 @@ export default class FightState extends Phaser.State {
 
             debug.log('Character "%s" is KICKING', character.name);
         });
+
         character.phaser.events.onBoxing = new Phaser.Signal();
         character.phaser.events.onBoxing.add(() => {
             this._playPunchSound(character);
