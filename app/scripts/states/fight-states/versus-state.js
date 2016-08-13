@@ -92,7 +92,7 @@ export default class VersusState extends FightState {
         let player = this.game.player;
         let enemy = this.game.enemy;
 
-        // Disable keyboard globally.
+        // Wyłączamy wsparcie klawiatury w grze.
         this.input.keyboard.enabled = false;
 
         shout(this.game, { text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
@@ -101,13 +101,13 @@ export default class VersusState extends FightState {
         enemy.phaser.play(enemyState);
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
-            // Restore keyboard globally.
+            // Przywracamy wsparcie klawiatury w grze.
             this.input.keyboard.enabled = true;
 
             if (playerSate === 'died') {
                 this.state.start('GameOver');
             } else {
-                // Remove first, defeated, enemy.
+                // Usuwamy pierwszego, pokonanego wroga.
                 this.game.enemies.shift();
 
                 if (this.game.enemies.length === 0) {

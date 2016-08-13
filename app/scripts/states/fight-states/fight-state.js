@@ -269,7 +269,7 @@ export default class FightState extends Phaser.State {
         let up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
         let space = this.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
 
-        // Stop the following keys from propagating up to the browser.
+        // Wstrzymujemy propagację zdarzeń w oknie przeglądarki.
         this.input.keyboard.addKeyCapture([
             Phaser.Keyboard.C,
             Phaser.Keyboard.X,

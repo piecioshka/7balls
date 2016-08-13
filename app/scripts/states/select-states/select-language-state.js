@@ -26,7 +26,7 @@ export default class SelectLanguageState extends Phaser.State {
         this.enCard = this.add.button(450, 135, 'btn-en', this._chooseEnglish, this);
         this.enCard.onInputOver.add(this._selectEnglish, this);
 
-        // Default: select english language.
+        // Domyślnie wybieramy język angielski.
         this._selectEnglish();
 
         this._setupKeyboard();
@@ -63,7 +63,7 @@ export default class SelectLanguageState extends Phaser.State {
             }
         });
 
-        // Add some audio effect.
+        // Dodajemy efekty audio.
         this.audio.scouter.play();
     }
 
@@ -72,7 +72,7 @@ export default class SelectLanguageState extends Phaser.State {
         let right = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
         let enter = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 
-        // Stop the following keys from propagating up to the browser.
+        // Wstrzymujemy propagację zdarzeń w oknie przeglądarki.
         this.input.keyboard.addKeyCapture([
             Phaser.Keyboard.LEFT,
             Phaser.Keyboard.RIGHT,

@@ -96,15 +96,12 @@ export default class LoadingState extends Phaser.State {
 
         this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
 
-        // Use this when character has level less than first threshold.
         this.load.audio('sound-weakkick', './assets/sound/dbz/weakkick.ogg');
         this.load.audio('sound-weakpunch', './assets/sound/dbz/weakpunch.ogg');
 
-        // Use this when character has level less than second threshold.
         this.load.audio('sound-mediumkick', './assets/sound/dbz/mediumkick.ogg');
         this.load.audio('sound-mediumpunch', './assets/sound/dbz/mediumpunch.ogg');
 
-        // Use this when character has level less than max.
         this.load.audio('sound-strongkick', './assets/sound/dbz/strongkick.ogg');
         this.load.audio('sound-strongpunch', './assets/sound/dbz/strongpunch.ogg');
 
@@ -145,7 +142,7 @@ export default class LoadingState extends Phaser.State {
     }
 
     create() {
-        // Delay to display whole progressbar for some time.
+        // Opóźnienie, aby wyświetlić przez chwilkę cały progressBar.
         setTimeout(() => this.state.start('SelectLanguage'), DISPLAY_LOADING_DELAY);
     }
 };

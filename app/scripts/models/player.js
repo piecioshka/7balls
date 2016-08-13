@@ -5,27 +5,27 @@ let debug = {
 let assign = require('lodash.assign');
 
 let defaultSettings = {
-    // Identifier of character, ex. goku, vegeta
+    // Identyfikator użytkownika, np. goku, vegeta
     id: 'unknown',
 
-    // User put his favourite nickname.
+    // Użytkownik podaje swoją nazwę.
     nickname: 'unknown',
 
-    // Name of character: Son Goku or Vegeta.
+    // Nazwa postaci, np. Son Goku, Vegeta.
     name: 'unknown'
 };
 
 let defaultNumbers = {
-    // Number of lives.
+    // Liczba żyć.
     up: 0,
 
-    // Percent of health. Decrease. When =0, up -1.
+    // Procent życia.
     hp: 100,
 
-    // Number of skills. Increase. When =100, level +1 and reduce =0.
+    // Liczba doświadczenia.
     exp: 0,
 
-    // Number of level. Max lvl=100
+    // Poziom. Max = 100.
     lvl: 1
 };
 

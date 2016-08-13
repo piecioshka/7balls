@@ -27,7 +27,7 @@ export default class GameOverState extends Phaser.State {
     _setupKeyboard() {
         let enter = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 
-        // Stop the following keys from propagating up to the browser.
+        // Wstrzymujemy propagację zdarzeń w oknie przeglądarki.
         this.input.keyboard.addKeyCapture([
             Phaser.Keyboard.ENTER
         ]);

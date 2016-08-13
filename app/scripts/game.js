@@ -17,10 +17,10 @@ import WinnerState from './states/static-states/winner-state';
 
 export default class Game {
     constructor() {
-        // Create game object.
+        // Tworzymy obiekt gry.
         this.game = new Phaser.Game(config.GAME_WIDTH, config.GAME_HEIGHT, Phaser.Canvas, config.GAME_RENDER_ID);
 
-        // List of all states.
+        // Definicja wszystkich możliwych stanów w grze.
         this.game.state.add('Bootstrap', BootstrapState);
         this.game.state.add('Loading', LoadingState);
         this.game.state.add('CollectDragonBalls', CollectDragonBallsState);

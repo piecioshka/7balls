@@ -47,7 +47,7 @@ export default class SelectCharacterState extends Phaser.State {
         this._setupKeyboard();
         this._setupSound();
 
-        // Default: select Son Goku.
+        // Domyślnie wybieramy Son Goku.
         this._selectGoku();
 
         displayGameVersion(this.game);
@@ -55,26 +55,22 @@ export default class SelectCharacterState extends Phaser.State {
     }
 
     _chooseGoku() {
-        ga('send', 'event', 'game', 'choose-goku');
-
-        // Add player object as common in all states.
-        this.game.player = new Goku();
-        this._next();
+        this._chooseCharacter(new Goku());
     }
 
     _chooseVegeta() {
-        ga('send', 'event', 'game', 'choose-vegeta');
-
-        // Add player object as common in all states.
-        this.game.player = new Vegeta();
-        this._next();
+        this._chooseCharacter(new Vegeta());
     }
 
     _choosePiccolo() {
-        ga('send', 'event', 'game', 'choose-piccolo');
+        this._chooseCharacter(new Piccolo());
+    }
 
-        // Add player object as common in all states.
-        this.game.player = new Piccolo();
+    _chooseCharacter(character) {
+        ga('send', 'event', 'game', `choose-${character.name}`);
+
+        // Współdzielimy obiekt playera między stanami w grze.
+        this.game.player = character;
         this._next();
     }
 
@@ -93,7 +89,7 @@ export default class SelectCharacterState extends Phaser.State {
             }
         });
 
-        // Add some audio effect.
+        // Dodajemy efekty audio.
         this.audio.scouter.play();
     }
 
@@ -105,7 +101,7 @@ export default class SelectCharacterState extends Phaser.State {
         let left = this.input.keyboard.addKey(Phaser.Keyboard.LEFT);
         let right = this.input.keyboard.addKey(Phaser.Keyboard.RIGHT);
 
-        // Stop the following keys from propagating up to the browser.
+        // Wstrzymujemy propagację zdarzeń w oknie przeglądarki.
         this.input.keyboard.addKeyCapture([
             Phaser.Keyboard.LEFT,
             Phaser.Keyboard.RIGHT
