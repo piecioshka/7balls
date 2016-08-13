@@ -48,7 +48,8 @@ export default class SelectLanguageState extends Phaser.State {
         this.game.emit('locale:select', { locale: locale });
 
         this.game.locale = this.cache.getJSON(locale);
-        assert(isObject(this.game.locale));
+
+        assert(isObject(this.game.locale), 'SelectLanguageState#_chooseLanguage: this.game.locale is not an object');
 
         this._next();
     }

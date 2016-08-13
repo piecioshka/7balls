@@ -5,13 +5,13 @@
   "COLLECTING_STATE_WELCOME": "Hello",
   "COLLECTING_STATE_TIME": "Time",
 
-  "ENEMY_PRESENTATION_STATE_WELCOME": "Your next enemy",
+  "ENEMY_PRESENTATION_STATE_WELCOME": "Next enemy appear!",
 
   "FIGHT_STATE_LEVEL_SHORT": "lvl",
 
-  "MEAL_STATE_WELCOME": "Time to eat!",
+  "MEAL_STATE_WELCOME": "Time to eat and rest!",
 
-  "TRAINING_STATE_WELCOME": "Start your training!",
+  "TRAINING_STATE_WELCOME": "Training time!",
 
   "VERSUS_STATE_WELCOME": "Fight!",
   "VERSUS_STATE_PLAYER_DIED": "defeat",

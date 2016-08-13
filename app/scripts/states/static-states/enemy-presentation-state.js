@@ -21,7 +21,7 @@ export default class EnemyPresentationState extends Phaser.State {
         this._setupEnemy();
         this._displayEnemy();
 
-        shout(this.game, { text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}!` });
+        shout(this.game, { text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}` });
 
         utils.timeout(this, this.lifetime, this.cb);
 
