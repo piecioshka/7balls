@@ -1,4 +1,4 @@
-import Configuration from '../../configuration';
+import Configuration from '../../configs';
 import Utilities from '../../common/utilities';
 
 import { shout, addSaiyanLabel } from '../../helpers/meesage';

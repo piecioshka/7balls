@@ -1,4 +1,4 @@
-import Configuration from './configuration';
+import Configuration from './configs';
 
 import BootstrapState from './states/bootstrap-state';
 import LoadingState from './states/loading-state';

@@ -2,7 +2,7 @@ let debug = {
     log: require('debug')('7balls:fight-state:log')
 };
 
-import Configuration from '../../configuration';
+import Configuration from '../../configs';
 
 
 import { addSaiyanLabel } from '../../helpers/meesage';

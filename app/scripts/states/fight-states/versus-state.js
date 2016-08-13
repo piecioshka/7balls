@@ -1,4 +1,4 @@
-import Configuration from '../../configuration';
+import Configuration from '../../configs';
 import FightState from './fight-state';
 import Computer from '../../models/computer';
 
