@@ -1,7 +1,7 @@
 let config = require('../configs');
 let MUTE_MODES = ['unmute', 'mute'];
 
-let loadSoundPreferences = (game) => {
+function loadSoundPreferences(game) {
     let key = config.STORAGE_AUDIO_KEY;
     let translateState = () => MUTE_MODES[Number(game.sound.mute)];
 
@@ -14,7 +14,7 @@ let loadSoundPreferences = (game) => {
         localStorage.setItem(key, Number(game.sound.mute));
         mute.loadTexture(translateState());
     });
-};
+}
 
 module.exports = {
     loadSoundPreferences

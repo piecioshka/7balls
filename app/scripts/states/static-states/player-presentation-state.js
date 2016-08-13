@@ -19,14 +19,18 @@ export default class PlayerPresentationState extends Phaser.State {
     create() {
         this.add.image(0, 0, 'bg-player');
 
-        let getCenterPixel = (dimension) => {
-            return (this.game[dimension] / 2) - (this.cache.getImage(this.name)[dimension] / 2);
-        };
-
-        this.add.image(getCenterPixel('width'), getCenterPixel('height'), this.name);
+        this._displayPlayer();
 
         utils.timeout(this, this.lifetime, this.cb);
 
         loadSoundPreferences(this.game);
+    }
+
+    _displayPlayer() {
+        this.add.image(this._getCenterPixel('width'), this._getCenterPixel('height'), this.name);
+    }
+
+    _getCenterPixel(dimension) {
+        return (this.game[dimension] / 2) - (this.cache.getImage(this.name)[dimension] / 2);
     }
 }

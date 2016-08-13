@@ -5,7 +5,7 @@ const BACKGROUND_HEIGHT = 150;
 
 let pkg = require('../../../package.json');
 
-let addRectangle = (game, x, y, width, height) => {
+function addRectangle(game, x, y, width, height) {
     let rect = game.add.graphics(x, y);
 
     rect.beginFill(WHITE_COLOR, 0.5);
@@ -13,9 +13,9 @@ let addRectangle = (game, x, y, width, height) => {
     rect.endFill();
 
     return rect;
-};
+}
 
-let displayHorizontalRectangle = (game, lifetime) => {
+function displayHorizontalRectangle(game, lifetime) {
     let background = addRectangle(game, 0, (game.height / 2) - (BACKGROUND_HEIGHT / 2) + 10, game.width, BACKGROUND_HEIGHT);
     background.alpha = 0;
 
@@ -28,7 +28,7 @@ let displayHorizontalRectangle = (game, lifetime) => {
     });
 
     return background;
-};
+}
 
 function addLabel(game, x, y, text, anchor = [0, 0]) {
     let label = game.add.text(x, y, text);
@@ -50,18 +50,18 @@ function addLabel(game, x, y, text, anchor = [0, 0]) {
  * @param {Array} [anchor]
  * @returns {Phaser.Text}
  */
-let addSaiyanLabel = (game, x, y, text, anchor) => {
+function addSaiyanLabel(game, x, y, text, anchor) {
     let label = addLabel(game, x, y, text, anchor);
     label.font = 'Saiyan-Sans';
     return label;
-};
+}
 
-let shout = (game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 80, cb = () => null }) => {
+function shout(game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 80, cb = () => null }) {
     displayHorizontalRectangle(game, lifetime);
     return displayCentralMessage(game, { text, lifetime, fontSize, cb });
-};
+}
 
-let displayCentralMessage = (game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 40, cb = () => null }) => {
+function displayCentralMessage(game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 40, cb = () => null }) {
     let message = addLabel(game, game.width / 2, game.height / 2, text, [0.5, 0.5]);
     message.alpha = 0;
     message.fontSize = fontSize;
@@ -77,9 +77,9 @@ let displayCentralMessage = (game, { text, lifetime = Phaser.Timer.SECOND * 2, f
     game.time.events.add(lifetime, cb);
 
     return message;
-};
+}
 
-let displayGameVersion = (game) => {
+function displayGameVersion(game) {
     let version = game.add.text(5, game.height - 20, 'v' + pkg.version);
 
     version.font = 'Arial';
@@ -88,7 +88,7 @@ let displayGameVersion = (game) => {
     version.setShadow(0, 0, BLACK_COLOR, 3);
 
     return version;
-};
+}
 
 module.exports = {
     addSaiyanLabel,

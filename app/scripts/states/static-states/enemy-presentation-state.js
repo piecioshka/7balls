@@ -29,8 +29,11 @@ export default class EnemyPresentationState extends Phaser.State {
     }
 
     _setupEnemy() {
+        // TODO(piecioshka): dlaczego jest "0"?
+        let Enemy = this.game.enemies[0];
+
         // Add player object as common in all states.
-        this.game.enemy = new this.game.enemies[0]();
+        this.game.enemy = new Enemy();
     }
 
     _displayEnemy() {

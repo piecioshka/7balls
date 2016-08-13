@@ -60,12 +60,12 @@ export default class VersusState extends FightState {
 
         let isCollision = () => this.physics.arcade.overlap(enemy.phaser, player.phaser);
 
-        let handlePlayerBlow = (label, points) => {
+        function handlePlayerBlow(label, points) {
             if (isCollision()) {
                 this._addPlayerEXP(points * 1.75);
                 this._removeEnemyHP(points);
             }
-        };
+        }
 
         player.phaser.events.onKicking.add(() => {
             handlePlayerBlow('kicking', config.VERSUS_KICKING_POINTS)
@@ -77,12 +77,12 @@ export default class VersusState extends FightState {
             this._finishFight('died', 'win');
         });
 
-        let handleEnemyBlow = (label, points) => {
+        function handleEnemyBlow(label, points) {
             if (isCollision()) {
                 this._addEnemyEXP(points);
                 this._removePlayerHP(points);
             }
-        };
+        }
 
         enemy.phaser.events.onKicking.add(() => handleEnemyBlow('kicking', config.VERSUS_KICKING_POINTS));
         enemy.phaser.events.onBoxing.add(() => handleEnemyBlow('boxing', config.VERSUS_BOXING_POINTS));
