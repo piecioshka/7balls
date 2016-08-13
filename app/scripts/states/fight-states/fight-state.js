@@ -7,15 +7,17 @@ let config = require('../../configs');
 let { addSaiyanLabel } = require('../../helpers/message');
 
 function defineAnimations(character) {
-    let resizeMaximum = () => {
+    function resizeMaximum() {
         character.body.setSize(150, 200, 0, 0);
-    };
-    let reduceByHalf = () => {
+    }
+
+    function reduceByHalf() {
         character.body.setSize(150, 100, 0, 0);
-    };
-    let revertDefaultSize = () => {
+    }
+
+    function revertDefaultSize() {
         character.body.setSize(100, 200, 0, 0);
-    };
+    }
 
     let sitting = character.animations.add('sitting', [4, 5], 4, false);
 
@@ -42,7 +44,7 @@ function defineAnimations(character) {
     debug.log('Character "%s" is STANDING', name);
 }
 
-function handleCharacterVelocity(character) {
+function resetCharacterVelocity(character) {
     character.phaser.body.velocity.x = 0;
     character.phaser.body.velocity.y += config.FIGHT_FALL_SPEED;
 }
@@ -51,7 +53,7 @@ function handleCharacterVelocity(character) {
  * @extends Phaser.State
  */
 export default class FightState extends Phaser.State {
-    static handleCharacterVelocity = handleCharacterVelocity;
+    static resetCharacterVelocity = resetCharacterVelocity;
 
     displayLogo() {
         this.add.image((this.game.width / 2) - (this.cache.getImage('logo-minimal').width / 2), 5, 'logo-minimal');
@@ -289,7 +291,7 @@ export default class FightState extends Phaser.State {
         let player = this.game.player;
         let keyboard = this.input.keyboard;
 
-        handleCharacterVelocity(player);
+        resetCharacterVelocity(player);
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
             player.phaser.events.onLeft.dispatch();

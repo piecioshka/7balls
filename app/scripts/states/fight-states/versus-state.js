@@ -200,7 +200,7 @@ export default class VersusState extends FightState {
 
     update() {
         super.update();
-        FightState.handleCharacterVelocity(this.game.enemy);
+        FightState.resetCharacterVelocity(this.game.enemy);
     }
 
     render() {
