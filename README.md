@@ -59,6 +59,7 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [ ] dodać `credits` - autorzy gry
 * [ ] po porażce przegrany powinien leżeć na ziemi
 * [ ] zrezygnować z zarządzaniem przezroczystością na rzecz zielonej otoczki (border)
+* [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
 
 ### Inne związane z realizacją projektu
 

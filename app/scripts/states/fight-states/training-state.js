@@ -59,8 +59,8 @@ export default class TrainingState extends FightState {
     }
 
     render() {
-        // let player = this.game.player;
+        let player = this.game.player;
         // this.game.debug.bodyInfo(player.phaser, 25, 25);
-        // this.game.debug.body(player.phaser);
+        this.game.debug.body(player.phaser);
     }
 }
