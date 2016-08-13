@@ -1,5 +1,5 @@
 import Configuration from '../../configs';
-import Utilities from '../../common/utilities';
+import Utilities from '../../common/utils';
 
 import { shout, addSaiyanLabel } from '../../helpers/meesage';
 import { loadSoundPreferences } from '../../helpers/audio';

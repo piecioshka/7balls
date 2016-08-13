@@ -1,5 +1,5 @@
 
-import Utilities from '../../common/utilities';
+import Utilities from '../../common/utils';
 
 import { loadSoundPreferences } from '../../helpers/audio';
 

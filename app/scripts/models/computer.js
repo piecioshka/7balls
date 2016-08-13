@@ -1,4 +1,4 @@
-import Utilities from '../common/utilities';
+import Utilities from '../common/utils';
 
 export default class Computer {
     static applyArtificialIntelligence(state, character) {

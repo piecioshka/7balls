@@ -1,4 +1,4 @@
-import Utilities from '../../common/utilities';
+import Utilities from '../../common/utils';
 import FightState from './fight-state';
 
 import { shout } from '../../helpers/meesage';

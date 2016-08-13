@@ -1,5 +1,5 @@
 
-import Utilities from '../../common/utilities';
+import Utilities from '../../common/utils';
 import Character from '../../models/characters/character';
 
 import { shout } from '../../helpers/meesage';
