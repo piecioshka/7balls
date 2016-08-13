@@ -111,16 +111,19 @@ export default class CollectDragonBallsState extends Phaser.State {
 
     _handleCollision() {
         this.physics.arcade.collide(this.game.player.phaser, this.layer);
-        this.physics.arcade.collide(this.game.player.phaser, this.game.balls, (player, ball) => {
-            ball.destroy();
+        this.physics.arcade.collide(this.game.player.phaser, this.game.balls, this._handleCollectedBall.bind(this));
+    }
 
-            this.audio.candypop.play();
+    _handleCollectedBall(player, ball) {
+        this.game.emit('ball:collected', { ball });
+        ball.destroy();
 
-            if (this.game.balls.length === 0) {
-                this.audio.radar.stop();
-                this.state.start('Shenron');
-            }
-        });
+        this.audio.candypop.play();
+
+        if (this.game.balls.length === 0) {
+            this.audio.radar.stop();
+            this.state.start('Shenron');
+        }
     }
 
     _handleKeyboard() {

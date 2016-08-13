@@ -67,7 +67,7 @@ export default class SelectCharacterState extends Phaser.State {
     }
 
     _chooseCharacter(character) {
-        ga('send', 'event', 'game', `choose-${character.name}`);
+        this.game.emit('player:select', { character: character });
 
         // Współdzielimy obiekt playera między stanami w grze.
         this.game.player = character;

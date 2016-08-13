@@ -1,3 +1,8 @@
 import Game from './game';
 
-new Game();
+let game = new Game();
+
+require('./stats').setup(game);
+
+// Aby się lepiej programowało.
+window.game = game;

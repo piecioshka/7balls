@@ -9,7 +9,7 @@ export default class WinnerState extends Phaser.State {
     };
 
     create() {
-        ga('send', 'event', 'game', 'win');
+        this.game.emit('game:win');
 
         this.add.image(0, 0, 'bg-winner');
         this.add.button(370, this.game.height / 2, 'btn-try-again', this._tryAgain, this);
@@ -34,7 +34,7 @@ export default class WinnerState extends Phaser.State {
     }
 
     _tryAgain() {
-        ga('send', 'event', 'game', 'win-try-again');
+        this.game.emit('game:win:try-again');
 
         this.audio.thing1.stop();
         this.state.start('SelectCharacter');

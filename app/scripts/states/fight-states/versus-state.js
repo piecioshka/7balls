@@ -109,6 +109,7 @@ export default class VersusState extends FightState {
             } else {
                 // Usuwamy pierwszego, pokonanego wroga.
                 this.game.enemies.shift();
+                this.game.emit('enemy:killed', { enemy: this.game.enemy });
 
                 if (this.game.enemies.length === 0) {
                     this.state.start('Winner');

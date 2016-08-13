@@ -92,7 +92,7 @@ export default class LoadingState extends Phaser.State {
 
         this.load.image('logo-minimal', './assets/graphics/logo/logo-minimal.png');
 
-        debug.log('images loaded');
+        debug.log('images files loaded');
 
         this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
 
@@ -115,17 +115,17 @@ export default class LoadingState extends Phaser.State {
         this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
         this.load.audio('sound-radar', './assets/sound/dbk/devices_02.ogg');
 
-        debug.log('audio loaded');
+        debug.log('audio files loaded');
 
         this.load.tilemap('collecting-1', './assets/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('collecting-2', './assets/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('collecting-3', './assets/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
 
-        debug.log('tilemap loaded');
+        debug.log('tilemap files loaded');
 
         this.load.spritesheet('spr-collecting', './assets/graphics/spritesheet/spr-collecting.png', 40, 40);
 
-        debug.log('spritesheet loaded');
+        debug.log('spritesheet files loaded');
 
         this.load.json('positions-1', './assets/balls/positions-1.json');
         this.load.json('positions-2', './assets/balls/positions-2.json');
@@ -134,15 +134,15 @@ export default class LoadingState extends Phaser.State {
         this.load.json('locale-en', './locale/en_EN.json');
         this.load.json('locale-pl', './locale/pl_PL.json');
 
-        debug.log('jsons loaded');
+        debug.log('json files loaded');
 
         this.load.text('font-saiyan-sans', './assets/fonts/Saiyan-Sans.ttf');
 
-        debug.log('fonts loaded');
+        debug.log('fonts files loaded');
     }
 
     create() {
         // Opóźnienie, aby wyświetlić przez chwilkę cały progressBar.
-        setTimeout(() => this.state.start('SelectLanguage'), DISPLAY_LOADING_DELAY);
+        window.setTimeout(() => this.state.start('SelectLanguage'), DISPLAY_LOADING_DELAY);
     }
 };

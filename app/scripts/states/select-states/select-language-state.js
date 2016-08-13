@@ -37,18 +37,17 @@ export default class SelectLanguageState extends Phaser.State {
     }
 
     _choosePolish() {
-        ga('send', 'event', 'game', 'locale-pl');
-
-        this.game.locale = this.cache.getJSON('locale-pl');
-        assert(isObject(this.game.locale));
-
-        this._next();
+        this._chooseLanguage('locale-pl');
     }
 
     _chooseEnglish() {
-        ga('send', 'event', 'game', 'locale-en');
+        this._chooseLanguage('locale-en');
+    }
 
-        this.game.locale = this.cache.getJSON('locale-en');
+    _chooseLanguage(locale) {
+        this.game.emit('locale:select', { locale: locale });
+
+        this.game.locale = this.cache.getJSON(locale);
         assert(isObject(this.game.locale));
 
         this._next();

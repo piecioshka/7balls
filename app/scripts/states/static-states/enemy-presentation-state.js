@@ -34,6 +34,8 @@ export default class EnemyPresentationState extends Phaser.State {
 
         // Współdzielimy obiekt wroga między stana w grze.
         this.game.enemy = new Enemy();
+
+        this.game.emit('enemy:new', { enemy: this.game.enemy });
     }
 
     _displayEnemy() {

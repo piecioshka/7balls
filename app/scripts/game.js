@@ -15,10 +15,17 @@ import TrainingState from './states/fight-states/training-state';
 import VersusState from './states/fight-states/versus-state';
 import WinnerState from './states/static-states/winner-state';
 
+let EventEmitter = require('super-event-emitter');
+
 export default class Game {
+    game = null;
+
     constructor() {
         // Tworzymy obiekt gry.
         this.game = new Phaser.Game(config.GAME_WIDTH, config.GAME_HEIGHT, Phaser.Canvas, config.GAME_RENDER_ID);
+
+        // Rozszerzamy obiekt gry o zdarzenia, aby np. podłączyć statystyki.
+        EventEmitter.mixin(this.game);
 
         // Definicja wszystkich możliwych stanów w grze.
         this.game.state.add('Bootstrap', BootstrapState);
@@ -37,5 +44,9 @@ export default class Game {
         this.game.state.add('Winner', WinnerState);
 
         this.game.state.start('Bootstrap');
+    }
+
+    on() {
+        return this.game.on.apply(this.game, arguments);
     }
 }

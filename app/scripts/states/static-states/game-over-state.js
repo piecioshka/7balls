@@ -9,7 +9,7 @@ export default class GameOverState extends Phaser.State {
     };
 
     create() {
-        ga('send', 'event', 'game', 'over');
+        this.game.emit('game:over', { enemy: this.game.enemy });
 
         this.add.image(0, 0, 'bg-game-over');
         this.add.button(this.game.width / 2 - this.cache.getImage('btn-try-again').width / 2, this.game.height / 2 + 40, 'btn-try-again', this._tryAgain, this);
@@ -36,7 +36,7 @@ export default class GameOverState extends Phaser.State {
     }
 
     _tryAgain() {
-        ga('send', 'event', 'game', 'over-try-again');
+        this.game.emit('game:over:try-again', { enemy: this.game.enemy });
 
         this.audio.dramatic.stop();
         this.state.start('SelectCharacter');
