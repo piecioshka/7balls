@@ -76,21 +76,17 @@ export default class FightState extends Phaser.State {
      */
     _setupOrientation(character, orientation) {
         let sprite = character.getSprite();
+        let width = 150;
+        let height = 200;
+        let defaultSize = null;
+        let reduceByHalf = null;
 
         if (orientation === sprite.orientation) {
             // Nie zmieniamy orientacji na już wybraną.
             return;
         }
 
-        console.log(character, orientation);
-
         sprite.orientation = orientation;
-
-        let width = 150;
-        let height = 200;
-
-        let defaultSize = null;
-        let reduceByHalf = null;
 
         switch (orientation) {
             case 'left':

@@ -106,16 +106,23 @@ export default class VersusState extends FightState {
         let enemy = this.game.enemy;
         let enemySprite = enemy.getSprite();
 
+        shout(this.game, { text: `${player.title} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
+
         // Wyłączamy wsparcie klawiatury w grze.
         this.input.keyboard.enabled = false;
 
-        playerSprite.kill();
-        enemySprite.kill();
+        // Sprowadzamy postacie na ziemie.
+        playerSprite.y = 0;
+        enemySprite.y = 0;
 
-        shout(this.game, { text: `${player.title} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
-
+        // Włączamy animacje: zwycięstwa i porażki.
         playerSprite.play(playerSate);
         enemySprite.play(enemyState);
+
+        // Uśmiercam obu, aby żadne animacje nie były więcej wykonywane.
+        // Nie używamy .kill() bo wtedy nie wykona się ost. animacja (zwycięstwa i porażki).
+        playerSprite.alive = false;
+        enemySprite.alive = false;
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
             // Przywracamy wsparcie klawiatury w grze.

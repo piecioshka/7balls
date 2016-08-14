@@ -42,6 +42,7 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [x] nie używać fonta `Sayian sans` do wszystkiego, tylko do napisu DBP
 * [x] zatrzymaj postacie po skończonej bitwie
 * [x] rywal powinien uderzać w kierunku gracza, a nie w tym samym
+* [x] po skończonej walce sprowadzamy postacie na ziemie i odtwarzamy ostatnie animacje (zwycięstwo i porażka)
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
 * [ ] kucanie powinno być na stałe (nie trzeba tak jak przy uderzeniu wracać do normalnej postaci)
