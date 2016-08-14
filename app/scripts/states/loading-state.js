@@ -2,6 +2,8 @@ let debug = {
     log: require('debug')('7balls:loading-state:log')
 };
 
+let utils = require('../common/utils');
+
 // Czas opóźnienia do schowania paska postępu.
 const DISPLAY_LOADING_DELAY = 500;
 
@@ -10,7 +12,10 @@ const DISPLAY_LOADING_DELAY = 500;
  */
 export default class LoadingState extends Phaser.State {
     preload() {
-        var loadingLabel = this.add.text(this.world.centerX, 150, 'Loading...', { font: '30px Arial', fill: '#ffffff' });
+        var loadingLabel = this.add.text(this.world.centerX, 150, 'Loading...', {
+            font: '30px Arial',
+            fill: '#ffffff'
+        });
         loadingLabel.anchor.setTo(0.5, 0.5);
 
         var pixelLoadingWidth = this.cache.getImage('pixel-loading').width;
@@ -65,11 +70,11 @@ export default class LoadingState extends Phaser.State {
         this.load.image('freeza', './assets/graphics/characters/freeza/poster/freeza.png');
         this.load.spritesheet('freeza-spritesheet', './assets/graphics/characters/freeza/freeza-fight.png', 150, 200);
 
-        this.load.image('goku-collecting', './assets/graphics/characters/goku/goku-collecting.png');
-        this.load.image('goku-card', './assets/graphics/characters/goku/goku-card.png');
-        this.load.image('goku', './assets/graphics/characters/goku/poster/goku.png');
-        this.load.image('goku-halo', './assets/graphics/characters/goku/poster/goku-halo.png');
-        this.load.spritesheet('goku-spritesheet', './assets/graphics/characters/goku/goku-fight.png', 150, 200);
+        this.load.image('son-goku-collecting', './assets/graphics/characters/son-goku/son-goku-collecting.png');
+        this.load.image('son-goku-card', './assets/graphics/characters/son-goku/son-goku-card.png');
+        this.load.image('son-goku', './assets/graphics/characters/son-goku/poster/son-goku.png');
+        this.load.image('son-goku-halo', './assets/graphics/characters/son-goku/poster/son-goku-halo.png');
+        this.load.spritesheet('son-goku-spritesheet', './assets/graphics/characters/son-goku/son-goku-fight.png', 150, 200);
 
         this.load.image('piccolo-collecting', './assets/graphics/characters/piccolo/piccolo-collecting.png');
         this.load.image('piccolo-card', './assets/graphics/characters/piccolo/piccolo-card.png');
@@ -143,6 +148,6 @@ export default class LoadingState extends Phaser.State {
 
     create() {
         // Opóźnienie, aby wyświetlić przez chwilkę cały progressBar.
-        window.setTimeout(() => this.state.start('SelectLanguage'), DISPLAY_LOADING_DELAY);
+        utils.timeout(this, DISPLAY_LOADING_DELAY, () => this.state.start('SelectLanguage'));
     }
 };

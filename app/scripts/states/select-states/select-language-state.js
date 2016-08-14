@@ -1,6 +1,5 @@
 let isObject = require('lodash.isobject');
 let assert = require('assert');
-
 let utils = require('../../common/utils');
 let { displayGameVersion } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
@@ -45,21 +44,21 @@ export default class SelectLanguageState extends Phaser.State {
     }
 
     _chooseLanguage(locale) {
-        this.game.emit('locale:select', { locale: locale });
-
         this.game.locale = this.cache.getJSON(locale);
 
         assert(isObject(this.game.locale), 'SelectLanguageState#_chooseLanguage: this.game.locale is not an object');
+
+        this.game.emit('locale:select', { locale: locale });
 
         this._next();
     }
 
     _next() {
         this.state.start('Message', true, false, {
-            body: this.game.locale.MESSAGE_STATE_WELCOME,
-            lifetime: Phaser.Timer.SECOND * 2,
+            content: this.game.locale.MESSAGE_STATE_WELCOME,
+            lifespan: Phaser.Timer.SECOND * 2,
             cb: () => {
-                this.game.state.start('SelectCharacter');
+                this.game.state.start('SelectPlayer');
             }
         });
 

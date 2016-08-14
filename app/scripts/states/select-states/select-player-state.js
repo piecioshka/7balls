@@ -1,10 +1,12 @@
-import Goku from '../../models/characters/goku';
-import Vegeta from '../../models/characters/vegeta';
-import Piccolo from '../../models/characters/piccolo';
+import Player from '../../models/player';
 
-import Freeza from '../../models/characters/freeza';
-import Cell from '../../models/characters/cell';
-import Bubu from '../../models/characters/bubu';
+import SonGoku from '../../models/species/saiyans/son-goku';
+import Vegeta from '../../models/species/saiyans/vegeta';
+
+import Piccolo from '../../models/species/monsters/piccolo';
+import Freeza from '../../models/species/monsters/freeza';
+import Cell from '../../models/species/monsters/cell';
+import Bubu from '../../models/species/monsters/bubu';
 
 let { displayGameVersion } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
@@ -12,7 +14,7 @@ let { loadSoundPreferences } = require('../../helpers/audio');
 /**
  * @extends Phaser.State
  */
-export default class SelectCharacterState extends Phaser.State {
+export default class SelectPlayerState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
     piccoloCard = null;
@@ -32,15 +34,15 @@ export default class SelectCharacterState extends Phaser.State {
     create() {
         this.add.image(0, 0, 'bg-menu');
 
-        this.gokuCard = this.add.button(220, 160, 'goku-card', this._chooseGoku, this);
-        this.gokuCard.onInputOver.add(this._selectGoku, this);
+        this.gokuCard = this.add.button(220, 160, 'son-goku-card', () => this._chooseCharacter(SonGoku), this);
+        this.gokuCard.onInputOver.add(this._selectSonGoku, this);
         this.cards.push(this.gokuCard);
 
-        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', this._chooseVegeta, this);
+        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', () => this._chooseCharacter(Vegeta), this);
         this.vegetaCard.onInputOver.add(this._selectVegeta, this);
         this.cards.push(this.vegetaCard);
 
-        this.piccoloCard = this.add.button(520, 160, 'piccolo-card', this._choosePiccolo, this);
+        this.piccoloCard = this.add.button(520, 160, 'piccolo-card', () => this._chooseCharacter(Piccolo), this);
         this.piccoloCard.onInputOver.add(this._selectPiccolo, this);
         this.piccoloCard.visible = false;
 
@@ -48,40 +50,30 @@ export default class SelectCharacterState extends Phaser.State {
         this._setupSound();
 
         // Domyślnie wybieramy Son Goku.
-        this._selectGoku();
+        this._selectSonGoku();
 
         displayGameVersion(this.game);
         loadSoundPreferences(this.game);
     }
 
-    _chooseGoku() {
-        this._chooseCharacter(new Goku());
-    }
-
-    _chooseVegeta() {
-        this._chooseCharacter(new Vegeta());
-    }
-
-    _choosePiccolo() {
-        this._chooseCharacter(new Piccolo());
-    }
-
-    _chooseCharacter(character) {
-        this.game.emit('player:select', { character: character });
-
+    _chooseCharacter(typeClass) {
         // Współdzielimy obiekt playera między stanami w grze.
-        this.game.player = character;
+        this.game.player = new Player();
+        this.game.player.setPersonality(typeClass);
+
+        this.game.emit('player:select', { player: this.game.player });
+
         this._next();
     }
 
     _next() {
         this.state.start('PlayerPresentation', true, false, {
-            name: `${this.game.player.id}-halo`,
-            lifetime: Phaser.Timer.SECOND * 2,
+            key: `${this.game.player.id}-halo`,
+            lifespan: Phaser.Timer.SECOND * 2,
             cb: () => {
                 this.state.start('Message', true, false, {
-                    body: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
-                    lifetime: Phaser.Timer.SECOND * 3,
+                    content: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
+                    lifespan: Phaser.Timer.SECOND * 3,
                     cb: () => {
                         this.state.start('CollectDragonBalls');
                     }
@@ -165,7 +157,7 @@ export default class SelectCharacterState extends Phaser.State {
         this.cards[this.cardsIndex].onInputOver.dispatch();
     }
 
-    _selectGoku() {
+    _selectSonGoku() {
         this.gokuCard.alpha = 1;
         this.vegetaCard.alpha = 0.5;
         this.piccoloCard.alpha = 0.5;

@@ -10,15 +10,15 @@ function random(start = 0, stop = 10) {
 /**
  * @param {Phaser.State} state Game state.
  * @param {number} max Number of maximum times.
- * @param {number} lifetime Number of milliseconds of delay.
+ * @param {number} delay Number of milliseconds of delay.
  * @param {Function} cb Callback.
  */
-function timesRandomAsync(state, max, lifetime, cb) {
+function timesRandomAsync(state, max, delay, cb) {
     let index = 0;
     let times = random(1, max - 1);
 
     function loop() {
-        timeout(state, lifetime, () => {
+        timeout(state, delay, () => {
             index++;
 
             if (index < times) {
@@ -34,23 +34,23 @@ function timesRandomAsync(state, max, lifetime, cb) {
 
 /**
  * @param {Phaser.State} state Game state.
- * @param {number} lifetime Number of milliseconds of delay.
+ * @param {number} delay Number of milliseconds of delay.
  * @param {Function} cb Callback.
  */
-function interval(state, lifetime, cb) {
+function interval(state, delay, cb) {
     let clock = state.time.create();
 
-    clock.repeat(lifetime, Infinity, cb);
+    clock.repeat(delay, Infinity, cb);
     clock.start();
 }
 
 /**
  * @param {Phaser.State} state Game state.
- * @param {number} lifetime Number of milliseconds of delay.
+ * @param {number} delay Number of milliseconds of delay.
  * @param {function} cb Callback.
  */
-function timeout(state, lifetime, cb) {
-    state.time.events.add(lifetime, cb);
+function timeout(state, delay, cb) {
+    state.time.events.add(delay, cb, this);
 }
 
 module.exports = {

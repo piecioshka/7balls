@@ -9,19 +9,17 @@ export default class GameOverState extends Phaser.State {
     };
 
     create() {
-        this.game.emit('game:over', { enemy: this.game.enemy });
-
         this.add.image(0, 0, 'bg-game-over');
         this.add.button(this.game.width / 2 - this.cache.getImage('btn-try-again').width / 2, this.game.height / 2 + 40, 'btn-try-again', this._tryAgain, this);
 
-        this.game.player.resetNumbers();
-
         this._setupKeyboard();
-        this._setupSound();
 
+        this._setupSound();
         loadSoundPreferences(this.game);
 
         this.audio.dramatic.play();
+
+        this.game.emit('game:over', { enemy: this.game.enemy });
     }
 
     _setupKeyboard() {
@@ -36,10 +34,11 @@ export default class GameOverState extends Phaser.State {
     }
 
     _tryAgain() {
+        this.audio.dramatic.stop();
+
         this.game.emit('game:over:try-again', { enemy: this.game.enemy });
 
-        this.audio.dramatic.stop();
-        this.state.start('SelectCharacter');
+        this.state.start('SelectPlayer');
     }
 
     _setupSound() {

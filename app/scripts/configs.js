@@ -3,7 +3,7 @@ let pkg = require('../../package.json');
 module.exports = {
     GAME_WIDTH: 800,
     GAME_HEIGHT: 400,
-    GAME_RENDER_ID: 'game',
+    GAME_RENDER_ID: 'game-area',
 
     STORAGE_AUDIO_KEY: `${pkg.name}-sound-mute`,
 

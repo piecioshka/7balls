@@ -2,18 +2,18 @@
 if (typeof ga !== 'function') {
     window.ga = (...args) => {
         args.unshift('[Google Analytics]');
-        console.warn.apply(console, args);
+        // console.warn.apply(console, args);
     }
 }
 
 module.exports = {
     setup(game) {
         game.on('all', (...args) => {
-            console.info.apply(console, args);
+            // console.info.apply(console, args);
         });
 
         game.on('player:choose', ({ character }) => {
-            ga('send', 'event', 'game', `choose-${character.name}`);
+            ga('send', 'event', 'game', `choose-${character.id}`);
         });
 
         game.on('locale:select', ({ locale }) => {

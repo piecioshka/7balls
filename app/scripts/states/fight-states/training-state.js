@@ -1,16 +1,17 @@
-let utils = require('../../common/utils');
+import FightState from './fight-state';
 
+let assign = require('lodash.assign');
+let utils = require('../../common/utils');
 let { shout } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
-
-import FightState from './fight-state';
+let OptionsPlayerMixin = require('./options-player-mixin');
 
 /**
  * @extends FightState
  */
 export default class TrainingState extends FightState {
-    lifetime = null;
     cb = null;
+    lifespan = null;
     audio = {
         jump: null,
 
@@ -31,22 +32,25 @@ export default class TrainingState extends FightState {
         }
     };
 
-    init({ lifetime, cb }) {
-        this.lifetime = lifetime;
+    init({ cb, lifespan }) {
         this.cb = cb;
+        this.lifespan = lifespan;
+
+        assign(this, OptionsPlayerMixin);
     }
 
     create() {
         this.add.image(0, 0, 'bg-training-capsule');
 
-        utils.timeout(this, this.lifetime, this.cb);
+        utils.timeout(this, this.lifespan, this.cb);
 
         this._setupWorld();
-        this._setupKeyboard();
         this._setupSound();
 
         this._setupSprite(150, 360, this.game.player);
         this._setupPlayerOptions();
+
+        this._setupKeyboard();
 
         this.displayLogo();
         shout(this.game, { text: `${this.game.locale.TRAINING_STATE_WELCOME}` });
@@ -59,8 +63,8 @@ export default class TrainingState extends FightState {
     }
 
     render() {
-        let player = this.game.player;
-        // this.game.debug.bodyInfo(player.phaser, 25, 25);
-        this.game.debug.body(player.phaser);
+        let playerSprite = this.game.player.getSprite();
+        // this.game.debug.bodyInfo(playerSprite, 25, 25);
+        this.game.debug.body(playerSprite);
     }
 }

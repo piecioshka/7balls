@@ -1,9 +1,12 @@
-let config = require('../../configs');
 import FightState from './fight-state';
-import Computer from '../../models/computer';
+import ArtificialIntelligence from '../../helpers/artificial-intelligence';
 
-let { shout, addSaiyanLabel } = require('../../helpers/message');
+let assign = require('lodash.assign');
+let config = require('../../configs');
+let { shout } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
+let OptionsEnemyMixin = require('./options-enemy-mixin');
+let OptionsPlayerMixin = require('./options-player-mixin');
 
 /**
  * @extends FightState
@@ -34,11 +37,15 @@ export default class VersusState extends FightState {
         }
     };
 
+    init() {
+        assign(this, OptionsEnemyMixin);
+        assign(this, OptionsPlayerMixin);
+    }
+
     create() {
         this.add.image(0, 0, 'bg-versus-sky');
 
         this._setupWorld();
-        this._setupKeyboard();
         this._setupSound();
 
         this._setupSprite(150, 360, this.game.player);
@@ -48,6 +55,7 @@ export default class VersusState extends FightState {
         this._setupEnemyOptions();
 
         this._setupFight();
+        this._setupKeyboard();
 
         this.displayLogo();
         shout(this.game, { text: `${this.game.locale.VERSUS_STATE_WELCOME}` });
@@ -57,11 +65,11 @@ export default class VersusState extends FightState {
 
     _setupFight() {
         let context = this;
-        let player = this.game.player;
-        let enemy = this.game.enemy;
+        let playerSprite = this.game.player.getSprite();
+        let enemySprite = this.game.enemy.getSprite();
 
         function isCollision() {
-            return context.physics.arcade.overlap(enemy.phaser, player.phaser);
+            return context.physics.arcade.overlap(enemySprite, playerSprite);
         }
 
         function handlePlayerBlow(points) {
@@ -71,9 +79,9 @@ export default class VersusState extends FightState {
             }
         }
 
-        player.phaser.events.onKicking.add(() => handlePlayerBlow(config.VERSUS_KICKING_POINTS));
-        player.phaser.events.onBoxing.add(() => handlePlayerBlow(config.VERSUS_BOXING_POINTS));
-        player.phaser.events.onDied.add(() => this._finishFight('died', 'win'));
+        playerSprite.events.onKicking.add(() => handlePlayerBlow(config.VERSUS_KICKING_POINTS));
+        playerSprite.events.onBoxing.add(() => handlePlayerBlow(config.VERSUS_BOXING_POINTS));
+        playerSprite.events.onDied.add(() => this._finishFight('died', 'win'));
 
         function handleEnemyBlow(points) {
             if (isCollision()) {
@@ -82,24 +90,26 @@ export default class VersusState extends FightState {
             }
         }
 
-        enemy.phaser.events.onKicking.add(() => handleEnemyBlow(config.VERSUS_KICKING_POINTS));
-        enemy.phaser.events.onBoxing.add(() => handleEnemyBlow(config.VERSUS_BOXING_POINTS));
-        enemy.phaser.events.onDied.add(() => this._finishFight('win', 'died'));
+        enemySprite.events.onKicking.add(() => handleEnemyBlow(config.VERSUS_KICKING_POINTS));
+        enemySprite.events.onBoxing.add(() => handleEnemyBlow(config.VERSUS_BOXING_POINTS));
+        enemySprite.events.onDied.add(() => this._finishFight('win', 'died'));
 
-        Computer.applyArtificialIntelligence(this, enemy);
+        ArtificialIntelligence.setup(this, enemySprite);
     }
 
     _finishFight(playerSate, enemyState) {
         let player = this.game.player;
+        let playerSprite = player.getSprite();
         let enemy = this.game.enemy;
+        let enemySprite = enemy.getSprite();
 
         // Wyłączamy wsparcie klawiatury w grze.
         this.input.keyboard.enabled = false;
 
-        shout(this.game, { text: `${player.name} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
+        shout(this.game, { text: `${player.title} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
 
-        player.phaser.play(playerSate);
-        enemy.phaser.play(enemyState);
+        playerSprite.play(playerSate);
+        enemySprite.play(enemyState);
 
         this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
             // Przywracamy wsparcie klawiatury w grze.
@@ -116,13 +126,13 @@ export default class VersusState extends FightState {
                     this.state.start('Winner');
                 } else {
                     this.state.start('Meal', true, false, {
-                        lifetime: Phaser.Timer.SECOND * 4,
+                        lifespan: Phaser.Timer.SECOND * 4,
                         cb: () => {
                             this.state.start('Training', true, false, {
-                                lifetime: Phaser.Timer.SECOND * 5,
+                                lifespan: Phaser.Timer.SECOND * 5,
                                 cb: () => {
                                     this.state.start('EnemyPresentation', true, false, {
-                                        lifetime: Phaser.Timer.SECOND * 4,
+                                        lifespan: Phaser.Timer.SECOND * 2,
                                         cb: () => {
                                             this.state.start('Versus');
                                         }
@@ -136,77 +146,18 @@ export default class VersusState extends FightState {
         });
     }
 
-    _setupEnemyOptions() {
-        let enemy = this.game.enemy;
-
-        addSaiyanLabel(this.game, 755, 18, 'HP');
-        addSaiyanLabel(this.game, 755, 48, 'EXP');
-        this._addAvatar(745, 85, `${enemy.id}-card`);
-
-        this.options.enemy.lvl = addSaiyanLabel(this.game, 733, 81, `${enemy.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`, [1, 0]);
-
-        this.options.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
-        this._updateEnemyOptionsHP();
-
-        this.options.enemy.exp = this._addBar(746, 55, 'bar-exp-invert', [1, 0]);
-        this._updateEnemyOptionsEXP();
-    }
-
-    _updateEnemyOptionsHP() {
-        let hp = this.game.enemy.hp;
-        let imageWidth = this.cache.getImage('bar-hp-invert').width;
-        let width = hp * imageWidth / 100;
-        this.options.enemy.hp.color.crop(new Phaser.Rectangle(imageWidth - width, 0, width, 16));
-    }
-
-    _updateEnemyOptionsEXP() {
-        let exp = this.game.enemy.exp;
-        let imageWidth = this.cache.getImage('bar-exp').width;
-        let width = exp * imageWidth / 100;
-        this.options.enemy.exp.color.crop(new Phaser.Rectangle(imageWidth - width, 0, width, 16));
-    }
-
-    _removeEnemyHP(value) {
-        let enemy = this.game.enemy;
-        enemy.hp -= value;
-
-        if (enemy.hp <= 0) {
-            enemy.hp = 0;
-            enemy.phaser.events.onDied.dispatch();
-        }
-
-        this._updateEnemyOptionsHP();
-        this._updateOptionsLvL('enemy');
-    }
-
-    _addEnemyEXP(value) {
-        let enemy = this.game.enemy;
-        enemy.exp += value;
-
-        if (enemy.exp >= config.PLAYER_MAXIMUM_EXPERIENCE) {
-            enemy.exp = 0;
-
-            if (enemy.lvl < config.PLAYER_MAXIMUM_LEVEL) {
-                enemy.lvl++;
-            }
-        }
-
-        this._updateEnemyOptionsEXP();
-        this._updateOptionsLvL('enemy');
-    }
-
     update() {
+        FightState.resetCharacterVelocity(this.game.enemy.getSprite());
         super.update();
-        FightState.resetCharacterVelocity(this.game.enemy);
     }
 
     render() {
-        let player = this.game.player;
-        // this.game.debug.bodyInfo(player.phaser, 25, 25);
-        this.game.debug.body(player.phaser);
+        let playerSprite = this.game.player.getSprite();
+        // this.game.debug.bodyInfo(playerSprite, 25, 25);
+        this.game.debug.body(playerSprite);
 
-        let enemy = this.game.enemy;
-        // this.game.debug.bodyInfo(enemy.phaser, 25, 225);
-        this.game.debug.body(enemy.phaser);
+        let enemySprite = this.game.enemy.getSprite();
+        // this.game.debug.bodyInfo(enemySprite, 25, 225);
+        this.game.debug.body(enemySprite);
     }
 }

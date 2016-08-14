@@ -5,20 +5,20 @@ let { loadSoundPreferences } = require('../../helpers/audio');
  * @extends Phaser.State
  */
 export default class MessageState extends Phaser.State {
-    body = null;
+    text = null;
     cb = null;
-    lifetime = null;
+    lifespan = null;
 
-    init({ body, cb, lifetime }) {
-        this.body = body;
+    init({ content, cb, lifespan }) {
+        this.text = content;
         this.cb = cb;
-        this.lifetime = lifetime;
+        this.lifespan = lifespan;
     }
 
     create() {
         this.add.image(0, 0, 'bg-message');
 
-        displayCentralMessage(this.game, { text: this.body, lifetime: this.lifetime, cb: this.cb });
+        displayCentralMessage(this.game, { text: this.text, lifespan: this.lifespan, cb: this.cb });
 
         loadSoundPreferences(this.game);
     }

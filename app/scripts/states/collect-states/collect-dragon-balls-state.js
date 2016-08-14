@@ -21,9 +21,9 @@ export default class CollectDragonBallsState extends Phaser.State {
         this._setupSound();
 
         this._setupBalls(random);
-        this._setupPlayerSprite();
+        this._setupSprite(10, 60, this.game.player);
 
-        shout(this.game, { text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.name}!` });
+        shout(this.game, { text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.title}!` });
 
         this._setupTimer(random);
 
@@ -41,20 +41,21 @@ export default class CollectDragonBallsState extends Phaser.State {
         this.layer.resizeWorld();
     }
 
-    _setupPlayerSprite() {
-        let player = this.game.player;
+    _setupSprite(x, y, character, anchor = [0.5, 0.5]) {
+        let sprite = character.createSprite(this, x, y, `${character.id}-collecting`);
+        sprite.anchor.setTo(...anchor);
 
-        player.phaser = this.add.sprite(30, 60, `${player.id}-collecting`);
-        player.phaser.anchor.setTo(0.5, 0.5);
-
-        this._defineDefaultProperties(player);
+        this._defineDefaultProperties(character);
     }
 
     _defineDefaultProperties(character) {
-        this.physics.arcade.enable(character.phaser);
+        let sprite = character.getSprite();
 
-        character.phaser.body.collideWorldBounds = true;
-        character.phaser.body.setSize(30, 30, 5, 30);
+        // Tutaj tworzymy ciało dla naszej postaci.
+        this.physics.arcade.enable(sprite);
+
+        sprite.body.collideWorldBounds = true;
+        sprite.body.setSize(30, 30, 5, 30);
     }
 
     _setupBalls(random) {
@@ -111,12 +112,14 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleCollision() {
-        this.physics.arcade.collide(this.game.player.phaser, this.layer);
-        this.physics.arcade.collide(this.game.player.phaser, this.game.balls, this._handleCollectedBall.bind(this));
+        let playerSprite = this.game.player.getSprite();
+
+        this.physics.arcade.collide(playerSprite, this.layer);
+        this.physics.arcade.collide(playerSprite, this.game.balls, this._handleCollectedBall.bind(this));
     }
 
     _handleCollectedBall(player, ball) {
-        this.game.emit('ball:collected', { ball });
+        this.game.emit('ball:collected', { player, ball });
         ball.destroy();
 
         this.audio.candypop.play();
@@ -128,31 +131,31 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleKeyboard() {
-        let player = this.game.player;
+        let playerSprite = this.game.player.getSprite();
         let keyboard = this.input.keyboard;
 
-        player.phaser.body.velocity.x = player.phaser.body.velocity.y = 0;
+        playerSprite.body.velocity.x = playerSprite.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.phaser.body.velocity.x -= config.COLLECTING_PLAYER_SPEED;
-            player.phaser.angle = -10;
+            playerSprite.body.velocity.x -= config.COLLECTING_PLAYER_SPEED;
+            playerSprite.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.phaser.body.velocity.x += config.COLLECTING_PLAYER_SPEED;
-            player.phaser.angle = 10;
+            playerSprite.body.velocity.x += config.COLLECTING_PLAYER_SPEED;
+            playerSprite.angle = 10;
         } else {
-            player.phaser.angle = 0;
+            playerSprite.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            player.phaser.body.velocity.y -= config.COLLECTING_PLAYER_SPEED;
+            playerSprite.body.velocity.y -= config.COLLECTING_PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            player.phaser.body.velocity.y += config.COLLECTING_PLAYER_SPEED;
+            playerSprite.body.velocity.y += config.COLLECTING_PLAYER_SPEED;
         }
     }
 
     render() {
-        // let player = this.game.player;
-        // this.game.debug.bodyInfo(player.phaser, 25, 25);
-        // this.game.debug.body(player.phaser);
+        let playerSprite = this.game.player.getSprite();
+        // this.game.debug.bodyInfo(playerSprite, 25, 25);
+        this.game.debug.body(playerSprite);
     }
 }

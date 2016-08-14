@@ -38,10 +38,10 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [x] zamiana `undefined` na `null`
 * [x] nie działa na IE9, bo nie ma `Object.assign` - użyć `lodash.assign`
 * [x] poprawić dodanie customowej czcionki
+* [x] kucanie nie powinno uderzać zawodnika (rozszerzać bounding boxa)
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
 * [ ] kucanie powinno być na stałe (nie trzeba tak jak przy uderzeniu wracać do normalnej postaci)
-* [ ] kucanie nie powinno uderzać zawodnika (rozszerzać bounding boxa)
 * [ ] nie używać fonta `Sayian sans` do wszystkiego, tylko do napisu DBP
 
 ### Rozwój

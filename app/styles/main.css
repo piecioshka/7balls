@@ -9,7 +9,7 @@ body {
     font-family: 'Saiyan-Sans', serif;
 }
 
-#game {
+#game-area {
     width: 800px;
     height: 400px;
     background: #000;

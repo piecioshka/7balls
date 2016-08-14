@@ -15,7 +15,7 @@ function addRectangle(game, x, y, width, height) {
     return rect;
 }
 
-function displayHorizontalRectangle(game, lifetime) {
+function displayHorizontalRectangle(game, lifespan) {
     let background = addRectangle(game, 0, (game.height / 2) - (BACKGROUND_HEIGHT / 2), game.width, BACKGROUND_HEIGHT);
     background.alpha = 0;
 
@@ -23,7 +23,7 @@ function displayHorizontalRectangle(game, lifetime) {
         game.add.tween(background).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
     });
 
-    game.time.events.add(lifetime - Phaser.Timer.SECOND / 2, () => {
+    game.time.events.add(lifespan - Phaser.Timer.SECOND / 2, () => {
         game.add.tween(background).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
     });
 
@@ -56,12 +56,12 @@ function addSaiyanLabel(game, x, y, text, anchor) {
     return label;
 }
 
-function shout(game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 60, cb = () => null }) {
-    displayHorizontalRectangle(game, lifetime);
-    return displayCentralMessage(game, { text, lifetime, fontSize, cb });
+function shout(game, { text, lifespan = Phaser.Timer.SECOND * 2, fontSize = 60, cb = () => null }) {
+    displayHorizontalRectangle(game, lifespan);
+    return displayCentralMessage(game, { text, lifespan, fontSize, cb });
 }
 
-function displayCentralMessage(game, { text, lifetime = Phaser.Timer.SECOND * 2, fontSize = 40, cb = () => null }) {
+function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2, fontSize = 40, cb = () => null }) {
     let message = addLabel(game, game.width / 2, game.height / 2, text, [0.5, 0.5]);
     message.alpha = 0;
     message.fontSize = fontSize;
@@ -70,11 +70,11 @@ function displayCentralMessage(game, { text, lifetime = Phaser.Timer.SECOND * 2,
         game.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
     });
 
-    game.time.events.add(lifetime - Phaser.Timer.SECOND / 2, () => {
+    game.time.events.add(lifespan - Phaser.Timer.SECOND / 2, () => {
         game.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
     });
 
-    game.time.events.add(lifetime, cb);
+    game.time.events.add(lifespan, cb, this);
 
     return message;
 }

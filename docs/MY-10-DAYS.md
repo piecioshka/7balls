@@ -92,7 +92,7 @@ Chciałbym w 10 dni zrobić sporo materiału do kilku rzeczy:
 
 ## Dzień VII - 2015-09-07
 
-* design: dodać Play do background w SelectCharacterState
+* design: dodać Play do background w SelectPlayerState
 * develop: zmienić kolejność ładowania pasków, aby były one nieprzysłanialne przez zawodników
 * develop: aktywować kartę gracza po najechaniu myszką
 * develop: wyszarzyć exp dla wroga
@@ -123,7 +123,7 @@ Chciałbym w 10 dni zrobić sporo materiału do kilku rzeczy:
 * DODATKOWO: nagrać jak stworzyć sztuczną inteligencję (22)
 * develop: stworzyć plik z lokalizacją
 * develop: podczas GameOverState powinno się czyścić liczba leveli
-* develop: dodać wsparcie "Konami code” - na ekranie SelectCharacterState pojawia się nowa postać do gry - Piccolo
+* develop: dodać wsparcie "Konami code” - na ekranie SelectPlayerState pojawia się nowa postać do gry - Piccolo
 * DODATKOWO: develop: uszczuplenie obsługi klawiatury
 
 ## Dzień X - 2015-09-10

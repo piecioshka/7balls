@@ -9,17 +9,17 @@ export default class WinnerState extends Phaser.State {
     };
 
     create() {
-        this.game.emit('game:win');
-
         this.add.image(0, 0, 'bg-winner');
         this.add.button(370, this.game.height / 2, 'btn-try-again', this._tryAgain, this);
 
         this._setupKeyboard();
-        this._setupSound();
 
+        this._setupSound();
         loadSoundPreferences(this.game);
 
         this.audio.thing1.play();
+
+        this.game.emit('game:win');
     }
 
     _setupKeyboard() {
@@ -34,10 +34,11 @@ export default class WinnerState extends Phaser.State {
     }
 
     _tryAgain() {
+        this.audio.thing1.stop();
+
         this.game.emit('game:win:try-again');
 
-        this.audio.thing1.stop();
-        this.state.start('SelectCharacter');
+        this.state.start('SelectPlayer');
     }
 
     _setupSound() {

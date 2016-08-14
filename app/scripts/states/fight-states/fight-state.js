@@ -4,49 +4,51 @@ let debug = {
 
 let config = require('../../configs');
 
-let { addSaiyanLabel } = require('../../helpers/message');
-
 function defineAnimations(character) {
+    let sprite = character.getSprite();
+    let width = 150;
+    let height = 200;
+
     function resizeMaximum() {
-        character.body.setSize(150, 200, 0, 0);
+        sprite.body.setSize(width, height, 0, 0);
     }
 
     function reduceByHalf() {
-        character.body.setSize(150, 100, 0, 0);
+        sprite.body.setSize((width * 2) / 3, height / 2, 0, height / 2);
     }
 
     function revertDefaultSize() {
-        character.body.setSize(100, 200, 0, 0);
+        sprite.body.setSize((width * 2) / 3, height, 0, 0);
     }
 
-    let sitting = character.animations.add('sitting', [4, 5], 4, false);
+    let sitting = sprite.animations.add('sitting', [4, 5], 4, false);
 
     sitting.onStart.add(reduceByHalf);
     sitting.onComplete.add(revertDefaultSize);
 
-    let kicking = character.animations.add('kicking', [12, 13], 16, false);
+    let kicking = sprite.animations.add('kicking', [12, 13], 16, false);
 
     kicking.onStart.add(resizeMaximum);
     kicking.onComplete.add(revertDefaultSize);
 
-    let boxing = character.animations.add('boxing', [16, 17], 16, false);
+    let boxing = sprite.animations.add('boxing', [16, 17], 16, false);
 
     boxing.onStart.add(resizeMaximum);
     boxing.onComplete.add(revertDefaultSize);
 
-    character.animations.add('standing', [0, 1, 2], 4, true);
-    character.animations.add('jumping', [8, 9], 4, false);
-    character.animations.add('win', [20, 21], 4, false);
-    character.animations.add('died', [24, 25], 4, false);
+    sprite.animations.add('standing', [0, 1, 2], 4, true);
+    sprite.animations.add('jumping', [8, 9], 4, false);
+    sprite.animations.add('win', [20, 21], 4, false);
+    sprite.animations.add('died', [24, 25], 4, false);
 
-    character.play('standing');
+    sprite.play('standing');
 
     debug.log('Character "%s" is STANDING', name);
 }
 
-function resetCharacterVelocity(character) {
-    character.phaser.body.velocity.x = 0;
-    character.phaser.body.velocity.y += config.FIGHT_FALL_SPEED;
+function resetCharacterVelocity(sprite) {
+    sprite.body.velocity.x = 0;
+    sprite.body.velocity.y += config.FIGHT_FALL_SPEED;
 }
 
 /**
@@ -61,16 +63,22 @@ export default class FightState extends Phaser.State {
 
     _setupWorld() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
-        this.physics.arcade.gravity.set(0, 1);
+        this.physics.arcade.gravity.setTo(0, 1);
         this.world.setBounds(0, 0, this.game.width, this.game.height - config.FIGHT_BOTTOM_MARGIN);
     }
 
     _defineDefaultProperties(character) {
-        this.physics.arcade.enable(character);
+        let sprite = character.getSprite();
 
-        character.body.bounce.setTo(0, 0.1);
-        character.body.collideWorldBounds = true;
-        character.body.setSize(100, 200, 0, 0);
+        // Tutaj tworzymy ciało dla naszej postaci.
+        this.physics.arcade.enable(sprite);
+
+        let width = sprite.body.width;
+        let height = sprite.body.height;
+
+        sprite.body.bounce.setTo(0, 0.1);
+        sprite.body.collideWorldBounds = true;
+        sprite.body.setSize((width * 2) / 3, height, 0, 0);
     }
 
     _addAvatar(x, y, key) {
@@ -91,139 +99,77 @@ export default class FightState extends Phaser.State {
     }
 
     _setupSprite(x, y, character, anchor = [0, 1]) {
-        // Usuwamy ewentualny Phaser.Sprite (z poprzednich stanów).
-        if (character.phaser) {
-            character.phaser.destroy();
-            delete character.phaser;
-        }
+        let sprite = character.createSprite(this, x, y, `${character.id}-spritesheet`);
 
-        character.phaser = this.add.sprite(x, y, `${character.id}-spritesheet`);
-        character.phaser.anchor.setTo(...anchor);
+        sprite.anchor.setTo(...anchor);
 
-        character.phaser.events.onLeft = new Phaser.Signal();
-        character.phaser.events.onLeft.add(() => {
-            character.phaser.body.velocity.x -= config.FIGHT_HORIZONTAL_SPEED;
+        this._defineDefaultProperties(character);
 
-            debug.log('Character "%s" is LEFT', character.name);
+        this._setupMoves(character);
+        defineAnimations(character);
+    }
+
+    _setupMoves(character) {
+        let sprite = character.getSprite();
+
+        sprite.events.onLeft = new Phaser.Signal();
+        sprite.events.onLeft.add(() => {
+            sprite.body.velocity.x -= config.FIGHT_HORIZONTAL_SPEED;
+
+            debug.log('Character "%s" is LEFT', character.title);
         });
 
-        character.phaser.events.onRight = new Phaser.Signal();
-        character.phaser.events.onRight.add(() => {
-            character.phaser.body.velocity.x += config.FIGHT_HORIZONTAL_SPEED;
+        sprite.events.onRight = new Phaser.Signal();
+        sprite.events.onRight.add(() => {
+            sprite.body.velocity.x += config.FIGHT_HORIZONTAL_SPEED;
 
-            debug.log('Character "%s" is RIGHT', character.name);
+            debug.log('Character "%s" is RIGHT', character.title);
         });
 
-        character.phaser.events.onSitting = new Phaser.Signal();
-        character.phaser.events.onSitting.add(() => {
-            character.phaser.play('sitting');
+        sprite.events.onSitting = new Phaser.Signal();
+        sprite.events.onSitting.add(() => {
+            sprite.play('sitting');
 
-            debug.log('Character "%s" is SITTING', character.name);
+            debug.log('Character "%s" is SITTING', character.title);
         });
 
-        character.phaser.events.onJumping = new Phaser.Signal();
-        character.phaser.events.onJumping.add(() => {
-            if (!character.phaser.body.onFloor()) {
+        sprite.events.onJumping = new Phaser.Signal();
+        sprite.events.onJumping.add(() => {
+            if (!sprite.body.onFloor()) {
                 return;
             }
 
             this.audio.jump.play();
 
-            character.phaser.body.velocity.y -= config.FIGHT_JUMP;
+            sprite.body.velocity.y -= config.FIGHT_JUMP;
 
-            character.phaser.play('jumping');
+            sprite.play('jumping');
 
-            debug.log('Character "%s" is JUMPING', character.name);
+            debug.log('Character "%s" is JUMPING', character.title);
         });
 
-        character.phaser.events.onKicking = new Phaser.Signal();
-        character.phaser.events.onKicking.add(() => {
+        sprite.events.onKicking = new Phaser.Signal();
+        sprite.events.onKicking.add(() => {
             this._playKickSound(character);
 
-            character.phaser.play('kicking');
+            sprite.play('kicking');
 
-            debug.log('Character "%s" is KICKING', character.name);
+            debug.log('Character "%s" is KICKING', character.title);
         });
 
-        character.phaser.events.onBoxing = new Phaser.Signal();
-        character.phaser.events.onBoxing.add(() => {
+        sprite.events.onBoxing = new Phaser.Signal();
+        sprite.events.onBoxing.add(() => {
             this._playPunchSound(character);
 
-            character.phaser.play('boxing');
+            sprite.play('boxing');
 
-            debug.log('Character "%s" is BOXING', character.name);
+            debug.log('Character "%s" is BOXING', character.title);
         });
-        character.phaser.events.onDied = new Phaser.Signal();
-
-        this._defineDefaultProperties(character.phaser);
-        defineAnimations(character.phaser);
-    }
-
-    _setupPlayerOptions() {
-        let player = this.game.player;
-
-        addSaiyanLabel(this.game, 21, 18, 'HP');
-        addSaiyanLabel(this.game, 8, 48, 'EXP');
-        this._addAvatar(6, 85, `${player.id}-card`);
-
-        this.options.player.lvl = addSaiyanLabel(this.game, 63, 81, `${player.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
-
-        this.options.player.hp = this._addBar(55, 25, 'bar-hp');
-        this._updatePlayerOptionsHP();
-
-        this.options.player.exp = this._addBar(55, 55, 'bar-exp');
-        this._updatePlayerOptionsEXP();
-    }
-
-    _updatePlayerOptionsHP() {
-        let hp = this.game.player.hp;
-        let imageWidth = this.cache.getImage('bar-hp').width;
-        let width = hp * imageWidth / 100;
-
-        this.options.player.hp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
-    }
-
-    _updatePlayerOptionsEXP() {
-        let exp = this.game.player.exp;
-        let imageWidth = this.cache.getImage('bar-exp').width;
-        let width = exp * imageWidth / 100;
-
-        this.options.player.exp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
+        sprite.events.onDied = new Phaser.Signal();
     }
 
     _updateOptionsLvL(character) {
         this.options[character].lvl.setText(`${this.game[character].lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
-    }
-
-    _removePlayerHP(value) {
-        let player = this.game.player;
-
-        player.hp -= value;
-
-        if (player.hp <= 0) {
-            player.hp = 0;
-            player.phaser.events.onDied.dispatch();
-        }
-
-        this._updatePlayerOptionsHP();
-        this._updateOptionsLvL('player');
-    }
-
-    _addPlayerEXP(value) {
-        let player = this.game.player;
-
-        player.exp += value;
-
-        if (player.exp >= config.PLAYER_MAXIMUM_EXPERIENCE) {
-            player.exp = 0;
-
-            if (player.lvl < config.PLAYER_MAXIMUM_LEVEL) {
-                player.lvl++;
-            }
-        }
-
-        this._updatePlayerOptionsEXP();
-        this._updateOptionsLvL('player');
     }
 
     _setupSound() {
@@ -270,7 +216,8 @@ export default class FightState extends Phaser.State {
     }
 
     _setupKeyboard() {
-        let player = this.game.player;
+        let playerSprite = this.game.player.getSprite();
+
         let c = this.input.keyboard.addKey(Phaser.Keyboard.C);
         let x = this.input.keyboard.addKey(Phaser.Keyboard.X);
         let up = this.input.keyboard.addKey(Phaser.Keyboard.UP);
@@ -284,10 +231,10 @@ export default class FightState extends Phaser.State {
             Phaser.Keyboard.SPACEBAR
         ]);
 
-        c.onDown.add(() => player.phaser.events.onKicking.dispatch());
-        x.onDown.add(() => player.phaser.events.onBoxing.dispatch());
-        up.onDown.add(() => player.phaser.events.onJumping.dispatch());
-        space.onDown.add(() => player.phaser.events.onJumping.dispatch());
+        c.onDown.add(() => playerSprite.events.onKicking.dispatch());
+        x.onDown.add(() => playerSprite.events.onBoxing.dispatch());
+        up.onDown.add(() => playerSprite.events.onJumping.dispatch());
+        space.onDown.add(() => playerSprite.events.onJumping.dispatch());
     }
 
     update() {
@@ -295,19 +242,19 @@ export default class FightState extends Phaser.State {
     }
 
     _handleKeyboard() {
-        let player = this.game.player;
+        let playerSprite = this.game.player.getSprite();
         let keyboard = this.input.keyboard;
 
-        resetCharacterVelocity(player);
+        resetCharacterVelocity(playerSprite);
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            player.phaser.events.onLeft.dispatch();
+            playerSprite.events.onLeft.dispatch();
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            player.phaser.events.onRight.dispatch();
+            playerSprite.events.onRight.dispatch();
         }
 
         if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            player.phaser.events.onSitting.dispatch();
+            playerSprite.events.onSitting.dispatch();
         }
     }
 }

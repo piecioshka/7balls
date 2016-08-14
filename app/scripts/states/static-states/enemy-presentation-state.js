@@ -1,5 +1,6 @@
-let utils = require('../../common/utils');
+import Enemy from '../../models/enemy';
 
+let utils = require('../../common/utils');
 let { shout } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
@@ -8,11 +9,11 @@ let { loadSoundPreferences } = require('../../helpers/audio');
  */
 export default class EnemyPresentationState extends Phaser.State {
     cb = null;
-    lifetime = null;
+    lifespan = null;
 
-    init({ cb, lifetime }) {
+    init({ cb, lifespan }) {
         this.cb = cb;
-        this.lifetime = lifetime;
+        this.lifespan = lifespan;
     }
 
     create() {
@@ -23,17 +24,18 @@ export default class EnemyPresentationState extends Phaser.State {
 
         shout(this.game, { text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}` });
 
-        utils.timeout(this, this.lifetime, this.cb);
+        utils.timeout(this, this.lifespan, this.cb);
 
         loadSoundPreferences(this.game);
     }
 
     _setupEnemy() {
         // Pobieramy pierwszego wroga. Każde zwycięstwo eliminuje pierwszego z listy.
-        let Enemy = this.game.enemies[0];
+        let typeClass = this.game.enemies[0];
 
         // Współdzielimy obiekt wroga między stana w grze.
         this.game.enemy = new Enemy();
+        this.game.enemy.setPersonality(typeClass);
 
         this.game.emit('enemy:new', { enemy: this.game.enemy });
     }

@@ -1,6 +1,4 @@
 let utils = require('../../common/utils');
-import Player from '../../models/player';
-
 let { shout } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
@@ -8,22 +6,22 @@ let { loadSoundPreferences } = require('../../helpers/audio');
  * @extends Phaser.State
  */
 export default class MealState extends Phaser.State {
-    lifetime = null;
     cb = null;
+    lifespan = null;
 
-    init({ lifetime, cb }) {
-        this.lifetime = lifetime;
+    init({ cb, lifespan }) {
         this.cb = cb;
+        this.lifespan = lifespan;
     }
 
     create() {
         this.add.image(0, 0, 'bg-meal-house');
 
-        this.game.player.hp = Player.defaultNumbers.hp;
+        this.game.player.resetHP();
 
         shout(this.game, { text: `${this.game.locale.MEAL_STATE_WELCOME}` });
 
-        utils.timeout(this, this.lifetime, this.cb);
+        utils.timeout(this, this.lifespan, this.cb);
 
         loadSoundPreferences(this.game);
     }
