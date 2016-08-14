@@ -48,6 +48,9 @@ export default class TrainingState extends FightState {
         this._setupSound();
 
         this._setupSprite(150, 360, this.game.player);
+
+        this._setupOrientation(this.game.player, 'left');
+
         this._setupPlayerOptions();
 
         this._setupKeyboard();
@@ -60,6 +63,17 @@ export default class TrainingState extends FightState {
 
     update() {
         super.update();
+        this._handleTrainingKeyboard();
+    }
+
+    _handleTrainingKeyboard() {
+        let keyboard = this.input.keyboard;
+
+        if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
+            this._setupOrientation(this.game.player, 'left');
+        } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
+            this._setupOrientation(this.game.player, 'right');
+        }
     }
 
     render() {

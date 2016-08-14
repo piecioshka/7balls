@@ -51,6 +51,9 @@ export default class VersusState extends FightState {
         this._setupSprite(150, 360, this.game.player);
         this._setupSprite(650, 360, this.game.enemy, [1, 1]);
 
+        this._setupOrientation(this.game.player, 'left');
+        this._setupOrientation(this.game.enemy, 'right');
+
         this._setupPlayerOptions();
         this._setupEnemyOptions();
 

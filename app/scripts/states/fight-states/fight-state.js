@@ -4,21 +4,13 @@ let debug = {
 
 let config = require('../../configs');
 
-function defineAnimations(character) {
+function defineAnimations(character, reduceByHalf, revertDefaultSize) {
     let sprite = character.getSprite();
     let width = 150;
     let height = 200;
 
     function resizeMaximum() {
         sprite.body.setSize(width, height, 0, 0);
-    }
-
-    function reduceByHalf() {
-        sprite.body.setSize((width * 2) / 3, height / 2, 0, height / 2);
-    }
-
-    function revertDefaultSize() {
-        sprite.body.setSize((width * 2) / 3, height, 0, 0);
     }
 
     let sitting = sprite.animations.add('sitting', [4, 5], 4, false);
@@ -43,7 +35,7 @@ function defineAnimations(character) {
 
     sprite.play('standing');
 
-    debug.log('Character "%s" is STANDING', name);
+    debug.log('Character "%s" is STANDING', character.title);
 }
 
 function resetCharacterVelocity(sprite) {
@@ -73,12 +65,63 @@ export default class FightState extends Phaser.State {
         // Tutaj tworzymy ciało dla naszej postaci.
         this.physics.arcade.enable(sprite);
 
-        let width = sprite.body.width;
-        let height = sprite.body.height;
-
         sprite.body.bounce.setTo(0, 0.1);
         sprite.body.collideWorldBounds = true;
-        sprite.body.setSize((width * 2) / 3, height, 0, 0);
+    }
+
+    /**
+     * @param {Character} character
+     * @param {string} orientation [left, right]
+     * @access protected
+     */
+    _setupOrientation(character, orientation) {
+        let sprite = character.getSprite();
+
+        if (orientation === sprite.orientation) {
+            // Nie zmieniamy orientacji na już wybraną.
+            return;
+        }
+
+        console.log(character, orientation);
+
+        sprite.orientation = orientation;
+
+        let width = 150;
+        let height = 200;
+
+        let defaultSize = null;
+        let reduceByHalf = null;
+
+        switch (orientation) {
+            case 'left':
+                defaultSize = () => {
+                    sprite.body.setSize((width * 2) / 3, height, 0, 0);
+                };
+
+                reduceByHalf = () => {
+                    sprite.body.setSize((width * 2) / 3, height / 2, 0, height / 2);
+                };
+
+                defineAnimations(character, reduceByHalf, defaultSize);
+                defaultSize();
+                break;
+
+            case 'right':
+                defaultSize = () => {
+                    sprite.body.setSize((width * 2) / 3, height, width / 3, 0);
+                };
+
+                reduceByHalf = () => {
+                    sprite.body.setSize((width * 2) / 3, height / 2, width / 3, height / 2);
+                };
+
+                defineAnimations(character, reduceByHalf, defaultSize);
+                defaultSize();
+                break;
+
+            default:
+            // no default
+        }
     }
 
     _addAvatar(x, y, key) {
@@ -106,7 +149,6 @@ export default class FightState extends Phaser.State {
         this._defineDefaultProperties(character);
 
         this._setupMoves(character);
-        defineAnimations(character);
     }
 
     _setupMoves(character) {
