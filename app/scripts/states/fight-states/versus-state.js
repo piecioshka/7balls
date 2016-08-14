@@ -156,7 +156,7 @@ export default class VersusState extends FightState {
                     });
                 }
             }
-        });
+        }, this);
     }
 
     update() {

@@ -46,6 +46,7 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
 * [ ] kucanie powinno być na stałe (nie trzeba tak jak przy uderzeniu wracać do normalnej postaci)
+* [ ] podczas versus, zawodnicy nie mogą na siebie nachodzić
 
 ### Rozwój
 

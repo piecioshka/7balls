@@ -21,11 +21,11 @@ function displayHorizontalRectangle(game, lifespan) {
 
     game.time.events.add(Phaser.Timer.SECOND / 4, () => {
         game.add.tween(background).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
-    });
+    }, this);
 
     game.time.events.add(lifespan - Phaser.Timer.SECOND / 2, () => {
         game.add.tween(background).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
-    });
+    }, this);
 
     return background;
 }
@@ -68,11 +68,11 @@ function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2,
 
     game.time.events.add(Phaser.Timer.SECOND / 4, () => {
         game.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
-    });
+    }, this);
 
     game.time.events.add(lifespan - Phaser.Timer.SECOND / 2, () => {
         game.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
-    });
+    }, this);
 
     game.time.events.add(lifespan, cb, this);
 
