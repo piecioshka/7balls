@@ -238,14 +238,14 @@ export default class FightState extends Phaser.State {
     }
 
     update() {
+        let playerSprite = this.game.player.getSprite();
+        resetCharacterVelocity(playerSprite);
         this._handleKeyboard();
     }
 
     _handleKeyboard() {
         let playerSprite = this.game.player.getSprite();
         let keyboard = this.input.keyboard;
-
-        resetCharacterVelocity(playerSprite);
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
             playerSprite.events.onLeft.dispatch();

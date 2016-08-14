@@ -47,6 +47,10 @@ function setup(state, sprite) {
 
     function start(intervalTime, strategy) {
         utils.interval(state, intervalTime, () => {
+            if (!sprite.alive) {
+                return;
+            }
+
             let random = utils.random(0, strategy.length - 1);
             let move = strategy[random];
 

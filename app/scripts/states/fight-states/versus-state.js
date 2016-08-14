@@ -106,6 +106,9 @@ export default class VersusState extends FightState {
         // Wyłączamy wsparcie klawiatury w grze.
         this.input.keyboard.enabled = false;
 
+        playerSprite.kill();
+        enemySprite.kill();
+
         shout(this.game, { text: `${player.title} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
 
         playerSprite.play(playerSate);
@@ -147,7 +150,8 @@ export default class VersusState extends FightState {
     }
 
     update() {
-        FightState.resetCharacterVelocity(this.game.enemy.getSprite());
+        let enemySprite = this.game.enemy.getSprite();
+        FightState.resetCharacterVelocity(enemySprite);
         super.update();
     }
 
