@@ -122,9 +122,9 @@ export default class LoadingState extends Phaser.State {
 
         debug.log('audio files loaded');
 
-        this.load.tilemap('collecting-1', './assets/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-2', './assets/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-3', './assets/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('collecting-1', './data/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('collecting-2', './data/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('collecting-3', './data/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
 
         debug.log('tilemap files loaded');
 
@@ -132,9 +132,9 @@ export default class LoadingState extends Phaser.State {
 
         debug.log('spritesheet files loaded');
 
-        this.load.json('positions-1', './assets/balls/positions-1.json');
-        this.load.json('positions-2', './assets/balls/positions-2.json');
-        this.load.json('positions-3', './assets/balls/positions-3.json');
+        this.load.json('positions-1', './data/balls-positions/positions-1.json');
+        this.load.json('positions-2', './data/balls-positions/positions-2.json');
+        this.load.json('positions-3', './data/balls-positions/positions-3.json');
 
         this.load.json('locale-en', './locale/en_EN.json');
         this.load.json('locale-pl', './locale/pl_PL.json');
