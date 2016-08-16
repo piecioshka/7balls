@@ -17,7 +17,7 @@ export default class EnemyPresentationState extends Phaser.State {
     }
 
     create() {
-        this.add.image(0, 0, 'bg-enemy');
+        this.add.image(0, 0, 'bg-enemy-presentation');
 
         this._setupEnemy();
         this._displayEnemy();

@@ -43,7 +43,8 @@ export default class VersusState extends FightState {
     }
 
     create() {
-        this.add.image(0, 0, 'bg-versus-sky');
+        // this.add.image(0, 0, 'bg-versus-heaven');
+        this.add.image(0, 0, 'bg-versus-hell');
 
         this._setupWorld();
         this._setupSound();

@@ -34,15 +34,15 @@ export default class SelectPlayerState extends Phaser.State {
     create() {
         this.add.image(0, 0, 'bg-select-player');
 
-        this.gokuCard = this.add.button(220, 160, 'son-goku-card', () => this._chooseCharacter(SonGoku), this);
+        this.gokuCard = this.add.button(220, 180, 'son-goku-card', () => this._chooseCharacter(SonGoku), this);
         this.gokuCard.onInputOver.add(this._selectSonGoku, this);
         this.cards.push(this.gokuCard);
 
-        this.vegetaCard = this.add.button(420, 160, 'vegeta-card', () => this._chooseCharacter(Vegeta), this);
+        this.vegetaCard = this.add.button(420, 180, 'vegeta-card', () => this._chooseCharacter(Vegeta), this);
         this.vegetaCard.onInputOver.add(this._selectVegeta, this);
         this.cards.push(this.vegetaCard);
 
-        this.piccoloCard = this.add.button(520, 160, 'piccolo-card', () => this._chooseCharacter(Piccolo), this);
+        this.piccoloCard = this.add.button(520, 180, 'piccolo-card', () => this._chooseCharacter(Piccolo), this);
         this.piccoloCard.onInputOver.add(this._selectPiccolo, this);
         this.piccoloCard.visible = false;
 

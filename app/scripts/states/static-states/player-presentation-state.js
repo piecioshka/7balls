@@ -16,7 +16,7 @@ export default class PlayerPresentationState extends Phaser.State {
     }
 
     create() {
-        this.add.image(0, 0, 'bg-select-player');
+        this.add.image(0, 0, 'bg-player-presentation');
 
         this._displayPlayer();
 

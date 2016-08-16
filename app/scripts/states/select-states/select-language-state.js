@@ -19,10 +19,10 @@ export default class SelectLanguageState extends Phaser.State {
     create() {
         this.add.image(0, 0, 'bg-select-language');
 
-        this.plCard = this.add.button(150, 135, 'btn-pl', this._choosePolish, this);
+        this.plCard = this.add.button(150, 200, 'btn-pl', this._choosePolish, this);
         this.plCard.onInputOver.add(this._selectPolish, this);
 
-        this.enCard = this.add.button(450, 135, 'btn-en', this._chooseEnglish, this);
+        this.enCard = this.add.button(450, 200, 'btn-en', this._chooseEnglish, this);
         this.enCard.onInputOver.add(this._selectEnglish, this);
 
         // Domyślnie wybieramy język angielski.

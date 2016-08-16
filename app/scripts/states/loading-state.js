@@ -25,20 +25,21 @@ export default class LoadingState extends Phaser.State {
         // graphics/backgrounds
         this.load.path = './assets/graphics/backgrounds/';
 
-        this.load.image('bg-enemy', 'static/enemy-presentation/bg-enemy-presentation.png');
-        this.load.image('bg-game-over', 'static/game-over/bg-game-over.png');
+        this.load.image('bg-training-capsule', 'fight/training/bg-training-capsule.png');
+        this.load.image('bg-versus-hell', 'fight/versus/bg-versus-hell.png');
+        this.load.image('bg-versus-heaven', 'fight/versus/bg-versus-heaven.png');
+
         this.load.image('bg-select-language', 'select/select-language/bg-select-language.png');
         this.load.image('bg-select-player', 'select/select-player/bg-select-player.png');
-        this.load.image('bg-message', 'static/message/bg-message.png');
-        this.load.image('bg-select-player', 'select/select-player/bg-select-player.png');
-        this.load.image('bg-winner', 'static/winner/bg-winner.png');
 
+        this.load.image('bg-enemy-presentation', 'static/enemy-presentation/bg-enemy-presentation.png');
+        this.load.image('bg-player-presentation', 'static/player-presentation/bg-player-presentation.png');
+        this.load.image('bg-game-over', 'static/game-over/bg-game-over.png');
+        this.load.image('bg-message', 'static/message/bg-message.png');
+        this.load.image('bg-winner', 'static/winner/bg-winner.png');
         this.load.image('bg-meal-house', 'static/meal/bg-meal-house.png');
         this.load.image('bg-shenron', 'static/shenron/bg-shenron.png');
         this.load.image('bg-shenron-growing', 'static/shenron/bg-shenron-growing.png');
-        this.load.image('bg-training-capsule', 'fight/training/bg-training-capsule.png');
-        this.load.image('bg-versus-hell', 'fight/versus/bg-versus-hell.png');
-        this.load.image('bg-versus-sky', 'fight/versus/bg-versus-sky.png');
 
         // graphics/bars
         this.load.path = './assets/graphics/bars/';
