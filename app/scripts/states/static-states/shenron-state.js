@@ -31,10 +31,10 @@ export default class ShenronState extends Phaser.State {
         utils.timeout(this, Phaser.Timer.SECOND, () => {
             this.state.start('PlayerPresentation', true, false, {
                 key: this.game.player.id,
-                lifespan: Phaser.Timer.SECOND * 2,
+                lifespan: Phaser.Timer.SECOND,
                 cb: () => {
                     this.state.start('EnemyPresentation', true, false, {
-                        lifespan: Phaser.Timer.SECOND * 2,
+                        lifespan: Phaser.Timer.SECOND,
                         cb: () => {
                             this.state.start('Versus');
                         }

@@ -69,11 +69,11 @@ export default class SelectPlayerState extends Phaser.State {
     _next() {
         this.state.start('PlayerPresentation', true, false, {
             key: `${this.game.player.id}-halo`,
-            lifespan: Phaser.Timer.SECOND * 2,
+            lifespan: Phaser.Timer.SECOND,
             cb: () => {
                 this.state.start('Message', true, false, {
                     content: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
-                    lifespan: Phaser.Timer.SECOND * 3,
+                    lifespan: Phaser.Timer.SECOND * 2,
                     cb: () => {
                         this.state.start('CollectDragonBalls');
                     }

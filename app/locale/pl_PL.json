@@ -1,5 +1,5 @@
 {
-  "MESSAGE_STATE_WELCOME": "Witaj!\n\nSterowanie:\n - Nawigacja: LEFT, RIGHT, UP, DOWN\n - Walka: X, C",
+  "MESSAGE_STATE_WELCOME": "Sterowanie:\n - Nawigacja: LEFT, RIGHT, UP, DOWN\n - Walka: X, C",
   "MESSAGE_STATE_COLLECT_DRAGON_BALL": "Zbierz smocze kule,\naby pojawił się Shenron\ni przywrócił Ci życie!",
 
   "COLLECTING_STATE_WELCOME": "Cześć",
