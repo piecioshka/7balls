@@ -3,6 +3,7 @@ let debug = {
 };
 
 let utils = require('../common/utils');
+let { addSaiyanLabel } = require('../helpers/message');
 
 // Czas opóźnienia do schowania paska postępu.
 const DISPLAY_LOADING_DELAY = 500;
@@ -12,81 +13,84 @@ const DISPLAY_LOADING_DELAY = 500;
  */
 export default class LoadingState extends Phaser.State {
     preload() {
-        var loadingLabel = this.add.text(this.world.centerX, 150, 'Loading...', {
-            font: '30px Arial',
-            fill: '#ffffff'
-        });
-        loadingLabel.anchor.setTo(0.5, 0.5);
+        let title = addSaiyanLabel(this.game, this.world.centerX, 150, 'Loading...', [0.5, 0.5]);
+        title.fontSize = 130;
 
         var pixelLoadingWidth = this.cache.getImage('pixel-loading').width;
-        var progressBar = this.add.sprite(this.world.centerX - (pixelLoadingWidth / 2), 200, 'pixel-loading');
+        var progressBar = this.add.sprite(this.world.centerX - (pixelLoadingWidth / 2), 230, 'pixel-loading');
         this.load.setPreloadSprite(progressBar);
 
         debug.log('assets loading...');
 
         // graphics/backgrounds
+        this.load.path = './assets/graphics/backgrounds/';
 
-        this.load.image('bg-enemy', './assets/graphics/backgrounds/bg-enemy.png');
-        this.load.image('bg-game-over', './assets/graphics/backgrounds/bg-game-over.png');
-        this.load.image('bg-language', './assets/graphics/backgrounds/bg-language.png');
-        this.load.image('bg-menu', './assets/graphics/backgrounds/bg-menu.png');
-        this.load.image('bg-message', './assets/graphics/backgrounds/bg-message.png');
-        this.load.image('bg-player', './assets/graphics/backgrounds/bg-player.png');
-        this.load.image('bg-winner', './assets/graphics/backgrounds/bg-winner.png');
+        this.load.image('bg-enemy', 'static/enemy-presentation/bg-enemy-presentation.png');
+        this.load.image('bg-game-over', 'static/game-over/bg-game-over.png');
+        this.load.image('bg-select-language', 'select/select-language/bg-select-language.png');
+        this.load.image('bg-select-player', 'select/select-player/bg-select-player.png');
+        this.load.image('bg-message', 'static/message/bg-message.png');
+        this.load.image('bg-select-player', 'select/select-player/bg-select-player.png');
+        this.load.image('bg-winner', 'static/winner/bg-winner.png');
 
-        this.load.image('bg-meal-house', './assets/graphics/backgrounds/meal/bg-meal-house.png');
-        this.load.image('bg-shenron-growing', './assets/graphics/backgrounds/shenron/bg-shenron-growing.png');
-        this.load.image('bg-shenron', './assets/graphics/backgrounds/shenron/bg-shenron.png');
-        this.load.image('bg-training-capsule', './assets/graphics/backgrounds/training/bg-training-capsule.png');
-        this.load.image('bg-versus-hell', './assets/graphics/backgrounds/versus/bg-versus-hell.png');
-        this.load.image('bg-versus-sky', './assets/graphics/backgrounds/versus/bg-versus-sky.png');
+        this.load.image('bg-meal-house', 'static/meal/bg-meal-house.png');
+        this.load.image('bg-shenron', 'static/shenron/bg-shenron.png');
+        this.load.image('bg-shenron-growing', 'static/shenron/bg-shenron-growing.png');
+        this.load.image('bg-training-capsule', 'fight/training/bg-training-capsule.png');
+        this.load.image('bg-versus-hell', 'fight/versus/bg-versus-hell.png');
+        this.load.image('bg-versus-sky', 'fight/versus/bg-versus-sky.png');
 
         // graphics/bars
+        this.load.path = './assets/graphics/bars/';
 
-        this.load.image('bar-blank', './assets/graphics/bars/blank.png');
-        this.load.image('bar-exp', './assets/graphics/bars/exp.png');
-        this.load.image('bar-exp-invert', './assets/graphics/bars/exp-invert.png');
-        this.load.image('bar-hp', './assets/graphics/bars/hp.png');
-        this.load.image('bar-hp-invert', './assets/graphics/bars/hp-invert.png');
+        this.load.image('bar-blank', 'blank.png');
+        this.load.image('bar-exp', 'exp.png');
+        this.load.image('bar-exp-invert', 'exp-invert.png');
+        this.load.image('bar-hp', 'hp.png');
+        this.load.image('bar-hp-invert', 'hp-invert.png');
 
         // graphics/buttons
+        this.load.path = './assets/graphics/buttons/';
 
-        this.load.image('btn-pl', './assets/graphics/buttons/pl-flag.png');
-        this.load.image('btn-try-again', './assets/graphics/buttons/try-again.png');
-        this.load.image('btn-try-again', './assets/graphics/buttons/try-again.png');
-        this.load.image('btn-en', './assets/graphics/buttons/usa-flag.png');
+        this.load.image('btn-pl', 'pl-flag.png');
+        this.load.image('btn-try-again', 'try-again.png');
+        this.load.image('btn-try-again', 'try-again.png');
+        this.load.image('btn-en', 'usa-flag.png');
 
         // graphics/characters
+        this.load.path = './assets/graphics/characters/';
 
-        this.load.image('bubu', './assets/graphics/characters/bubu/poster/bubu.png');
-        this.load.image('bubu-card', './assets/graphics/characters/bubu/bubu-card.png');
-        this.load.spritesheet('bubu-spritesheet', './assets/graphics/characters/bubu/bubu-fight.png', 150, 200);
+        this.load.image('bubu', 'bubu/poster/bubu.png');
+        this.load.image('bubu-card', 'bubu/bubu-card.png');
+        this.load.spritesheet('bubu-spritesheet', 'bubu/bubu-fight.png', 150, 200);
 
-        this.load.image('cell-card', './assets/graphics/characters/cell/cell-card.png');
-        this.load.image('cell', './assets/graphics/characters/cell/poster/cell.png');
-        this.load.spritesheet('cell-spritesheet', './assets/graphics/characters/cell/cell-fight.png', 150, 200);
+        this.load.image('cell-card', 'cell/cell-card.png');
+        this.load.image('cell', 'cell/poster/cell.png');
+        this.load.spritesheet('cell-spritesheet', 'cell/cell-fight.png', 150, 200);
 
-        this.load.image('freeza-card', './assets/graphics/characters/freeza/freeza-card.png');
-        this.load.image('freeza', './assets/graphics/characters/freeza/poster/freeza.png');
-        this.load.spritesheet('freeza-spritesheet', './assets/graphics/characters/freeza/freeza-fight.png', 150, 200);
+        this.load.image('freeza-card', 'freeza/freeza-card.png');
+        this.load.image('freeza', 'freeza/poster/freeza.png');
+        this.load.spritesheet('freeza-spritesheet', 'freeza/freeza-fight.png', 150, 200);
 
-        this.load.image('son-goku-collecting', './assets/graphics/characters/son-goku/son-goku-collecting.png');
-        this.load.image('son-goku-card', './assets/graphics/characters/son-goku/son-goku-card.png');
-        this.load.image('son-goku', './assets/graphics/characters/son-goku/poster/son-goku.png');
-        this.load.image('son-goku-halo', './assets/graphics/characters/son-goku/poster/son-goku-halo.png');
-        this.load.spritesheet('son-goku-spritesheet', './assets/graphics/characters/son-goku/son-goku-fight.png', 150, 200);
+        this.load.image('son-goku-collecting', 'son-goku/son-goku-collecting.png');
+        this.load.image('son-goku-card', 'son-goku/son-goku-card.png');
+        this.load.image('son-goku', 'son-goku/poster/son-goku.png');
+        this.load.image('son-goku-halo', 'son-goku/poster/son-goku-halo.png');
+        this.load.spritesheet('son-goku-spritesheet', 'son-goku/son-goku-fight.png', 150, 200);
 
-        this.load.image('piccolo-collecting', './assets/graphics/characters/piccolo/piccolo-collecting.png');
-        this.load.image('piccolo-card', './assets/graphics/characters/piccolo/piccolo-card.png');
-        this.load.image('piccolo', './assets/graphics/characters/piccolo/poster/piccolo.png');
-        this.load.image('piccolo-halo', './assets/graphics/characters/piccolo/poster/piccolo-halo.png');
-        this.load.spritesheet('piccolo-spritesheet', './assets/graphics/characters/piccolo/piccolo-fight.png', 150, 200);
+        this.load.image('piccolo-collecting', 'piccolo/piccolo-collecting.png');
+        this.load.image('piccolo-card', 'piccolo/piccolo-card.png');
+        this.load.image('piccolo', 'piccolo/poster/piccolo.png');
+        this.load.image('piccolo-halo', 'piccolo/poster/piccolo-halo.png');
+        this.load.spritesheet('piccolo-spritesheet', 'piccolo/piccolo-fight.png', 150, 200);
 
-        this.load.image('vegeta-collecting', './assets/graphics/characters/vegeta/vegeta-collecting.png');
-        this.load.image('vegeta-card', './assets/graphics/characters/vegeta/vegeta-card.png');
-        this.load.image('vegeta', './assets/graphics/characters/vegeta/poster/vegeta.png');
-        this.load.image('vegeta-halo', './assets/graphics/characters/vegeta/poster/vegeta-halo.png');
-        this.load.spritesheet('vegeta-spritesheet', './assets/graphics/characters/vegeta/vegeta-fight.png', 150, 200);
+        this.load.image('vegeta-collecting', 'vegeta/vegeta-collecting.png');
+        this.load.image('vegeta-card', 'vegeta/vegeta-card.png');
+        this.load.image('vegeta', 'vegeta/poster/vegeta.png');
+        this.load.image('vegeta-halo', 'vegeta/poster/vegeta-halo.png');
+        this.load.spritesheet('vegeta-spritesheet', 'vegeta/vegeta-fight.png', 150, 200);
+
+        this.load.path = '';
 
         // graphics/icons
 

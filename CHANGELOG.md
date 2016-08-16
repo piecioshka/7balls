@@ -135,7 +135,7 @@ v0.3.0 / 2015-09-03
 v0.2.0 / 2015-09-02
 ===================
 
-  * Update graphics: add background color to bg-menu.
+  * Update graphics: add background color to bg-select-player.
   * Create default character properties. Print on SearchingState player experience.
   * Use SearchingState. Redirect user to it after choose character. Setup common player object - cross states.
   * Create player object after user choose.

@@ -32,7 +32,7 @@ export default class SelectPlayerState extends Phaser.State {
     }
 
     create() {
-        this.add.image(0, 0, 'bg-menu');
+        this.add.image(0, 0, 'bg-select-player');
 
         this.gokuCard = this.add.button(220, 160, 'son-goku-card', () => this._chooseCharacter(SonGoku), this);
         this.gokuCard.onInputOver.add(this._selectSonGoku, this);
