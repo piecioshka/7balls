@@ -49,7 +49,7 @@ export default class Game {
         this.game.state.start('Bootstrap');
     }
 
-    on() {
+    on(name, handler, context) {
         return this.game.on.apply(this.game, arguments);
     }
 }

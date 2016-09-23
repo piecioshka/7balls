@@ -9,11 +9,12 @@
         "url": "http://piecioshka.pl/"
     },
     "scripts": {
-        "clear": "rm -rf node_modules/ npm-debug.log app/dist/",
-        "build": "webpack --profile",
-        "watch": "webpack -w",
+        "clear": "rm -rf node_modules/ npm-debug.log app/dist/ typings/",
+        "build": "webpack --progress --profile",
+        "watch": "webpack --progress -w",
         "dev": "webpack-dev-server --no-info --compress --hot --content-base app",
-        "count": "find app/scripts -name '*.js' -not -path 'app/scripts/vendor*' | xargs wc -l | sort -r"
+        "count": "find app/scripts -name '*.js' -not -path 'app/scripts/vendor*' | xargs wc -l | sort -r",
+        "postinstall": "typings install env~node --global --save-dev"
     },
     "devDependencies": {
         "assert": "^1.4.1",
@@ -33,7 +34,9 @@
         "script-loader": "^0.7.0",
         "slug": "^0.9.1",
         "super-event-emitter": "^4.1.4",
-        "webpack": "^1.12.0",
+        "ts-loader": "^0.8.2",
+        "typings": "^1.4.0",
+        "webpack": "^2.0.0-beta",
         "webpack-dev-server": "^1.14.1",
         "write-file-webpack-plugin": "^3.1.8"
     }

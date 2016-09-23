@@ -1,0 +1,10 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "outDir": "dist",
+        "allowJs": true,
+        "noImplicitAny": true,
+        "noImplicitThis": true,
+        "inlineSourceMap": true
+    }
+}

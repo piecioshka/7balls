@@ -15,7 +15,7 @@ module.exports = {
     output: {
         filename: '[name].js',
         path: './app/dist',
-        pathinfo: true
+        // pathinfo: true
     },
 
     devtool: '#inline-source-map',
@@ -29,6 +29,10 @@ module.exports = {
             {
                 test: /\.js$/,
                 loader: 'babel-loader'
+            },
+            {
+                test: /\.ts$/,
+                loader: 'ts-loader'
             },
             {
                 test: /\.json$/,

@@ -47,7 +47,7 @@ function interval(state, delay, cb) {
 /**
  * @param {Phaser.State} state Game state.
  * @param {number} delay Number of milliseconds of delay.
- * @param {function} cb Callback.
+ * @param {Function} cb Callback.
  */
 function timeout(state, delay, cb) {
     state.time.events.add(delay, cb, this);
