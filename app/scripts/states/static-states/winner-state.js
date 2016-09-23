@@ -1,3 +1,5 @@
+import runtime from '../../runtime';
+
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 /**
@@ -19,7 +21,7 @@ export default class WinnerState extends Phaser.State {
 
         this.audio.thing1.play();
 
-        this.game.emit('game:win');
+        runtime.emit('game:win');
     }
 
     _setupKeyboard() {
@@ -36,7 +38,7 @@ export default class WinnerState extends Phaser.State {
     _tryAgain() {
         this.audio.thing1.stop();
 
-        this.game.emit('game:win:try-again');
+        runtime.emit('game:win:try-again');
 
         this.state.start('SelectPlayer');
     }

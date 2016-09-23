@@ -1,3 +1,5 @@
+import runtime from '../../runtime';
+
 let isObject = require('lodash.isobject');
 let assert = require('assert');
 let utils = require('../../common/utils');
@@ -48,7 +50,7 @@ export default class SelectLanguageState extends Phaser.State {
 
         assert(isObject(this.game.locale), 'SelectLanguageState#_chooseLanguage: this.game.locale is not an object');
 
-        this.game.emit('locale:select', { locale: locale });
+        runtime.emit('locale:select', { locale: locale });
 
         this._next();
     }

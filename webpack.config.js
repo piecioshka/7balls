@@ -3,6 +3,10 @@
 let WriteFilePlugin = require('write-file-webpack-plugin');
 
 module.exports = {
+    resolve: {
+        extensions: ['.ts', '.js', '']
+    },
+
     devServer: {
         outputPath: './app/dist'
     },

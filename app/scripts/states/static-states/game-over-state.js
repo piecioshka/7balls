@@ -1,3 +1,5 @@
+import runtime from '../../runtime';
+
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 /**
@@ -19,7 +21,7 @@ export default class GameOverState extends Phaser.State {
 
         this.audio.dramatic.play();
 
-        this.game.emit('game:over', { enemy: this.game.enemy });
+        runtime.emit('game:over', { enemy: this.game.enemy });
     }
 
     _setupKeyboard() {
@@ -36,7 +38,7 @@ export default class GameOverState extends Phaser.State {
     _tryAgain() {
         this.audio.dramatic.stop();
 
-        this.game.emit('game:over:try-again', { enemy: this.game.enemy });
+        runtime.emit('game:over:try-again', { enemy: this.game.enemy });
 
         this.state.start('SelectPlayer');
     }

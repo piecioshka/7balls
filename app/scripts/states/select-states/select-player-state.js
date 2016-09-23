@@ -8,6 +8,8 @@ import Freeza from '../../models/species/monsters/freeza';
 import Cell from '../../models/species/monsters/cell';
 import Bubu from '../../models/species/monsters/bubu';
 
+import runtime from '../../runtime';
+
 let { displayGameVersion } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
@@ -61,7 +63,7 @@ export default class SelectPlayerState extends Phaser.State {
         this.game.player = new Player();
         this.game.player.setPersonality(typeClass);
 
-        this.game.emit('player:select', { player: this.game.player });
+        runtime.emit('player:select', { player: this.game.player });
 
         this._next();
     }

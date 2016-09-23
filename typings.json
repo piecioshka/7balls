@@ -1,5 +1,7 @@
 {
     "globalDevDependencies": {
-        "node": "registry:env/node#6.0.0+20160918225031"
+        "node": "registry:env/node#6.0.0+20160918225031",
+        "phaser": "github:photonstorm/phaser/typescript/typings.json",
+        "super-event-emitter": "github:piecioshka/super-event-emitter/typings.json"
     }
 }

@@ -1,3 +1,5 @@
+import runtime from '../../runtime';
+
 let config = require('../../configs');
 let utils = require('../../common/utils');
 
@@ -119,7 +121,7 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleCollectedBall(player, ball) {
-        this.game.emit('ball:collected', { player, ball });
+        runtime.emit('ball:collected', { player, ball });
         ball.destroy();
 
         this.audio.candypop.play();

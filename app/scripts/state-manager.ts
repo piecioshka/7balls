@@ -1,21 +1,25 @@
-import Game from './game.js';
+import runtime from './runtime';
 
 class StateManager {
 
-    private game: Game = null;
+    private game: Phaser.Game = null;
 
-    constructor(game: Game) {
+    constructor(game: Phaser.Game) {
         this.game = game;
     }
 
     public setupListeners(): void {
-        this.game.on('all', (...args: any[]): void => {
+        runtime.on('all', (...args: any[]): void => {
             console.info.apply(console, args);
+        }, this);
+
+        runtime.on('game:setup', (): void => {
+            this.game.state.start('Bootstrap');
         }, this);
     }
 }
 
-function setup(game: Game) {
+function setup(game: Phaser.Game) {
     let sm = new StateManager(game);
     sm.setupListeners();
 }

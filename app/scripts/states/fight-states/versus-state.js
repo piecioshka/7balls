@@ -1,6 +1,8 @@
 import FightState from './fight-state';
 import ArtificialIntelligence from '../../helpers/artificial-intelligence';
 
+import runtime from '../../runtime';
+
 let assign = require('lodash.assign');
 let config = require('../../configs');
 let { shout } = require('../../helpers/message');
@@ -134,7 +136,7 @@ export default class VersusState extends FightState {
             } else {
                 // Usuwamy pierwszego, pokonanego wroga.
                 this.game.enemies.shift();
-                this.game.emit('enemy:killed', { enemy: this.game.enemy });
+                runtime.emit('enemy:killed', { enemy: this.game.enemy });
 
                 if (this.game.enemies.length === 0) {
                     this.state.start('Winner');

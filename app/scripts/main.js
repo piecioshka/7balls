@@ -1,9 +1,14 @@
 import Game from './game';
 
-let game = new Game();
+let config = require('./configs');
 
-require('./state-manager.ts').setup(game);
-require('./stats').setup(game);
+// Tworzymy obiekt gry.
+let game = new Game(config.GAME_WIDTH, config.GAME_HEIGHT, Phaser.Canvas, config.GAME_RENDER_ID);
+
+require('./state-manager').setup(game);
+require('./stats').setup();
+
+game.setup();
 
 // Aby się lepiej programowało.
 window.game = game;

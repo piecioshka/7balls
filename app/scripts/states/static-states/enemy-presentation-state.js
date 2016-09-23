@@ -1,5 +1,7 @@
 import Enemy from '../../models/enemy';
 
+import runtime from '../../runtime';
+
 let utils = require('../../common/utils');
 let { shout } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
@@ -37,7 +39,7 @@ export default class EnemyPresentationState extends Phaser.State {
         this.game.enemy = new Enemy();
         this.game.enemy.setPersonality(typeClass);
 
-        this.game.emit('enemy:new', { enemy: this.game.enemy });
+        runtime.emit('enemy:new', { enemy: this.game.enemy });
     }
 
     _displayEnemy() {
