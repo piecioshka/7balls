@@ -3,7 +3,7 @@ import runtime from '../../runtime';
 let isObject = require('lodash.isobject');
 let assert = require('assert');
 let utils = require('../../common/utils');
-let { displayGameVersion } = require('../../helpers/message');
+let { displayGameVersion, displayFullscreenMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 /**
@@ -52,20 +52,14 @@ export default class SelectLanguageState extends Phaser.State {
 
         runtime.emit('locale:select', { locale: locale });
 
-        this._next();
-    }
-
-    _next() {
-        this.state.start('Message', true, false, {
-            content: this.game.locale.MESSAGE_STATE_WELCOME,
-            lifespan: Phaser.Timer.SECOND * 2,
-            cb: () => {
-                this.game.state.start('SelectPlayer');
-            }
-        });
-
         // Dodajemy efekty audio.
         this.audio.scouter.play();
+
+        displayFullscreenMessage(this.game, this.game.locale.CONTROLS_INFO);
+
+        utils.timeout(this, Phaser.Timer.SECOND * 2, () => {
+            runtime.emit('game:language-selected');
+        });
     }
 
     _setupKeyboard() {

@@ -3,7 +3,7 @@ import runtime from '../../runtime';
 let config = require('../../configs');
 let utils = require('../../common/utils');
 
-let { shout, addSaiyanLabel } = require('../../helpers/message');
+let { displayFullscreenMessage, addSaiyanLabel } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 /**
@@ -25,11 +25,11 @@ export default class CollectDragonBallsState extends Phaser.State {
         this._setupBalls(random);
         this._setupSprite(10, 60, this.game.player);
 
-        shout(this.game, { text: `${this.game.locale.COLLECTING_STATE_WELCOME} ${this.game.player.title}!` });
-
         this._setupTimer(random);
 
         loadSoundPreferences(this.game);
+
+        displayFullscreenMessage(this.game, this.game.locale.COLLECT_DRAGON_BALLS);
     }
 
     _setupWorld(random) {
@@ -97,7 +97,7 @@ export default class CollectDragonBallsState extends Phaser.State {
 
         clock.onComplete.add(() => {
             this.audio.radar.stop();
-            this.state.start('GameOver');
+            runtime.emit('game:over');
         });
 
         clock.start();
@@ -121,14 +121,14 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleCollectedBall(player, ball) {
-        runtime.emit('ball:collected', { player, ball });
+        // runtime.emit('ball:collected', { player, ball });
         ball.destroy();
 
         this.audio.candypop.play();
 
         if (this.game.balls.length === 0) {
             this.audio.radar.stop();
-            this.state.start('Shenron');
+            runtime.emit('game:collect-dragon-balls');
         }
     }
 

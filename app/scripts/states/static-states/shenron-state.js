@@ -1,3 +1,5 @@
+import runtime from '../../runtime';
+
 let utils = require('../../common/utils');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
@@ -18,29 +20,12 @@ export default class ShenronState extends Phaser.State {
 
         this._setupSound();
 
-        this.game.time.events.add(Phaser.Timer.SECOND * 2, this._next, this);
-
         loadSoundPreferences(this.game);
 
         this.audio.ambienceThunder.play();
-    }
 
-    _next() {
-        // this.audio.ambienceThunder.stop();
-
-        utils.timeout(this, Phaser.Timer.SECOND, () => {
-            this.state.start('PlayerPresentation', true, false, {
-                key: this.game.player.id,
-                lifespan: Phaser.Timer.SECOND,
-                cb: () => {
-                    this.state.start('EnemyPresentation', true, false, {
-                        lifespan: Phaser.Timer.SECOND,
-                        cb: () => {
-                            this.state.start('Versus');
-                        }
-                    });
-                }
-            });
+        utils.timeout(this, Phaser.Timer.SECOND * 3, () => {
+            runtime.emit('game:shenron');
         });
     }
 

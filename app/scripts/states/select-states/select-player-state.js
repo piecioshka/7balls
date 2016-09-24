@@ -24,10 +24,6 @@ export default class SelectPlayerState extends Phaser.State {
     cardsIndex = 0;
     cards = null;
 
-    audio = {
-        scouter: null
-    };
-
     init() {
         this.cards = [];
         this.game.enemies = [Freeza, Cell, Bubu];
@@ -49,7 +45,6 @@ export default class SelectPlayerState extends Phaser.State {
         this.piccoloCard.visible = false;
 
         this._setupKeyboard();
-        this._setupSound();
 
         // Domyślnie wybieramy Son Goku.
         this._selectSonGoku();
@@ -64,31 +59,6 @@ export default class SelectPlayerState extends Phaser.State {
         this.game.player.setPersonality(typeClass);
 
         runtime.emit('player:select', { player: this.game.player });
-
-        this._next();
-    }
-
-    _next() {
-        this.state.start('PlayerPresentation', true, false, {
-            key: `${this.game.player.id}-halo`,
-            lifespan: Phaser.Timer.SECOND,
-            cb: () => {
-                this.state.start('Message', true, false, {
-                    content: this.game.locale.MESSAGE_STATE_COLLECT_DRAGON_BALL,
-                    lifespan: Phaser.Timer.SECOND * 2,
-                    cb: () => {
-                        this.state.start('CollectDragonBalls');
-                    }
-                });
-            }
-        });
-
-        // Dodajemy efekty audio.
-        this.audio.scouter.play();
-    }
-
-    _setupSound() {
-        this.audio.scouter = this.add.audio('scouter');
     }
 
     _setupKeyboard() {

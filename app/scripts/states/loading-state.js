@@ -1,3 +1,5 @@
+import runtime from '../runtime';
+
 let debug = {
     log: require('debug')('7balls:loading-state:log')
 };
@@ -12,6 +14,7 @@ const DISPLAY_LOADING_DELAY = 500;
  * @extends Phaser.State
  */
 export default class LoadingState extends Phaser.State {
+
     preload() {
         let title = addSaiyanLabel(this.game, this.world.centerX, 150, 'Loading...', [0.5, 0.5]);
         title.fontSize = 130;
@@ -153,6 +156,8 @@ export default class LoadingState extends Phaser.State {
 
     create() {
         // Opóźnienie, aby wyświetlić przez chwilkę cały progressBar.
-        utils.timeout(this, DISPLAY_LOADING_DELAY, () => this.state.start('SelectLanguage'));
+        utils.timeout(this, DISPLAY_LOADING_DELAY, () => {
+            runtime.emit('game:loaded')
+        });
     }
 };

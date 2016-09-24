@@ -5,7 +5,8 @@ import runtime from '../../runtime';
 
 let assign = require('lodash.assign');
 let config = require('../../configs');
-let { shout } = require('../../helpers/message');
+let utils = require('../../common/utils');
+let { displaySingleLineMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 let OptionsEnemyMixin = require('./options-enemy-mixin');
 let OptionsPlayerMixin = require('./options-player-mixin');
@@ -64,7 +65,7 @@ export default class VersusState extends FightState {
         this._setupKeyboard();
 
         this.displayLogo();
-        shout(this.game, { text: `${this.game.locale.VERSUS_STATE_WELCOME}` });
+        displaySingleLineMessage(this.game, `${this.game.locale.VERSUS_STATE_WELCOME}`);
 
         loadSoundPreferences(this.game);
     }
@@ -103,13 +104,23 @@ export default class VersusState extends FightState {
         ArtificialIntelligence.setup(this, enemySprite);
     }
 
+    _getLocaleStatus(playerSate) {
+        let status = playerSate.toUpperCase();
+
+        let strategies = new Map();
+        strategies.set('win', this.game.locale.VERSUS_STATE_PLAYER_WIN);
+        strategies.set('died', this.game.locale.VERSUS_STATE_PLAYER_DIED);
+
+        return strategies.get(status);
+    }
+
     _finishFight(playerSate, enemyState) {
         let player = this.game.player;
         let playerSprite = player.getSprite();
         let enemy = this.game.enemy;
         let enemySprite = enemy.getSprite();
 
-        shout(this.game, { text: `${player.title} ${this.game.locale['VERSUS_STATE_PLAYER_' + playerSate.toUpperCase()]}!` });
+        displaySingleLineMessage(this.game, `${player.title} ${this._getLocaleStatus(playerSate)}`);
 
         // Wyłączamy wsparcie klawiatury w grze.
         this.input.keyboard.enabled = false;
@@ -127,39 +138,24 @@ export default class VersusState extends FightState {
         playerSprite.alive = false;
         enemySprite.alive = false;
 
-        this.game.time.events.add(Phaser.Timer.SECOND * 2, () => {
+        utils.timeout(this, Phaser.Timer.SECOND * 2, () => {
             // Przywracamy wsparcie klawiatury w grze.
             this.input.keyboard.enabled = true;
 
             if (playerSate === 'died') {
-                this.state.start('GameOver');
+                runtime.emit('game:over', { enemy: this.game.enemy });
             } else {
                 // Usuwamy pierwszego, pokonanego wroga.
                 this.game.enemies.shift();
                 runtime.emit('enemy:killed', { enemy: this.game.enemy });
 
                 if (this.game.enemies.length === 0) {
-                    this.state.start('Winner');
+                    runtime.emit('game:win');
                 } else {
-                    this.state.start('Meal', true, false, {
-                        lifespan: Phaser.Timer.SECOND * 4,
-                        cb: () => {
-                            this.state.start('Training', true, false, {
-                                lifespan: Phaser.Timer.SECOND * 5,
-                                cb: () => {
-                                    this.state.start('EnemyPresentation', true, false, {
-                                        lifespan: Phaser.Timer.SECOND * 2,
-                                        cb: () => {
-                                            this.state.start('Versus');
-                                        }
-                                    });
-                                }
-                            });
-                        }
-                    });
+                    runtime.emit('game:player-rest');
                 }
             }
-        }, this);
+        });
     }
 
     update() {

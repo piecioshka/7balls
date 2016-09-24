@@ -3,10 +3,12 @@ import runtime from '../../runtime';
 let utils = require('../../common/utils');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
+// TODO(piecioshka): może uda się nie robić specjalnego ekranu dla bohatera z halo (można wykorzystać PlayerPresentationState)
+
 /**
  * @extends Phaser.State
  */
-export default class PlayerPresentationState extends Phaser.State {
+export default class PlayerHaloPresentationState extends Phaser.State {
     audio = {
         scouter: null
     };
@@ -14,7 +16,7 @@ export default class PlayerPresentationState extends Phaser.State {
     create() {
         this.add.image(0, 0, 'bg-player-presentation');
 
-        this.cacheKey = this.game.player.id;
+        this.cacheKey = `${this.game.player.id}-halo`;
 
         this._setupSound();
         this._displayPlayer();
@@ -25,7 +27,7 @@ export default class PlayerPresentationState extends Phaser.State {
         this.audio.scouter.play();
 
         utils.timeout(this, Phaser.Timer.SECOND, () => {
-            runtime.emit('game:player-presents');
+            runtime.emit('game:player-halo-presents');
         });
     }
 

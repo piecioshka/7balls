@@ -1,19 +1,12 @@
 {
-  "MESSAGE_STATE_WELCOME": "Game controls:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C",
-  "MESSAGE_STATE_COLLECT_DRAGON_BALL": "Collect dragon balls,\nnext Shenron will be appear\nand give you a life!",
-
-  "COLLECTING_STATE_WELCOME": "Hello",
-  "COLLECTING_STATE_TIME": "Time",
-
-  "ENEMY_PRESENTATION_STATE_WELCOME": "New enemy appeared!",
-
-  "FIGHT_STATE_LEVEL_SHORT": "lvl",
-
-  "MEAL_STATE_WELCOME": "Time to eat and rest!",
-
-  "TRAINING_STATE_WELCOME": "Training time!",
-
-  "VERSUS_STATE_WELCOME": "Fight!",
-  "VERSUS_STATE_PLAYER_DIED": "defeat",
-  "VERSUS_STATE_PLAYER_WIN": "win"
+    "CONTROLS_INFO": "Game controls:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C",
+    "COLLECT_DRAGON_BALLS": "Collect dragon balls,\nnext Shenron will be appear\nand give you a life!",
+    "COLLECTING_STATE_TIME": "Time",
+    "ENEMY_PRESENTATION_STATE_WELCOME": "New enemy appeared!",
+    "FIGHT_STATE_LEVEL_SHORT": "lvl",
+    "MEAL_STATE_WELCOME": "Time to eat and rest!",
+    "TRAINING_STATE_WELCOME": "Training time!",
+    "VERSUS_STATE_WELCOME": "Fight!",
+    "VERSUS_STATE_PLAYER_DIED": "defeat!",
+    "VERSUS_STATE_PLAYER_WIN": "win!"
 }

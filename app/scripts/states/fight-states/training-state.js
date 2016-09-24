@@ -1,8 +1,9 @@
 import FightState from './fight-state';
+import runtime from '../../runtime';
 
 let assign = require('lodash.assign');
 let utils = require('../../common/utils');
-let { shout } = require('../../helpers/message');
+let { displaySingleLineMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 let OptionsPlayerMixin = require('./options-player-mixin');
 
@@ -10,8 +11,6 @@ let OptionsPlayerMixin = require('./options-player-mixin');
  * @extends FightState
  */
 export default class TrainingState extends FightState {
-    cb = null;
-    lifespan = null;
     audio = {
         jump: null,
 
@@ -32,17 +31,10 @@ export default class TrainingState extends FightState {
         }
     };
 
-    init({ cb, lifespan }) {
-        this.cb = cb;
-        this.lifespan = lifespan;
-
-        assign(this, OptionsPlayerMixin);
-    }
-
     create() {
-        this.add.image(0, 0, 'bg-training-capsule');
+        assign(this, OptionsPlayerMixin);
 
-        utils.timeout(this, this.lifespan, this.cb);
+        this.add.image(0, 0, 'bg-training-capsule');
 
         this._setupWorld();
         this._setupSound();
@@ -56,9 +48,15 @@ export default class TrainingState extends FightState {
         this._setupKeyboard();
 
         this.displayLogo();
-        shout(this.game, { text: `${this.game.locale.TRAINING_STATE_WELCOME}` });
+        displaySingleLineMessage(this.game, `${this.game.locale.TRAINING_STATE_WELCOME}`);
 
         loadSoundPreferences(this.game);
+
+        utils.timeout(this, Phaser.Timer.SECOND * 5, () => {
+            runtime.emit('game:training-finished');
+        });
+
+        // TODO(piecioshka): dodać countdown
     }
 
     update() {

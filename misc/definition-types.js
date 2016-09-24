@@ -2,10 +2,9 @@
  * @typedef {Object} Locale
  * @description JSON files in {@link `/app/locale/`} directory.
  *
- * @property {string} MESSAGE_STATE_WELCOME
- * @property {string} MESSAGE_STATE_COLLECT_DRAGON_BALL
+ * @property {string} CONTROLS_INFO
+ * @property {string} COLLECT_DRAGON_BALLS
  *
- * @property {string} COLLECTING_STATE_WELCOME
  * @property {string} COLLECTING_STATE_TIME
  *
  * @property {string} ENEMY_PRESENTATION_STATE_WELCOME

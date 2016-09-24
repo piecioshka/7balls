@@ -1,3 +1,5 @@
+import runtime from '../runtime';
+
 let debug = {
     log: require('debug')('7balls:bootstrap-state:log')
 };
@@ -6,12 +8,13 @@ let debug = {
  * @extends Phaser.State
  */
 export default class BootstrapState extends Phaser.State {
+
     preload() {
         this.load.image('pixel-loading', './assets/pixelart/loading.png');
     }
 
     create() {
         this.stage.backgroundColor = '#000';
-        this.state.start('Loading');
+        runtime.emit('game:bootstrap');
     }
 };

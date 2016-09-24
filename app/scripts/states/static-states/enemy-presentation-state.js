@@ -3,20 +3,13 @@ import Enemy from '../../models/enemy';
 import runtime from '../../runtime';
 
 let utils = require('../../common/utils');
-let { shout } = require('../../helpers/message');
+let { displaySingleLineMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 /**
  * @extends Phaser.State
  */
 export default class EnemyPresentationState extends Phaser.State {
-    cb = null;
-    lifespan = null;
-
-    init({ cb, lifespan }) {
-        this.cb = cb;
-        this.lifespan = lifespan;
-    }
 
     create() {
         this.add.image(0, 0, 'bg-enemy-presentation');
@@ -24,11 +17,13 @@ export default class EnemyPresentationState extends Phaser.State {
         this._setupEnemy();
         this._displayEnemy();
 
-        shout(this.game, { text: `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}` });
-
-        utils.timeout(this, this.lifespan, this.cb);
+        displaySingleLineMessage(this.game, `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}`);
 
         loadSoundPreferences(this.game);
+
+        utils.timeout(this, Phaser.Timer.SECOND, () => {
+            runtime.emit('game:enemy-presents');
+        });
     }
 
     _setupEnemy() {

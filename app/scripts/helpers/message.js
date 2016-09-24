@@ -1,8 +1,6 @@
 const BLACK_COLOR = 'rgb(0,0,0)';
 const WHITE_COLOR = 'rgb(255,255,255)';
 
-const BACKGROUND_HEIGHT = 150;
-
 let pkg = require('../../../package.json');
 
 function addRectangle(game, x, y, width, height) {
@@ -15,8 +13,8 @@ function addRectangle(game, x, y, width, height) {
     return rect;
 }
 
-function displayHorizontalRectangle(game, lifespan) {
-    let background = addRectangle(game, 0, (game.height / 2) - (BACKGROUND_HEIGHT / 2), game.width, BACKGROUND_HEIGHT);
+function displayHorizontalRectangle(game, lifespan, height = 150) {
+    let background = addRectangle(game, 0, (game.height / 2) - (height / 2), game.width, height);
     background.alpha = 0;
 
     game.time.events.add(Phaser.Timer.SECOND / 4, () => {
@@ -56,11 +54,6 @@ function addSaiyanLabel(game, x, y, text, anchor) {
     return label;
 }
 
-function shout(game, { text, lifespan = Phaser.Timer.SECOND * 2, fontSize = 60, cb = () => null }) {
-    displayHorizontalRectangle(game, lifespan);
-    return displayCentralMessage(game, { text, lifespan, fontSize, cb });
-}
-
 function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2, fontSize = 40, cb = () => null }) {
     let message = addLabel(game, game.width / 2, game.height / 2, text, [0.5, 0.5]);
     message.alpha = 0;
@@ -90,9 +83,23 @@ function displayGameVersion(game) {
     return version;
 }
 
+function displaySingleLineMessage(game, text) {
+    let lifespan = Phaser.Timer.SECOND * 2;
+    let fontSize = 60;
+    displayHorizontalRectangle(game, lifespan);
+    return displayCentralMessage(game, { text, lifespan, fontSize });
+}
+
+function displayFullscreenMessage(game, text) {
+    let lifespan = Phaser.Timer.SECOND * 2;
+    let fontSize = 40;
+    displayHorizontalRectangle(game, lifespan, game.height);
+    return displayCentralMessage(game, { text, lifespan, fontSize });
+}
+
 module.exports = {
     addSaiyanLabel,
-    shout,
-    displayCentralMessage,
-    displayGameVersion
+    displayGameVersion,
+    displaySingleLineMessage,
+    displayFullscreenMessage
 };
