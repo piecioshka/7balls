@@ -6,9 +6,6 @@ let utils = require('../../common/utils');
 let { displayGameVersion, displayFullscreenMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
-/**
- * @extends Phaser.State
- */
 export default class SelectLanguageState extends Phaser.State {
     plCard = null;
     enCard = null;

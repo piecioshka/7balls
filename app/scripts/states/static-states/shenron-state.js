@@ -3,9 +3,6 @@ import runtime from '../../runtime';
 let utils = require('../../common/utils');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
-/**
- * @extends Phaser.State
- */
 export default class ShenronState extends Phaser.State {
     audio = {
         ambienceThunder: null

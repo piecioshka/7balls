@@ -2,9 +2,6 @@ import runtime from '../../runtime';
 
 let { loadSoundPreferences } = require('../../helpers/audio');
 
-/**
- * @extends Phaser.State
- */
 export default class GameOverState extends Phaser.State {
     audio = {
         dramatic: null

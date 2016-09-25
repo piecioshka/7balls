@@ -2,7 +2,7 @@ let debug = {
     log: require('debug')('7balls:fight-state:log')
 };
 
-let config = require('../../configs');
+let config = require('../../constants/configs');
 
 function defineAnimations(character, reduceByHalf, revertDefaultSize) {
     let sprite = character.getSprite();
@@ -43,9 +43,6 @@ function resetCharacterVelocity(sprite) {
     sprite.body.velocity.y += config.FIGHT_FALL_SPEED;
 }
 
-/**
- * @extends Phaser.State
- */
 export default class FightState extends Phaser.State {
     static resetCharacterVelocity = resetCharacterVelocity;
 

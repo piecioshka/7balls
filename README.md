@@ -60,8 +60,10 @@ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [x] prezentować aktualną wersję na ekranach wyboru języka i zawodnika
 * [x] stworzyć loader podczas ładowania assetów
 * [x] czy faktycznie musimy definiować klawisze jako properties klasy?
+* [ ] dodać ekran, gdzie leci się z lewej na prawo i robi uniki od potworów
+* [ ] dodać ekran, gdzie broni się rannego przyjaciela, a atakuje kilku `Cell Jr.`
 * [ ] dodać tryb `fullscreen`
-* [ ] dodać faktyczny `konami code` - na GitHubie polubiłem odpowiednią bibliotekę
+* [ ] dodać faktyczny `konami code` - https://github.com/mikeflynn/egg.js
 * [ ] czy trzeba tworzyć nowy zegar? (`game.time.create()`) czy nie można skorzystać z już istniejącego? (`this.time.events.add`)
 * [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)
 * [ ] dodać `credits` - autorzy gry

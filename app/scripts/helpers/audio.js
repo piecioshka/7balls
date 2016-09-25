@@ -1,4 +1,4 @@
-let config = require('../configs');
+let config = require('../constants/configs');
 let MUTE_MODES = ['unmute', 'mute'];
 
 function translateState(game) {

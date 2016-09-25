@@ -1,4 +1,4 @@
-let config = require('../../configs');
+let config = require('../../constants/configs');
 let { addSaiyanLabel } = require('../../helpers/message');
 
 module.exports = {

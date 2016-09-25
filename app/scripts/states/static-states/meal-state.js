@@ -4,9 +4,6 @@ let utils = require('../../common/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
-/**
- * @extends Phaser.State
- */
 export default class MealState extends Phaser.State {
 
     create() {

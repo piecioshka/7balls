@@ -10,9 +10,6 @@ let { addSaiyanLabel } = require('../helpers/message');
 // Czas opóźnienia do schowania paska postępu.
 const DISPLAY_LOADING_DELAY = 500;
 
-/**
- * @extends Phaser.State
- */
 export default class LoadingState extends Phaser.State {
 
     preload() {

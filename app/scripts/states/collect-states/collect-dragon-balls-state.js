@@ -1,14 +1,11 @@
 import runtime from '../../runtime';
 
-let config = require('../../configs');
+let config = require('../../constants/configs');
 let utils = require('../../common/utils');
 
 let { displayFullscreenMessage, addSaiyanLabel } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
-/**
- * @extends Phaser.State
- */
 export default class CollectDragonBallsState extends Phaser.State {
     layer = null;
     audio = {

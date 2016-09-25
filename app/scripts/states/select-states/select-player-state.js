@@ -13,9 +13,6 @@ import runtime from '../../runtime';
 let { displayGameVersion } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
-/**
- * @extends Phaser.State
- */
 export default class SelectPlayerState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;

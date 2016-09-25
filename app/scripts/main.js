@@ -1,6 +1,6 @@
 import Game from './game';
 
-let config = require('./configs');
+let config = require('./constants/configs');
 
 // Tworzymy obiekt gry.
 let game = new Game(config.GAME_WIDTH, config.GAME_HEIGHT, Phaser.Canvas, config.GAME_RENDER_ID);

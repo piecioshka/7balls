@@ -12,6 +12,7 @@ import ShenronState from './states/static-states/shenron-state';
 import TrainingState from './states/fight-states/training-state';
 import VersusState from './states/fight-states/versus-state';
 import WinnerState from './states/static-states/winner-state';
+import AvoidMonstersState from './states/fly-states/avoid-monsters-state';
 
 import runtime from './runtime';
 
@@ -33,6 +34,7 @@ export default class Game extends Phaser.Game {
         this.state.add('Training', TrainingState);
         this.state.add('Versus', VersusState);
         this.state.add('Winner', WinnerState);
+        this.state.add('AvoidMonsters', AvoidMonstersState);
 
         runtime.emit('game:define-states');
     }

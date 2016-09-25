@@ -32,7 +32,8 @@ class StateManager {
         });
 
         runtime.on('game:player-halo-presents', () => {
-            this.game.state.start('CollectDragonBalls');
+            this.game.state.start('AvoidMonsters');
+            // this.game.state.start('CollectDragonBalls');
         });
 
         runtime.on('game:collect-dragon-balls', (): void => {

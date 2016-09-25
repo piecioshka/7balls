@@ -1,4 +1,4 @@
-let pkg = require('../../package.json');
+let pkg = require('../../../package.json');
 
 module.exports = {
     GAME_WIDTH: 800,

@@ -6,7 +6,7 @@ import runtime from '../../runtime';
 let assert = require('assert');
 let assign = require('lodash.assign');
 let isString = require('lodash.isstring');
-let config = require('../../configs');
+let config = require('../../constants/configs');
 let utils = require('../../common/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');

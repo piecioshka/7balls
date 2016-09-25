@@ -5,9 +5,6 @@ let { loadSoundPreferences } = require('../../helpers/audio');
 
 // TODO(piecioshka): może uda się nie robić specjalnego ekranu dla bohatera z halo (można wykorzystać PlayerPresentationState)
 
-/**
- * @extends Phaser.State
- */
 export default class PlayerHaloPresentationState extends Phaser.State {
     audio = {
         scouter: null
