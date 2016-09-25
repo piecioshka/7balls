@@ -3,6 +3,7 @@ import ArtificialIntelligence from '../../helpers/artificial-intelligence';
 
 import runtime from '../../runtime';
 
+let assert = require('assert');
 let assign = require('lodash.assign');
 let config = require('../../configs');
 let utils = require('../../common/utils');
@@ -105,13 +106,17 @@ export default class VersusState extends FightState {
     }
 
     _getLocaleStatus(playerSate) {
-        let status = playerSate.toUpperCase();
+        assert(typeof playerSate === 'string');
+        let status = playerSate.toLowerCase();
 
         let strategies = new Map();
         strategies.set('win', this.game.locale.VERSUS_STATE_PLAYER_WIN);
         strategies.set('died', this.game.locale.VERSUS_STATE_PLAYER_DIED);
 
-        return strategies.get(status);
+        let locale = strategies.get(status);
+        assert(typeof locale === 'string');
+
+        return locale;
     }
 
     _finishFight(playerSate, enemyState) {
