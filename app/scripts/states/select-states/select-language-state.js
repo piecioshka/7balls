@@ -46,6 +46,11 @@ export default class SelectLanguageState extends Phaser.State {
     }
 
     _chooseLanguage(locale) {
+        if (this.game.locale) {
+            // Jeśli wybraliśmy już język, to ignorujemy kolejne wybory.
+            return;
+        }
+
         this.game.locale = this.cache.getJSON(locale);
 
         assert(isObject(this.game.locale), 'SelectLanguageState#_chooseLanguage: this.game.locale is not an object');
