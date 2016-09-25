@@ -3,6 +3,7 @@ let debug = {
 };
 
 let assign = require('lodash.assign');
+let isString = require('lodash.isstring');
 let slug = require('slug');
 let assert = require('assert');
 
@@ -24,7 +25,7 @@ export default class Character {
 
     // Identyfikator użytkownika, np. goku, vegeta
     get id() {
-        assert(typeof this.title === 'string', 'Character#id: title is not a string');
+        assert(isString(this.title), 'Character#id: title is not a string');
         return slug(this.title).toLowerCase();
     }
 

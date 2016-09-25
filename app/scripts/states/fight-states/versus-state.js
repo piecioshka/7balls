@@ -5,6 +5,7 @@ import runtime from '../../runtime';
 
 let assert = require('assert');
 let assign = require('lodash.assign');
+let isString = require('lodash.isstring');
 let config = require('../../configs');
 let utils = require('../../common/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
@@ -106,7 +107,7 @@ export default class VersusState extends FightState {
     }
 
     _getLocaleStatus(playerSate) {
-        assert(typeof playerSate === 'string');
+        assert(isString(playerSate));
         let status = playerSate.toLowerCase();
 
         let strategies = new Map();
@@ -114,7 +115,7 @@ export default class VersusState extends FightState {
         strategies.set('died', this.game.locale.VERSUS_STATE_PLAYER_DIED);
 
         let locale = strategies.get(status);
-        assert(typeof locale === 'string');
+        assert(isString(locale));
 
         return locale;
     }

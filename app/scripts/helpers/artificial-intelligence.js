@@ -58,9 +58,9 @@ function setup(state, sprite) {
         });
     }
 
-    start(Phaser.Timer.SECOND / 2, moves);
-    start(Phaser.Timer.SECOND * 3 / 4, dodge);
     start(Phaser.Timer.SECOND, fight);
+    start(Phaser.Timer.SECOND / 2, moves);
+    start(Phaser.Timer.SECOND / 3, dodge);
 }
 
 module.exports = {
