@@ -25,7 +25,7 @@ export default class Character {
 
     // Identyfikator użytkownika, np. goku, vegeta
     get id() {
-        assert(isString(this.title), 'Character#id: title is not a string');
+        assert(isString(this.title));
         return slug(this.title).toLowerCase();
     }
 
