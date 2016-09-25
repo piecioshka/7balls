@@ -76,7 +76,7 @@ export default class SelectLanguageState extends Phaser.State {
 
         left.onDown.add(() => this._selectPolish());
         right.onDown.add(() => this._selectEnglish());
-        enter.onDown.add(() => this.onEnter());
+        enter.onDown.addOnce(() => this.onEnter());
     }
 
     _setupSound() {
