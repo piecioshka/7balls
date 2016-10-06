@@ -18,15 +18,15 @@ Wszystkie materiały znajdują się na kanale YouTube autora.
 ## Uruchomienie deweloperskie (dla programistów)
 
 ```
-npm install
-npm run build   # buduje paczkę developerską.
+$ npm install
+$ npm run build   # buduje paczkę developerską.
 ```
 
 Aby rozwijać projekt:
 
 ```
-npm run dev     # tworzy serwer HTTP do serwowania plików (wraz z hotreloadingiem)
-npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
+$ npm run dev     # tworzy serwer HTTP do serwowania plików (wraz z hotreloadingiem)
+$ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 ```
 
 ## TODO LIST
