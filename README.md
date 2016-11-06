@@ -88,7 +88,7 @@ Kontakt do autora aplikacji:
 
  * Twitter: [@piecioshka](http://twitter.com/piecioshka)
  * Wykop: [@piecioshka](http://wykop.pl/profile/piecioshka)
- * Blog: [piecioshka.pl](https://piecioshka.pl/blog/)
+ * Blog: [piecioshka.pl/blog](http://piecioshka.pl/blog/)
 
 ---
 
