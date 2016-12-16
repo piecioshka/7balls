@@ -1,5 +1,5 @@
 let config = require('../../constants/configs');
-let utils = require('../../common/utils');
+let utils = require('../../helpers/utils');
 
 let { displayFullscreenMessage, addSaiyanLabel } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
@@ -39,7 +39,9 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _setupSprite(x, y, character, anchor = [0.5, 0.5]) {
-        let sprite = character.createSprite(this, x, y, `${character.id}-collecting`);
+        character.createSprite(this, x, y, `${character.id}-collecting`);
+
+        let sprite = character.getSprite();
         sprite.anchor.setTo(...anchor);
 
         this._defineDefaultProperties(character);

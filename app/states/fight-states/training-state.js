@@ -1,7 +1,7 @@
 import FightState from './fight-state';
 
 let assign = require('lodash.assign');
-let utils = require('../../common/utils');
+let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 let OptionsPlayerMixin = require('./options-player-mixin');

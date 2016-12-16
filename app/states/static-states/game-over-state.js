@@ -1,5 +1,3 @@
-
-
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 export default class GameOverState extends Phaser.State {

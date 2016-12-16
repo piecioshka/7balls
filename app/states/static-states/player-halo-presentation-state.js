@@ -1,6 +1,4 @@
-
-
-let utils = require('../../common/utils');
+let utils = require('../../helpers/utils');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 // TODO(piecioshka): może uda się nie robić specjalnego ekranu dla bohatera z halo (można wykorzystać PlayerPresentationState)

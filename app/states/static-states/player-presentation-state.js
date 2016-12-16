@@ -1,6 +1,4 @@
-
-
-let utils = require('../../common/utils');
+let utils = require('../../helpers/utils');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
 export default class PlayerPresentationState extends Phaser.State {

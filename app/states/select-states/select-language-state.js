@@ -1,8 +1,6 @@
-
-
 let isObject = require('lodash.isobject');
 let assert = require('assert');
-let utils = require('../../common/utils');
+let utils = require('../../helpers/utils');
 let { displayGameVersion, displayFullscreenMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 

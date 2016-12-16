@@ -135,8 +135,9 @@ export default class FightState extends Phaser.State {
     }
 
     _setupSprite(x, y, character, anchor = [0, 1]) {
-        let sprite = character.createSprite(this, x, y, `${character.id}-spritesheet`);
+        character.createSprite(this, x, y, `${character.id}-spritesheet`);
 
+        let sprite = character.getSprite();
         sprite.anchor.setTo(...anchor);
 
         this._defineDefaultProperties(character);

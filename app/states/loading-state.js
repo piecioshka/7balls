@@ -2,7 +2,7 @@ let debug = {
     log: require('debug')('7balls:loading-state:log')
 };
 
-let utils = require('../common/utils');
+let utils = require('../helpers/utils');
 let { addSaiyanLabel } = require('../helpers/message');
 
 // Czas opóźnienia do schowania paska postępu.

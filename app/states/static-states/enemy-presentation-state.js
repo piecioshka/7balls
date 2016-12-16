@@ -1,8 +1,6 @@
 import Enemy from '../../models/enemy';
 
-
-
-let utils = require('../../common/utils');
+let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 

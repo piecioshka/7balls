@@ -1,4 +1,4 @@
-let utils = require('../common/utils');
+let utils = require('../helpers/utils');
 
 function setup(state, sprite) {
     function walkingLeft() {

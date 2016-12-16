@@ -4,22 +4,9 @@ let debug = {
 
 let assign = require('lodash.assign');
 let isString = require('lodash.isstring');
-let { slug } = require('../common/utils');
+let { slug } = require('../helpers/utils');
 let assert = require('assert');
-
-let DEFAULT_ATTRIBUTES = {
-    // Liczba żyć.
-    up: 0,
-
-    // Procent życia.
-    hp: 100,
-
-    // Liczba doświadczenia.
-    exp: 0,
-
-    // Poziom. Max = 100.
-    lvl: 1
-};
+const DEFAULT_ATTRIBUTES = require('../constants/character-attributes');
 
 export default class Character {
 
@@ -50,10 +37,9 @@ export default class Character {
      * @param {number} x
      * @param {number} y
      * @param {string} key
-     * @returns {Phaser.Sprite}
      */
     createSprite(state, x, y, key) {
-        return this._phaser = state.add.sprite(x, y, key);
+        this._phaser = state.add.sprite(x, y, key);
     }
 
     /**

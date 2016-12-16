@@ -8,8 +8,6 @@ import Freeza from '../../models/species/monsters/freeza';
 import Cell from '../../models/species/monsters/cell';
 import Bubu from '../../models/species/monsters/bubu';
 
-
-
 let { displayGameVersion } = require('../../helpers/message');
 let { loadSoundPreferences } = require('../../helpers/audio');
 
