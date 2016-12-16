@@ -2,7 +2,7 @@ let debug = {
     log: require('debug')('7balls:fight-state:log')
 };
 
-let config = require('../../constants/configs');
+const FIGHT = require('../../constants/fight');
 
 function defineAnimations(character, reduceByHalf, revertDefaultSize) {
     let sprite = character.getSprite();
@@ -40,7 +40,7 @@ function defineAnimations(character, reduceByHalf, revertDefaultSize) {
 
 function resetCharacterVelocity(sprite) {
     sprite.body.velocity.x = 0;
-    sprite.body.velocity.y += config.FIGHT_FALL_SPEED;
+    sprite.body.velocity.y += FIGHT.FALL_SPEED;
 }
 
 export default class FightState extends Phaser.State {
@@ -53,7 +53,7 @@ export default class FightState extends Phaser.State {
     _setupWorld() {
         this.physics.startSystem(Phaser.Physics.ARCADE);
         this.physics.arcade.gravity.setTo(0, 1);
-        this.world.setBounds(0, 0, this.game.width, this.game.height - config.FIGHT_BOTTOM_MARGIN);
+        this.world.setBounds(0, 0, this.game.width, this.game.height - FIGHT.BOTTOM_MARGIN);
     }
 
     _defineDefaultProperties(character) {
@@ -120,8 +120,8 @@ export default class FightState extends Phaser.State {
     _addAvatar(x, y, key) {
         let avatar = this.add.image(x, y, key);
 
-        avatar.width = config.FIGHT_CHARACTER_AVATAR_WIDTH;
-        avatar.height = config.FIGHT_CHARACTER_AVATAR_HEIGHT;
+        avatar.width = FIGHT.CHARACTER_AVATAR_WIDTH;
+        avatar.height = FIGHT.CHARACTER_AVATAR_HEIGHT;
     }
 
     _addBar(x, y, key, anchor = [0, 0]) {
@@ -150,14 +150,14 @@ export default class FightState extends Phaser.State {
 
         sprite.events.onLeft = new Phaser.Signal();
         sprite.events.onLeft.add(() => {
-            sprite.body.velocity.x -= config.FIGHT_HORIZONTAL_SPEED;
+            sprite.body.velocity.x -= FIGHT.HORIZONTAL_SPEED;
 
             debug.log('Character "%s" is LEFT', character.title);
         });
 
         sprite.events.onRight = new Phaser.Signal();
         sprite.events.onRight.add(() => {
-            sprite.body.velocity.x += config.FIGHT_HORIZONTAL_SPEED;
+            sprite.body.velocity.x += FIGHT.HORIZONTAL_SPEED;
 
             debug.log('Character "%s" is RIGHT', character.title);
         });
@@ -175,7 +175,7 @@ export default class FightState extends Phaser.State {
                 return;
             }
 
-            sprite.body.velocity.y -= config.FIGHT_JUMP;
+            sprite.body.velocity.y -= FIGHT.JUMP;
             sprite.play('jumping');
             debug.log('Character "%s" is JUMPING', character.title);
         });

@@ -4,11 +4,11 @@ import ArtificialIntelligence from '../../helpers/artificial-intelligence';
 let assert = require('assert');
 let assign = require('lodash.assign');
 let isString = require('lodash.isstring');
-let config = require('../../constants/configs');
+const VERSUS = require('../../constants/versus');
 let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
-let OptionsEnemyMixin = require('./options-enemy-mixin');
-let OptionsPlayerMixin = require('./options-player-mixin');
+let OptionsEnemyMixin = require('../mixins/options-enemy-mixin');
+let OptionsPlayerMixin = require('../mixins/options-player-mixin');
 
 /**
  * @extends FightState
@@ -70,8 +70,8 @@ export default class VersusState extends FightState {
             }
         }
 
-        playerSprite.events.onKicking.add(() => handlePlayerBlow(config.VERSUS_KICKING_POINTS));
-        playerSprite.events.onBoxing.add(() => handlePlayerBlow(config.VERSUS_BOXING_POINTS));
+        playerSprite.events.onKicking.add(() => handlePlayerBlow(VERSUS.VERSUS_KICKING_POINTS));
+        playerSprite.events.onBoxing.add(() => handlePlayerBlow(VERSUS.VERSUS_BOXING_POINTS));
         playerSprite.events.onDied.add(() => this._finishFight('died', 'win'));
 
         function handleEnemyBlow(points) {
@@ -81,8 +81,8 @@ export default class VersusState extends FightState {
             }
         }
 
-        enemySprite.events.onKicking.add(() => handleEnemyBlow(config.VERSUS_KICKING_POINTS));
-        enemySprite.events.onBoxing.add(() => handleEnemyBlow(config.VERSUS_BOXING_POINTS));
+        enemySprite.events.onKicking.add(() => handleEnemyBlow(VERSUS.KICKING_POINTS));
+        enemySprite.events.onBoxing.add(() => handleEnemyBlow(VERSUS.BOXING_POINTS));
         enemySprite.events.onDied.add(() => this._finishFight('win', 'died'));
 
         ArtificialIntelligence.setup(this, enemySprite);

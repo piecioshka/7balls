@@ -15,7 +15,6 @@ import WinnerState from './states/static-states/winner-state';
 import AvoidMonstersState from './states/fly-states/avoid-monsters-state';
 
 export class StateManager {
-
     game = null;
 
     constructor(game) {

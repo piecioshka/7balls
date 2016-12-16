@@ -1,7 +1,7 @@
 let isObject = require('lodash.isobject');
 let assert = require('assert');
 let utils = require('../../helpers/utils');
-let { displayGameVersion, displayFullscreenMessage } = require('../../helpers/message');
+let { displayFullscreenMessage } = require('../../helpers/message');
 
 export default class SelectLanguageState extends Phaser.State {
     plCard = null;
@@ -9,20 +9,16 @@ export default class SelectLanguageState extends Phaser.State {
     onEnter = null;
 
     create() {
-        this.add.image(0, 0, 'bg-select-language');
-
-        this.plCard = this.add.button(150, 200, 'btn-pl', this._choosePolish, this);
+        this.plCard = this.add.button(150, 130, 'btn-pl', this._choosePolish, this);
         this.plCard.onInputOver.add(this._selectPolish, this);
 
-        this.enCard = this.add.button(450, 200, 'btn-en', this._chooseEnglish, this);
+        this.enCard = this.add.button(450, 130, 'btn-en', this._chooseEnglish, this);
         this.enCard.onInputOver.add(this._selectEnglish, this);
 
         // Domyślnie wybieramy język angielski.
         this._selectEnglish();
 
         this._setupKeyboard();
-
-        displayGameVersion(this.game);
     }
 
     _choosePolish() {

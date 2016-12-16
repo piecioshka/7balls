@@ -8,8 +8,6 @@ import Freeza from '../../models/species/monsters/freeza';
 import Cell from '../../models/species/monsters/cell';
 import Bubu from '../../models/species/monsters/bubu';
 
-let { displayGameVersion } = require('../../helpers/message');
-
 export default class SelectPlayerState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
@@ -42,8 +40,6 @@ export default class SelectPlayerState extends Phaser.State {
 
         // Domyślnie wybieramy Son Goku.
         this._selectSonGoku();
-
-        displayGameVersion(this.game);
     }
 
     _chooseCharacter(typeClass) {

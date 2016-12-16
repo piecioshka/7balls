@@ -1,4 +1,4 @@
-let config = require('../../constants/configs');
+const PLAYER = require('../../constants/player');
 let { addSaiyanLabel } = require('../../helpers/message');
 
 module.exports = {
@@ -54,10 +54,10 @@ module.exports = {
 
         enemy.exp += value;
 
-        if (enemy.exp >= config.PLAYER_MAXIMUM_EXPERIENCE) {
+        if (enemy.exp >= PLAYER.MAXIMUM_EXPERIENCE) {
             enemy.exp = 0;
 
-            if (enemy.lvl < config.PLAYER_MAXIMUM_LEVEL) {
+            if (enemy.lvl < PLAYER.MAXIMUM_LEVEL) {
                 enemy.lvl++;
             }
         }

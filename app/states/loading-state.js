@@ -4,12 +4,12 @@ let debug = {
 
 let utils = require('../helpers/utils');
 let { addSaiyanLabel } = require('../helpers/message');
+let { displayGameVersion } = require('../helpers/message');
 
 // Czas opóźnienia do schowania paska postępu.
 const DISPLAY_LOADING_DELAY = 500;
 
 export default class LoadingState extends Phaser.State {
-
     preload() {
         let title = addSaiyanLabel(this.game, this.world.centerX, 150, 'Loading...', [0.5, 0.5]);
         title.fontSize = 130;
@@ -27,7 +27,6 @@ export default class LoadingState extends Phaser.State {
         this.load.image('bg-versus-hell', 'fight/versus/bg-versus-hell.png');
         this.load.image('bg-versus-heaven', 'fight/versus/bg-versus-heaven.png');
 
-        this.load.image('bg-select-language', 'select/select-language/bg-select-language.png');
         this.load.image('bg-select-player', 'select/select-player/bg-select-player.png');
 
         this.load.image('bg-enemy-presentation', 'static/enemy-presentation/bg-enemy-presentation.png');
@@ -131,5 +130,7 @@ export default class LoadingState extends Phaser.State {
         utils.timeout(this, DISPLAY_LOADING_DELAY, () => {
             this.game.emit('game:loaded')
         });
+
+        displayGameVersion(this.game);
     }
 };

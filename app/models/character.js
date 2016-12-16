@@ -9,7 +9,6 @@ let assert = require('assert');
 const DEFAULT_ATTRIBUTES = require('../constants/character-attributes');
 
 export default class Character {
-
     // Identyfikator użytkownika, np. goku, vegeta
     get id() {
         assert(isString(this.title));

@@ -1,10 +1,10 @@
-let config = require('./constants/configs');
+const GAME = require('./constants/game');
 
 import { Game } from './game';
 import { StateManager } from './state-manager';
 import { StatisticsManager } from './statistics-manager';
 
-let game = new Game(config.GAME_WIDTH, config.GAME_HEIGHT, Phaser.Canvas, config.GAME_RENDER_ID);
+let game = new Game(GAME.WIDTH, GAME.HEIGHT, Phaser.Canvas, GAME.RENDER_ID);
 
 let stateManager = new StateManager(game);
 stateManager.start();

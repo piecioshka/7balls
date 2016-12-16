@@ -3,7 +3,7 @@ import FightState from './fight-state';
 let assign = require('lodash.assign');
 let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
-let OptionsPlayerMixin = require('./options-player-mixin');
+let OptionsPlayerMixin = require('../mixins/options-player-mixin');
 
 /**
  * @extends FightState

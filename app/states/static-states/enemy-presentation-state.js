@@ -4,7 +4,6 @@ let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
 
 export default class EnemyPresentationState extends Phaser.State {
-
     create() {
         this.add.image(0, 0, 'bg-enemy-presentation');
 

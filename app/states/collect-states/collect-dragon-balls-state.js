@@ -1,4 +1,4 @@
-let config = require('../../constants/configs');
+const COLLECT = require('../../constants/collect');
 let utils = require('../../helpers/utils');
 
 let { displayFullscreenMessage, addSaiyanLabel } = require('../../helpers/message');
@@ -62,7 +62,7 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _setupTimer(random) {
-        let limit = config.COLLECTING_MAPS_TIME_LIMIT[random - 1];
+        let limit = COLLECT.MAPS_TIME_LIMIT[random - 1];
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
@@ -117,19 +117,19 @@ export default class CollectDragonBallsState extends Phaser.State {
         playerSprite.body.velocity.x = playerSprite.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            playerSprite.body.velocity.x -= config.COLLECTING_PLAYER_SPEED;
+            playerSprite.body.velocity.x -= COLLECT.PLAYER_SPEED;
             playerSprite.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            playerSprite.body.velocity.x += config.COLLECTING_PLAYER_SPEED;
+            playerSprite.body.velocity.x += COLLECT.PLAYER_SPEED;
             playerSprite.angle = 10;
         } else {
             playerSprite.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            playerSprite.body.velocity.y -= config.COLLECTING_PLAYER_SPEED;
+            playerSprite.body.velocity.y -= COLLECT.PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            playerSprite.body.velocity.y += config.COLLECTING_PLAYER_SPEED;
+            playerSprite.body.velocity.y += COLLECT.PLAYER_SPEED;
         }
     }
 

@@ -3,7 +3,6 @@ let debug = {
 };
 
 export default class BootstrapState extends Phaser.State {
-
     preload() {
         this.load.image('pixel-loading', './assets/pixelart/loading.png');
     }

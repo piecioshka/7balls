@@ -1,0 +1,10 @@
+'use strict';
+
+module.exports = {
+    BOTTOM_MARGIN: 40,
+    HORIZONTAL_SPEED: 300,
+    JUMP: 500,
+    FALL_SPEED: 12,
+    CHARACTER_AVATAR_WIDTH: 50,
+    CHARACTER_AVATAR_HEIGHT: 70
+};
