@@ -11,6 +11,9 @@ v0.0.0
  * All files are from `public/assets/`
  * Remove `write-file-webpack-plugin`
  * Remove audio files
+ * Split config file
+ * Use babel-plugin-transform-object-assign instead of lodash.assign (saved 
+ 16KB)
 
 v1.2.0 / 2016-07-18
 ==================
@@ -46,11 +49,13 @@ v1.1.0 / 2015-09-26
   * Add possibility to change ESlint parser to Babel.js.
   * Fixed a lot of ESLint errors. Add Phaser as global variable.
   * Each case in switch..case syntax should be start with indention.
-  * Decrease min length of variable name, ex. x & y - positions are single letter vars.
+  * Decrease min length of variable name, ex. x & y - positions are single
+  letter vars.
   * Update .eslintrc with max of rules for v1.5.1 (2015-09-22).
   * Update ESLint configuration.
   * Enable ESLint.
-  * Fixed paths in .gitignore file about paths to node_modules and npm-debug.log.
+  * Fixed paths in `.gitignore` file about paths to `node_modules/` and
+  `npm-debug.log`.
   * Setup Google Analytics events.
 
 v1.0.0 / 2015-09-11
@@ -70,7 +75,8 @@ v0.9.0 / 2015-09-10
   * Stop sound when exit from GameOverState.
   * Add simple shortcut for display new character on SelectPlayerState.
   * Reset player numbers (hp, up, exp, lvl) on GameOverState.
-  * Support language choose. Create locale mechanizm. Add two locals: en_EN, pl_PL.
+  * Support language choose. Create locale mechanizm. Add two locals: en_EN,
+  pl_PL.
   * Apply better artificial intelligence.
   * Enlarge versus status label.
   * Use for all label Saiyans font.
@@ -81,8 +87,10 @@ v0.8.0 / 2015-09-09
 ===================
 
   * Support Artificial Intelligence.
-  * Add sound for GameOverState and when clock is coming to close in SearchingState.
-  * Create FightState as generic state only with player on stage. Create TrainingState which extend FightState.
+  * Add sound for GameOverState and when clock is coming to close
+  in `SearchingState`.
+  * Create FightState as generic state only with player on stage. Create
+  `TrainingState` which extend FightState.
   * FightState is now VersusState.
   * Create MessageState: generic screen which display only text.
 
@@ -90,8 +98,12 @@ v0.7.0 / 2015-09-08
 ===================
 
   * Clear collision on FightState.
-  * Support remove HP points from Enemy. If HP=0 display player win. Support adding points to player. Recognized overlapping of player and enemy. Display try-again button on GameOverState. Add keyshortcut for ENTER in GameOverState for repeat the level. Don't create new player if exists old.
-  * Create generic method to display welcome message in AbstractState. Display welcome message on FightState and TrainingState.
+  * Support remove HP points from Enemy. If HP=0 display player win. Support
+  adding points to player. Recognized overlapping of player and enemy. Display
+  try-again button on GameOverState. Add keyshortcut for ENTER in GameOverState
+  for repeat the level. Don't create new player if exists old.
+  * Create generic method to display welcome message in AbstractState. Display
+  welcome message on FightState and TrainingState.
   * Append EXP points to player when try kicking or boxing.
   * Disable EXP bar for enemy.
   * Support mouse over event on SelectPlayerState.
@@ -103,7 +115,8 @@ v0.6.0 / 2015-09-07
 
   * Setup characters bars: HP & EXP. Use Saiyan Sans to each graphics as can.
   * Display avatars of characters on FightState.
-  * Create AbstractState which is usesd as master class of all states. Implement mute (sound) switcher - globally add icon in right bottom corner.
+  * Create AbstractState which is usesd as master class of all states.
+  Implement mute (sound) switcher - globally add icon in right bottom corner.
   * Add labels: HP, EXP and LVL on FightState - use Saiyan Sans.
 
 v0.5.0 / 2015-09-06
@@ -117,7 +130,8 @@ v0.5.0 / 2015-09-06
   * Create models for enemies.
   * Add spritesheets for enemies: Freeza, Cell and Bubu.
   * Add MealState - place where character will be rest.
-  * Add a lot of sound effects. Use `scouter.ogg` on SelectPlayerState when user choose character.
+  * Add a lot of sound effects. Use `scouter.ogg` on SelectPlayerState
+  when user choose character.
   * Add files related with Dragon Ball logo.
 
 v0.4.0 / 2015-09-05
@@ -134,13 +148,15 @@ v0.4.0 / 2015-09-05
 v0.3.0 / 2015-09-03
 ===================
 
-  * Enable collision. Enable ES7 Stage 0 in webpack configuration file for Babel.js.
+  * Enable collision. Enable ES7 Stage 0 in webpack configuration file for
+  Babel.js.
   * Add background to FightState.
   * Fixed cards position on SelectPlayerState.
   * Support input keyboard: LEFT, RIGHT, UP, DOWN.
   * Add places for dragon balls.
   * Add 2 new maps for SearchingState.
-  * Update map - add 7 tiles with dragon balls. Update spritesheet (add elipse on one tile - this will be dragon ball).
+  * Update map - add 7 tiles with dragon balls. Update spritesheet (add 
+  eclipse on one tile - this will be dragon ball).
   * Show welcome message on SearchingState.
   * Add two characters (Goku & Vegeta) to SearchingState.
   * Create spritesheet and map (JSON format). Apply map to game.
@@ -149,10 +165,13 @@ v0.2.0 / 2015-09-02
 ===================
 
   * Update graphics: add background color to bg-select-player.
-  * Create default character properties. Print on SearchingState player experience.
-  * Use SearchingState. Redirect user to it after choose character. Setup common player object - cross states.
+  * Create default character properties. Print on SearchingState player
+  experience.
+  * Use SearchingState. Redirect user to it after choose character.
+  Setup common player object - cross states.
   * Create player object after user choose.
-  * Rename Player model to Character. Player is object which user playing/control.
+  * Rename Player model to Character. Player is object which user
+  playing/control.
   * Setup two new states: SearchingState & FightState.
   * Create main models: Vegeta & Goku as child base class Player.
   * Display two card. User can select one.
