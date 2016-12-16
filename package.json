@@ -9,36 +9,35 @@
         "url": "http://piecioshka.pl/"
     },
     "scripts": {
-        "clear": "rm -rf node_modules/ npm-debug.log app/dist/ typings/",
-        "build": "webpack --progress --profile",
+        "audit": "source-map-explorer public/dist/bundle.js",
+        "clear": "rm -rf node_modules/ npm-debug.log public/dist/ typings/",
         "watch": "webpack --progress -w",
-        "dev": "webpack-dev-server --no-info --compress --hot --content-base app",
-        "count": "find app/scripts -name '*.js' -not -path 'app/scripts/vendor*' | xargs wc -l | sort -r",
-        "postinstall": "typings install env~node --global --save-dev"
+        "prebuild": "node ./tasks/copy-phaser.js",
+        "build": "webpack --profile",
+        "count": "find app -name '*.js' | xargs wc -l | sort -r",
+        "postinstall": "typings install"
     },
     "devDependencies": {
         "assert": "^1.4.1",
-        "babel-core": "^6.11.4",
-        "babel-loader": "^6.2.4",
-        "babel-polyfill": "^6.7.4",
-        "babel-preset-es2015": "^6.9.0",
-        "babel-preset-stage-0": "^6.5.0",
-        "debug": "^2.2.0",
-        "expose-loader": "^0.7.1",
-        "imports-loader": "^0.6.5",
+        "babel-core": "^6.20.0",
+        "babel-loader": "^6.2.10",
+        "babel-polyfill": "^6.20.0",
+        "babel-preset-es2015": "^6.18.0",
+        "babel-preset-es2016": "^6.16.0",
+        "babel-preset-stage-0": "^6.16.0",
+        "debug": "^2.4.4",
+        "imports-loader": "^0.7.0",
         "json-loader": "^0.5.4",
         "lodash.assign": "^4.2.0",
         "lodash.isobject": "^3.0.2",
         "lodash.isstring": "^4.0.1",
         "phaser": "^2.6.1",
-        "pixi": "^0.3.1",
-        "script-loader": "^0.7.0",
-        "slug": "^0.9.1",
         "super-event-emitter": "^4.1.4",
-        "ts-loader": "^0.8.2",
-        "typings": "^1.4.0",
-        "webpack": "^2.0.0-beta",
-        "webpack-dev-server": "^1.14.1",
-        "write-file-webpack-plugin": "^3.1.8"
+        "typings": "^2.0.0",
+        "webpack": "^2.1.0-beta"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/piecioshka/7balls"
     }
 }

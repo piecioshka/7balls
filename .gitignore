@@ -1,5 +1,5 @@
 node_modules/
 npm-debug.log
 
-app/dist/
+public/dist/
 typings/
