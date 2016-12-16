@@ -1,6 +1,5 @@
 import FightState from './fight-state';
 
-let assign = require('lodash.assign');
 let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
 let OptionsPlayerMixin = require('../mixins/options-player-mixin');
@@ -18,7 +17,7 @@ export default class TrainingState extends FightState {
     };
 
     create() {
-        assign(this, OptionsPlayerMixin);
+        Object.assign(this, OptionsPlayerMixin);
 
         this.add.image(0, 0, 'bg-training-capsule');
 

@@ -2,7 +2,6 @@ let debug = {
     log: require('debug')('7balls:character:log')
 };
 
-let assign = require('lodash.assign');
 let isString = require('lodash.isstring');
 let { slug } = require('../helpers/utils');
 let assert = require('assert');
@@ -28,7 +27,7 @@ export default class Character {
     _phaser = null;
 
     constructor() {
-        assign(this, DEFAULT_ATTRIBUTES);
+        Object.assign(this, DEFAULT_ATTRIBUTES);
     }
 
     /**

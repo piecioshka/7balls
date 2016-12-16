@@ -2,7 +2,6 @@ import FightState from './fight-state';
 import ArtificialIntelligence from '../../helpers/artificial-intelligence';
 
 let assert = require('assert');
-let assign = require('lodash.assign');
 let isString = require('lodash.isstring');
 const VERSUS = require('../../constants/versus');
 let utils = require('../../helpers/utils');
@@ -28,8 +27,8 @@ export default class VersusState extends FightState {
     };
 
     init() {
-        assign(this, OptionsEnemyMixin);
-        assign(this, OptionsPlayerMixin);
+        Object.assign(this, OptionsEnemyMixin);
+        Object.assign(this, OptionsPlayerMixin);
     }
 
     create() {
