@@ -79,7 +79,6 @@ $ npm run watch   # obserwuje zmiany w plikach i buduje developerską paczkę
 * [ ] kupić `ScreenFlow`
 * [ ] nagrać jak korzysta się z paczki `debug`
 * [ ] nagrać jak się konwertuje projekt z 5.x na 6.x `Babel.js`
-* [ ] nagrać jak używać `webpack-dev-server` razem z `write-file-webpack-plugin`
 * [ ] nagrać prezentację o module `StateManager`
 
 ## Autor

@@ -1,3 +1,15 @@
+v0.0.0
+==================
+
+ * Remove TypeScript
+ * Create Directory public/ with static files
+ * Directory app/ should contains only source files
+ * Build bundle in public/dist/
+ * Remove usage of `slug` library which have dependencies with 2 MB size
+ * Copy file Phaser.js in Node.js no by Webpack
+ * Remove `runtime` - each event trigger on game object
+ * All files are from `public/assets/`
+ * Remove `write-file-webpack-plugin`
 
 v1.2.0 / 2016-07-18
 ==================
@@ -10,7 +22,7 @@ v1.2.0 / 2016-07-18
   * Add "debug" package which display logs
   * Set label to link
   * Link to STORY.md from README.md
-  * Apply snake case convention info filenames
+  * Apply snake case convention info file names
   * Upgrade Babel.js to v6.x
   * Disable Phaser banner; Move vendor/phaser to node_modules/phaser
   * Split TODO section in README.md file
@@ -58,7 +70,7 @@ v0.9.0 / 2015-09-10
   * Add simple shortcut for display new character on SelectPlayerState.
   * Reset player numbers (hp, up, exp, lvl) on GameOverState.
   * Support language choose. Create locale mechanizm. Add two locals: en_EN, pl_PL.
-  * Apply better artificial interlligence.
+  * Apply better artificial intelligence.
   * Enlarge versus status label.
   * Use for all label Saiyans font.
   * Setup configuration for jumping in FightState.
@@ -68,7 +80,7 @@ v0.8.0 / 2015-09-09
 ===================
 
   * Support Artificial Intelligence.
-  * Add sound for GameOverState and when clock is comming to close in SearchinState.
+  * Add sound for GameOverState and when clock is coming to close in SearchingState.
   * Create FightState as generic state only with player on stage. Create TrainingState which extend FightState.
   * FightState is now VersusState.
   * Create MessageState: generic screen which display only text.
