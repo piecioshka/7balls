@@ -102,29 +102,6 @@ export default class LoadingState extends Phaser.State {
 
         debug.log('images files loaded');
 
-        this.load.audio('sound-jump', './assets/sound/dbz/jump.ogg');
-
-        this.load.audio('sound-weakkick', './assets/sound/dbz/weakkick.ogg');
-        this.load.audio('sound-weakpunch', './assets/sound/dbz/weakpunch.ogg');
-
-        this.load.audio('sound-mediumkick', './assets/sound/dbz/mediumkick.ogg');
-        this.load.audio('sound-mediumpunch', './assets/sound/dbz/mediumpunch.ogg');
-
-        this.load.audio('sound-strongkick', './assets/sound/dbz/strongkick.ogg');
-        this.load.audio('sound-strongpunch', './assets/sound/dbz/strongpunch.ogg');
-
-        this.load.audio('sound-ambience-thunder', './assets/sound/dbk/ambience_thunder.ogg');
-        this.load.audio('sound-dramatic', './assets/sound/dbk/dramatic_reveal_01.ogg');
-        this.load.audio('sound-thing1', './assets/sound/dbk/thing1.ogg');
-        this.load.audio('scouter', './assets/sound/dbz/scouter.ogg');
-
-        this.load.audio('scouter', './assets/sound/dbz/scouter.ogg');
-
-        this.load.audio('sound-candypop', './assets/sound/dbz/candypop.ogg');
-        this.load.audio('sound-radar', './assets/sound/dbk/devices_02.ogg');
-
-        debug.log('audio files loaded');
-
         this.load.tilemap('collecting-1', './assets/data/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('collecting-2', './assets/data/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
         this.load.tilemap('collecting-3', './assets/data/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);

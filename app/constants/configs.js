@@ -5,8 +5,6 @@ module.exports = {
     GAME_HEIGHT: 400,
     GAME_RENDER_ID: 'game-area',
 
-    STORAGE_AUDIO_KEY: `${pkg.name}-sound-mute`,
-
     PLAYER_MAXIMUM_EXPERIENCE: 100,
     PLAYER_MAXIMUM_LEVEL: 100,
 

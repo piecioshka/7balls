@@ -2,27 +2,18 @@ let config = require('../../constants/configs');
 let utils = require('../../helpers/utils');
 
 let { displayFullscreenMessage, addSaiyanLabel } = require('../../helpers/message');
-let { loadSoundPreferences } = require('../../helpers/audio');
 
 export default class CollectDragonBallsState extends Phaser.State {
     layer = null;
-    audio = {
-        candypop: null,
-        radar: null
-    };
 
     create() {
         let random = utils.random(1, 3);
 
         this._setupWorld(random);
-        this._setupSound();
-
         this._setupBalls(random);
         this._setupSprite(10, 60, this.game.player);
 
         this._setupTimer(random);
-
-        loadSoundPreferences(this.game);
 
         displayFullscreenMessage(this.game, this.game.locale.COLLECT_DRAGON_BALLS);
     }
@@ -83,7 +74,6 @@ export default class CollectDragonBallsState extends Phaser.State {
             message.setText(`${this.game.locale.COLLECTING_STATE_TIME}: ${remain}`);
 
             if (remain === ending) {
-                this.audio.radar.play();
                 message.anchor.setTo(0.5, 0.5);
                 message.x = this.game.width / 2;
                 message.y = this.game.height / 2;
@@ -93,16 +83,10 @@ export default class CollectDragonBallsState extends Phaser.State {
         }, this);
 
         clock.onComplete.add(() => {
-            this.audio.radar.stop();
             this.game.emit('game:over');
         });
 
         clock.start();
-    }
-
-    _setupSound() {
-        this.audio.candypop = this.add.audio('sound-candypop');
-        this.audio.radar = this.add.audio('sound-radar');
     }
 
     update() {
@@ -121,10 +105,7 @@ export default class CollectDragonBallsState extends Phaser.State {
         // this.game.emit('ball:collected', { player, ball });
         ball.destroy();
 
-        this.audio.candypop.play();
-
         if (this.game.balls.length === 0) {
-            this.audio.radar.stop();
             this.game.emit('game:collect-dragon-balls');
         }
     }

@@ -2,7 +2,6 @@ import Enemy from '../../models/enemy';
 
 let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
-let { loadSoundPreferences } = require('../../helpers/audio');
 
 export default class EnemyPresentationState extends Phaser.State {
 
@@ -13,8 +12,6 @@ export default class EnemyPresentationState extends Phaser.State {
         this._displayEnemy();
 
         displaySingleLineMessage(this.game, `${this.game.locale.ENEMY_PRESENTATION_STATE_WELCOME}`);
-
-        loadSoundPreferences(this.game);
 
         utils.timeout(this, Phaser.Timer.SECOND, () => {
             this.game.emit('game:enemy-presents');

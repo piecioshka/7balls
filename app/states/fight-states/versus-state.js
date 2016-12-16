@@ -7,7 +7,6 @@ let isString = require('lodash.isstring');
 let config = require('../../constants/configs');
 let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
-let { loadSoundPreferences } = require('../../helpers/audio');
 let OptionsEnemyMixin = require('./options-enemy-mixin');
 let OptionsPlayerMixin = require('./options-player-mixin');
 
@@ -15,18 +14,6 @@ let OptionsPlayerMixin = require('./options-player-mixin');
  * @extends FightState
  */
 export default class VersusState extends FightState {
-    audio = {
-        jump: null,
-
-        weakkick: null,
-        weakpunch: null,
-
-        mediumkick: null,
-        mediumpunch: null,
-
-        strongkick: null,
-        strongpunch: null
-    };
     options = {
         player: {
             hp: null,
@@ -50,7 +37,6 @@ export default class VersusState extends FightState {
         this.add.image(0, 0, 'bg-versus-hell');
 
         this._setupWorld();
-        this._setupSound();
 
         this._setupSprite(150, 360, this.game.player);
         this._setupSprite(650, 360, this.game.enemy, [1, 1]);
@@ -66,8 +52,6 @@ export default class VersusState extends FightState {
 
         this.displayLogo();
         displaySingleLineMessage(this.game, `${this.game.locale.VERSUS_STATE_WELCOME}`);
-
-        loadSoundPreferences(this.game);
     }
 
     _setupFight() {

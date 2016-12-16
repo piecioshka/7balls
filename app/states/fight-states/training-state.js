@@ -3,25 +3,12 @@ import FightState from './fight-state';
 let assign = require('lodash.assign');
 let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
-let { loadSoundPreferences } = require('../../helpers/audio');
 let OptionsPlayerMixin = require('./options-player-mixin');
 
 /**
  * @extends FightState
  */
 export default class TrainingState extends FightState {
-    audio = {
-        jump: null,
-
-        weakkick: null,
-        weakpunch: null,
-
-        mediumkick: null,
-        mediumpunch: null,
-
-        strongkick: null,
-        strongpunch: null
-    };
     options = {
         player: {
             hp: null,
@@ -36,20 +23,13 @@ export default class TrainingState extends FightState {
         this.add.image(0, 0, 'bg-training-capsule');
 
         this._setupWorld();
-        this._setupSound();
-
         this._setupSprite(150, 360, this.game.player);
-
         this._setupOrientation(this.game.player, 'left');
-
         this._setupPlayerOptions();
-
         this._setupKeyboard();
 
         this.displayLogo();
         displaySingleLineMessage(this.game, `${this.game.locale.TRAINING_STATE_WELCOME}`);
-
-        loadSoundPreferences(this.game);
 
         utils.timeout(this, Phaser.Timer.SECOND * 5, () => {
             this.game.emit('game:training-finished');

@@ -9,7 +9,6 @@ import Cell from '../../models/species/monsters/cell';
 import Bubu from '../../models/species/monsters/bubu';
 
 let { displayGameVersion } = require('../../helpers/message');
-let { loadSoundPreferences } = require('../../helpers/audio');
 
 export default class SelectPlayerState extends Phaser.State {
     gokuCard = null;
@@ -45,7 +44,6 @@ export default class SelectPlayerState extends Phaser.State {
         this._selectSonGoku();
 
         displayGameVersion(this.game);
-        loadSoundPreferences(this.game);
     }
 
     _chooseCharacter(typeClass) {

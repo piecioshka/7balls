@@ -1,6 +1,5 @@
 let utils = require('../../helpers/utils');
 let { displaySingleLineMessage } = require('../../helpers/message');
-let { loadSoundPreferences } = require('../../helpers/audio');
 
 export default class MealState extends Phaser.State {
 
@@ -14,7 +13,5 @@ export default class MealState extends Phaser.State {
         utils.timeout(this, Phaser.Timer.SECOND * 3, () => {
             this.game.emit('game:rest-finished');
         });
-
-        loadSoundPreferences(this.game);
     }
 }

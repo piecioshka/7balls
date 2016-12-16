@@ -10,6 +10,7 @@ v0.0.0
  * Remove `runtime` - each event trigger on game object
  * All files are from `public/assets/`
  * Remove `write-file-webpack-plugin`
+ * Remove audio files
 
 v1.2.0 / 2016-07-18
 ==================

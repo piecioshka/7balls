@@ -175,30 +175,20 @@ export default class FightState extends Phaser.State {
                 return;
             }
 
-            this.audio.jump.play();
-
             sprite.body.velocity.y -= config.FIGHT_JUMP;
-
             sprite.play('jumping');
-
             debug.log('Character "%s" is JUMPING', character.title);
         });
 
         sprite.events.onKicking = new Phaser.Signal();
         sprite.events.onKicking.add(() => {
-            this._playKickSound(character);
-
             sprite.play('kicking');
-
             debug.log('Character "%s" is KICKING', character.title);
         });
 
         sprite.events.onBoxing = new Phaser.Signal();
         sprite.events.onBoxing.add(() => {
-            this._playPunchSound(character);
-
             sprite.play('boxing');
-
             debug.log('Character "%s" is BOXING', character.title);
         });
         sprite.events.onDied = new Phaser.Signal();
@@ -207,50 +197,6 @@ export default class FightState extends Phaser.State {
     _updateOptionsLvL(character) {
         this.options[character].lvl.setText(`${this.game[character].lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
     }
-
-    _setupSound() {
-        this.audio.jump = this.add.audio('sound-jump');
-
-        this.audio.weakkick = this.add.audio('sound-weakkick');
-        this.audio.weakpunch = this.add.audio('sound-weakpunch');
-
-        this.audio.mediumkick = this.add.audio('sound-mediumkick');
-        this.audio.mediumpunch = this.add.audio('sound-mediumpunch');
-
-        this.audio.strongkick = this.add.audio('sound-strongkick');
-        this.audio.strongpunch = this.add.audio('sound-strongpunch');
-    }
-
-    _playKickSound(character) {
-        switch (true) {
-            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[0]:
-                this.audio.weakkick.play();
-                break;
-
-            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[1]:
-                this.audio.mediumkick.play();
-                break;
-
-            default:
-                this.audio.strongkick.play();
-        }
-    }
-
-    _playPunchSound(character) {
-        switch (true) {
-            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[0]:
-                this.audio.weakpunch.play();
-                break;
-
-            case character.lvl < config.FIGHT_LEVELS_THRESHOLD[1]:
-                this.audio.mediumpunch.play();
-                break;
-
-            default:
-                this.audio.strongpunch.play();
-        }
-    }
-
     _setupKeyboard() {
         let playerSprite = this.game.player.getSprite();
 

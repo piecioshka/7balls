@@ -2,16 +2,11 @@ let isObject = require('lodash.isobject');
 let assert = require('assert');
 let utils = require('../../helpers/utils');
 let { displayGameVersion, displayFullscreenMessage } = require('../../helpers/message');
-let { loadSoundPreferences } = require('../../helpers/audio');
 
 export default class SelectLanguageState extends Phaser.State {
     plCard = null;
     enCard = null;
     onEnter = null;
-
-    audio = {
-        scouter: null
-    };
 
     create() {
         this.add.image(0, 0, 'bg-select-language');
@@ -26,10 +21,8 @@ export default class SelectLanguageState extends Phaser.State {
         this._selectEnglish();
 
         this._setupKeyboard();
-        this._setupSound();
 
         displayGameVersion(this.game);
-        loadSoundPreferences(this.game);
     }
 
     _choosePolish() {
@@ -51,9 +44,6 @@ export default class SelectLanguageState extends Phaser.State {
         assert(isObject(this.game.locale));
 
         this.game.emit('locale:select', { locale: locale });
-
-        // Dodajemy efekty audio.
-        this.audio.scouter.play();
 
         displayFullscreenMessage(this.game, this.game.locale.CONTROLS_INFO);
 
@@ -77,10 +67,6 @@ export default class SelectLanguageState extends Phaser.State {
         left.onDown.add(() => this._selectPolish());
         right.onDown.add(() => this._selectEnglish());
         enter.onDown.addOnce(() => this.onEnter());
-    }
-
-    _setupSound() {
-        this.audio.scouter = this.add.audio('scouter');
     }
 
     _selectPolish() {

@@ -1,19 +1,9 @@
-let { loadSoundPreferences } = require('../../helpers/audio');
-
 export default class GameOverState extends Phaser.State {
-    audio = {
-        dramatic: null
-    };
-
     create() {
         this.add.image(0, 0, 'bg-game-over');
         this.add.button(this.game.width / 2 - this.cache.getImage('btn-try-again').width / 2, this.game.height / 2 + 40, 'btn-try-again', this._tryAgain, this);
 
         this._setupKeyboard();
-        this._setupSound();
-        loadSoundPreferences(this.game);
-
-        // this.audio.dramatic.play();
     }
 
     _setupKeyboard() {
@@ -28,12 +18,6 @@ export default class GameOverState extends Phaser.State {
     }
 
     _tryAgain() {
-        // this.audio.dramatic.stop();
-
         this.game.emit('game:over:try-again', { enemy: this.game.enemy });
-    }
-
-    _setupSound() {
-        this.audio.dramatic = this.add.audio('sound-dramatic');
     }
 }
