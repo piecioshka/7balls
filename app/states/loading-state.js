@@ -14,8 +14,8 @@ export default class LoadingState extends Phaser.State {
         let title = addSaiyanLabel(this.game, this.world.centerX, 150, 'Loading...', [0.5, 0.5]);
         title.fontSize = 130;
 
-        var pixelLoadingWidth = this.cache.getImage('pixel-loading').width;
-        var progressBar = this.add.sprite(this.world.centerX - (pixelLoadingWidth / 2), 230, 'pixel-loading');
+        let pixelLoadingWidth = this.cache.getImage('pixel-loading').width;
+        let progressBar = this.add.sprite(this.world.centerX - (pixelLoadingWidth / 2), 230, 'pixel-loading');
         this.load.setPreloadSprite(progressBar);
 
         debug.log('assets loading...');

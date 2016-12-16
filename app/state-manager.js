@@ -45,14 +45,14 @@ export class StateManager {
 
     setupNativeListeners() {
         this.game.state.onStateChange.add((newState, oldState) => {
-            console.debug('Enter to new state: %s', newState);
+            console.debug('[SM] State: %s', newState);
         });
     }
 
     setupListeners() {
         this.game.on('all', (...args) => {
-            args.unshift('[SM]');
-            console.warn.apply(console, args);
+            args.unshift('%c[SM] Event:', 'color: green');
+            console.log.apply(console, args);
         });
 
         this.game.on('game:bootstrap', () => {

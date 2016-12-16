@@ -1,4 +1,4 @@
-import SuperEventEmitter from 'super-event-emitter';
+let SuperEventEmitter = require('super-event-emitter');
 
 export class Game extends Phaser.Game {
     player = null;
