@@ -32,6 +32,7 @@ function addLabel(game, x, y, text, anchor = [0, 0]) {
     let label = game.add.text(x, y, text);
 
     label.fill = '#fff';
+    label.font = 'Tahoma';
     label.setShadow(0, 0, BLACK_COLOR, 3);
     label.anchor.setTo(...anchor);
 
@@ -60,11 +61,11 @@ function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2,
     message.fontSize = fontSize;
 
     game.time.events.add(Phaser.Timer.SECOND / 4, () => {
-        game.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
+        game.add.tween(message).to({ alpha: 1 }, Phaser.Timer.SECOND / 4, Phaser.Easing.Linear.None, true);
     }, this);
 
     game.time.events.add(lifespan - Phaser.Timer.SECOND / 2, () => {
-        game.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 2, Phaser.Easing.Linear.None, true);
+        game.add.tween(message).to({ alpha: 0 }, Phaser.Timer.SECOND / 4, Phaser.Easing.Linear.None, true);
     }, this);
 
     game.time.events.add(lifespan, cb, this);
@@ -75,7 +76,7 @@ function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2,
 function displayGameVersion(game) {
     let version = game.add.text(5, game.height - 20, 'v' + pkg.version);
 
-    version.font = 'Arial';
+    version.font = 'Tahoma';
     version.fontSize = '10px';
     version.fill = '#fff';
     version.setShadow(0, 0, BLACK_COLOR, 3);
