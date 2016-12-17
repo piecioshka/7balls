@@ -5,6 +5,7 @@ let { displayFullscreenMessage, addSaiyanLabel } = require('../../helpers/messag
 
 export default class CollectDragonBallsState extends Phaser.State {
     layer = null;
+    emitter = null;
 
     create() {
         let random = utils.random(1, 3);
@@ -12,10 +13,24 @@ export default class CollectDragonBallsState extends Phaser.State {
         this._setupWorld(random);
         this._setupBalls(random);
         this._setupSprite(10, 60, this.game.player);
+        this._setupParticles();
 
         this._setupTimer(random);
 
         displayFullscreenMessage(this.game, this.game.locale.COLLECT_DRAGON_BALLS);
+    }
+
+    _setupParticles() {
+        this.emitter = this.add.emitter();
+        this.emitter.makeParticles('pixel');
+        this.emitter.setXSpeed(-150, 150);
+        this.emitter.gravity = 0;
+    }
+
+    _fireParticles(x, y) {
+        this.emitter.x = x;
+        this.emitter.y = y;
+        this.emitter.start(true, 600, null, 15);
     }
 
     _setupWorld(random) {
@@ -102,6 +117,8 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleCollectedBall(player, ball) {
+        this._fireParticles(ball.x + ball.width / 2, ball.y + ball.height / 2);
+
         // this.game.emit('ball:collected', { player, ball });
         ball.destroy();
 

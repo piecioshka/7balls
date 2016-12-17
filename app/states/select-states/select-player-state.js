@@ -37,7 +37,6 @@ export default class SelectPlayerState extends Phaser.State {
         this.piccoloCard.visible = false;
 
         this._setupKeyboard();
-
         // Domyślnie wybieramy Son Goku.
         this._selectSonGoku();
     }

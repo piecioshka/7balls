@@ -9,16 +9,15 @@ export default class SelectLanguageState extends Phaser.State {
     onEnter = null;
 
     create() {
-        this.plCard = this.add.button(150, 130, 'btn-pl', this._choosePolish, this);
-        this.plCard.onInputOver.add(this._selectPolish, this);
-
-        this.enCard = this.add.button(450, 130, 'btn-en', this._chooseEnglish, this);
+        this.enCard = this.add.button(150, 150, 'btn-en', this._chooseEnglish, this);
         this.enCard.onInputOver.add(this._selectEnglish, this);
 
-        // Domyślnie wybieramy język angielski.
-        this._selectEnglish();
+        this.plCard = this.add.button(450, 150, 'btn-pl', this._choosePolish, this);
+        this.plCard.onInputOver.add(this._selectPolish, this);
 
         this._setupKeyboard();
+        // Domyślnie wybieramy język angielski.
+        this._selectEnglish();
     }
 
     _choosePolish() {

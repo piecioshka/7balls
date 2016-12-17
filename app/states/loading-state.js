@@ -94,6 +94,7 @@ export default class LoadingState extends Phaser.State {
 
         this.load.image('mute', './assets/graphics/icons/mute.png');
         this.load.image('unmute', './assets/graphics/icons/unmute.png');
+        this.load.image('pixel', './assets/graphics/icons/pixel.png');
 
         // graphics/logo
 
