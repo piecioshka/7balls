@@ -6,6 +6,7 @@ import SelectLanguageState from './states/select-states/select-language-state';
 import SelectPlayerState from './states/select-states/select-player-state';
 import FightState from './states/play-states/fight-state';
 import WinnerState from './states/static-states/winner-state';
+import CreditsState from './states/static-states/credits-state';
 import AvoidMonstersState from './states/play-states/avoid-monsters-state';
 
 export class StateManager {
@@ -28,6 +29,7 @@ export class StateManager {
         this.game.state.add('Fight', FightState);
         this.game.state.add('Winner', WinnerState);
         this.game.state.add('GameOver', GameOverState);
+        this.game.state.add('Credits', CreditsState);
     }
 
     setupNativeListeners() {
@@ -78,16 +80,19 @@ export class StateManager {
             }
         });
 
-        this.game.on('game:collect-completed', () => {
+        let win = () => {
             this.game.state.start('Winner');
+        };
+
+        this.game.on('game:collect-completed', win);
+        this.game.on('game:win', win);
+
+        this.game.on('game:credits', () => {
+            this.game.state.start('Credits');
         });
 
         this.game.on('game:over', () => {
             this.game.state.start('GameOver');
-        });
-
-        this.game.on('game:win', () => {
-            this.game.state.start('Winner');
         });
     }
 

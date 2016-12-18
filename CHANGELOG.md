@@ -1,4 +1,4 @@
-v0.0.0
+v1.3.0 / 2016-12-18
 ==================
 
  * Remove TypeScript
@@ -22,6 +22,7 @@ v0.0.0
  * Add meta tags in HTML
  * Support Open Graph
  * Display Phaser banner
+ * Add credits state
 
 v1.2.0 / 2016-07-18
 ==================

@@ -57,16 +57,15 @@ export default class LoadingState extends Phaser.State {
         // ---
         this.load.path = 'assets/pixelart/';
 
-        this.load.image('bg-game-over', 'backgrounds/game-over/game-over.png');
-        this.load.image('bg-win', 'backgrounds/win/win.png');
-
         this.load.image('pixel', 'pixel.png');
         this.load.image('logo', 'logo/logo.png');
         this.load.image('flag-pl', 'flags/flag-pl.png');
         this.load.image('flag-usa', 'flags/flag-usa.png');
-        this.load.image('btn-try-again', 'try-again.png');
         this.load.image('cloud', 'cloud.png');
 
+        this.load.image('bg-game-over', 'backgrounds/game-over/game-over.png');
+        this.load.image('bg-win', 'backgrounds/win/win.png');
+        this.load.image('bg-credits', 'backgrounds/credits/credits.png');
         this.load.image('bg-select-player', 'backgrounds/select-player/select-player.png');
 
         this.load.image('son-goku-card', 'posters/son-goku/son-goku-card.png');

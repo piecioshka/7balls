@@ -36,9 +36,9 @@ do normalnej postaci)
 * [ ] dodać faktyczny `konami code` - https://github.com/mikeflynn/egg.js
 * [ ] czy trzeba tworzyć nowy zegar? (`game.time.create()`) czy nie można
 skorzystać z już istniejącego? (`this.time.events.add`)
-* [ ] dodać `credits` - autorzy gry
 * [ ] po porażce przegrany powinien leżeć na ziemi
 * [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
+* [ ] narysować obrazek, który będzie plakatem gry, np. pojawi się w OGP.
 
 ## Autor
 
