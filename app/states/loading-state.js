@@ -50,9 +50,9 @@ export default class LoadingState extends Phaser.State {
 
         this.load.path = '';
 
-        this.load.tilemap('collecting-1', './assets/data/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-2', './assets/data/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
-        this.load.tilemap('collecting-3', './assets/data/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('map-collecting-1', './assets/data/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('map-collecting-2', './assets/data/maps/collecting-2.json', null, Phaser.Tilemap.TILED_JSON);
+        this.load.tilemap('map-collecting-3', './assets/data/maps/collecting-3.json', null, Phaser.Tilemap.TILED_JSON);
 
         // ---
         this.load.path = 'assets/pixelart/';
@@ -65,13 +65,15 @@ export default class LoadingState extends Phaser.State {
         this.load.image('flag-pl', 'flags/flag-pl.png');
         this.load.image('flag-usa', 'flags/flag-usa.png');
         this.load.image('btn-try-again', 'try-again.png');
+        this.load.image('cloud', 'cloud.png');
 
-        this.load.image('bg-select-player', 'backgrounds/select-player/bg-select-player.png');
+        this.load.image('bg-select-player', 'backgrounds/select-player/select-player.png');
 
         this.load.image('son-goku-card', 'posters/son-goku/son-goku-card.png');
         this.load.image('vegeta-card', 'posters/vegeta/vegeta-card.png');
 
-        this.load.spritesheet('collect-spritesheet', 'sheets/collecting.png', 40, 40);
+        this.load.spritesheet('collect-spritesheet', 'sheets/collect-spritesheet.png', 40, 40);
+        this.load.spritesheet('ball-spritesheet', 'sheets/ball-spritesheet.png', 40, 40);
 
         this.load.image('bar-blank', 'bars/blank.png');
         this.load.image('bar-exp', 'bars/exp.png');

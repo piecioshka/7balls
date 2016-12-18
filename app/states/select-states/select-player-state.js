@@ -14,28 +14,33 @@ export default class SelectPlayerState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
 
-    cardsIndex = 0;
+    cardsIndex = null;
     cards = null;
-
-    init() {
-        this.cards = [];
-        this.game.enemies = [Freeza, Cell, Bubu, Piccolo];
-    }
+    clouds = null;
 
     create() {
+        this.cardsIndex = 0;
+        this.cards = [];
+        this.game.enemies = [Freeza, Cell, Bubu, Piccolo];
+
         this.add.image(0, 0, 'bg-select-player');
 
-        this.gokuCard = this.add.button(180, 120, 'son-goku-card', () => this._chooseCharacter(SonGoku));
+        this.clouds = this.add.group();
+        this.clouds.create(-50, 30, 'cloud');
+        this.clouds.create(260, 10, 'cloud');
+        this.clouds.create(480, 20, 'cloud');
+
+        this.gokuCard = this.add.button(200, 100, 'son-goku-card', () => this._chooseCharacter(SonGoku));
         this.gokuCard.onInputOver.add(this._selectSonGoku, this);
         this.cards.push(this.gokuCard);
 
-        addSaiyanLabel(this.game, 215, 360, 'Son Gokū');
+        addSaiyanLabel(this.game, 215, 350, 'Son Gokū').fontSize = 30;
 
-        this.vegetaCard = this.add.button(440, 120, 'vegeta-card', () => this._chooseCharacter(Vegeta));
+        this.vegetaCard = this.add.button(450, 100, 'vegeta-card', () => this._chooseCharacter(Vegeta));
         this.vegetaCard.onInputOver.add(this._selectVegeta, this);
         this.cards.push(this.vegetaCard);
 
-        addSaiyanLabel(this.game, 485, 360, 'Vegeta');
+        addSaiyanLabel(this.game, 485, 350, 'Vegeta').fontSize = 30;
 
         this._setupKeyboard();
         // Domyślnie wybieramy Son Goku.
@@ -66,6 +71,14 @@ export default class SelectPlayerState extends Phaser.State {
 
     update() {
         this._handleKeyboard();
+
+        this.clouds.children.forEach((item, index) => {
+            item.position.x += (Math.log(index + 2) / 5);
+
+            if (item.position.x > this.game.world.width) {
+                item.position.x = -1 * item.width;
+            }
+        }, this);
     }
 
     _handleKeyboard() {

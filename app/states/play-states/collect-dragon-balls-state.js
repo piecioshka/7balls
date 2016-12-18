@@ -36,7 +36,7 @@ export default class CollectDragonBallsState extends Phaser.State {
     _setupWorld(random) {
         this.physics.startSystem(Phaser.Physics.ARCADE);
 
-        let map = this.add.tilemap(`collecting-${random}`);
+        let map = this.add.tilemap(`map-collecting-${random}`);
         map.addTilesetImage('collect-spritesheet');
         map.setCollision([1, 3]);
 
@@ -69,9 +69,12 @@ export default class CollectDragonBallsState extends Phaser.State {
         this.physics.arcade.enable(balls);
 
         let places = this.cache.getJSON(`positions-${random}`);
-        places.forEach((item) => {
-            let [x, y] = item;
-            let ball = this.add.tileSprite(x * 40, y * 40, 40, 40, 'collect-spritesheet', 1);
+        places.forEach(([x, y]) => {
+            let ball = this.add.tileSprite(x * 40, y * 40, 40, 40, 'ball-spritesheet');
+
+            ball.animations.add('base', [0, 1, 2, 3], 4, true);
+            ball.play('base');
+
             balls.add(ball);
         });
     }
@@ -93,7 +96,7 @@ export default class CollectDragonBallsState extends Phaser.State {
                 message.x = this.game.width / 2;
                 message.y = this.game.height / 2;
                 message.fill = '#f00';
-                message.fontSize = 60;
+                message.fontSize = 100;
             }
         }, this);
 
