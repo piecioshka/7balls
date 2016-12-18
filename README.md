@@ -22,21 +22,6 @@ zawiera kompletną listę odcinków w chronologicznej postaci.
 
 ### Błędy
 
-* [x] wyłączyć `Phaser banner`
-* [x] przenieść `vendor` do `node_modules` (jest tylko `phaser.js`)
-* [x] upgrade `Babel.js` do wersji 6.x
-* [x] zmiana nazw plików wg `snake case`
-* [x] dodać paczkę `debug`
-* [x] dodać odznakę - link do GitHuba
-* [x] zamiana `undefined` na `null`
-* [x] nie działa na IE9, bo nie ma `Object.assign` - użyć `lodash.assign`
-* [x] poprawić dodanie customowej czcionki
-* [x] kucanie nie powinno uderzać zawodnika (rozszerzać bounding boxa)
-* [x] nie używać fonta `Sayian sans` do wszystkiego, tylko do napisu DBP
-* [x] zatrzymaj postacie po skończonej bitwie
-* [x] rywal powinien uderzać w kierunku gracza, a nie w tym samym
-* [x] po skończonej walce sprowadzamy postacie na ziemie i odtwarzamy ostatnie
-animacje (zwycięstwo i porażka)
 * [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
 * [ ] po co czyścić `velocity` w każdym `update`?
 * [ ] kucanie powinno być na stałe (nie trzeba tak jak przy uderzeniu wracać
@@ -45,22 +30,14 @@ do normalnej postaci)
 
 ### Rozwój
 
-* [x] wykorzystajmy `webpack-dev-server`, aby nie czekać na zmiany
-* [x] przenieść `DefinitionTypes` do katalogu `misc`
-* [x] przenieść ładowanie assetów do `BootstrapState`
-* [x] prezentować aktualną wersję na ekranach wyboru języka i zawodnika
-* [x] stworzyć loader podczas ładowania assetów
-* [x] czy faktycznie musimy definiować klawisze jako properties klasy?
 * [ ] dodać ekran, gdzie leci się z lewej na prawo i robi uniki od potworów
 * [ ] dodać ekran, gdzie broni się rannego przyjaciela, a atakuje kilku `Cell Jr.`
 * [ ] dodać tryb `fullscreen`
 * [ ] dodać faktyczny `konami code` - https://github.com/mikeflynn/egg.js
 * [ ] czy trzeba tworzyć nowy zegar? (`game.time.create()`) czy nie można
 skorzystać z już istniejącego? (`this.time.events.add`)
-* [ ] zaktualizować grę zgodnie z 24 epizodem (fabuła)
 * [ ] dodać `credits` - autorzy gry
 * [ ] po porażce przegrany powinien leżeć na ziemi
-* [ ] zrezygnować z zarządzaniem przezroczystością na rzecz zielonej otoczki (border)
 * [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
 
 ## Autor

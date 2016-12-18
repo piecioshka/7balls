@@ -1,17 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
     <meta charset="UTF-8">
     <title>7balls.game</title>
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta name="keywords" content="game, dragon ball"/>
+    <meta name="description" content="Game based on Dragon Ball"/>
+
+    <meta property="og:url" content="http://www.7balls.game/"/>
+    <meta property="og:type" content="game"/>
+    <meta property="og:title" content="7balls.game"/>
+    <meta property="og:description" content="Game based on Dragon Ball"/>
+    <meta property="og:image" content=""/>
+    <meta property="og:locale" content="en_EN"/>
+
+    <link rel="icon" href="assets/pixelart/logo-minimal.png" type="image/png"/>
     <link rel="stylesheet" href="assets/styles/main.css"/>
 </head>
 <body>
     <div id="game-area"></div>
-    <script>
-        window.PhaserGlobal = {
-            hideBanner: true
-        };
-    </script>
+
     <script src="dist/phaser.js"></script>
     <script src="dist/bundle.js"></script>
     <script>

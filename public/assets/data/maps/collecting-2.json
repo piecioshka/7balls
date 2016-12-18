@@ -22,11 +22,11 @@
  "tilesets":[
         {
          "firstgid":1,
-         "image":"..\/..\/graphics\/spritesheet\/spr-collecting.png",
+         "image":"..\/..\/pixelart\/sheets\/collect-spritesheet.png",
          "imageheight":80,
          "imagewidth":80,
          "margin":0,
-         "name":"spr-collecting",
+         "name":"collect-spritesheet",
          "properties":
             {
 

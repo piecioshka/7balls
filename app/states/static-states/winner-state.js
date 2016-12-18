@@ -1,7 +1,12 @@
+let { addSaiyanLabel } = require('../../helpers/message');
+
 export default class WinnerState extends Phaser.State {
     create() {
-        this.add.image(0, 0, 'bg-winner');
+        this.add.image(0, 0, 'bg-win');
         this.add.button(370, this.game.height / 2, 'btn-try-again', this._tryAgain, this);
+
+        let label = addSaiyanLabel(this.game, 200, 50, 'Winner!');
+        label.fontSize = 100;
 
         this._setupKeyboard();
     }

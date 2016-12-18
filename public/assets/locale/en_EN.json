@@ -1,12 +1,9 @@
 {
     "CONTROLS_INFO": "Game controls:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C",
     "COLLECT_DRAGON_BALLS": "Collect dragon balls,\nnext Shenron will be appear\nand give you a life!",
-    "COLLECTING_STATE_TIME": "Time",
-    "ENEMY_PRESENTATION_STATE_WELCOME": "New enemy appeared!",
+    "TIME": "Time",
     "FIGHT_STATE_LEVEL_SHORT": "lvl",
-    "MEAL_STATE_WELCOME": "Time to eat and rest!",
-    "TRAINING_STATE_WELCOME": "Training time!",
-    "VERSUS_STATE_WELCOME": "Fight!",
-    "VERSUS_STATE_PLAYER_DIED": "defeat!",
-    "VERSUS_STATE_PLAYER_WIN": "win!"
+    "FIGHT_STATE_WELCOME": "Fight!",
+    "FIGHT_STATE_PLAYER_DIED": "defeat!",
+    "FIGHT_STATE_PLAYER_WIN": "win!"
 }

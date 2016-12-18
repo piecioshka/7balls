@@ -9,10 +9,10 @@ export default class SelectLanguageState extends Phaser.State {
     onEnter = null;
 
     create() {
-        this.enCard = this.add.button(150, 150, 'btn-en', this._chooseEnglish, this);
+        this.enCard = this.add.button(150, 150, 'flag-usa', this._chooseEnglish, this);
         this.enCard.onInputOver.add(this._selectEnglish, this);
 
-        this.plCard = this.add.button(450, 150, 'btn-pl', this._choosePolish, this);
+        this.plCard = this.add.button(450, 150, 'flag-pl', this._choosePolish, this);
         this.plCard.onInputOver.add(this._selectPolish, this);
 
         this._setupKeyboard();
@@ -59,8 +59,8 @@ export default class SelectLanguageState extends Phaser.State {
             Phaser.Keyboard.ENTER
         ]);
 
-        left.onDown.add(() => this._selectPolish());
-        right.onDown.add(() => this._selectEnglish());
+        left.onDown.add(() => this._selectEnglish());
+        right.onDown.add(() => this._selectPolish());
         enter.onDown.addOnce(() => this.onEnter());
     }
 

@@ -14,6 +14,14 @@ v0.0.0
  * Split config file
  * Use babel-plugin-transform-object-assign instead of lodash.assign (saved 
  16KB)
+ * Remove all static states: meal, presentation enemy & player, shenron
+ * Draw a lot of graphic in Pixel Art style
+ * Remove Training state
+ * Merge Fight & Versus state in single Fight state
+ * Add Piccolo as 4-th monster
+ * Add meta tags in HTML
+ * Support Open Graph
+ * Display Phaser banner
 
 v1.2.0 / 2016-07-18
 ==================

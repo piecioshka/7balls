@@ -8,33 +8,34 @@ import Freeza from '../../models/species/monsters/freeza';
 import Cell from '../../models/species/monsters/cell';
 import Bubu from '../../models/species/monsters/bubu';
 
+import { addSaiyanLabel } from '../../helpers/message';
+
 export default class SelectPlayerState extends Phaser.State {
     gokuCard = null;
     vegetaCard = null;
-    piccoloCard = null;
 
     cardsIndex = 0;
     cards = null;
 
     init() {
         this.cards = [];
-        this.game.enemies = [Freeza, Cell, Bubu];
+        this.game.enemies = [Freeza, Cell, Bubu, Piccolo];
     }
 
     create() {
         this.add.image(0, 0, 'bg-select-player');
 
-        this.gokuCard = this.add.button(220, 180, 'son-goku-card', () => this._chooseCharacter(SonGoku), this);
+        this.gokuCard = this.add.button(180, 120, 'son-goku-card', () => this._chooseCharacter(SonGoku));
         this.gokuCard.onInputOver.add(this._selectSonGoku, this);
         this.cards.push(this.gokuCard);
 
-        this.vegetaCard = this.add.button(420, 180, 'vegeta-card', () => this._chooseCharacter(Vegeta), this);
+        addSaiyanLabel(this.game, 215, 360, 'Son Gokū');
+
+        this.vegetaCard = this.add.button(440, 120, 'vegeta-card', () => this._chooseCharacter(Vegeta));
         this.vegetaCard.onInputOver.add(this._selectVegeta, this);
         this.cards.push(this.vegetaCard);
 
-        this.piccoloCard = this.add.button(520, 180, 'piccolo-card', () => this._chooseCharacter(Piccolo), this);
-        this.piccoloCard.onInputOver.add(this._selectPiccolo, this);
-        this.piccoloCard.visible = false;
+        addSaiyanLabel(this.game, 485, 360, 'Vegeta');
 
         this._setupKeyboard();
         // Domyślnie wybieramy Son Goku.
@@ -73,28 +74,6 @@ export default class SelectPlayerState extends Phaser.State {
         if (keyboard.isDown(Phaser.Keyboard.ENTER)) {
             this.cards[this.cardsIndex].onInputUp.dispatch();
         }
-
-        // keyboard.isDown(Phaser.Keyboard.LEFT)
-        // keyboard.isDown(Phaser.Keyboard.RIGHT)
-        // keyboard.isDown(Phaser.Keyboard.DOWN)
-        // keyboard.isDown(Phaser.Keyboard.ENTER)
-
-        // A'la Konami Code
-        if (
-            keyboard.isDown(Phaser.Keyboard.A) &&
-            keyboard.isDown(Phaser.Keyboard.B) &&
-            keyboard.isDown(Phaser.Keyboard.UP)
-        ) {
-            if (this.piccoloCard.visible) {
-                return;
-            }
-
-            this.gokuCard.x = 120;
-            this.vegetaCard.x = 320;
-            this.piccoloCard.visible = true;
-
-            this.cards.push(this.piccoloCard);
-        }
     }
 
     _prevCard() {
@@ -120,18 +99,10 @@ export default class SelectPlayerState extends Phaser.State {
     _selectSonGoku() {
         this.gokuCard.alpha = 1;
         this.vegetaCard.alpha = 0.5;
-        this.piccoloCard.alpha = 0.5;
     }
 
     _selectVegeta() {
         this.gokuCard.alpha = 0.5;
         this.vegetaCard.alpha = 1;
-        this.piccoloCard.alpha = 0.5;
-    }
-
-    _selectPiccolo() {
-        this.gokuCard.alpha = 0.5;
-        this.vegetaCard.alpha = 0.5;
-        this.piccoloCard.alpha = 1;
     }
 }
