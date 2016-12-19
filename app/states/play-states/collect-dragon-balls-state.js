@@ -132,6 +132,7 @@ export default class CollectDragonBallsState extends Phaser.State {
         let $playerSprite = this.game.player.getSprite();
         let keyboard = this.input.keyboard;
 
+        // Resetujemy, aby velocity (prędkość) ciągle nie rosła.
         $playerSprite.body.velocity.x = $playerSprite.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {

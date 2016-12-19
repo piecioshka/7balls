@@ -1,4 +1,4 @@
-# 7balls
+# ![](./screenshots/son-goku-fight-small.png) 7balls
 
 > :video_game: Gry webowa oparta na anime "Dragon Ball"
 
@@ -18,17 +18,11 @@ Wszystkie materiały znajdują się na kanale YouTube autora.
 [Playlista](https://www.youtube.com/playlist?list=PLDTdlgCXlVhjAlKJ1W2Y12Xejvt4Ih02p)
 zawiera kompletną listę odcinków w chronologicznej postaci.
 
+# KA ME HA ME HA!!!!
+
+![](./screenshots/son-goku-fight.png) 
+
 ## TODO LIST
-
-### Błędy
-
-* [ ] zweryfikować czy `player.x` a nie `player.body.x`? tak samo z `velocity`
-* [ ] po co czyścić `velocity` w każdym `update`?
-* [ ] kucanie powinno być na stałe (nie trzeba tak jak przy uderzeniu wracać
-do normalnej postaci)
-* [ ] podczas versus, zawodnicy nie mogą na siebie nachodzić
-
-### Rozwój
 
 * [ ] dodać ekran, gdzie leci się z lewej na prawo i robi uniki od potworów
 * [ ] dodać ekran, gdzie broni się rannego przyjaciela, a atakuje kilku `Cell Jr.`
@@ -38,7 +32,7 @@ do normalnej postaci)
 skorzystać z już istniejącego? (`this.time.events.add`)
 * [ ] po porażce przegrany powinien leżeć na ziemi
 * [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
-* [ ] narysować obrazek, który będzie plakatem gry, np. pojawi się w OGP.
+* [ ] narysować obrazek 526x275, który będzie plakatem gry (Open Graph).
 
 ## Autor
 
