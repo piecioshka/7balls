@@ -1,10 +1,14 @@
-# ![](./screenshots/son-goku-fight-small.png) 7balls
+# [7balls](http://www.7balls.game)
 
 > :video_game: Gry webowa oparta na anime "Dragon Ball"
 
+# KA ME HA ME HA!!!!
+
+![](./screenshots/son-goku-fight.png) 
+
 ## Gdzie można zagrać?
 
-Wspierane są wszystkie najnowsze wersje przeglądarek, oraz systemy operacyjne:
+Wspierane są wszystkie najnowsze wersje przeglądarek oraz systemy operacyjne:
 MS Windows, Linux, Mac OS X. Aplikacja dostępna jest pod adresem: 
 http://www.7balls.game
 
@@ -17,10 +21,6 @@ Podczas tworzenia projektu powstało 25 filmów na temat tego projektu.
 Wszystkie materiały znajdują się na kanale YouTube autora.
 [Playlista](https://www.youtube.com/playlist?list=PLDTdlgCXlVhjAlKJ1W2Y12Xejvt4Ih02p)
 zawiera kompletną listę odcinków w chronologicznej postaci.
-
-# KA ME HA ME HA!!!!
-
-![](./screenshots/son-goku-fight.png) 
 
 ## TODO LIST
 

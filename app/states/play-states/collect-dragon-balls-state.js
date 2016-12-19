@@ -49,19 +49,21 @@ export default class CollectDragonBallsState extends Phaser.State {
 
         let $sprite = character.getSprite();
         $sprite.anchor.setTo(...anchor);
-        $sprite.scale.setTo(0.3, 0.3);
-
-        this._defineDefaultProperties(character);
-    }
-
-    _defineDefaultProperties(character) {
-        let sprite = character.getSprite();
 
         // Tutaj tworzymy ciało dla naszej postaci.
-        this.physics.arcade.enable(sprite);
+        this.physics.arcade.enable($sprite);
 
-        sprite.body.collideWorldBounds = true;
-        sprite.body.setSize(30, 30, 5, 30);
+        $sprite.body.collideWorldBounds = true;
+
+        let width = $sprite.width * 0.8;
+        let height = $sprite.height * 0.4;
+        let positionX = $sprite.width * 0.1;
+        let positionY = $sprite.height * 0.6;
+        $sprite.body.setSize(width, height, positionX, positionY);
+
+        $sprite.scale.setTo(0.3, 0.3);
+
+        $sprite.animations.add('standing', [0, 1, 2], 4, true).play();
     }
 
     _setupBalls(random) {

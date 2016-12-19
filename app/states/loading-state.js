@@ -41,7 +41,7 @@ export default class LoadingState extends Phaser.State {
         this.load.image('freeza-card', 'posters/freeza/freeza-card.png');
         this.load.image('piccolo-card', 'posters/piccolo/piccolo-card.png');
 
-        this.load.spritesheet('son-goku-fight', 'fight/son-goku/son-goku-fight-spritesheet.png', 150, 200);
+        this.load.spritesheet('son-goku-fight', 'fight/son-goku/son-goku-spritesheet.png', 150, 200);
         this.load.spritesheet('vegeta-fight', 'fight/vegeta/vegeta-fight.png', 150, 200);
         this.load.spritesheet('bubu-fight', 'fight/bubu/bubu-fight.png', 150, 200);
         this.load.spritesheet('cell-fight', 'fight/cell/cell-fight.png', 150, 200);

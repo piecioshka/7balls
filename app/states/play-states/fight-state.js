@@ -67,16 +67,6 @@ export default class FightState extends Phaser.State {
         this.world.setBounds(0, 0, this.game.width, this.game.height - FIGHT.BOTTOM_MARGIN);
     }
 
-    _defineDefaultProperties(character) {
-        let $sprite = character.getSprite();
-
-        // Tutaj tworzymy ciało dla naszej postaci.
-        this.physics.arcade.enable($sprite);
-
-        $sprite.body.bounce.setTo(0, 0.1);
-        $sprite.body.collideWorldBounds = true;
-    }
-
     /**
      * @param {Character} character
      * @param {string} orientation [left, right]
@@ -133,7 +123,12 @@ export default class FightState extends Phaser.State {
         let $sprite = character.getSprite();
         $sprite.anchor.setTo(...anchor);
 
-        this._defineDefaultProperties(character);
+        // Tutaj tworzymy ciało dla naszej postaci.
+        this.physics.arcade.enable($sprite);
+
+        $sprite.body.bounce.setTo(0, 0.1);
+        $sprite.body.collideWorldBounds = true;
+
         this._setupMoves(character);
     }
 
