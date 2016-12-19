@@ -40,7 +40,7 @@ export class StateManager {
 
     setupListeners() {
         this.game.on('all', (...args) => {
-            args.unshift('%c[SM] Event:', 'color: green');
+            args.unshift('%c[SM] Event:', 'color: orange');
             console.log.apply(console, args);
         });
 

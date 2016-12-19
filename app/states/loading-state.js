@@ -18,34 +18,24 @@ export default class LoadingState extends Phaser.State {
         this.load.path = './assets/graphics/characters/';
 
         this.load.image('son-goku-collecting', 'son-goku/son-goku-collecting.png');
-        this.load.image('son-goku', 'son-goku/poster/son-goku.png');
-        this.load.image('son-goku-halo', 'son-goku/poster/son-goku-halo.png');
         this.load.spritesheet('son-goku-spritesheet', 'son-goku/son-goku-fight.png', 150, 200);
 
         this.load.image('vegeta-collecting', 'vegeta/vegeta-collecting.png');
-        this.load.image('vegeta', 'vegeta/poster/vegeta.png');
-        this.load.image('vegeta-halo', 'vegeta/poster/vegeta-halo.png');
         this.load.spritesheet('vegeta-spritesheet', 'vegeta/vegeta-fight.png', 150, 200);
 
         // graphics/monsters
         this.load.path = './assets/graphics/monsters/';
 
-        this.load.image('bubu', 'bubu/poster/bubu.png');
         this.load.image('bubu-card', 'bubu/bubu-card.png');
         this.load.spritesheet('bubu-spritesheet', 'bubu/bubu-fight.png', 150, 200);
 
         this.load.image('cell-card', 'cell/cell-card.png');
-        this.load.image('cell', 'cell/poster/cell.png');
         this.load.spritesheet('cell-spritesheet', 'cell/cell-fight.png', 150, 200);
 
         this.load.image('freeza-card', 'freeza/freeza-card.png');
-        this.load.image('freeza', 'freeza/poster/freeza.png');
         this.load.spritesheet('freeza-spritesheet', 'freeza/freeza-fight.png', 150, 200);
 
-        this.load.image('piccolo-collecting', 'piccolo/piccolo-collecting.png');
         this.load.image('piccolo-card', 'piccolo/piccolo-card.png');
-        this.load.image('piccolo', 'piccolo/poster/piccolo.png');
-        this.load.image('piccolo-halo', 'piccolo/poster/piccolo-halo.png');
         this.load.spritesheet('piccolo-spritesheet', 'piccolo/piccolo-fight.png', 150, 200);
 
         this.load.path = '';
