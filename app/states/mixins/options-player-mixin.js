@@ -1,6 +1,8 @@
 const PLAYER = require('../../constants/player');
 let { addSaiyanLabel } = require('../../helpers/message');
 
+// TODO(piecioshka): refactoring, trzeba złączyć 2 pliki mixin.
+
 module.exports = {
     _setupPlayerOptions() {
         let player = this.game.player;
@@ -22,7 +24,6 @@ module.exports = {
         let hp = this.game.player.hp;
         let imageWidth = this.cache.getImage('bar-hp').width;
         let width = hp * imageWidth / 100;
-
         this.options.player.hp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
     },
 
@@ -30,19 +31,18 @@ module.exports = {
         let exp = this.game.player.exp;
         let imageWidth = this.cache.getImage('bar-exp').width;
         let width = exp * imageWidth / 100;
-
         this.options.player.exp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
     },
 
     _removePlayerHP(value) {
         let player = this.game.player;
-        let playerSprite = player.getSprite();
+        let $playerSprite = player.getSprite();
 
         player.hp -= value;
 
         if (player.hp <= 0) {
             player.hp = 0;
-            playerSprite.events.onDied.dispatch();
+            $playerSprite.events.onDied.dispatch();
         }
 
         this._updatePlayerOptionsHP();

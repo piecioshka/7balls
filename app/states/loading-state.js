@@ -14,30 +14,6 @@ export default class LoadingState extends Phaser.State {
         let progressBar = this.add.sprite(this.world.centerX - (pixelLoadingWidth / 2), 230, 'pixel-loading');
         this.load.setPreloadSprite(progressBar);
 
-        // graphics/characters
-        this.load.path = './assets/graphics/characters/';
-
-        this.load.image('son-goku-collecting', 'son-goku/son-goku-collecting.png');
-        this.load.spritesheet('son-goku-spritesheet', 'son-goku/son-goku-fight.png', 150, 200);
-
-        this.load.image('vegeta-collecting', 'vegeta/vegeta-collecting.png');
-        this.load.spritesheet('vegeta-spritesheet', 'vegeta/vegeta-fight.png', 150, 200);
-
-        // graphics/monsters
-        this.load.path = './assets/graphics/monsters/';
-
-        this.load.image('bubu-card', 'bubu/bubu-card.png');
-        this.load.spritesheet('bubu-spritesheet', 'bubu/bubu-fight.png', 150, 200);
-
-        this.load.image('cell-card', 'cell/cell-card.png');
-        this.load.spritesheet('cell-spritesheet', 'cell/cell-fight.png', 150, 200);
-
-        this.load.image('freeza-card', 'freeza/freeza-card.png');
-        this.load.spritesheet('freeza-spritesheet', 'freeza/freeza-fight.png', 150, 200);
-
-        this.load.image('piccolo-card', 'piccolo/piccolo-card.png');
-        this.load.spritesheet('piccolo-spritesheet', 'piccolo/piccolo-fight.png', 150, 200);
-
         this.load.path = '';
 
         this.load.tilemap('map-collecting-1', './assets/data/maps/collecting-1.json', null, Phaser.Tilemap.TILED_JSON);
@@ -60,6 +36,17 @@ export default class LoadingState extends Phaser.State {
 
         this.load.image('son-goku-card', 'posters/son-goku/son-goku-card.png');
         this.load.image('vegeta-card', 'posters/vegeta/vegeta-card.png');
+        this.load.image('bubu-card', 'posters/bubu/bubu-card.png');
+        this.load.image('cell-card', 'posters/cell/cell-card.png');
+        this.load.image('freeza-card', 'posters/freeza/freeza-card.png');
+        this.load.image('piccolo-card', 'posters/piccolo/piccolo-card.png');
+
+        this.load.spritesheet('bubu-fight', 'fight/bubu/bubu-fight.png', 150, 200);
+        this.load.spritesheet('cell-fight', 'fight/cell/cell-fight.png', 150, 200);
+        this.load.spritesheet('freeza-fight', 'fight/freeza/freeza-fight.png', 150, 200);
+        this.load.spritesheet('piccolo-fight', 'fight/piccolo/piccolo-fight.png', 150, 200);
+        this.load.spritesheet('son-goku-fight', 'fight/son-goku/son-goku-fight.png', 150, 200);
+        this.load.spritesheet('vegeta-fight', 'fight/vegeta/vegeta-fight.png', 150, 200);
 
         this.load.spritesheet('collect-spritesheet', 'sheets/collect-spritesheet.png', 40, 40);
         this.load.spritesheet('ball-spritesheet', 'sheets/ball-spritesheet.png', 40, 40);

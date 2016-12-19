@@ -45,10 +45,11 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _setupSprite(x, y, character, anchor = [0.5, 0.5]) {
-        character.createSprite(this, x, y, `${character.id}-collecting`);
+        character.createSprite(this, x, y, `${character.id}-fight`);
 
-        let sprite = character.getSprite();
-        sprite.anchor.setTo(...anchor);
+        let $sprite = character.getSprite();
+        $sprite.anchor.setTo(...anchor);
+        $sprite.scale.setTo(0.3, 0.3);
 
         this._defineDefaultProperties(character);
     }
@@ -70,12 +71,9 @@ export default class CollectDragonBallsState extends Phaser.State {
 
         let places = this.cache.getJSON(`positions-${random}`);
         places.forEach(([x, y]) => {
-            let ball = this.add.tileSprite(x * 40, y * 40, 40, 40, 'ball-spritesheet');
-
-            ball.animations.add('base', [0, 1, 2, 3], 4, true);
-            ball.play('base');
-
-            balls.add(ball);
+            let $ball = this.add.tileSprite(x * 40, y * 40, 40, 40, 'ball-spritesheet');
+            $ball.animations.add('default', [0, 1, 2, 3], 4, true).play();
+            balls.add($ball);
         });
     }
 
@@ -84,19 +82,19 @@ export default class CollectDragonBallsState extends Phaser.State {
         let ending = parseInt(Math.log2(limit));
         let clock = this.game.time.create();
 
-        let message = addSaiyanLabel(this.game, 10, 0, `${this.game.locale.TIME}: ${limit}`);
-        message.fontSize = 35;
+        let $message = addSaiyanLabel(this.game, 10, 0, `${this.game.locale.TIME}: ${limit}`);
+        $message.fontSize = 35;
 
         clock.repeat(Phaser.Timer.SECOND, limit, () => {
             let remain = limit - parseInt(clock.seconds);
-            message.setText(`${this.game.locale.TIME}: ${remain}`);
+            $message.setText(`${this.game.locale.TIME}: ${remain}`);
 
             if (remain === ending) {
-                message.anchor.setTo(0.5, 0.5);
-                message.x = this.game.width / 2;
-                message.y = this.game.height / 2;
-                message.fill = '#f00';
-                message.fontSize = 100;
+                $message.anchor.setTo(0.5, 0.5);
+                $message.x = this.game.width / 2;
+                $message.y = this.game.height / 2;
+                $message.fill = '#f00';
+                $message.fontSize = 100;
             }
         }, this);
 
@@ -119,11 +117,11 @@ export default class CollectDragonBallsState extends Phaser.State {
         this.physics.arcade.collide(playerSprite, this.game.balls, this._handleCollectedBall.bind(this));
     }
 
-    _handleCollectedBall(player, ball) {
-        this._fireParticles(ball.x + ball.width / 2, ball.y + ball.height / 2);
+    _handleCollectedBall(player, $ball) {
+        this._fireParticles($ball.x + $ball.width / 2, $ball.y + $ball.height / 2);
 
         // this.game.emit('ball:collected', { player, ball });
-        ball.destroy();
+        $ball.destroy();
 
         if (this.game.balls.length === 0) {
             this.game.emit('game:collect-completed');
@@ -131,31 +129,31 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleKeyboard() {
-        let playerSprite = this.game.player.getSprite();
+        let $playerSprite = this.game.player.getSprite();
         let keyboard = this.input.keyboard;
 
-        playerSprite.body.velocity.x = playerSprite.body.velocity.y = 0;
+        $playerSprite.body.velocity.x = $playerSprite.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            playerSprite.body.velocity.x -= COLLECT.PLAYER_SPEED;
-            playerSprite.angle = -10;
+            $playerSprite.body.velocity.x -= COLLECT.PLAYER_SPEED;
+            $playerSprite.angle = -10;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            playerSprite.body.velocity.x += COLLECT.PLAYER_SPEED;
-            playerSprite.angle = 10;
+            $playerSprite.body.velocity.x += COLLECT.PLAYER_SPEED;
+            $playerSprite.angle = 10;
         } else {
-            playerSprite.angle = 0;
+            $playerSprite.angle = 0;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            playerSprite.body.velocity.y -= COLLECT.PLAYER_SPEED;
+            $playerSprite.body.velocity.y -= COLLECT.PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            playerSprite.body.velocity.y += COLLECT.PLAYER_SPEED;
+            $playerSprite.body.velocity.y += COLLECT.PLAYER_SPEED;
         }
     }
 
     render() {
-        let playerSprite = this.game.player.getSprite();
-        // this.game.debug.bodyInfo(playerSprite, 25, 25);
-        this.game.debug.body(playerSprite);
+        let $playerSprite = this.game.player.getSprite();
+        // this.game.debug.bodyInfo($playerSprite, 25, 25);
+        this.game.debug.body($playerSprite);
     }
 }

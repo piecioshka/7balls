@@ -1,6 +1,8 @@
 const PLAYER = require('../../constants/player');
 let { addSaiyanLabel } = require('../../helpers/message');
 
+// TODO(piecioshka): refactoring, trzeba złączyć 2 pliki mixin.
+
 module.exports = {
     _setupEnemyOptions() {
         let enemy = this.game.enemy;
@@ -36,13 +38,13 @@ module.exports = {
 
     _removeEnemyHP(value) {
         let enemy = this.game.enemy;
-        let enemySprite = enemy.getSprite();
+        let $enemySprite = enemy.getSprite();
 
         enemy.hp -= value;
 
         if (enemy.hp <= 0) {
             enemy.hp = 0;
-            enemySprite.events.onDied.dispatch();
+            $enemySprite.events.onDied.dispatch();
         }
 
         this._updateEnemyOptionsHP();

@@ -1,3 +1,10 @@
+v?.?.? / 2016-12-18
+==================
+
+ * Remove sitting options
+ * Remove animation for jumping
+ * Remove using of "debug" package
+
 v1.3.0 / 2016-12-18
 ==================
 

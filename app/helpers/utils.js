@@ -17,7 +17,7 @@ function timesRandomAsync(state, max, delay, cb) {
     let index = 0;
     let times = random(1, max - 1);
 
-    function loop() {
+    (function loop() {
         timeout(state, delay, () => {
             index++;
 
@@ -27,9 +27,7 @@ function timesRandomAsync(state, max, delay, cb) {
 
             cb();
         });
-    }
-
-    loop();
+    }());
 }
 
 /**
@@ -39,7 +37,6 @@ function timesRandomAsync(state, max, delay, cb) {
  */
 function interval(state, delay, cb) {
     let clock = state.time.create();
-
     clock.repeat(delay, Infinity, cb);
     clock.start();
 }

@@ -29,16 +29,12 @@ function setup(state, sprite) {
         sprite.events.onJumping.dispatch();
     }
 
-    function sitting() {
-        sprite.events.onSitting.dispatch();
-    }
-
     let moves = [
         walkingLeft, walkingRight
     ];
 
     let dodge = [
-        jumping, sitting
+        jumping
     ];
 
     let fight = [

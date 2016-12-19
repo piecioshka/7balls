@@ -1,7 +1,3 @@
-let debug = {
-    log: require('debug')('7balls:character:log')
-};
-
 let isString = require('lodash.isstring');
 let { slug } = require('../helpers/utils');
 let assert = require('assert');
