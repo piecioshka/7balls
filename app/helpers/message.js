@@ -84,15 +84,13 @@ function displayGameVersion(game) {
     return $version;
 }
 
-function displaySingleLineMessage(game, text) {
-    let lifespan = Phaser.Timer.SECOND * 2;
+function displaySingleLineMessage(game, text, lifespan = Phaser.Timer.SECOND * 2) {
     let fontSize = 60;
     displayHorizontalRectangle(game, lifespan);
     return displayCentralMessage(game, { text, lifespan, fontSize });
 }
 
-function displayFullscreenMessage(game, text) {
-    let lifespan = Phaser.Timer.SECOND * 2;
+function displayFullscreenMessage(game, text, lifespan = Phaser.Timer.SECOND * 2) {
     let fontSize = 40;
     displayHorizontalRectangle(game, lifespan, game.height);
     return displayCentralMessage(game, { text, lifespan, fontSize });

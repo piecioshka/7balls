@@ -36,13 +36,13 @@ module.exports = {
 
     _removePlayerHP(value) {
         let player = this.game.player;
-        let $playerSprite = player.getSprite();
+        let $player = player.getSprite();
 
         player.hp -= value;
 
         if (player.hp <= 0) {
             player.hp = 0;
-            $playerSprite.events.onDied.dispatch();
+            $player.events.onDied.dispatch();
         }
 
         this._updatePlayerOptionsHP();

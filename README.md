@@ -4,7 +4,7 @@
 
 # KA ME HA ME HA!!!!
 
-![](./screenshots/son-goku-fight.png) 
+![](./screenshots/son-goku-standing-150x200.png)
 
 ## Gdzie można zagrać?
 

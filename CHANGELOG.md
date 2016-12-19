@@ -1,9 +1,11 @@
-v?.?.? / 2016-12-18
+v1.3.1 / 2016-12-19
 ==================
 
  * Remove sitting options
  * Remove animation for jumping
  * Remove using of "debug" package
+ * Draw whole Son Goku spritesheet
+ * Rename all "playerSprite" to "$player" and "enemySprite" to "$enemy"
 
 v1.3.0 / 2016-12-18
 ==================

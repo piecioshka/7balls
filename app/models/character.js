@@ -45,7 +45,7 @@ export default class Character {
 
     setPersonality(typeClass) {
         let type = new typeClass();
-        console.log(this.constructor.name + '#setPersonality', type);
+        // console.log(this.constructor.name + '#setPersonality', type);
         this.title = type.title;
     }
 

@@ -20,17 +20,20 @@ function defineAnimations(character, revertDefaultSize) {
     }
 
     $sprite.animations.add('standing', [0, 1, 2], 4, true);
-    $sprite.animations.add('win', [3, 4], 4, false);
-    $sprite.animations.add('died', [6, 7], 4, false);
+    $sprite.animations.add('win', [3, 4, 5], 4, true);
+    let died = $sprite.animations.add('died', [6, 7, 8], 4, true);
+    died.onStart.add(() => {
+        $sprite.angle = -90;
+    });
 
-    let kicking = $sprite.animations.add('kicking', [9, 10], 16, false);
+    let kicking = $sprite.animations.add('kicking', [9, 10], 8, false);
     kicking.onStart.add(resizeMaximum);
     kicking.onComplete.add(revertDefaultSize);
     kicking.onComplete.add(() => {
         $sprite.play('standing');
     });
 
-    let boxing = $sprite.animations.add('boxing', [12, 13], 16, false);
+    let boxing = $sprite.animations.add('boxing', [12, 13], 8, false);
     boxing.onStart.add(resizeMaximum);
     boxing.onComplete.add(revertDefaultSize);
     boxing.onComplete.add(() => {
@@ -126,7 +129,7 @@ export default class FightState extends Phaser.State {
         // Tutaj tworzymy ciało dla naszej postaci.
         this.physics.arcade.enable($sprite);
 
-        $sprite.body.bounce.setTo(0, 0.1);
+        $sprite.body.bounce.setTo(0.9, 0.3);
         $sprite.body.collideWorldBounds = true;
 
         this._setupMoves(character);
@@ -171,7 +174,7 @@ export default class FightState extends Phaser.State {
     }
 
     _setupKeyboard() {
-        let $playerSprite = this.game.player.getSprite();
+        let $player = this.game.player.getSprite();
 
         let c = this.input.keyboard.addKey(Phaser.Keyboard.C);
         let x = this.input.keyboard.addKey(Phaser.Keyboard.X);
@@ -186,10 +189,10 @@ export default class FightState extends Phaser.State {
             Phaser.Keyboard.SPACEBAR
         ]);
 
-        c.onDown.add(() => $playerSprite.events.onKicking.dispatch());
-        x.onDown.add(() => $playerSprite.events.onBoxing.dispatch());
-        up.onDown.add(() => $playerSprite.events.onJumping.dispatch());
-        space.onDown.add(() => $playerSprite.events.onJumping.dispatch());
+        c.onDown.add(() => $player.events.onKicking.dispatch());
+        x.onDown.add(() => $player.events.onBoxing.dispatch());
+        up.onDown.add(() => $player.events.onJumping.dispatch());
+        space.onDown.add(() => $player.events.onJumping.dispatch());
     }
 
     _setupEnemy() {
@@ -236,46 +239,50 @@ export default class FightState extends Phaser.State {
     }
 
     update() {
-        let enemySprite = this.game.enemy.getSprite();
-        let playerSprite = this.game.player.getSprite();
-        this.physics.arcade.collide(enemySprite, playerSprite);
-        resetCharacterVelocity(enemySprite);
-        resetCharacterVelocity(playerSprite);
+        let $enemy = this.game.enemy.getSprite();
+        let $player = this.game.player.getSprite();
+        this.physics.arcade.collide($enemy, $player);
+        resetCharacterVelocity($enemy);
+        resetCharacterVelocity($player);
         this._handleKeyboard();
     }
 
     _setupFight() {
         let context = this;
-        let $playerSprite = this.game.player.getSprite();
-        let $enemySprite = this.game.enemy.getSprite();
+        let $player = this.game.player.getSprite();
+        let $enemy = this.game.enemy.getSprite();
 
         function isCollision() {
-            return context.physics.arcade.overlap($enemySprite, $playerSprite);
+            return context.physics.arcade.overlap($enemy, $player);
         }
 
         function handlePlayerBlow(points) {
             if (isCollision()) {
                 context._addPlayerEXP(points * 1.75);
                 context._removeEnemyHP(points);
+
+                $enemy.body.velocity.x += FIGHT.HORIZONTAL_SPEED * 4;
             }
         }
 
-        $playerSprite.events.onKicking.add(() => handlePlayerBlow(FIGHT.KICKING_POINTS));
-        $playerSprite.events.onBoxing.add(() => handlePlayerBlow(FIGHT.BOXING_POINTS));
-        $playerSprite.events.onDied.add(() => this._finishFight('died', 'win'));
+        $player.events.onKicking.add(() => handlePlayerBlow(FIGHT.KICKING_POINTS));
+        $player.events.onBoxing.add(() => handlePlayerBlow(FIGHT.BOXING_POINTS));
+        $player.events.onDied.add(() => this._finishFight('died', 'win'));
 
         function handleEnemyBlow(points) {
             if (isCollision()) {
                 context._addEnemyEXP(points);
                 context._removePlayerHP(points);
+
+                $player.body.velocity.x -= FIGHT.HORIZONTAL_SPEED * 4;
             }
         }
 
-        $enemySprite.events.onKicking.add(() => handleEnemyBlow(FIGHT.KICKING_POINTS));
-        $enemySprite.events.onBoxing.add(() => handleEnemyBlow(FIGHT.BOXING_POINTS));
-        $enemySprite.events.onDied.add(() => this._finishFight('win', 'died'));
+        $enemy.events.onKicking.add(() => handleEnemyBlow(FIGHT.KICKING_POINTS));
+        $enemy.events.onBoxing.add(() => handleEnemyBlow(FIGHT.BOXING_POINTS));
+        $enemy.events.onDied.add(() => this._finishFight('win', 'died'));
 
-        ArtificialIntelligence.setup(this, $enemySprite);
+        ArtificialIntelligence.setup(this, $enemy);
     }
 
     _getLocaleStatus(playerState) {
@@ -294,29 +301,32 @@ export default class FightState extends Phaser.State {
 
     _finishFight(playerState, enemyState) {
         let player = this.game.player;
-        let $playerSprite = player.getSprite();
+        let $player = player.getSprite();
         let enemy = this.game.enemy;
-        let $enemySprite = enemy.getSprite();
+        let $enemy = enemy.getSprite();
 
-        displaySingleLineMessage(this.game, `${player.title} ${this._getLocaleStatus(playerState)}`);
+        let time = Phaser.Timer.SECOND * 4;
+        let label = `${player.title} ${this._getLocaleStatus(playerState)}`;
+        displaySingleLineMessage(this.game, label);
 
         // Wyłączamy wsparcie klawiatury w grze.
         this.input.keyboard.enabled = false;
 
         // Sprowadzamy postacie na ziemie.
-        $playerSprite.body.velocity.setTo(0, 0);
-        $enemySprite.body.velocity.setTo(0, 0);
+        $player.body.velocity.setTo(0, 0);
+        $enemy.body.velocity.setTo(0, 0);
 
         // Włączamy animacje: zwycięstwa i porażki.
-        $playerSprite.play(playerState);
-        $enemySprite.play(enemyState);
+        $player.play(playerState);
+        $enemy.play(enemyState);
 
         // Uśmiercam obu, aby żadne animacje nie były więcej wykonywane.
-        // Nie używamy .kill() bo wtedy nie wykona się ost. animacja (zwycięstwa i porażki).
-        $playerSprite.alive = false;
-        $enemySprite.alive = false;
+        // Nie używamy .kill() bo wtedy nie wykona się ost. animacja
+        // (zwycięstwa albo porażki).
+        $player.alive = false;
+        $enemy.alive = false;
 
-        utils.timeout(this, Phaser.Timer.SECOND * 2, () => {
+        utils.timeout(this, time, () => {
             // Przywracamy wsparcie klawiatury w grze.
             this.input.keyboard.enabled = true;
 
@@ -331,23 +341,23 @@ export default class FightState extends Phaser.State {
     }
 
     _handleKeyboard() {
-        let $playerSprite = this.game.player.getSprite();
+        let $player = this.game.player.getSprite();
         let keyboard = this.input.keyboard;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            $playerSprite.events.onLeft.dispatch();
+            $player.events.onLeft.dispatch();
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            $playerSprite.events.onRight.dispatch();
+            $player.events.onRight.dispatch();
         }
     }
 
     render() {
-        let $playerSprite = this.game.player.getSprite();
-        // this.game.debug.bodyInfo($playerSprite, 25, 25);
-        this.game.debug.body($playerSprite);
+        let $player = this.game.player.getSprite();
+        // this.game.debug.bodyInfo($player, 25, 25);
+        // this.game.debug.body($player);
 
-        let $enemySprite = this.game.enemy.getSprite();
-        // this.game.debug.bodyInfo($enemySprite, 25, 225);
-        this.game.debug.body($enemySprite);
+        let $enemy = this.game.enemy.getSprite();
+        // this.game.debug.bodyInfo($enemy, 25, 225);
+        this.game.debug.body($enemy);
     }
 }

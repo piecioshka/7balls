@@ -1,7 +1,7 @@
 {
     "private": true,
     "name": "7balls",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "homepage": "http://www.7balls.game",
     "author": {
         "name": "Piotr Kowalski",
@@ -13,7 +13,7 @@
         "clear": "rm -rf node_modules/ npm-debug.log public/dist/ typings/",
         "watch": "webpack --progress -w",
         "prebuild": "node ./tasks/copy-phaser.js",
-        "build": "webpack --profile",
+        "build": "webpack --profile -p",
         "count": "find app -name '*.js' | xargs wc -l | sort -r",
         "postinstall": "typings install"
     },

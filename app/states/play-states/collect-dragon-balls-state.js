@@ -113,10 +113,10 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleCollision() {
-        let playerSprite = this.game.player.getSprite();
+        let $player = this.game.player.getSprite();
 
-        this.physics.arcade.collide(playerSprite, this.layer);
-        this.physics.arcade.collide(playerSprite, this.game.balls, this._handleCollectedBall.bind(this));
+        this.physics.arcade.collide($player, this.layer);
+        this.physics.arcade.collide($player, this.game.balls, this._handleCollectedBall.bind(this));
     }
 
     _handleCollectedBall(player, $ball) {
@@ -131,32 +131,28 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleKeyboard() {
-        let $playerSprite = this.game.player.getSprite();
+        let $player = this.game.player.getSprite();
         let keyboard = this.input.keyboard;
 
         // Resetujemy, aby velocity (prędkość) ciągle nie rosła.
-        $playerSprite.body.velocity.x = $playerSprite.body.velocity.y = 0;
+        $player.body.velocity.x = $player.body.velocity.y = 0;
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
-            $playerSprite.body.velocity.x -= COLLECT.PLAYER_SPEED;
-            $playerSprite.angle = -10;
+            $player.body.velocity.x -= COLLECT.PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
-            $playerSprite.body.velocity.x += COLLECT.PLAYER_SPEED;
-            $playerSprite.angle = 10;
-        } else {
-            $playerSprite.angle = 0;
+            $player.body.velocity.x += COLLECT.PLAYER_SPEED;
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
-            $playerSprite.body.velocity.y -= COLLECT.PLAYER_SPEED;
+            $player.body.velocity.y -= COLLECT.PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
-            $playerSprite.body.velocity.y += COLLECT.PLAYER_SPEED;
+            $player.body.velocity.y += COLLECT.PLAYER_SPEED;
         }
     }
 
     render() {
-        let $playerSprite = this.game.player.getSprite();
-        // this.game.debug.bodyInfo($playerSprite, 25, 25);
-        this.game.debug.body($playerSprite);
+        let $player = this.game.player.getSprite();
+        // this.game.debug.bodyInfo($player, 25, 25);
+        // this.game.debug.body($player);
     }
 }

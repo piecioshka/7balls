@@ -38,13 +38,13 @@ module.exports = {
 
     _removeEnemyHP(value) {
         let enemy = this.game.enemy;
-        let $enemySprite = enemy.getSprite();
+        let $enemy = enemy.getSprite();
 
         enemy.hp -= value;
 
         if (enemy.hp <= 0) {
             enemy.hp = 0;
-            $enemySprite.events.onDied.dispatch();
+            $enemy.events.onDied.dispatch();
         }
 
         this._updateEnemyOptionsHP();
