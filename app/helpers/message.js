@@ -2,6 +2,7 @@ const BLACK_COLOR = 'rgb(0,0,0)';
 const WHITE_COLOR = 'rgb(255,255,255)';
 
 let pkg = require('../../package.json');
+let utils = require('./utils');
 
 function addRectangle(game, x, y, width, height) {
     let $rect = game.add.graphics(x, y);
@@ -96,22 +97,36 @@ function displayFullscreenMessage(game, text, lifespan = Phaser.Timer.SECOND * 2
     return displayCentralMessage(game, { text, lifespan, fontSize });
 }
 
+function toggleColor($text, currentColor) {
+    let color = currentColor;
+
+    return function () {
+        if (color === WHITE_COLOR) {
+            $text.fill = color = BLACK_COLOR;
+            $text.setShadow(0, 0, WHITE_COLOR, 3);
+        } else if (color === BLACK_COLOR) {
+            $text.fill = color = WHITE_COLOR;
+            $text.setShadow(0, 0, BLACK_COLOR, 3);
+        } else {
+            console.warn('ignore toggling');
+        }
+    }
+}
+
 function addRepeatLink(game, x, y = 333, anchor = [0.5, 0]) {
-    let text = '--- REPEAT ---';
+    let text = 'press ENTER to play once again';
     let $repeat = addSaiyanLabel(game, x || game.world.centerX, y, text, anchor);
 
     $repeat.anchor.setTo(0.5, 0);
+    $repeat.fill = WHITE_COLOR;
     $repeat.inputEnabled = true;
     $repeat.input.useHandCursor = true;
 
-    $repeat.events.onInputOver.add(() => {
-        $repeat.fill = BLACK_COLOR;
-        $repeat.setShadow(0, 0, WHITE_COLOR, 3);
-    }, this);
-    $repeat.events.onInputOut.add(() => {
-        $repeat.fill = WHITE_COLOR;
-        $repeat.setShadow(0, 0, BLACK_COLOR, 3);
-    }, this);
+    let colorToggler = toggleColor($repeat, WHITE_COLOR);
+    let currentState = game.state.getCurrentState();
+    let timeInterval = Phaser.Timer.SECOND / 2;
+
+    utils.interval(currentState, timeInterval, colorToggler);
 
     return $repeat;
 }
