@@ -20,24 +20,26 @@ function defineAnimations(character, revertDefaultSize) {
     }
 
     $sprite.animations.add('standing', [0, 1, 2], 4, true);
-    $sprite.animations.add('win', [3, 4, 5], 4, true);
-    let died = $sprite.animations.add('died', [6, 7, 8], 4, true);
-    died.onStart.add(() => {
-        $sprite.angle = -90;
+
+    let boxing = $sprite.animations.add('boxing', [3, 4], 8, false);
+    boxing.onStart.add(resizeMaximum);
+    boxing.onComplete.add(revertDefaultSize);
+    boxing.onComplete.add(() => {
+        $sprite.play('standing');
     });
 
-    let kicking = $sprite.animations.add('kicking', [9, 10], 8, false);
+    let kicking = $sprite.animations.add('kicking', [6, 7], 8, false);
     kicking.onStart.add(resizeMaximum);
     kicking.onComplete.add(revertDefaultSize);
     kicking.onComplete.add(() => {
         $sprite.play('standing');
     });
 
-    let boxing = $sprite.animations.add('boxing', [12, 13], 8, false);
-    boxing.onStart.add(resizeMaximum);
-    boxing.onComplete.add(revertDefaultSize);
-    boxing.onComplete.add(() => {
-        $sprite.play('standing');
+    $sprite.animations.add('win', [9, 10, 11], 4, true);
+
+    let died = $sprite.animations.add('died', [12, 13, 14], 4, true);
+    died.onStart.add(() => {
+        $sprite.angle = -90;
     });
 }
 
