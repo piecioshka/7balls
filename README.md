@@ -34,12 +34,10 @@ skorzystać z już istniejącego? (`this.time.events.add`)
 * [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
 * [ ] narysować obrazek 526x275, który będzie plakatem gry (Open Graph).
 
-## Autor
-
-Kontakt do autora aplikacji:
+## Kontakt
 
  * Twitter: [@piecioshka](http://twitter.com/piecioshka)
- * Wykop: [@piecioshka](http://wykop.pl/profile/piecioshka)
+ * YouTube: [@piecioshka](http://youtube.com/user/piecioshka)
  * Blog: [piecioshka.pl/blog](http://piecioshka.pl/blog/)
 
 ---
