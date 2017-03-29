@@ -131,7 +131,6 @@ Chciałbym w 10 dni zrobić sporo materiału do kilku rzeczy:
 * develop: dodać ekrany zgodnie z fabułą
 * nagrać: jak wygląda fabuła gry (narysować na kartce)
 * nagrać: podziękować za 10 dni codziennej pracy przy projekcie
-* nagrać: gra jest dostępna pod domeną http://www.7balls.game
 * DODATKOWO: nagrać: podsumowanie 10 dni (23)
 * DODATKOWO: nagrać: fabuła gry (24)
 * DODATKOWO: nagrać: zakończenie projektu (25)

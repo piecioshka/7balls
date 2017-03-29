@@ -6,19 +6,25 @@
     "author": {
         "name": "Piotr Kowalski",
         "email": "piecioshka@gmail.com",
-        "url": "http://piecioshka.pl/"
+        "url": "https://piecioshka.pl/"
     },
     "scripts": {
         "audit": "source-map-explorer public/dist/bundle.js",
         "clear": "rm -rf node_modules/ npm-debug.log public/dist/ typings/",
         "watch": "webpack --progress -w",
-        "prebuild": "node ./tasks/copy-phaser.js",
         "build": "webpack --profile -p",
+        "postbuild": "node ./tasks/copy-phaser.js",
         "count": "find app -name '*.js' | xargs wc -l | sort -r",
         "postinstall": "typings install"
     },
-    "devDependencies": {
+    "dependencies": {
         "assert": "^1.4.1",
+        "lodash.isobject": "^3.0.2",
+        "lodash.isstring": "^4.0.1",
+        "phaser": "^2.6.1",
+        "super-event-emitter": "^4.1.4"
+    },
+    "devDependencies": {
         "babel-core": "^6.20.0",
         "babel-loader": "^6.2.10",
         "babel-plugin-transform-object-assign": "^6.8.0",
@@ -28,12 +34,8 @@
         "babel-preset-stage-0": "^6.16.0",
         "imports-loader": "^0.7.0",
         "json-loader": "^0.5.4",
-        "lodash.isobject": "^3.0.2",
-        "lodash.isstring": "^4.0.1",
-        "phaser": "^2.6.1",
-        "super-event-emitter": "^4.1.4",
         "typings": "^2.0.0",
-        "webpack": "^2.1.0-beta"
+        "webpack": "^2.3.1"
     },
     "repository": {
         "type": "git",

@@ -1,16 +1,31 @@
-# [7balls](http://www.7balls.game)
+# 7balls
 
 > :video_game: Gry webowa oparta na anime "Dragon Ball"
 
-# KA ME HA ME HA!!!!
+---
 
 ![](./screenshots/son-goku-standing-150x200.png)
 
 ## Gdzie można zagrać?
 
-Wspierane są wszystkie najnowsze wersje przeglądarek oraz systemy operacyjne:
-MS Windows, Linux, Mac OS X. Aplikacja dostępna jest pod adresem: 
-http://www.7balls.game
+Aplikacja dostępna jest pod adresem: http://piecioshka.pl/game/7balls/public/
+
+## Wsparcie
+
+Wspierane są wszystkie najnowsze wersje przeglądarek 
+
+* Google Chrome
+* Mozilla Firefox
+* Safari
+* Opera
+* IE
+* Edge
+
+oraz systemy operacyjne:
+
+* MS Windows
+* Linux
+* Mac OS X 
 
 ## Geneza projektu
 
@@ -34,12 +49,6 @@ skorzystać z już istniejącego? (`this.time.events.add`)
 * [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
 * [ ] narysować obrazek 526x275, który będzie plakatem gry (Open Graph).
 
-## Kontakt
+## Licencja
 
- * Twitter: [@piecioshka](http://twitter.com/piecioshka)
- * YouTube: [@piecioshka](http://youtube.com/user/piecioshka)
- * Blog: [piecioshka.pl/blog](http://piecioshka.pl/blog/)
-
----
-
-@ 2015
+Copyright @ 2015

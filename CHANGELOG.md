@@ -55,7 +55,7 @@ v1.2.0 / 2016-07-18
   * Add game details
   * Remove ESLint
   * Refactoring README
-  * New title: 7balls.game
+  * New title: 7balls
   * Uncomment disabling Google Analytics
   * Setup changelog
 

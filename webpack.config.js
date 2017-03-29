@@ -1,17 +1,19 @@
 'use strict';
 
+let path = require('path');
+
 module.exports = {
     entry: {
-        bundle: './app/main'
+        bundle: path.resolve('./app/main')
     },
 
     output: {
         filename: '[name].js',
-        path: './public/dist',
+        path: path.resolve('./public/dist'),
         pathinfo: true
     },
 
-    // devtool: '#source-map',
+    devtool: '#source-map',
 
     module: {
         loaders: [
