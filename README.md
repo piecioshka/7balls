@@ -2,8 +2,6 @@
 
 > :video_game: Gry webowa oparta na anime "Dragon Ball"
 
----
-
 ![](./screenshots/son-goku-standing-150x200.png)
 
 ## Gdzie można zagrać?
