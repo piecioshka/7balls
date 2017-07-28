@@ -6,7 +6,7 @@
 
 ## Gdzie można zagrać?
 
-Aplikacja dostępna jest pod adresem: http://piecioshka.pl/game/7balls/public/
+Aplikacja dostępna jest pod adresem: http://piecioshka.pl/games/7balls/public/
 
 ## Wsparcie
 
