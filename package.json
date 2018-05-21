@@ -12,6 +12,7 @@
         "audit": "source-map-explorer public/dist/bundle.js",
         "clear": "rm -rf public/dist/",
         "clear:all": "rm -rf node_modules/ npm-debug.log typings/ && npm run clear",
+        "deploy": "gh-pages -d dist/",
         "watch": "webpack -w",
         "build": "webpack --profile -p",
         "postbuild": "node ./tasks/copy-phaser.js",
@@ -20,6 +21,7 @@
     },
     "dependencies": {
         "assert": "^1.4.1",
+        "gh-pages": "^1.1.0",
         "lodash.isobject": "^3.0.2",
         "lodash.isstring": "^4.0.1",
         "phaser": "^2.6.1",
