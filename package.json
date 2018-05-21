@@ -2,7 +2,6 @@
     "private": true,
     "name": "7balls",
     "version": "1.3.1",
-    "homepage": "http://piecioshka.pl/game/7balls/public/",
     "author": {
         "name": "Piotr Kowalski",
         "email": "piecioshka@gmail.com",
@@ -11,13 +10,12 @@
     "scripts": {
         "audit": "source-map-explorer public/dist/bundle.js",
         "clear": "rm -rf public/dist/",
-        "clear:all": "rm -rf node_modules/ npm-debug.log typings/ && npm run clear",
-        "deploy": "gh-pages -d dist/",
+        "clear:all": "rm -rf node_modules/ npm-debug.log && npm run clear",
+        "deploy": "gh-pages -d public/",
         "watch": "webpack -w",
         "build": "webpack --profile -p",
         "postbuild": "node ./tasks/copy-phaser.js",
-        "count": "find app -name '*.js' | xargs wc -l | sort -r",
-        "postinstall": "typings install"
+        "count": "find app -name '*.js' | xargs wc -l | sort -r"
     },
     "dependencies": {
         "assert": "^1.4.1",
