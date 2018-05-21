@@ -1,0 +1,9 @@
+{
+    "CONTROLS_INFO": "Sterowanie:\n - Nawigacja: LEFT, RIGHT, UP, DOWN\n - Walka: X, C",
+    "COLLECT_DRAGON_BALLS": "Zbierz smocze kule,\naby pojawił się Shenron\ni przywrócił Ci życie!",
+    "TIME": "Czas",
+    "FIGHT_STATE_LEVEL_SHORT": "poziom",
+    "FIGHT_STATE_WELCOME": "Walka!",
+    "FIGHT_STATE_PLAYER_DIED": "przegrał!",
+    "FIGHT_STATE_PLAYER_WIN": "wygrał!"
+}

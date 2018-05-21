@@ -1,0 +1,9 @@
+{
+    "CONTROLS_INFO": "Game controls:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C",
+    "COLLECT_DRAGON_BALLS": "Collect dragon balls,\nnext Shenron will be appear\nand give you a life!",
+    "TIME": "Time",
+    "FIGHT_STATE_LEVEL_SHORT": "lvl",
+    "FIGHT_STATE_WELCOME": "Fight!",
+    "FIGHT_STATE_PLAYER_DIED": "defeat!",
+    "FIGHT_STATE_PLAYER_WIN": "win!"
+}
