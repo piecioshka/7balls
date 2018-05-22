@@ -47,6 +47,13 @@ skorzystać z już istniejącego? (`this.time.events.add`)
 * [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
 * [ ] narysować obrazek 526x275, który będzie plakatem gry (Open Graph).
 
+## Interesujące źródła
+
+- https://www.wykop.pl/link/2734787/goku-vs-street-fighter-2/
+- https://i.pinimg.com/236x/bc/3b/a9/bc3ba9721a4698e58055a748efb2fb21.jpg
+- https://i.pinimg.com/236x/2f/d2/b7/2fd2b78b17f8eeebf7ad7368f2e8c8d3.jpg
+- https://i.pinimg.com/236x/55/fc/a8/55fca80f935845e7a4cdcb74d436ec85.jpg
+
 ## Licencja
 
 Copyright @ 2015
