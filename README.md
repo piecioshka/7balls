@@ -1,29 +1,12 @@
 # 7balls
 
-> :video_game: Gra webowa oparta na anime "Dragon Ball"
+:video_game: Gra webowa oparta na anime "Dragon Ball"
 
 ![](./screenshots/son-goku-standing-150x200.png)
 
 ## Gdzie można zagrać?
 
-Aplikacja dostępna jest pod adresem: http://piecioshka.github.io/7balls/
-
-## Wsparcie
-
-Wspierane są wszystkie najnowsze wersje przeglądarek 
-
-* Google Chrome
-* Mozilla Firefox
-* Safari
-* Opera
-* IE
-* Edge
-
-oraz systemy operacyjne:
-
-* MS Windows
-* Linux
-* Mac OS X 
+Gra dostępna jest tutaj: https://piecioshka.github.io/7balls/
 
 ## Geneza projektu
 
@@ -49,10 +32,21 @@ skorzystać z już istniejącego? (`this.time.events.add`)
 
 ## Interesujące źródła
 
-- https://www.wykop.pl/link/2734787/goku-vs-street-fighter-2/
-- https://i.pinimg.com/236x/bc/3b/a9/bc3ba9721a4698e58055a748efb2fb21.jpg
-- https://i.pinimg.com/236x/2f/d2/b7/2fd2b78b17f8eeebf7ad7368f2e8c8d3.jpg
-- https://i.pinimg.com/236x/55/fc/a8/55fca80f935845e7a4cdcb74d436ec85.jpg
+* https://www.wykop.pl/link/2734787/goku-vs-street-fighter-2/
+* https://i.pinimg.com/236x/bc/3b/a9/bc3ba9721a4698e58055a748efb2fb21.jpg
+* https://i.pinimg.com/236x/2f/d2/b7/2fd2b78b17f8eeebf7ad7368f2e8c8d3.jpg
+* https://i.pinimg.com/236x/55/fc/a8/55fca80f935845e7a4cdcb74d436ec85.jpg
+
+## Wsparcie
+
+Wspierane są wszystkie najnowsze wersje przeglądarek 
+
+* Google Chrome
+* Mozilla Firefox
+* Safari
+* Opera
+* IE
+* Edge
 
 ## Licencja
 

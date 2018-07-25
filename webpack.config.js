@@ -4,12 +4,12 @@ let path = require('path');
 
 module.exports = {
     entry: {
-        bundle: path.resolve('./app/main')
+        bundle: path.resolve('./src/app/main')
     },
 
     output: {
         filename: '[name].js',
-        path: path.resolve('./public/dist'),
+        path: path.resolve('./src/public/dist'),
         pathinfo: true
     },
 
