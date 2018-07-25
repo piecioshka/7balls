@@ -1,6 +1,6 @@
 /**
  * @typedef {Object} Locale
- * @description JSON files in {@link `/app/locale/`} directory.
+ * @description JSON files in {@link `/src/app/locale/`} directory.
  *
  * @property {string} CONTROLS_INFO
  * @property {string} COLLECT_DRAGON_BALLS
