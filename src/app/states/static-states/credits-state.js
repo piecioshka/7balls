@@ -1,6 +1,6 @@
-let { addSaiyanLabel, addLabel, addRepeatLink } = require('../../helpers/message');
+const { addSaiyanLabel, addLabel, addRepeatLink } = require('../../helpers/message');
 
-let pkg = require('../../../package.json');
+const pkg = require('../../../../package.json');
 
 export default class CreditsState extends Phaser.State {
     create() {
@@ -11,19 +11,20 @@ export default class CreditsState extends Phaser.State {
         addLabel(this.game, this.game.world.centerX, 110, 'Developed by', [0.5, 0]).fontSize = 20;
         addLabel(this.game, this.game.world.centerX, 140, 'Piotr Kowalski', [0.5, 0]).fontSize = 30;
         addLabel(this.game, this.game.world.centerX, 180, '@piecioshka', [0.5, 0]).fontSize = 30;
-        let $version = addLabel(this.game, this.game.world.centerX, 260, `v${pkg.version}`, [0.5, 0]);
+
+        const $version = addLabel(this.game, this.game.world.centerX, 260, `v${pkg.version}`, [0.5, 0]);
         $version.setShadow(0, 0, null, 0);
         $version.fill = 'rgba(0,0,0,1)';
         $version.fontSize = 20;
 
-        let $repeat = addRepeatLink(this.game);
+        const $repeat = addRepeatLink(this.game);
         $repeat.events.onInputDown.add(this._tryAgain, this);
 
         this._setupKeyboard();
     }
 
     _setupKeyboard() {
-        let enter = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
+        const enter = this.input.keyboard.addKey(Phaser.Keyboard.ENTER);
 
         // Wstrzymujemy propagację zdarzeń w oknie przeglądarki.
         this.input.keyboard.addKeyCapture([

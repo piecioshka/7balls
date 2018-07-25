@@ -2,28 +2,30 @@
 
 let path = require('path');
 
+function resolve(dir) {
+    return path.resolve(__dirname, dir);
+}
+
 module.exports = {
     entry: {
-        bundle: path.resolve('./src/app/main')
+        bundle: resolve('src/app/main')
     },
 
     output: {
         filename: '[name].js',
-        path: path.resolve('./src/public/dist'),
-        pathinfo: true
+        path: resolve('src/public/dist')
     },
 
     devtool: '#source-map',
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loader: 'babel-loader'
-            },
-            {
-                test: /\.json$/,
-                loader: 'json-loader'
+                exclude: /(node_modules|bower_components)/,
+                use: {
+                    loader: 'babel-loader'
+                }
             }
         ]
     }

@@ -1,7 +1,7 @@
 const BLACK_COLOR = 'rgb(0,0,0)';
 const WHITE_COLOR = 'rgb(255,255,255)';
 
-let pkg = require('../../package.json');
+let pkg = require('../../../package.json');
 let utils = require('./utils');
 
 function addRectangle(game, x, y, width, height) {
