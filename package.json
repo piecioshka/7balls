@@ -8,25 +8,25 @@
         "url": "https://piecioshka.pl/"
     },
     "scripts": {
-        "audit": "source-map-explorer public/dist/bundle.js",
-        "clear": "rm -rf public/dist/",
+        "audit": "source-map-explorer src/public/dist/bundle.js",
+        "clear": "rm -rf src/public/dist/",
         "clear:all": "rm -rf node_modules/ npm-debug.log && npm run clear",
-        "deploy": "gh-pages -d public/",
+        "deploy": "gh-pages -d src/public/",
         "watch": "webpack -w",
         "build": "webpack --profile -p",
-        "postbuild": "node ./tasks/copy-phaser.js",
+        "postbuild": "node ./src/tasks/copy-phaser.js",
         "count": "find app -name '*.js' | xargs wc -l | sort -r"
     },
     "dependencies": {
         "assert": "^1.4.1",
-        "gh-pages": "^1.1.0",
+        "gh-pages": "^1.2.0",
         "lodash.isobject": "^3.0.2",
         "lodash.isstring": "^4.0.1",
         "phaser": "^2.6.1",
         "super-event-emitter": "^4.1.4"
     },
     "devDependencies": {
-        "babel-core": "^6.20.0",
+        "babel-core": "^6.26.3",
         "babel-loader": "^6.2.10",
         "babel-plugin-transform-object-assign": "^6.8.0",
         "babel-polyfill": "^6.20.0",
@@ -36,7 +36,7 @@
         "imports-loader": "^0.7.0",
         "json-loader": "^0.5.4",
         "typings": "^2.0.0",
-        "webpack": "^2.3.1"
+        "webpack": "^4.16.2"
     },
     "repository": {
         "type": "git",
