@@ -6,11 +6,11 @@
 
 ## Gdzie można zagrać?
 
-Gra dostępna jest tutaj: https://piecioshka.github.io/7balls/
+Gra dostępna jest tutaj: <https://piecioshka.github.io/7balls/>
 
 ## Geneza projektu
 
-Gra była realizowana na potrzeby stworzenia 
+Gra była realizowana na potrzeby stworzenia
 [prezentacji](https://www.youtube.com/watch?v=klDeljOKDjU) na WarsawJS.
 
 Podczas tworzenia projektu powstało 25 filmów na temat tego projektu.
@@ -32,14 +32,14 @@ skorzystać z już istniejącego? (`this.time.events.add`)
 
 ## Interesujące źródła
 
-* https://www.wykop.pl/link/2734787/goku-vs-street-fighter-2/
-* https://i.pinimg.com/236x/bc/3b/a9/bc3ba9721a4698e58055a748efb2fb21.jpg
-* https://i.pinimg.com/236x/2f/d2/b7/2fd2b78b17f8eeebf7ad7368f2e8c8d3.jpg
-* https://i.pinimg.com/236x/55/fc/a8/55fca80f935845e7a4cdcb74d436ec85.jpg
+* <https://www.wykop.pl/link/2734787/goku-vs-street-fighter-2/>
+* <https://i.pinimg.com/236x/bc/3b/a9/bc3ba9721a4698e58055a748efb2fb21.jpg>
+* <https://i.pinimg.com/236x/2f/d2/b7/2fd2b78b17f8eeebf7ad7368f2e8c8d3.jpg>
+* <https://i.pinimg.com/236x/55/fc/a8/55fca80f935845e7a4cdcb74d436ec85.jpg>
 
 ## Wsparcie
 
-Wspierane są wszystkie najnowsze wersje przeglądarek 
+Wspierane są wszystkie najnowsze wersje przeglądarek
 
 * Google Chrome
 * Mozilla Firefox
@@ -47,6 +47,10 @@ Wspierane są wszystkie najnowsze wersje przeglądarek
 * Opera
 * IE
 * Edge
+
+## Boilerplate
+
+Projekt zbudowany w oparciu o [boilerplate-babel-webpack](https://github.com/piecioshka/boilerplate-babel-webpack).
 
 ## Licencja
 
