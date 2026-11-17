@@ -28,7 +28,6 @@ zawiera kompletną listę odcinków w chronologicznej postaci.
 skorzystać z już istniejącego? (`this.time.events.add`)
 * [ ] po porażce przegrany powinien leżeć na ziemi
 * [ ] narysować Son Goku, który robi "Kamehameha" i użyć jako loader podczas ładowania gry
-* [ ] narysować obrazek 526x275, który będzie plakatem gry (Open Graph).
 
 ## Interesujące źródła
 
