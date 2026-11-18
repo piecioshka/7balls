@@ -9,12 +9,15 @@
         "url": "https://piecioshka.pl/"
     },
     "scripts": {
-        "clear": "rm -rf src/public/dist/",
+        "clear": "rm -rf dist/",
         "clear:all": "rm -rf node_modules/ npm-debug.log && npm run clear",
-        "deploy": "cross-env NODE_DEBUG=gh-pages gh-pages -d src/public/",
-        "watch": "webpack -w",
-        "build": "webpack --profile -p",
-        "postbuild": "node ./src/tasks/copy-phaser.js",
+        "deploy": "cross-env NODE_DEBUG=gh-pages gh-pages -d dist/",
+        "dev": "node ./scripts/dev.js",
+        "prewatch": "npm run clear && node ./scripts/copy-static.js",
+        "watch": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack -w",
+        "prebuild": "npm run clear",
+        "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --profile -p",
+        "postbuild": "node ./scripts/copy-static.js",
         "count": "find src -name '*.js' -not -path './node_modules/*' | xargs wc -l | sort -r"
     },
     "dependencies": {
