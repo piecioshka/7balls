@@ -1,16 +1,100 @@
+/* Texts in the game. SIL Open Font License, see PressStart2P-OFL.txt. */
 @font-face {
-    font-family: 'Saiyan-Sans';
-    src: url(../fonts/Saiyan-Sans.ttf);
+    font-family: 'Press Start 2P';
+    src: url(../fonts/PressStart2P-Regular.ttf);
 }
 
 body {
     margin: 0;
-    /* Workaround to use custom font in Phaser.js */
-    font-family: 'Saiyan-Sans', serif;
+    /* Phaser draws texts on a canvas, so the font must already be known. */
+    font-family: 'Press Start 2P', monospace;
 }
 
-#game-area {
+.game-area {
+    position: relative;
     width: 800px;
     height: 400px;
     background: #000;
+}
+
+.game-area:fullscreen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.corner-button {
+    position: absolute;
+    bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.55);
+    color: #fff;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.corner-button:hover,
+.corner-button:focus-visible {
+    opacity: 1;
+}
+
+.corner-icon {
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+.fullscreen-toggle {
+    right: 8px;
+}
+
+.music-toggle {
+    right: 48px;
+}
+
+/* One icon for three volume modes: 0 is off, 1 is quiet, 2 is loud. */
+.music-cross,
+.music-toggle[data-volume='0'] .music-wave-quiet,
+.music-toggle[data-volume='0'] .music-wave-loud,
+.music-toggle[data-volume='1'] .music-wave-loud {
+    display: none;
+}
+
+.music-toggle[data-volume='0'] .music-cross {
+    display: inline;
+}
+
+.fullscreen-icon-exit,
+.fullscreen-toggle.is-fullscreen .fullscreen-icon-enter {
+    display: none;
+}
+
+.fullscreen-toggle.is-fullscreen .fullscreen-icon-exit {
+    display: block;
+}
+
+.github-corner {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.github-corner-icon {
+    display: block;
+    fill: #151513;
+}
+
+.github-corner-octo {
+    fill: #fff;
 }

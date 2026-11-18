@@ -1,6 +1,12 @@
 const BLACK_COLOR = 'rgb(0,0,0)';
 const WHITE_COLOR = 'rgb(255,255,255)';
 
+// Every text of the game uses one pixel font in one size: 16 pixels, so
+// a pixel of the font is 2x2 screen pixels, like in all images.
+const TEXT_FONT = 'Press Start 2P';
+const TEXT_SIZE = 16;
+const TITLE_COLOR = '#ffe600';
+
 let pkg = require('../../../package.json');
 let utils = require('./utils');
 
@@ -29,19 +35,8 @@ function displayHorizontalRectangle(game, lifespan, height = 150) {
     return $background;
 }
 
-function addLabel(game, x, y, text, anchor = [0, 0]) {
-    let $label = game.add.text(x, y, text);
-
-    $label.fill = '#fff';
-    $label.font = 'Tahoma';
-    $label.setShadow(0, 0, BLACK_COLOR, 3);
-    $label.anchor.setTo(...anchor);
-
-    return $label
-}
-
 /**
- * Tworzy text z użyciem fonta: Saiyan Sans.
+ * Creates a regular text: the pixel font, never bold.
  *
  * @param {Phaser.Game} game
  * @param {number} x
@@ -50,16 +45,43 @@ function addLabel(game, x, y, text, anchor = [0, 0]) {
  * @param {Array} [anchor]
  * @returns {Phaser.Text}
  */
-function addSaiyanLabel(game, x, y, text, anchor) {
-    let $label = addLabel(game, x, y, text, anchor);
-    $label.font = 'Saiyan-Sans';
-    return $label;
+function addLabel(game, x, y, text, anchor = [0, 0]) {
+    let $label = game.add.text(x, y, text);
+
+    $label.fill = '#fff';
+    $label.font = TEXT_FONT;
+    $label.fontWeight = 'normal';
+    $label.fontSize = TEXT_SIZE;
+    // A hard shadow, like in pixel art, instead of a blurred one.
+    $label.setShadow(2, 2, BLACK_COLOR, 0);
+    $label.anchor.setTo(...anchor);
+
+    return $label
 }
 
-function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2, fontSize = 40, cb = () => null }) {
-    let $message = addLabel(game, game.width / 2, game.height / 2, text, [0.5, 0.5]);
+/**
+ * Creates a title: the same font and size as every text, in yellow.
+ *
+ * @param {Phaser.Game} game
+ * @param {number} x
+ * @param {number} y
+ * @param {string} text
+ * @param {Array} [anchor]
+ * @returns {Phaser.Text}
+ */
+function addTitle(game, x, y, text, anchor = [0, 0]) {
+    let $title = addLabel(game, x, y, text, anchor);
+
+    $title.fill = TITLE_COLOR;
+
+    return $title;
+}
+
+function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2, isTitle = false, cb = () => null }) {
+    let add = isTitle ? addTitle : addLabel;
+    let $message = add(game, game.width / 2, game.height / 2, text, [0.5, 0.5]);
     $message.alpha = 0;
-    $message.fontSize = fontSize;
+    $message.align = 'center';
 
     game.time.events.add(Phaser.Timer.SECOND / 4, () => {
         game.add.tween($message).to({ alpha: 1 }, Phaser.Timer.SECOND / 4, Phaser.Easing.Linear.None, true);
@@ -75,26 +97,27 @@ function displayCentralMessage(game, { text, lifespan = Phaser.Timer.SECOND * 2,
 }
 
 function displayGameVersion(game) {
-    let $version = game.add.text(5, game.height - 20, 'v' + pkg.version);
-
-    $version.font = 'Tahoma';
-    $version.fontSize = '10px';
-    $version.fill = '#fff';
-    $version.setShadow(0, 0, BLACK_COLOR, 3);
+    let $version = addLabel(game, 8, game.height - 24, 'v' + pkg.version);
 
     return $version;
 }
 
 function displaySingleLineMessage(game, text, lifespan = Phaser.Timer.SECOND * 2) {
-    let fontSize = 60;
     displayHorizontalRectangle(game, lifespan);
-    return displayCentralMessage(game, { text, lifespan, fontSize });
+    return displayCentralMessage(game, { text, lifespan });
+}
+
+/**
+ * Same as displaySingleLineMessage, but written as a big title.
+ */
+function displayTitleMessage(game, text, lifespan = Phaser.Timer.SECOND * 2) {
+    displayHorizontalRectangle(game, lifespan);
+    return displayCentralMessage(game, { text, lifespan, isTitle: true });
 }
 
 function displayFullscreenMessage(game, text, lifespan = Phaser.Timer.SECOND * 2) {
-    let fontSize = 40;
     displayHorizontalRectangle(game, lifespan, game.height);
-    return displayCentralMessage(game, { text, lifespan, fontSize });
+    return displayCentralMessage(game, { text, lifespan });
 }
 
 function toggleColor($text, currentColor) {
@@ -113,9 +136,11 @@ function toggleColor($text, currentColor) {
     }
 }
 
-function addRepeatLink(game, x, y = 333, anchor = [0.5, 0]) {
-    let text = 'press ENTER to play once again';
-    let $repeat = addSaiyanLabel(game, x || game.world.centerX, y, text, anchor);
+/**
+ * Blinking hint which tells which key moves the game on.
+ */
+function addRepeatLink(game, x, y = 340, anchor = [0.5, 0], text = game.locale.PLAY_AGAIN) {
+    let $repeat = addLabel(game, x || game.world.centerX, y, text, anchor);
 
     $repeat.anchor.setTo(0.5, 0);
     $repeat.fill = WHITE_COLOR;
@@ -133,9 +158,10 @@ function addRepeatLink(game, x, y = 333, anchor = [0.5, 0]) {
 
 module.exports = {
     addLabel,
-    addSaiyanLabel,
+    addTitle,
     addRepeatLink,
     displayGameVersion,
     displaySingleLineMessage,
+    displayTitleMessage,
     displayFullscreenMessage
 };

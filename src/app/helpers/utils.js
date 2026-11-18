@@ -57,7 +57,8 @@ function timeout(state, delay, cb) {
 function slug(value) {
     let lower = value.toLocaleLowerCase();
     let letters = lower.replace(/ū/, 'u');
-    return letters.replace(/\W/gi, '-');
+    // A run of other characters ("Mr. Satan") becomes one dash.
+    return letters.replace(/\W+/g, '-');
 }
 
 module.exports = {
