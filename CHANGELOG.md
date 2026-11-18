@@ -2,7 +2,7 @@
 
 All notable changes to this project, newest version first.
 
-## Unreleased
+## 2.0.0 - 2026-11-18
 
 - 2026-11-18 - **Breaking:** changed the rules to ten named rounds played one after another: dragon balls, Tyrant Freeza, cloud flight, the androids, Perfect Cell, defending the friend, Majin Bubu, training with Whis, Beerus the Destroyer and the Tournament of Power, where every rival enters the ring one after another. Before every round a screen shows its number, name, goal and controls, and after it a summary; a failed round ends the game and can be tried again with full health. ([`ae10a04`], [`06a74c4`])
 - 2026-11-18 - **Breaking:** changed levels to power levels from the story: Son Goku has 3 000 000, Freeza 120 000 000, Beerus 20 000 000 000. Experience raises the power of both fighters, and a blow takes twice as much health each time the attacker is 10 times stronger. ([`31781f2`])
