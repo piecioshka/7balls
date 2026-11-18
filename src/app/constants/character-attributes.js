@@ -7,9 +7,6 @@ module.exports = {
     // Procent życia.
     hp: 100,
 
-    // Liczba doświadczenia.
-    exp: 0,
-
-    // Poziom. Max = 100.
-    lvl: 1
+    // Experience: it raises the power level and is never lost.
+    exp: 0
 };

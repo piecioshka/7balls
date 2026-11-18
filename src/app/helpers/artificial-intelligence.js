@@ -1,4 +1,5 @@
 let utils = require('../helpers/utils');
+const FIGHT = require('../constants/fight');
 
 function setup(state, $sprite) {
     function walkingLeft() {
@@ -29,6 +30,21 @@ function setup(state, $sprite) {
         $sprite.events.onJumping.dispatch();
     }
 
+    function wave() {
+        $sprite.events.onWave.dispatch();
+    }
+
+    function dodging() {
+        if (!$sprite.alive || !$sprite.body.onFloor()) {
+            return;
+        }
+
+        $sprite.isDodging = true;
+        utils.timeout(state, FIGHT.DODGE_TIME, () => {
+            $sprite.isDodging = false;
+        });
+    }
+
     function start(intervalTime, strategy) {
         utils.interval(state, intervalTime, () => {
             if (!$sprite.alive) {
@@ -45,6 +61,8 @@ function setup(state, $sprite) {
     start(Phaser.Timer.SECOND, [boxing, kicking]);
     start(Phaser.Timer.SECOND / 3, [walkingLeft, walkingRight]);
     start(Phaser.Timer.SECOND * 5, [jumping]);
+    start(Phaser.Timer.SECOND * 3, [dodging]);
+    start(Phaser.Timer.SECOND * 4, [wave]);
 }
 
 module.exports = {
