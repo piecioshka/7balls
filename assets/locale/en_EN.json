@@ -1,9 +1,675 @@
 {
-    "CONTROLS_INFO": "Game controls:\n - Navigation: LEFT, RIGHT, UP, DOWN\n - Fight: X, C",
-    "COLLECT_DRAGON_BALLS": "Collect dragon balls,\nnext Shenron will be appear\nand give you a life!",
+    "CONTROLS": {
+        "title": "Controls",
+        "confirm": "press ENTER to continue",
+        "items": [
+            {
+                "keys": [
+                    "←",
+                    "→",
+                    "↑",
+                    "↓"
+                ],
+                "label": "Move"
+            },
+            {
+                "keys": [
+                    "X"
+                ],
+                "label": "Punch"
+            },
+            {
+                "keys": [
+                    "C"
+                ],
+                "label": "Kick"
+            },
+            {
+                "keys": [
+                    "V"
+                ],
+                "label": "Energy wave"
+            },
+            {
+                "keys": [
+                    "S"
+                ],
+                "label": "Next Saiyan form"
+            },
+            {
+                "keys": [
+                    "K"
+                ],
+                "label": "Kaioken"
+            },
+            {
+                "keys": [
+                    "↑",
+                    "Space"
+                ],
+                "label": "Jump"
+            },
+            {
+                "keys": [
+                    "↓"
+                ],
+                "label": "Dodge"
+            },
+            {
+                "keys": [
+                    "F"
+                ],
+                "label": "Fullscreen"
+            },
+            {
+                "keys": [
+                    "M"
+                ],
+                "label": "Music volume"
+            },
+            {
+                "keys": [
+                    "R"
+                ],
+                "label": "Restart the game"
+            },
+            {
+                "keys": [
+                    "?"
+                ],
+                "label": "Help and pause"
+            }
+        ]
+    },
     "TIME": "Time",
-    "FIGHT_STATE_LEVEL_SHORT": "lvl",
     "FIGHT_STATE_WELCOME": "Fight!",
     "FIGHT_STATE_PLAYER_DIED": "defeat!",
-    "FIGHT_STATE_PLAYER_WIN": "win!"
+    "FIGHT_STATE_PLAYER_WIN": "win!",
+    "FULLSCREEN_ENTER": "Enter fullscreen",
+    "FULLSCREEN_EXIT": "Exit fullscreen",
+    "SELECT_PLAYER": "Choose your fighter",
+    "PLAY_AGAIN": "press ENTER to play again",
+    "WINNER": "Winner",
+    "GAME_OVER": "Game Over",
+    "CREDITS": "Credits",
+    "DEVELOPED_BY": "Developed by",
+    "DEFEND_FRIEND": {
+        "friend": "Friend",
+        "saved": "Friend saved!",
+        "lost": "Friend lost!"
+    },
+    "ROUND": "Round",
+    "ROUND_START": "press ENTER to start the round",
+    "ROUNDS": [
+        {
+            "name": "Dragon balls",
+            "goal": "Collect all seven dragon balls before the time runs out.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→",
+                        "↑",
+                        "↓"
+                    ],
+                    "label": "Move"
+                }
+            ]
+        },
+        {
+            "name": "Tyrant Freeza",
+            "goal": "Defeat your rival: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Punch / kick"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Forms / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Cloud flight",
+            "goal": "Fly to the next rival. Avoid Cell Jr. or destroy them with an energy wave.\nEvery hit takes your health.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→",
+                        "↑",
+                        "↓"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                }
+            ]
+        },
+        {
+            "name": "The androids",
+            "goal": "Defeat the androids one after another: C-17, C-18 and C-16.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Punch / kick"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Forms / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Perfect Cell",
+            "goal": "Defeat your rival: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Punch / kick"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Forms / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Defend your friend",
+            "goal": "Your friend is wounded. Punch or kick Cell Jr. away\nbefore they get to him.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Punch / kick"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                }
+            ]
+        },
+        {
+            "name": "Majin Bubu",
+            "goal": "Defeat your rival: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Punch / kick"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Forms / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Training with Whis",
+            "goal": "Whis attacks high or low and warns you a moment earlier.\nDodge the high blows and jump over the low ones: at least 7 of 10.",
+            "controls": [
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                }
+            ]
+        },
+        {
+            "name": "Beerus the Destroyer",
+            "goal": "Defeat your rival: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Punch / kick"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Forms / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Tournament of Power",
+            "goal": "Every rival of the game enters the ring, one after another:\nFreeza, the androids, Cell, Bubu and Beerus. Defeat them all.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Move"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Space"
+                    ],
+                    "label": "Jump"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Dodge"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Punch / kick"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Energy wave"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Forms / Kaioken"
+                }
+            ]
+        }
+    ],
+    "MUSIC_VOLUME": [
+        "Music: off",
+        "Music: quiet",
+        "Music: loud"
+    ],
+    "SUMMARY": {
+        "title": "Well done",
+        "time": "Time",
+        "balls": "Dragon balls",
+        "rival": "Defeated rival",
+        "hits": "Collisions with Cell Jr.",
+        "beaten": "Cell Jr. driven away",
+        "friend": "Health of the friend",
+        "health": "Your health",
+        "confirm": "press ENTER to continue",
+        "destroyed": "Cell Jr. destroyed",
+        "rounds": "Rounds passed",
+        "gameTime": "Game time",
+        "avoided": "Blows avoided",
+        "rivals": "Rivals defeated",
+        "power": "Power level",
+        "rivalPower": "Power of the rival"
+    },
+    "TRAINING": {
+        "score": "Avoided",
+        "dodge": "Dodge",
+        "jump": "Jump",
+        "good": "Good",
+        "bad": "Hit",
+        "passed": "Training passed",
+        "failed": "Training failed"
+    },
+    "RESTART": {
+        "question": "Start the game over?",
+        "confirm": "ENTER - yes, start over",
+        "cancel": "Esc - no, back to the game"
+    },
+    "POWER": "Power",
+    "FORMS": {
+        "kaioken": "Kaioken!",
+        "onlySaiyans": "Only Saiyans can do it",
+        "tooWeak": "Too weak for it",
+        "exhausted": "Out of strength",
+        "ssj": "Super Saiyan!",
+        "ssj2": "Super Saiyan 2!",
+        "ssj3": "Super Saiyan 3!",
+        "god": "Super Saiyan God!",
+        "blue": "Super Saiyan Blue!"
+    },
+    "POWER_UNITS": {
+        "million": "M",
+        "billion": "B",
+        "decimal": "."
+    },
+    "SHORTCUTS": {
+        "title": "Controls and shortcuts",
+        "paused": "The game is paused.",
+        "close": "Esc or ? - back",
+        "sections": [
+            {
+                "title": "Everywhere",
+                "items": [
+                    {
+                        "keys": [
+                            "?"
+                        ],
+                        "label": "Help and pause"
+                    },
+                    {
+                        "keys": [
+                            "Esc"
+                        ],
+                        "label": "Close the help"
+                    },
+                    {
+                        "keys": [
+                            "F"
+                        ],
+                        "label": "Fullscreen"
+                    },
+                    {
+                        "keys": [
+                            "M"
+                        ],
+                        "label": "Music"
+                    },
+                    {
+                        "keys": [
+                            "R"
+                        ],
+                        "label": "Restart"
+                    }
+                ]
+            },
+            {
+                "title": "Menus",
+                "items": [
+                    {
+                        "keys": [
+                            "←",
+                            "→"
+                        ],
+                        "label": "Choose"
+                    },
+                    {
+                        "keys": [
+                            "Enter"
+                        ],
+                        "label": "Confirm"
+                    }
+                ]
+            },
+            {
+                "title": "Balls and flight",
+                "items": [
+                    {
+                        "keys": [
+                            "←",
+                            "→",
+                            "↑",
+                            "↓"
+                        ],
+                        "label": "Move"
+                    },
+                    {
+                        "keys": [
+                            "V"
+                        ],
+                        "label": "Wave (flight)"
+                    }
+                ]
+            },
+            {
+                "title": "Fight",
+                "items": [
+                    {
+                        "keys": [
+                            "←",
+                            "→"
+                        ],
+                        "label": "Move"
+                    },
+                    {
+                        "keys": [
+                            "↑",
+                            "Space"
+                        ],
+                        "label": "Jump"
+                    },
+                    {
+                        "keys": [
+                            "↓"
+                        ],
+                        "label": "Dodge"
+                    },
+                    {
+                        "keys": [
+                            "X"
+                        ],
+                        "label": "Punch"
+                    },
+                    {
+                        "keys": [
+                            "C"
+                        ],
+                        "label": "Kick"
+                    },
+                    {
+                        "keys": [
+                            "V"
+                        ],
+                        "label": "Energy wave"
+                    },
+                    {
+                        "keys": [
+                            "S"
+                        ],
+                        "label": "Saiyan form"
+                    },
+                    {
+                        "keys": [
+                            "K"
+                        ],
+                        "label": "Kaioken"
+                    }
+                ]
+            },
+            {
+                "title": "Game over",
+                "items": [
+                    {
+                        "keys": [
+                            "Enter"
+                        ],
+                        "label": "Play again"
+                    }
+                ]
+            }
+        ]
+    }
 }

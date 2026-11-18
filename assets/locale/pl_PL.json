@@ -1,9 +1,675 @@
 {
-    "CONTROLS_INFO": "Sterowanie:\n - Nawigacja: LEFT, RIGHT, UP, DOWN\n - Walka: X, C",
-    "COLLECT_DRAGON_BALLS": "Zbierz smocze kule,\naby pojawił się Shenron\ni przywrócił Ci życie!",
+    "CONTROLS": {
+        "title": "Sterowanie",
+        "confirm": "naciśnij ENTER, aby przejść dalej",
+        "items": [
+            {
+                "keys": [
+                    "←",
+                    "→",
+                    "↑",
+                    "↓"
+                ],
+                "label": "Ruch"
+            },
+            {
+                "keys": [
+                    "X"
+                ],
+                "label": "Cios ręką"
+            },
+            {
+                "keys": [
+                    "C"
+                ],
+                "label": "Kopnięcie"
+            },
+            {
+                "keys": [
+                    "V"
+                ],
+                "label": "Fala energii"
+            },
+            {
+                "keys": [
+                    "S"
+                ],
+                "label": "Kolejna przemiana Saiyan"
+            },
+            {
+                "keys": [
+                    "K"
+                ],
+                "label": "Kaioken"
+            },
+            {
+                "keys": [
+                    "↑",
+                    "Spacja"
+                ],
+                "label": "Skok"
+            },
+            {
+                "keys": [
+                    "↓"
+                ],
+                "label": "Unik"
+            },
+            {
+                "keys": [
+                    "F"
+                ],
+                "label": "Pełny ekran"
+            },
+            {
+                "keys": [
+                    "M"
+                ],
+                "label": "Głośność muzyki"
+            },
+            {
+                "keys": [
+                    "R"
+                ],
+                "label": "Restart gry"
+            },
+            {
+                "keys": [
+                    "?"
+                ],
+                "label": "Pomoc i pauza"
+            }
+        ]
+    },
     "TIME": "Czas",
-    "FIGHT_STATE_LEVEL_SHORT": "poziom",
     "FIGHT_STATE_WELCOME": "Walka!",
     "FIGHT_STATE_PLAYER_DIED": "przegrał!",
-    "FIGHT_STATE_PLAYER_WIN": "wygrał!"
+    "FIGHT_STATE_PLAYER_WIN": "wygrał!",
+    "FULLSCREEN_ENTER": "Włącz pełny ekran",
+    "FULLSCREEN_EXIT": "Wyłącz pełny ekran",
+    "SELECT_PLAYER": "Wybierz wojownika",
+    "PLAY_AGAIN": "naciśnij ENTER, aby zagrać jeszcze raz",
+    "WINNER": "Wygrana",
+    "GAME_OVER": "Koniec gry",
+    "CREDITS": "Autor",
+    "DEVELOPED_BY": "Grę stworzył",
+    "DEFEND_FRIEND": {
+        "friend": "Przyjaciel",
+        "saved": "Przyjaciel uratowany!",
+        "lost": "Przyjaciel pokonany!"
+    },
+    "ROUND": "Runda",
+    "ROUND_START": "naciśnij ENTER, aby rozpocząć rundę",
+    "ROUNDS": [
+        {
+            "name": "Smocze kule",
+            "goal": "Zbierz wszystkie siedem smoczych kul, zanim skończy się czas.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→",
+                        "↑",
+                        "↓"
+                    ],
+                    "label": "Ruch"
+                }
+            ]
+        },
+        {
+            "name": "Tyran Freeza",
+            "goal": "Pokonaj rywala: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Cios ręką / kopnięcie"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Przemiany / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Lot na chmurze",
+            "goal": "Leć do kolejnego rywala. Omijaj Cell Jr. albo niszcz ich falą energii.\nKażde zderzenie zabiera życie.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→",
+                        "↑",
+                        "↓"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                }
+            ]
+        },
+        {
+            "name": "Cyborgi",
+            "goal": "Pokonaj po kolei cyborgi: C-17, C-18 i C-16.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Cios ręką / kopnięcie"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Przemiany / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Doskonały Cell",
+            "goal": "Pokonaj rywala: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Cios ręką / kopnięcie"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Przemiany / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Obrona przyjaciela",
+            "goal": "Twój przyjaciel jest ranny. Odpędzaj ciosami Cell Jr.,\nzanim do niego dobiegną.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Cios ręką / kopnięcie"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                }
+            ]
+        },
+        {
+            "name": "Majin Bubu",
+            "goal": "Pokonaj rywala: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Cios ręką / kopnięcie"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Przemiany / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Trening z Whisem",
+            "goal": "Whis atakuje górą albo dołem i uprzedza o tym chwilę wcześniej.\nRób unik przed górnym ciosem, a dolny przeskakuj: co najmniej 7 z 10.",
+            "controls": [
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                }
+            ]
+        },
+        {
+            "name": "Niszczyciel Beerus",
+            "goal": "Pokonaj rywala: {rival}.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Cios ręką / kopnięcie"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Przemiany / Kaioken"
+                }
+            ]
+        },
+        {
+            "name": "Turniej Mocy",
+            "goal": "Na ring wchodzą po kolei wszyscy rywale z gry:\nFreeza, cyborgi, Cell, Bubu i Beerus. Pokonaj ich wszystkich.",
+            "controls": [
+                {
+                    "keys": [
+                        "←",
+                        "→"
+                    ],
+                    "label": "Ruch"
+                },
+                {
+                    "keys": [
+                        "↑",
+                        "Spacja"
+                    ],
+                    "label": "Skok"
+                },
+                {
+                    "keys": [
+                        "↓"
+                    ],
+                    "label": "Unik"
+                },
+                {
+                    "keys": [
+                        "X",
+                        "C"
+                    ],
+                    "label": "Cios ręką / kopnięcie"
+                },
+                {
+                    "keys": [
+                        "V"
+                    ],
+                    "label": "Fala energii"
+                },
+                {
+                    "keys": [
+                        "S",
+                        "K"
+                    ],
+                    "label": "Przemiany / Kaioken"
+                }
+            ]
+        }
+    ],
+    "MUSIC_VOLUME": [
+        "Muzyka: wyłączona",
+        "Muzyka: cicho",
+        "Muzyka: głośno"
+    ],
+    "SUMMARY": {
+        "title": "Brawo",
+        "time": "Czas",
+        "balls": "Smocze kule",
+        "rival": "Pokonany rywal",
+        "hits": "Zderzenia z Cell Jr.",
+        "beaten": "Odpędzeni Cell Jr.",
+        "friend": "Życie przyjaciela",
+        "health": "Twoje życie",
+        "confirm": "naciśnij ENTER, aby przejść dalej",
+        "destroyed": "Zniszczeni Cell Jr.",
+        "rounds": "Zaliczone rundy",
+        "gameTime": "Czas gry",
+        "avoided": "Uniknięte ciosy",
+        "rivals": "Pokonani rywale",
+        "power": "Moc",
+        "rivalPower": "Moc rywala"
+    },
+    "TRAINING": {
+        "score": "Uniki",
+        "dodge": "Unik",
+        "jump": "Skok",
+        "good": "Dobrze",
+        "bad": "Trafiony",
+        "passed": "Trening zaliczony",
+        "failed": "Trening oblany"
+    },
+    "RESTART": {
+        "question": "Zacząć grę od nowa?",
+        "confirm": "ENTER - tak, od nowa",
+        "cancel": "Esc - nie, wracam do gry"
+    },
+    "POWER": "Moc",
+    "FORMS": {
+        "kaioken": "Kaioken!",
+        "onlySaiyans": "Tylko Saiyanie to potrafią",
+        "tooWeak": "Za mało sił",
+        "exhausted": "Brak sił",
+        "ssj": "Super Saiyan!",
+        "ssj2": "Super Saiyan 2!",
+        "ssj3": "Super Saiyan 3!",
+        "god": "Super Saiyan God!",
+        "blue": "Super Saiyan Blue!"
+    },
+    "POWER_UNITS": {
+        "million": "mln",
+        "billion": "mld",
+        "decimal": ","
+    },
+    "SHORTCUTS": {
+        "title": "Sterowanie i skróty",
+        "paused": "Gra jest wstrzymana.",
+        "close": "Esc albo ? - powrót",
+        "sections": [
+            {
+                "title": "Wszędzie",
+                "items": [
+                    {
+                        "keys": [
+                            "?"
+                        ],
+                        "label": "Pomoc i pauza"
+                    },
+                    {
+                        "keys": [
+                            "Esc"
+                        ],
+                        "label": "Zamknij pomoc"
+                    },
+                    {
+                        "keys": [
+                            "F"
+                        ],
+                        "label": "Pełny ekran"
+                    },
+                    {
+                        "keys": [
+                            "M"
+                        ],
+                        "label": "Muzyka"
+                    },
+                    {
+                        "keys": [
+                            "R"
+                        ],
+                        "label": "Restart gry"
+                    }
+                ]
+            },
+            {
+                "title": "Menu",
+                "items": [
+                    {
+                        "keys": [
+                            "←",
+                            "→"
+                        ],
+                        "label": "Wybór"
+                    },
+                    {
+                        "keys": [
+                            "Enter"
+                        ],
+                        "label": "Zatwierdź"
+                    }
+                ]
+            },
+            {
+                "title": "Kule i lot",
+                "items": [
+                    {
+                        "keys": [
+                            "←",
+                            "→",
+                            "↑",
+                            "↓"
+                        ],
+                        "label": "Ruch"
+                    },
+                    {
+                        "keys": [
+                            "V"
+                        ],
+                        "label": "Fala (lot)"
+                    }
+                ]
+            },
+            {
+                "title": "Walka",
+                "items": [
+                    {
+                        "keys": [
+                            "←",
+                            "→"
+                        ],
+                        "label": "Ruch"
+                    },
+                    {
+                        "keys": [
+                            "↑",
+                            "Spacja"
+                        ],
+                        "label": "Skok"
+                    },
+                    {
+                        "keys": [
+                            "↓"
+                        ],
+                        "label": "Unik"
+                    },
+                    {
+                        "keys": [
+                            "X"
+                        ],
+                        "label": "Cios"
+                    },
+                    {
+                        "keys": [
+                            "C"
+                        ],
+                        "label": "Kopnięcie"
+                    },
+                    {
+                        "keys": [
+                            "V"
+                        ],
+                        "label": "Fala energii"
+                    },
+                    {
+                        "keys": [
+                            "S"
+                        ],
+                        "label": "Przemiana"
+                    },
+                    {
+                        "keys": [
+                            "K"
+                        ],
+                        "label": "Kaioken"
+                    }
+                ]
+            },
+            {
+                "title": "Koniec gry",
+                "items": [
+                    {
+                        "keys": [
+                            "Enter"
+                        ],
+                        "label": "Jeszcze raz"
+                    }
+                ]
+            }
+        ]
+    }
 }
