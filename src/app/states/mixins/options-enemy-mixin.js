@@ -1,5 +1,4 @@
-const PLAYER = require('../../constants/player');
-let { addSaiyanLabel } = require('../../helpers/message');
+let { addLabel } = require('../../helpers/message');
 
 // TODO(piecioshka): refactoring, trzeba złączyć 2 pliki mixin.
 
@@ -7,11 +6,12 @@ module.exports = {
     _setupEnemyOptions() {
         let enemy = this.game.enemy;
 
-        addSaiyanLabel(this.game, 755, 18, 'HP');
-        addSaiyanLabel(this.game, 755, 48, 'EXP');
-        this._addAvatar(745, 85, `${enemy.id}-card`);
+        addLabel(this.game, 751, 27, 'HP');
+        addLabel(this.game, 751, 57, 'EXP');
+        this.options.enemy.avatar = this._addAvatar(724, 85, `${enemy.id}-avatar`);
 
-        this.options.enemy.lvl = addSaiyanLabel(this.game, 733, 81, `${enemy.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`, [1, 0]);
+        this.options.enemy.power = addLabel(this.game, 716, 85, '', [1, 0]);
+        this._updatePower('enemy');
 
         this.options.enemy.hp = this._addBar(746, 25, 'bar-hp-invert', [1, 0]);
         this._updateEnemyOptionsHP();
@@ -29,7 +29,8 @@ module.exports = {
     },
 
     _updateEnemyOptionsEXP() {
-        let exp = this.game.enemy.exp;
+        // The bar shows the way to the next 100 points of experience.
+        let exp = this.game.enemy.exp % 100;
         let imageWidth = this.cache.getImage('bar-exp').width;
         let width = exp * imageWidth / 100;
 
@@ -48,7 +49,7 @@ module.exports = {
         }
 
         this._updateEnemyOptionsHP();
-        this._updateOptionsLvL('enemy');
+        this._updatePower('enemy');
     },
 
     _addEnemyEXP(value) {
@@ -56,15 +57,8 @@ module.exports = {
 
         enemy.exp += value;
 
-        if (enemy.exp >= PLAYER.MAXIMUM_EXPERIENCE) {
-            enemy.exp = 0;
-
-            if (enemy.lvl < PLAYER.MAXIMUM_LEVEL) {
-                enemy.lvl++;
-            }
-        }
 
         this._updateEnemyOptionsEXP();
-        this._updateOptionsLvL('enemy');
+        this._updatePower('enemy');
     }
 };

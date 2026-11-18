@@ -1,5 +1,4 @@
-const PLAYER = require('../../constants/player');
-let { addSaiyanLabel } = require('../../helpers/message');
+let { addLabel } = require('../../helpers/message');
 
 // TODO(piecioshka): refactoring, trzeba złączyć 2 pliki mixin.
 
@@ -7,11 +6,12 @@ module.exports = {
     _setupPlayerOptions() {
         let player = this.game.player;
 
-        addSaiyanLabel(this.game, 21, 18, 'HP');
-        addSaiyanLabel(this.game, 8, 48, 'EXP');
-        this._addAvatar(6, 85, `${player.id}-card`);
+        addLabel(this.game, 50, 27, 'HP', [1, 0]);
+        addLabel(this.game, 50, 57, 'EXP', [1, 0]);
+        this.options.player.avatar = this._addAvatar(6, 85, `${player.id}-avatar`);
 
-        this.options.player.lvl = addSaiyanLabel(this.game, 63, 81, `${player.lvl} ${this.game.locale.FIGHT_STATE_LEVEL_SHORT}`);
+        this.options.player.power = addLabel(this.game, 82, 85, '', [0, 0]);
+        this._updatePower('player');
 
         this.options.player.hp = this._addBar(55, 25, 'bar-hp');
         this._updatePlayerOptionsHP();
@@ -24,14 +24,15 @@ module.exports = {
         let hp = this.game.player.hp;
         let imageWidth = this.cache.getImage('bar-hp').width;
         let width = hp * imageWidth / 100;
-        this.options.player.hp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
+        this.options.player.hp.color.crop(new Phaser.Rectangle(0, 0, width, 15));
     },
 
     _updatePlayerOptionsEXP() {
-        let exp = this.game.player.exp;
+        // The bar shows the way to the next 100 points of experience.
+        let exp = this.game.player.exp % 100;
         let imageWidth = this.cache.getImage('bar-exp').width;
         let width = exp * imageWidth / 100;
-        this.options.player.exp.color.crop(new Phaser.Rectangle(0, 0, width, 16));
+        this.options.player.exp.color.crop(new Phaser.Rectangle(0, 0, width, 15));
     },
 
     _removePlayerHP(value) {
@@ -46,7 +47,7 @@ module.exports = {
         }
 
         this._updatePlayerOptionsHP();
-        this._updateOptionsLvL('player');
+        this._updatePower('player');
     },
 
     _addPlayerEXP(value) {
@@ -54,15 +55,8 @@ module.exports = {
 
         player.exp += value;
 
-        if (player.exp >= PLAYER.MAXIMUM_EXPERIENCE) {
-            player.exp = 0;
-
-            if (player.lvl < PLAYER.MAXIMUM_LEVEL) {
-                player.lvl++;
-            }
-        }
 
         this._updatePlayerOptionsEXP();
-        this._updateOptionsLvL('player');
+        this._updatePower('player');
     }
 };

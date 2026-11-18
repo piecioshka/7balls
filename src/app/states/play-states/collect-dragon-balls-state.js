@@ -1,23 +1,40 @@
 const COLLECT = require('../../constants/collect');
 let utils = require('../../helpers/utils');
 
-let { displayFullscreenMessage, addSaiyanLabel } = require('../../helpers/message');
+let { addLabel } = require('../../helpers/message');
+
+const TILE = 40;
+// Size of one pixel of the darkness.
+const FOG_PIXEL = 5;
+// The dragon balls in the corner: dim until found, 50 pixels apart.
+const HUD_BALL_GAP = 50;
+const HUD_BALL_DIM = 0.3;
+// Frames of the small head: standing and four steps of a walk.
+const MINI_FRAMES = {
+    standing: { right: 0, left: 5 },
+    walk: { right: [1, 2, 3, 4], left: [6, 7, 8, 9] }
+};
+const GRASS_COLOR = '#5cb531';
+const DEFAULT_COLOR = '#000';
 
 export default class CollectDragonBallsState extends Phaser.State {
     layer = null;
     emitter = null;
 
     create() {
-        let random = utils.random(1, 3);
+        let random = utils.random(1, COLLECT.MAPS);
+
+        // Grass, visible where the map has no tile.
+        this.stage.backgroundColor = GRASS_COLOR;
 
         this._setupWorld(random);
         this._setupBalls(random);
         this._setupSprite(10, 60, this.game.player);
         this._setupParticles();
+        this._setupFog();
 
         this._setupTimer();
-
-        displayFullscreenMessage(this.game, this.game.locale.COLLECT_DRAGON_BALLS);
+        this._setupHud();
     }
 
     _setupParticles() {
@@ -45,25 +62,26 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _setupSprite(x, y, character, anchor = [0.5, 0.5]) {
-        character.createSprite(this, x, y, `${character.id}-fight`);
+        // The head of the character, made for the maze.
+        character.createSprite(this, x, y, `${character.id}-mini`);
 
         let $sprite = character.getSprite();
         $sprite.anchor.setTo(...anchor);
+        $sprite.smoothed = false;
 
         // Tutaj tworzymy ciało dla naszej postaci.
         this.physics.arcade.enable($sprite);
 
         $sprite.body.collideWorldBounds = true;
 
-        let width = $sprite.width * 0.8;
-        let height = $sprite.height * 0.4;
-        let positionX = $sprite.width * 0.1;
-        let positionY = $sprite.height * 0.6;
-        $sprite.body.setSize(width, height, positionX, positionY);
+        // The head collides, a bit smaller than it looks.
+        $sprite.body.setSize(30, 26, 15, 25);
+        $sprite.facing = 'right';
+        $sprite.frame = MINI_FRAMES.standing.right;
 
-        $sprite.scale.setTo(0.3, 0.3);
-
-        $sprite.animations.add('standing', [0, 1, 2], 4, true).play();
+        ['right', 'left'].forEach((facing) => {
+            $sprite.animations.add(`walk-${facing}`, MINI_FRAMES.walk[facing], 8, true);
+        });
     }
 
     _setupBalls(random) {
@@ -72,23 +90,73 @@ export default class CollectDragonBallsState extends Phaser.State {
         this.physics.arcade.enable(balls);
 
         let places = this.cache.getJSON(`positions-${random}`);
-        places.forEach(([x, y]) => {
-            let $ball = this.add.tileSprite(x * 40, y * 40, 40, 40, 'ball-spritesheet');
+        // Every ball has its number of stars, in a random place.
+        let stars = Phaser.ArrayUtils.shuffle(places.map((place, index) => index + 1));
+
+        places.forEach(([x, y], index) => {
+            // Small balls in the middle of their tiles: harder to spot.
+            let $ball = balls.create(x * TILE + TILE / 2, y * TILE + TILE / 2, 'ball-spritesheet');
+            $ball.anchor.setTo(0.5, 0.5);
+            $ball.smoothed = false;
             $ball.animations.add('default', [0, 1, 2, 3], 4, true).play();
-            balls.add($ball);
+            $ball.stars = stars[index];
         });
+    }
+
+    /**
+     * Seven dim dragon balls in the corner; a found one lights up.
+     */
+    _setupHud() {
+        let count = this.game.balls.length;
+        let right = this.game.width - 12;
+
+        this.hudBalls = [];
+
+        for (let stars = 1; stars <= count; stars++) {
+            let x = right - (count - stars) * HUD_BALL_GAP - 22;
+            let $ball = this.add.image(x, 34, 'star-balls-spritesheet', stars - 1);
+
+            $ball.anchor.setTo(0.5, 0.5);
+            $ball.smoothed = false;
+            $ball.fixedToCamera = true;
+            $ball.alpha = HUD_BALL_DIM;
+            this.hudBalls.push($ball);
+        }
+    }
+
+    /**
+     * The ball with the given stars lights up, jumps and blinks.
+     */
+    _lightHudBall(stars) {
+        let $ball = this.hudBalls[stars - 1];
+
+        if (!$ball) {
+            return;
+        }
+
+        $ball.alpha = 1;
+
+        let y = $ball.cameraOffset.y;
+        this.add.tween($ball.cameraOffset).to({ y: y - 12 }, 160, Phaser.Easing.Quadratic.Out, true, 0, 0, true);
+
+        let blink = this.add.tween($ball).to({ alpha: 0.4 }, 90, Phaser.Easing.Linear.None, true, 320, 2, true);
+        blink.onComplete.add(() => {
+            $ball.alpha = 1;
+        });
+
+        this._fireParticles($ball.cameraOffset.x + this.camera.x, y + this.camera.y);
     }
 
     _setupTimer() {
         let limit = COLLECT.MAPS_TIME_LIMIT;
         let ending = parseInt(Math.log2(limit));
-        let clock = this.game.time.create();
+        this.remain = limit;
 
-        let $message = addSaiyanLabel(this.game, 10, 0, `${this.game.locale.TIME}: ${limit}`);
-        $message.fontSize = 35;
+        let $message = addLabel(this.game, 12, 12, `${this.game.locale.TIME}: ${limit}`, [0, 0]);
 
-        clock.repeat(Phaser.Timer.SECOND, limit, () => {
-            let remain = limit - parseInt(clock.seconds);
+        this.time.events.repeat(Phaser.Timer.SECOND, limit, () => {
+            this.remain--;
+            let remain = this.remain;
             $message.setText(`${this.game.locale.TIME}: ${remain}`);
 
             if (remain === ending) {
@@ -96,18 +164,54 @@ export default class CollectDragonBallsState extends Phaser.State {
                 $message.x = this.game.width / 2;
                 $message.y = this.game.height / 2;
                 $message.fill = '#f00';
-                $message.fontSize = 100;
             }
-        }, this);
 
-        clock.onComplete.add(() => {
-            this.game.emit('game:collect-failed');
+            if (remain === 0) {
+                this.game.emit('game:collect-failed');
+            }
         });
+    }
 
-        clock.start();
+    shutdown() {
+        this.stage.backgroundColor = DEFAULT_COLOR;
+    }
+
+    /**
+     * Darkness over the map: only a circle around the player is visible.
+     * It is drawn on a small canvas and enlarged, so its edge is pixelated.
+     */
+    _setupFog() {
+        this.fog = this.add.bitmapData(this.game.width / FOG_PIXEL, this.game.height / FOG_PIXEL);
+
+        let $fog = this.add.image(0, 0, this.fog);
+        $fog.scale.setTo(FOG_PIXEL, FOG_PIXEL);
+        $fog.smoothed = false;
+    }
+
+    _updateFog() {
+        let $player = this.game.player.getSprite();
+        let x = $player.x / FOG_PIXEL;
+        let y = $player.y / FOG_PIXEL;
+        let radius = COLLECT.SIGHT / FOG_PIXEL;
+        let context = this.fog.ctx;
+        let light = context.createRadialGradient(x, y, radius * 0.55, x, y, radius);
+
+        light.addColorStop(0, 'rgba(0, 0, 0, 1)');
+        light.addColorStop(1, 'rgba(0, 0, 0, 0)');
+
+        this.fog.clear();
+        context.globalCompositeOperation = 'source-over';
+        context.fillStyle = 'rgba(6, 8, 18, 0.97)';
+        context.fillRect(0, 0, this.fog.width, this.fog.height);
+        context.globalCompositeOperation = 'destination-out';
+        context.fillStyle = light;
+        context.fillRect(0, 0, this.fog.width, this.fog.height);
+        context.globalCompositeOperation = 'source-over';
+        this.fog.dirty = true;
     }
 
     update() {
+        this._updateFog();
         this._handleCollision();
         this._handleKeyboard();
     }
@@ -120,13 +224,18 @@ export default class CollectDragonBallsState extends Phaser.State {
     }
 
     _handleCollectedBall(player, $ball) {
-        this._fireParticles($ball.x + $ball.width / 2, $ball.y + $ball.height / 2);
+        this._fireParticles($ball.x, $ball.y);
 
-        // this.game.emit('ball:collected', { player, ball });
         $ball.destroy();
+        this._lightHudBall($ball.stars);
 
         if (this.game.balls.length === 0) {
-            this.game.emit('game:collect-completed');
+            this.game.emit('game:collect-completed', {
+                summary: [
+                    { label: 'time', value: `${COLLECT.MAPS_TIME_LIMIT - this.remain} s` },
+                    { label: 'balls', value: '7 / 7' }
+                ]
+            });
         }
     }
 
@@ -139,14 +248,26 @@ export default class CollectDragonBallsState extends Phaser.State {
 
         if (keyboard.isDown(Phaser.Keyboard.LEFT)) {
             $player.body.velocity.x -= COLLECT.PLAYER_SPEED;
+            $player.facing = 'left';
         } else if (keyboard.isDown(Phaser.Keyboard.RIGHT)) {
             $player.body.velocity.x += COLLECT.PLAYER_SPEED;
+            $player.facing = 'right';
         }
 
         if (keyboard.isDown(Phaser.Keyboard.UP)) {
             $player.body.velocity.y -= COLLECT.PLAYER_SPEED;
         } else if (keyboard.isDown(Phaser.Keyboard.DOWN)) {
             $player.body.velocity.y += COLLECT.PLAYER_SPEED;
+        }
+
+        // Walking (also up and down) or standing, looking where it went last.
+        let isMoving = $player.body.velocity.x !== 0 || $player.body.velocity.y !== 0;
+
+        if (isMoving) {
+            $player.play(`walk-${$player.facing}`);
+        } else {
+            $player.animations.stop();
+            $player.frame = MINI_FRAMES.standing[$player.facing];
         }
     }
 
