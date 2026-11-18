@@ -1,6 +1,6 @@
-## Miejsca
+# Miejsca
 
-http://dbz-mateusz.bloog.pl/kat,203971,index.html?smoybbtticaid=614ffb
+Numery odpowiadają mapie [map.jpg](./map.jpg). Źródło opisów: `dbz-mateusz.bloog.pl`.
 
 01  Miejsce przypuszczalnego, awaryjnego lądowania Kami-samy i miejsce jego pobytu zanim nie został Wszechmogącym. Teren niezwykle ekstremalny pod względem temperatur.
 02  Miejsce lądowania Cell'a wehikułem czasu, który został odebrany Trunksowi w przyszłości. Przebywał tutaj do momentu osiągnięcia niedoskonałej formy i wyruszył na poszukiwanie androidów C17 i C18.
