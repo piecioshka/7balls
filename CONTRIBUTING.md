@@ -154,6 +154,12 @@ node scripts/draw-scenery.js
 node scripts/draw-mazes.js
 ```
 
+Obrazek Open Graph (`src/public/og-image.png`, 1200x630) składa z grafik gry czwarty skrypt; uruchom go po generatorach postaci, żeby pokazywał aktualne postacie:
+
+```bash
+node scripts/draw-og-image.js
+```
+
 Labirynty 1-3 są zrobione ręcznie w Tiled; skrypt dokłada 4-10 i sprawdza, że da się dojść do każdej kuli w rozsądnym czasie.
 
 ## Zrzuty ekranu
