@@ -25,7 +25,7 @@ Wersję produkcyjną buduje `npm run build`. Wynik to kompletna gra w `dist/` (p
 | `npm run dev`       | Tryb deweloperski: serwer lokalny, przebudowa paczki i kopiowanie plików statycznych po zmianach |
 | `npm run build`     | Czyści `dist/`, buduje `dist/bundle.js`, kopiuje `src/public/` i Phasera do `dist/`              |
 | `npm run watch`     | Sama przebudowa paczki po zmianach w `src/app/`, bez serwera                                     |
-| `npm run deploy`    | Wypycha zawartość `dist/` na gałąź `gh-pages`                                                    |
+| `npm run deploy`    | Buduje grę i wypycha zawartość `dist/` na gałąź `gh-pages`                                       |
 | `npm run clear`     | Usuwa `dist/`                                                                                    |
 | `npm run clear:all` | Usuwa dodatkowo `node_modules/`                                                                  |
 | `npm run count`     | Liczy linie kodu w plikach `.js`                                                                 |
@@ -111,10 +111,9 @@ Gra nie pisze nic do konsoli. Dopisanie `?debug` do adresu strony włącza logow
 
 ## Wdrożenie
 
-Gra jest hostowana na GitHub Pages z gałęzi `gh-pages`:
+Gra jest hostowana na GitHub Pages z gałęzi `gh-pages`. `npm run deploy` najpierw buduje grę (`predeploy`), a potem wypycha `dist/`:
 
 ```bash
-npm run build
 npm run deploy
 ```
 
